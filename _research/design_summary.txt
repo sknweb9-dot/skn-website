@@ -1,0 +1,171 @@
+TYPOGRAPHY AND PALETTE (from rendered pages, 1440x900)
+======================================================================
+
+Font families / weights / sizes, by element count across all pages:
+     879  Arial | 400 | 10px
+     205  futura-lt-w01-book | 400 | 12px
+     136  din-next-w01-light | 400 | 15px
+     100  din-next-w01-light | 400 | 16px
+      84  HelveticaNeue | 400 | 14px
+      61  din-next-w01-light | 400 | 14px
+      53  din-next-w01-light | 400 | 25px
+      36  din-next-w01-light | 700 | 20px
+      34  din-next-w01-light | 400 | 30px
+      33  playfairdisplay-bold | 400 | 25px
+      30  din-next-w01-light | 400 | 20px
+      29  futura-lt-w01-book | 400 | 14px
+      22  Arial | 400 | 13.3333px
+      20  Arial | 400 | 11px
+      20  HelveticaNeueW01-55Roma | 400 | 12px
+      20  futura-lt-w01-book | 700 | 25px
+      19  futura-lt-w01-book | 400 | 15px
+      14  din-next-w01-light | 700 | 16px
+      13  din-next-w01-light | 400 | 40px
+       9  din-next-w01-light | 400 | 60px
+       9  avenir-lt-w01_35-light1475496 | 400 | 16px
+       7  din-next-w01-light | 400 | 24px
+       6  din-next-w01-light | 400 | 18px
+       4  din-next-w01-light | 400 | 21px
+
+Colours, by element count (BG = background-color):
+     916  rgb(0, 0, 0)
+     445  rgb(96, 94, 94)
+     228  rgb(0, 0, 238)
+     164  rgb(255, 255, 255)
+      53  rgb(47, 46, 46)
+      41  rgb(42, 87, 156)
+      30  rgb(18, 29, 107)
+      20  BG rgb(53, 70, 92)
+      20  BG rgb(0, 0, 0)
+      12  BG rgb(255, 255, 255)
+       9  BG rgb(0, 65, 94)
+       9  BG rgb(204, 204, 204)
+       3  rgb(32, 126, 169)
+       3  rgb(160, 160, 159)
+       2  BG rgb(48, 189, 255)
+       1  BG rgb(174, 99, 63)
+
+
+PER PAGE
+======================================================================
+
+about
+  title    : About | Shanti Kala Nikketan
+  height   : 900 px
+  images   : 1 rendered / 0 css backgrounds
+  iframes  : 0
+  forms    : 0  inputs: []
+
+contact
+  title    : Contact | Shanti Kala Nikketan
+  height   : 900 px
+  images   : 0 rendered / 1 css backgrounds
+  iframes  : 1
+  forms    : 1  inputs: ['name-*', 'email', 'subject', 'Message']
+    H1: Contact
+
+director
+  title    : Director | Shanti Kala Nikketan
+  height   : 1126 px
+  images   : 1 rendered / 0 css backgrounds
+  iframes  : 0
+  forms    : 0  inputs: []
+    H1: Head, Delhi Branch
+
+events
+  title    : Events | Shanti Kala Nikketan
+  height   : 2540 px
+  images   : 11 rendered / 0 css backgrounds
+  iframes  : 0
+  forms    : 0  inputs: []
+    H3: Events
+    H2: Udaan
+    H2: Arangetrams
+    H2: Performances
+    H2: Group
+    H2: Solo
+    H2: Outreach
+
+founder
+  title    : Founder | Shanti Kala Nikketan
+  height   : 1089 px
+  images   : 2 rendered / 0 css backgrounds
+  iframes  : 0
+  forms    : 0  inputs: []
+
+gurukulam
+  title    : Gurukulam | Shanti Kala Nikketan
+  height   : 1385 px
+  images   : 7 rendered / 0 css backgrounds
+  iframes  : 0
+  forms    : 0  inputs: []
+    H3: Gurukulam
+
+home
+  title    : Dance Institute | Shanti Kala Nikketan
+  height   : 1555 px
+  images   : 1 rendered / 0 css backgrounds
+  iframes  : 1
+  forms    : 0  inputs: []
+    H1: Shanti Kala Nikketan
+
+logo
+  title    : Logo | Shanti Kala Nikketan
+  height   : 900 px
+  images   : 1 rendered / 0 css backgrounds
+  iframes  : 0
+  forms    : 0  inputs: []
+
+photos
+  title    : Photos | Shanti Kala Nikketan
+  height   : 900 px
+  images   : 9 rendered / 0 css backgrounds
+  iframes  : 0
+  forms    : 0  inputs: []
+
+shanti-kala-nikketan
+  title    : Shanti Kala Nikketan | Dance Institute
+  height   : 900 px
+  images   : 1 rendered / 0 css backgrounds
+  iframes  : 0
+  forms    : 0  inputs: []
+    H1: Shanti Kala Nikketan
+
+team
+  title    : Team | Shanti Kala Nikketan
+  height   : 3231 px
+  images   : 7 rendered / 0 css backgrounds
+  iframes  : 0
+  forms    : 0  inputs: []
+    H1: Head, Canada Branch
+    H1: Senior Associate
+
+videos
+  title    : Videos | Shanti Kala Nikketan
+  height   : 1571 px
+  images   : 20 rendered / 20 css backgrounds
+  iframes  : 0
+  forms    : 0  inputs: []
+    H1: Videos
+    H2: Theory Class
+    H3: Mukula Hasta Viniyōgaḥ
+    H3: Sandaṃśa Hasta Viniyōgaḥ
+    H3: Haṃsapakṣa Hasta Viniyōgaḥ
+    H3: Haṃsāsya Hasta Viniyōgaḥ
+    H3: Catura Hasta Viniyōgaḥ
+    H3: Bhramara Hasta Viniyōgaḥ
+    H3: Alapadma Hasta Viniyōgaḥ
+    H3: Kāṅgūla Hasta Viniyōgaḥ
+    H3: Siṃhamukha Hasta Viniyōgaḥ
+    H3: Mṛgaśīrṣa Hasta Viniyōgaḥ
+    H3: Sarpaśīrṣa Hasta Viniyōgaḥ
+    H3: Padmakōsa Hasta Viniyōgaḥ
+    H3: Candrakalā Hasta Viniyōgaḥ
+    H3: Sūcī Hasta Viniyōgaḥ
+    H3: Asaṃyuta Hasta (Single Hand Gestures)
+    H3: Saṃyuta Hasta (Combined Hand Gestures)
+    H3: Patāka Hasta Viniyōgaḥ
+    H3: Tripatāka Hasta Viniyōgaḥ
+    H2: Talam
+    H3: Talam
+    H3: Talam - Ta dhi tom num

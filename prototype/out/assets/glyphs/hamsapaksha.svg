@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" role="img" aria-label="haṃsapakṣa hasta">
+  <mask id="crease-hamsapaksha" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 51.7 81.0 L 47.9 47.5"/>
+      <path d="M 64.8 80.5 L 66.0 46.1"/>
+      <path d="M 75.2 83.0 L 86.0 57.5"/>
+    </g>
+  </mask>
+  <g mask="url(#crease-hamsapaksha)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 26.1 103.0 Q 66.4 107.2 74.0 108.0" stroke-width="15.0"/>
+    <path d="M 76.7 87.8 Q 102.3 56.2 107.1 50.3" stroke-width="13.0"/>
+    <path d="M 70.8 84.9 Q 76.2 40.9 77.2 32.3" stroke-width="13.0"/>
+    <path d="M 58.5 84.0 Q 56.0 36.5 55.5 27.1" stroke-width="13.0"/>
+    <path d="M 45.7 85.8 Q 38.2 42.9 36.7 34.6" stroke-width="13.0"/>
+  </g>
+</svg>

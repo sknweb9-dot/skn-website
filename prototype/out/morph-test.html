@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Hasta morph test</title>
+<style>
+  :root { --ink:#0a1a3f; --cyan:#10b0d0; --paper:#f7f4ee; }
+  body { margin:0; padding:40px; background:var(--paper); color:var(--ink);
+         font:14px/1.5 ui-sans-serif,system-ui,sans-serif; }
+  h1 { font-size:20px; font-weight:500; margin:0 0 4px; }
+  p.note { margin:0 0 28px; color:#5b6b86; max-width:74ch; }
+  section { margin-bottom:30px; padding-bottom:22px; border-bottom:1px solid #ddd4c2; }
+  h2 { font-size:15px; font-weight:600; margin:0 0 2px; }
+  h2 em { font-weight:400; color:#5b6b86; font-style:normal; }
+  .strip { display:flex; gap:6px; align-items:flex-end; margin-top:14px;
+           background:var(--ink); padding:14px; border-radius:3px; }
+  .frame { flex:1; text-align:center; color:var(--cyan); }
+  .frame.end { color:#fff; }
+  .frame svg { width:100%; height:auto; }
+  .t { font-size:10px; color:#7f93b5; margin-top:5px; font-variant-numeric:tabular-nums; }
+  .frame.end .t { color:#cfe6f2; }
+  .sm { display:flex; gap:6px; margin-top:8px; align-items:flex-end; }
+  .sm .frame { color:var(--ink); }
+  .sm .frame svg { height:30px; width:auto; }
+</style></head><body>
+<h1>Hasta morph test</h1>
+<p class="note">Seven frames per transition, blended by interpolating finger
+extension, curl, abduction and convergence &mdash; not by blending outlines. The
+question for each strip is whether the middle frames look like a hand caught
+mid-gesture or like something that could not exist. Small row underneath checks
+the same frames at interface size.</p>
+<section>
+<h2>mukula &rarr; alapadma <em>&mdash; bud closed to full fan — every tip travels</em></h2>
+<div class="strip"><div class="frame end"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf0-0" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 51.7 81.0 L 49.2 59.2"/>
+      <path d="M 64.8 80.5 L 65.6 58.3"/>
+      <path d="M 76.2 83.3 L 80.3 65.3"/>
+    </g>
+  </mask>
+  <g mask="url(#mf0-0)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 37.2 113.9 Q 31.8 70.1 56.0 34.0" stroke-width="15.0"/>
+    <path d="M 79.7 89.5 Q 90.7 57.5 56.0 34.0" stroke-width="13.0"/>
+    <path d="M 70.8 84.9 Q 75.8 44.3 56.0 34.0" stroke-width="13.0"/>
+    <path d="M 58.5 84.0 Q 56.2 40.2 56.0 34.0" stroke-width="13.0"/>
+    <path d="M 45.7 85.8 Q 38.7 46.2 56.0 34.0" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.00</div></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf0-1" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.0 80.9 L 48.3 59.1"/>
+      <path d="M 64.8 80.5 L 65.7 58.0"/>
+      <path d="M 75.8 83.2 L 81.1 65.3"/>
+    </g>
+  </mask>
+  <g mask="url(#mf0-1)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 37.8 113.8 Q 29.8 70.1 49.7 41.4" stroke-width="15.0"/>
+    <path d="M 78.9 89.1 Q 92.9 57.9 60.9 39.8" stroke-width="13.0"/>
+    <path d="M 70.4 84.9 Q 77.0 43.9 58.0 37.1" stroke-width="13.0"/>
+    <path d="M 58.8 84.0 Q 55.3 39.6 54.1 36.3" stroke-width="13.0"/>
+    <path d="M 46.5 85.7 Q 36.3 46.2 50.7 37.6" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.17</div></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf0-2" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.3 80.9 L 47.5 58.9"/>
+      <path d="M 64.7 80.5 L 65.7 57.7"/>
+      <path d="M 75.4 83.1 L 82.0 65.4"/>
+    </g>
+  </mask>
+  <g mask="url(#mf0-2)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 38.4 113.7 Q 27.8 70.3 43.3 47.7" stroke-width="15.0"/>
+    <path d="M 78.1 88.7 Q 95.1 58.5 67.4 44.8" stroke-width="13.0"/>
+    <path d="M 70.1 84.8 Q 78.2 43.5 61.2 39.0" stroke-width="13.0"/>
+    <path d="M 59.1 83.9 Q 54.3 39.1 52.4 37.2" stroke-width="13.0"/>
+    <path d="M 47.2 85.5 Q 33.9 46.3 45.1 40.1" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.33</div></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf0-3" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.6 80.8 L 44.0 49.6"/>
+      <path d="M 64.7 80.5 L 66.3 47.6"/>
+      <path d="M 75.1 83.0 L 85.9 58.6"/>
+    </g>
+  </mask>
+  <g mask="url(#mf0-3)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 38.9 113.6 Q 25.8 70.6 36.6 53.1" stroke-width="15.0"/>
+    <path d="M 77.3 88.2 Q 97.2 59.3 75.4 49.1" stroke-width="13.0"/>
+    <path d="M 69.7 84.7 Q 79.5 43.2 65.7 39.6" stroke-width="13.0"/>
+    <path d="M 59.3 83.9 Q 53.2 38.6 51.0 36.9" stroke-width="13.0"/>
+    <path d="M 47.9 85.2 Q 31.4 46.7 39.1 41.7" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.50</div></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf0-4" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.9 80.7 L 42.5 49.6"/>
+      <path d="M 64.7 80.5 L 66.5 47.1"/>
+      <path d="M 74.7 82.8 L 87.2 58.8"/>
+    </g>
+  </mask>
+  <g mask="url(#mf0-4)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 39.5 113.4 Q 23.8 71.0 29.8 57.6" stroke-width="15.0"/>
+    <path d="M 76.6 87.7 Q 99.3 60.4 84.9 52.7" stroke-width="13.0"/>
+    <path d="M 69.4 84.6 Q 80.8 42.9 71.3 39.0" stroke-width="13.0"/>
+    <path d="M 59.6 83.9 Q 52.2 38.1 49.8 35.2" stroke-width="13.0"/>
+    <path d="M 48.6 84.9 Q 29.0 47.2 32.8 42.5" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.67</div></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf0-5" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 53.2 80.6 L 41.1 49.6"/>
+      <path d="M 64.7 80.5 L 66.6 46.6"/>
+      <path d="M 74.4 82.6 L 88.6 59.2"/>
+    </g>
+  </mask>
+  <g mask="url(#mf0-5)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 40.0 113.2 Q 21.8 71.6 22.9 61.3" stroke-width="15.0"/>
+    <path d="M 75.9 87.1 Q 101.3 61.6 95.9 55.9" stroke-width="13.0"/>
+    <path d="M 69.0 84.5 Q 82.1 42.7 78.2 37.3" stroke-width="13.0"/>
+    <path d="M 59.9 83.8 Q 51.1 37.7 48.8 32.3" stroke-width="13.0"/>
+    <path d="M 49.3 84.5 Q 26.5 48.0 26.1 42.6" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.83</div></div><div class="frame end"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf0-6" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 53.5 80.5 L 39.6 49.7"/>
+      <path d="M 64.6 80.5 L 66.8 46.2"/>
+      <path d="M 74.1 82.4 L 89.9 59.6"/>
+    </g>
+  </mask>
+  <g mask="url(#mf0-6)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 40.5 112.9 Q 19.8 72.2 15.8 64.3" stroke-width="15.0"/>
+    <path d="M 75.3 86.4 Q 103.2 63.0 108.3 58.8" stroke-width="13.0"/>
+    <path d="M 68.7 84.4 Q 83.4 42.6 86.3 34.4" stroke-width="13.0"/>
+    <path d="M 60.1 83.8 Q 50.0 37.3 48.0 28.1" stroke-width="13.0"/>
+    <path d="M 49.9 84.1 Q 24.1 48.9 19.1 42.2" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">1.00</div></div></div>
+<div class="sm"><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms0-0" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 51.7 81.0 L 49.2 59.2"/>
+      <path d="M 64.8 80.5 L 65.6 58.3"/>
+      <path d="M 76.2 83.3 L 80.3 65.3"/>
+    </g>
+  </mask>
+  <g mask="url(#ms0-0)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 37.2 113.9 Q 31.8 70.1 56.0 34.0" stroke-width="15.0"/>
+    <path d="M 79.7 89.5 Q 90.7 57.5 56.0 34.0" stroke-width="13.0"/>
+    <path d="M 70.8 84.9 Q 75.8 44.3 56.0 34.0" stroke-width="13.0"/>
+    <path d="M 58.5 84.0 Q 56.2 40.2 56.0 34.0" stroke-width="13.0"/>
+    <path d="M 45.7 85.8 Q 38.7 46.2 56.0 34.0" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms0-1" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.0 80.9 L 48.3 59.1"/>
+      <path d="M 64.8 80.5 L 65.7 58.0"/>
+      <path d="M 75.8 83.2 L 81.1 65.3"/>
+    </g>
+  </mask>
+  <g mask="url(#ms0-1)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 37.8 113.8 Q 29.8 70.1 49.7 41.4" stroke-width="15.0"/>
+    <path d="M 78.9 89.1 Q 92.9 57.9 60.9 39.8" stroke-width="13.0"/>
+    <path d="M 70.4 84.9 Q 77.0 43.9 58.0 37.1" stroke-width="13.0"/>
+    <path d="M 58.8 84.0 Q 55.3 39.6 54.1 36.3" stroke-width="13.0"/>
+    <path d="M 46.5 85.7 Q 36.3 46.2 50.7 37.6" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms0-2" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.3 80.9 L 47.5 58.9"/>
+      <path d="M 64.7 80.5 L 65.7 57.7"/>
+      <path d="M 75.4 83.1 L 82.0 65.4"/>
+    </g>
+  </mask>
+  <g mask="url(#ms0-2)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 38.4 113.7 Q 27.8 70.3 43.3 47.7" stroke-width="15.0"/>
+    <path d="M 78.1 88.7 Q 95.1 58.5 67.4 44.8" stroke-width="13.0"/>
+    <path d="M 70.1 84.8 Q 78.2 43.5 61.2 39.0" stroke-width="13.0"/>
+    <path d="M 59.1 83.9 Q 54.3 39.1 52.4 37.2" stroke-width="13.0"/>
+    <path d="M 47.2 85.5 Q 33.9 46.3 45.1 40.1" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms0-3" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.6 80.8 L 44.0 49.6"/>
+      <path d="M 64.7 80.5 L 66.3 47.6"/>
+      <path d="M 75.1 83.0 L 85.9 58.6"/>
+    </g>
+  </mask>
+  <g mask="url(#ms0-3)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 38.9 113.6 Q 25.8 70.6 36.6 53.1" stroke-width="15.0"/>
+    <path d="M 77.3 88.2 Q 97.2 59.3 75.4 49.1" stroke-width="13.0"/>
+    <path d="M 69.7 84.7 Q 79.5 43.2 65.7 39.6" stroke-width="13.0"/>
+    <path d="M 59.3 83.9 Q 53.2 38.6 51.0 36.9" stroke-width="13.0"/>
+    <path d="M 47.9 85.2 Q 31.4 46.7 39.1 41.7" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms0-4" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.9 80.7 L 42.5 49.6"/>
+      <path d="M 64.7 80.5 L 66.5 47.1"/>
+      <path d="M 74.7 82.8 L 87.2 58.8"/>
+    </g>
+  </mask>
+  <g mask="url(#ms0-4)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 39.5 113.4 Q 23.8 71.0 29.8 57.6" stroke-width="15.0"/>
+    <path d="M 76.6 87.7 Q 99.3 60.4 84.9 52.7" stroke-width="13.0"/>
+    <path d="M 69.4 84.6 Q 80.8 42.9 71.3 39.0" stroke-width="13.0"/>
+    <path d="M 59.6 83.9 Q 52.2 38.1 49.8 35.2" stroke-width="13.0"/>
+    <path d="M 48.6 84.9 Q 29.0 47.2 32.8 42.5" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms0-5" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 53.2 80.6 L 41.1 49.6"/>
+      <path d="M 64.7 80.5 L 66.6 46.6"/>
+      <path d="M 74.4 82.6 L 88.6 59.2"/>
+    </g>
+  </mask>
+  <g mask="url(#ms0-5)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 40.0 113.2 Q 21.8 71.6 22.9 61.3" stroke-width="15.0"/>
+    <path d="M 75.9 87.1 Q 101.3 61.6 95.9 55.9" stroke-width="13.0"/>
+    <path d="M 69.0 84.5 Q 82.1 42.7 78.2 37.3" stroke-width="13.0"/>
+    <path d="M 59.9 83.8 Q 51.1 37.7 48.8 32.3" stroke-width="13.0"/>
+    <path d="M 49.3 84.5 Q 26.5 48.0 26.1 42.6" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms0-6" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 53.5 80.5 L 39.6 49.7"/>
+      <path d="M 64.6 80.5 L 66.8 46.2"/>
+      <path d="M 74.1 82.4 L 89.9 59.6"/>
+    </g>
+  </mask>
+  <g mask="url(#ms0-6)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 40.5 112.9 Q 19.8 72.2 15.8 64.3" stroke-width="15.0"/>
+    <path d="M 75.3 86.4 Q 103.2 63.0 108.3 58.8" stroke-width="13.0"/>
+    <path d="M 68.7 84.4 Q 83.4 42.6 86.3 34.4" stroke-width="13.0"/>
+    <path d="M 60.1 83.8 Q 50.0 37.3 48.0 28.1" stroke-width="13.0"/>
+    <path d="M 49.9 84.1 Q 24.1 48.9 19.1 42.2" stroke-width="13.0"/>
+  </g>
+</svg></div></div>
+</section>
+<section>
+<h2>muṣṭi &rarr; sūcī <em>&mdash; fist to a single raised finger — nothing to something</em></h2>
+<div class="strip"><div class="frame end"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf1-0" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 77.8 84.7 Q 79.4 80.0 72.6 89.5"/>
+      <path d="M 69.2 81.4 Q 69.8 76.4 66.3 87.9"/>
+      <path d="M 58.8 81.0 Q 58.5 76.0 59.6 88.0"/>
+      <path d="M 48.0 81.7 Q 47.2 76.8 52.1 87.5"/>
+    </g>
+  </mask>
+  <g mask="url(#mf1-0)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 26.1 103.0 Q 66.4 107.2 74.0 108.0" stroke-width="15.0"/>
+    <path d="M 79.7 89.5 Q 84.4 76.0 84.7 75.0" stroke-width="13.0"/>
+    <path d="M 70.8 84.9 Q 72.7 69.5 72.8 68.2" stroke-width="13.0"/>
+    <path d="M 58.5 84.0 Q 57.7 68.0 57.6 66.5" stroke-width="13.0"/>
+    <path d="M 45.7 85.8 Q 43.1 70.7 42.8 69.4" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.00</div></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf1-1" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 77.8 84.7 Q 79.4 80.0 72.6 89.5"/>
+      <path d="M 69.2 81.4 Q 69.8 76.4 66.3 87.9"/>
+      <path d="M 58.8 81.0 Q 58.5 76.0 59.6 88.0"/>
+      <path d="M 48.0 81.7 Q 47.2 76.8 50.2 84.7"/>
+    </g>
+  </mask>
+  <g mask="url(#mf1-1)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 26.1 103.0 Q 66.4 107.2 74.0 108.0" stroke-width="15.0"/>
+    <path d="M 79.7 89.5 Q 84.4 76.0 84.7 75.0" stroke-width="13.0"/>
+    <path d="M 70.8 84.9 Q 72.7 69.5 72.8 68.2" stroke-width="13.0"/>
+    <path d="M 58.5 84.0 Q 57.7 68.0 57.6 66.5" stroke-width="13.0"/>
+    <path d="M 45.7 85.8 Q 42.2 66.1 41.8 63.6" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.17</div></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf1-2" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 77.8 84.7 Q 79.4 80.0 72.6 89.5"/>
+      <path d="M 69.2 81.4 Q 69.8 76.4 66.3 87.9"/>
+      <path d="M 58.8 81.0 Q 58.5 76.0 59.6 88.0"/>
+    </g>
+  </mask>
+  <g mask="url(#mf1-2)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 26.1 103.0 Q 66.4 107.2 74.0 108.0" stroke-width="15.0"/>
+    <path d="M 79.7 89.5 Q 84.4 76.0 84.7 75.0" stroke-width="13.0"/>
+    <path d="M 70.8 84.9 Q 72.7 69.5 72.8 68.2" stroke-width="13.0"/>
+    <path d="M 58.5 84.0 Q 57.7 68.0 57.6 66.5" stroke-width="13.0"/>
+    <path d="M 45.7 85.8 Q 41.4 61.4 40.8 57.8" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.33</div></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf1-3" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 77.8 84.7 Q 79.4 80.0 72.6 89.5"/>
+      <path d="M 69.2 81.4 Q 69.8 76.4 66.3 87.9"/>
+      <path d="M 58.8 81.0 Q 58.5 76.0 59.6 88.0"/>
+    </g>
+  </mask>
+  <g mask="url(#mf1-3)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 26.1 103.0 Q 66.4 107.2 74.0 108.0" stroke-width="15.0"/>
+    <path d="M 79.7 89.5 Q 84.4 76.0 84.7 75.0" stroke-width="13.0"/>
+    <path d="M 70.8 84.9 Q 72.7 69.5 72.8 68.2" stroke-width="13.0"/>
+    <path d="M 58.5 84.0 Q 57.7 68.0 57.6 66.5" stroke-width="13.0"/>
+    <path d="M 45.7 85.8 Q 40.6 56.8 39.8 52.0" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.50</div></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf1-4" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 77.8 84.7 Q 79.4 80.0 72.6 89.5"/>
+      <path d="M 69.2 81.4 Q 69.8 76.4 66.3 87.9"/>
+      <path d="M 58.8 81.0 Q 58.5 76.0 59.6 88.0"/>
+    </g>
+  </mask>
+  <g mask="url(#mf1-4)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 26.1 103.0 Q 66.4 107.2 74.0 108.0" stroke-width="15.0"/>
+    <path d="M 79.7 89.5 Q 84.4 76.0 84.7 75.0" stroke-width="13.0"/>
+    <path d="M 70.8 84.9 Q 72.7 69.5 72.8 68.2" stroke-width="13.0"/>
+    <path d="M 58.5 84.0 Q 57.7 68.0 57.6 66.5" stroke-width="13.0"/>
+    <path d="M 45.7 85.8 Q 39.8 52.2 38.7 46.2" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.67</div></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf1-5" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 77.8 84.7 Q 79.4 80.0 72.6 89.5"/>
+      <path d="M 69.2 81.4 Q 69.8 76.4 66.3 87.9"/>
+      <path d="M 58.8 81.0 Q 58.5 76.0 59.6 88.0"/>
+    </g>
+  </mask>
+  <g mask="url(#mf1-5)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 26.1 103.0 Q 66.4 107.2 74.0 108.0" stroke-width="15.0"/>
+    <path d="M 79.7 89.5 Q 84.4 76.0 84.7 75.0" stroke-width="13.0"/>
+    <path d="M 70.8 84.9 Q 72.7 69.5 72.8 68.2" stroke-width="13.0"/>
+    <path d="M 58.5 84.0 Q 57.7 68.0 57.6 66.5" stroke-width="13.0"/>
+    <path d="M 45.7 85.8 Q 39.0 47.5 37.7 40.4" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.83</div></div><div class="frame end"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf1-6" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 77.8 84.7 Q 79.4 80.0 72.6 89.5"/>
+      <path d="M 69.2 81.4 Q 69.8 76.4 66.3 87.9"/>
+      <path d="M 58.8 81.0 Q 58.5 76.0 59.6 88.0"/>
+    </g>
+  </mask>
+  <g mask="url(#mf1-6)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 26.1 103.0 Q 66.4 107.2 74.0 108.0" stroke-width="15.0"/>
+    <path d="M 79.7 89.5 Q 84.4 76.0 84.7 75.0" stroke-width="13.0"/>
+    <path d="M 70.8 84.9 Q 72.7 69.5 72.8 68.2" stroke-width="13.0"/>
+    <path d="M 58.5 84.0 Q 57.7 68.0 57.6 66.5" stroke-width="13.0"/>
+    <path d="M 45.7 85.8 Q 38.2 42.9 36.7 34.6" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">1.00</div></div></div>
+<div class="sm"><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms1-0" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 77.8 84.7 Q 79.4 80.0 72.6 89.5"/>
+      <path d="M 69.2 81.4 Q 69.8 76.4 66.3 87.9"/>
+      <path d="M 58.8 81.0 Q 58.5 76.0 59.6 88.0"/>
+      <path d="M 48.0 81.7 Q 47.2 76.8 52.1 87.5"/>
+    </g>
+  </mask>
+  <g mask="url(#ms1-0)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 26.1 103.0 Q 66.4 107.2 74.0 108.0" stroke-width="15.0"/>
+    <path d="M 79.7 89.5 Q 84.4 76.0 84.7 75.0" stroke-width="13.0"/>
+    <path d="M 70.8 84.9 Q 72.7 69.5 72.8 68.2" stroke-width="13.0"/>
+    <path d="M 58.5 84.0 Q 57.7 68.0 57.6 66.5" stroke-width="13.0"/>
+    <path d="M 45.7 85.8 Q 43.1 70.7 42.8 69.4" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms1-1" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 77.8 84.7 Q 79.4 80.0 72.6 89.5"/>
+      <path d="M 69.2 81.4 Q 69.8 76.4 66.3 87.9"/>
+      <path d="M 58.8 81.0 Q 58.5 76.0 59.6 88.0"/>
+      <path d="M 48.0 81.7 Q 47.2 76.8 50.2 84.7"/>
+    </g>
+  </mask>
+  <g mask="url(#ms1-1)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 26.1 103.0 Q 66.4 107.2 74.0 108.0" stroke-width="15.0"/>
+    <path d="M 79.7 89.5 Q 84.4 76.0 84.7 75.0" stroke-width="13.0"/>
+    <path d="M 70.8 84.9 Q 72.7 69.5 72.8 68.2" stroke-width="13.0"/>
+    <path d="M 58.5 84.0 Q 57.7 68.0 57.6 66.5" stroke-width="13.0"/>
+    <path d="M 45.7 85.8 Q 42.2 66.1 41.8 63.6" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms1-2" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 77.8 84.7 Q 79.4 80.0 72.6 89.5"/>
+      <path d="M 69.2 81.4 Q 69.8 76.4 66.3 87.9"/>
+      <path d="M 58.8 81.0 Q 58.5 76.0 59.6 88.0"/>
+    </g>
+  </mask>
+  <g mask="url(#ms1-2)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 26.1 103.0 Q 66.4 107.2 74.0 108.0" stroke-width="15.0"/>
+    <path d="M 79.7 89.5 Q 84.4 76.0 84.7 75.0" stroke-width="13.0"/>
+    <path d="M 70.8 84.9 Q 72.7 69.5 72.8 68.2" stroke-width="13.0"/>
+    <path d="M 58.5 84.0 Q 57.7 68.0 57.6 66.5" stroke-width="13.0"/>
+    <path d="M 45.7 85.8 Q 41.4 61.4 40.8 57.8" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms1-3" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 77.8 84.7 Q 79.4 80.0 72.6 89.5"/>
+      <path d="M 69.2 81.4 Q 69.8 76.4 66.3 87.9"/>
+      <path d="M 58.8 81.0 Q 58.5 76.0 59.6 88.0"/>
+    </g>
+  </mask>
+  <g mask="url(#ms1-3)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 26.1 103.0 Q 66.4 107.2 74.0 108.0" stroke-width="15.0"/>
+    <path d="M 79.7 89.5 Q 84.4 76.0 84.7 75.0" stroke-width="13.0"/>
+    <path d="M 70.8 84.9 Q 72.7 69.5 72.8 68.2" stroke-width="13.0"/>
+    <path d="M 58.5 84.0 Q 57.7 68.0 57.6 66.5" stroke-width="13.0"/>
+    <path d="M 45.7 85.8 Q 40.6 56.8 39.8 52.0" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms1-4" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 77.8 84.7 Q 79.4 80.0 72.6 89.5"/>
+      <path d="M 69.2 81.4 Q 69.8 76.4 66.3 87.9"/>
+      <path d="M 58.8 81.0 Q 58.5 76.0 59.6 88.0"/>
+    </g>
+  </mask>
+  <g mask="url(#ms1-4)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 26.1 103.0 Q 66.4 107.2 74.0 108.0" stroke-width="15.0"/>
+    <path d="M 79.7 89.5 Q 84.4 76.0 84.7 75.0" stroke-width="13.0"/>
+    <path d="M 70.8 84.9 Q 72.7 69.5 72.8 68.2" stroke-width="13.0"/>
+    <path d="M 58.5 84.0 Q 57.7 68.0 57.6 66.5" stroke-width="13.0"/>
+    <path d="M 45.7 85.8 Q 39.8 52.2 38.7 46.2" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms1-5" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 77.8 84.7 Q 79.4 80.0 72.6 89.5"/>
+      <path d="M 69.2 81.4 Q 69.8 76.4 66.3 87.9"/>
+      <path d="M 58.8 81.0 Q 58.5 76.0 59.6 88.0"/>
+    </g>
+  </mask>
+  <g mask="url(#ms1-5)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 26.1 103.0 Q 66.4 107.2 74.0 108.0" stroke-width="15.0"/>
+    <path d="M 79.7 89.5 Q 84.4 76.0 84.7 75.0" stroke-width="13.0"/>
+    <path d="M 70.8 84.9 Q 72.7 69.5 72.8 68.2" stroke-width="13.0"/>
+    <path d="M 58.5 84.0 Q 57.7 68.0 57.6 66.5" stroke-width="13.0"/>
+    <path d="M 45.7 85.8 Q 39.0 47.5 37.7 40.4" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms1-6" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 77.8 84.7 Q 79.4 80.0 72.6 89.5"/>
+      <path d="M 69.2 81.4 Q 69.8 76.4 66.3 87.9"/>
+      <path d="M 58.8 81.0 Q 58.5 76.0 59.6 88.0"/>
+    </g>
+  </mask>
+  <g mask="url(#ms1-6)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 26.1 103.0 Q 66.4 107.2 74.0 108.0" stroke-width="15.0"/>
+    <path d="M 79.7 89.5 Q 84.4 76.0 84.7 75.0" stroke-width="13.0"/>
+    <path d="M 70.8 84.9 Q 72.7 69.5 72.8 68.2" stroke-width="13.0"/>
+    <path d="M 58.5 84.0 Q 57.7 68.0 57.6 66.5" stroke-width="13.0"/>
+    <path d="M 45.7 85.8 Q 38.2 42.9 36.7 34.6" stroke-width="13.0"/>
+  </g>
+</svg></div></div>
+</section>
+<section>
+<h2>haṃsāsya &rarr; patāka <em>&mdash; three-finger pinch releasing to a flat flag</em></h2>
+<div class="strip"><div class="frame end"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf2-0" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.0 80.9 L 48.6 60.2"/>
+      <path d="M 64.8 80.5 L 65.6 59.2"/>
+      <path d="M 75.8 83.3 L 83.7 56.6"/>
+    </g>
+  </mask>
+  <g mask="url(#mf2-0)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 35.8 114.0 Q 36.6 71.6 44.0 54.0" stroke-width="15.0"/>
+    <path d="M 78.9 89.1 Q 93.7 55.9 96.4 49.9" stroke-width="13.0"/>
+    <path d="M 70.4 84.9 Q 77.4 41.0 78.7 32.5" stroke-width="13.0"/>
+    <path d="M 58.8 84.0 Q 55.5 42.1 44.0 54.0" stroke-width="13.0"/>
+    <path d="M 46.5 85.7 Q 37.0 48.3 44.0 54.0" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.00</div></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf2-1" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 51.9 80.9 L 48.6 59.8"/>
+      <path d="M 64.8 80.5 L 65.6 58.7"/>
+      <path d="M 75.9 83.3 L 83.5 56.6"/>
+    </g>
+  </mask>
+  <g mask="url(#mf2-1)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 33.1 113.6 Q 45.3 73.3 44.6 55.9" stroke-width="15.0"/>
+    <path d="M 79.1 89.2 Q 93.4 55.7 96.0 49.7" stroke-width="13.0"/>
+    <path d="M 70.5 84.9 Q 77.2 41.0 78.5 32.5" stroke-width="13.0"/>
+    <path d="M 58.7 84.0 Q 55.6 41.2 45.8 50.5" stroke-width="13.0"/>
+    <path d="M 46.3 85.7 Q 37.1 47.4 42.6 51.7" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.17</div></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf2-2" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 51.9 80.9 L 48.7 59.3"/>
+      <path d="M 64.8 80.5 L 65.6 58.3"/>
+      <path d="M 75.9 83.3 L 83.3 56.5"/>
+    </g>
+  </mask>
+  <g mask="url(#mf2-2)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 30.6 112.4 Q 53.2 77.2 48.5 59.5" stroke-width="15.0"/>
+    <path d="M 79.2 89.2 Q 93.0 55.6 95.5 49.5" stroke-width="13.0"/>
+    <path d="M 70.6 84.9 Q 77.0 41.0 78.2 32.5" stroke-width="13.0"/>
+    <path d="M 58.7 84.0 Q 55.6 40.2 47.7 46.6" stroke-width="13.0"/>
+    <path d="M 46.2 85.8 Q 37.3 46.5 41.2 49.0" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.33</div></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf2-3" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 51.8 80.9 L 47.5 49.6"/>
+      <path d="M 64.8 80.5 L 66.0 48.3"/>
+      <path d="M 76.0 83.3 L 83.0 56.4"/>
+    </g>
+  </mask>
+  <g mask="url(#mf2-3)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 28.5 110.6 Q 59.6 83.1 54.7 66.0" stroke-width="15.0"/>
+    <path d="M 79.3 89.3 Q 92.7 55.4 95.1 49.3" stroke-width="13.0"/>
+    <path d="M 70.6 84.9 Q 76.8 40.9 78.0 32.4" stroke-width="13.0"/>
+    <path d="M 58.7 84.0 Q 55.7 39.3 49.6 42.3" stroke-width="13.0"/>
+    <path d="M 46.1 85.8 Q 37.5 45.6 39.9 46.0" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.50</div></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf2-4" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 51.8 80.9 L 47.6 48.9"/>
+      <path d="M 64.8 80.5 L 66.0 47.6"/>
+      <path d="M 76.0 83.3 L 82.8 56.4"/>
+    </g>
+  </mask>
+  <g mask="url(#mf2-4)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 27.0 108.3 Q 64.1 90.5 62.1 76.1" stroke-width="15.0"/>
+    <path d="M 79.5 89.4 Q 92.3 55.3 94.6 49.1" stroke-width="13.0"/>
+    <path d="M 70.7 84.9 Q 76.6 40.9 77.7 32.4" stroke-width="13.0"/>
+    <path d="M 58.6 84.0 Q 55.8 38.3 51.5 37.6" stroke-width="13.0"/>
+    <path d="M 46.0 85.8 Q 37.7 44.7 38.7 42.6" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.67</div></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf2-5" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 51.7 81.0 L 47.7 48.2"/>
+      <path d="M 64.8 80.5 L 66.0 46.8"/>
+      <path d="M 76.1 83.3 L 82.6 56.3"/>
+    </g>
+  </mask>
+  <g mask="url(#mf2-5)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 26.1 105.7 Q 66.4 98.7 69.0 90.2" stroke-width="15.0"/>
+    <path d="M 79.6 89.4 Q 92.0 55.2 94.2 49.0" stroke-width="13.0"/>
+    <path d="M 70.7 84.9 Q 76.4 40.9 77.5 32.4" stroke-width="13.0"/>
+    <path d="M 58.6 84.0 Q 55.9 37.4 53.5 32.5" stroke-width="13.0"/>
+    <path d="M 45.9 85.8 Q 37.9 43.8 37.7 38.8" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.83</div></div><div class="frame end"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf2-6" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 51.7 81.0 L 47.9 47.5"/>
+      <path d="M 64.8 80.5 L 66.0 46.1"/>
+      <path d="M 76.2 83.3 L 82.4 56.3"/>
+    </g>
+  </mask>
+  <g mask="url(#mf2-6)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 26.1 103.0 Q 66.4 107.2 74.0 108.0" stroke-width="15.0"/>
+    <path d="M 79.7 89.5 Q 91.6 55.0 93.7 48.8" stroke-width="13.0"/>
+    <path d="M 70.8 84.9 Q 76.2 40.9 77.2 32.3" stroke-width="13.0"/>
+    <path d="M 58.5 84.0 Q 56.0 36.5 55.5 27.1" stroke-width="13.0"/>
+    <path d="M 45.7 85.8 Q 38.2 42.9 36.7 34.6" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">1.00</div></div></div>
+<div class="sm"><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms2-0" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.0 80.9 L 48.6 60.2"/>
+      <path d="M 64.8 80.5 L 65.6 59.2"/>
+      <path d="M 75.8 83.3 L 83.7 56.6"/>
+    </g>
+  </mask>
+  <g mask="url(#ms2-0)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 35.8 114.0 Q 36.6 71.6 44.0 54.0" stroke-width="15.0"/>
+    <path d="M 78.9 89.1 Q 93.7 55.9 96.4 49.9" stroke-width="13.0"/>
+    <path d="M 70.4 84.9 Q 77.4 41.0 78.7 32.5" stroke-width="13.0"/>
+    <path d="M 58.8 84.0 Q 55.5 42.1 44.0 54.0" stroke-width="13.0"/>
+    <path d="M 46.5 85.7 Q 37.0 48.3 44.0 54.0" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms2-1" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 51.9 80.9 L 48.6 59.8"/>
+      <path d="M 64.8 80.5 L 65.6 58.7"/>
+      <path d="M 75.9 83.3 L 83.5 56.6"/>
+    </g>
+  </mask>
+  <g mask="url(#ms2-1)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 33.1 113.6 Q 45.3 73.3 44.6 55.9" stroke-width="15.0"/>
+    <path d="M 79.1 89.2 Q 93.4 55.7 96.0 49.7" stroke-width="13.0"/>
+    <path d="M 70.5 84.9 Q 77.2 41.0 78.5 32.5" stroke-width="13.0"/>
+    <path d="M 58.7 84.0 Q 55.6 41.2 45.8 50.5" stroke-width="13.0"/>
+    <path d="M 46.3 85.7 Q 37.1 47.4 42.6 51.7" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms2-2" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 51.9 80.9 L 48.7 59.3"/>
+      <path d="M 64.8 80.5 L 65.6 58.3"/>
+      <path d="M 75.9 83.3 L 83.3 56.5"/>
+    </g>
+  </mask>
+  <g mask="url(#ms2-2)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 30.6 112.4 Q 53.2 77.2 48.5 59.5" stroke-width="15.0"/>
+    <path d="M 79.2 89.2 Q 93.0 55.6 95.5 49.5" stroke-width="13.0"/>
+    <path d="M 70.6 84.9 Q 77.0 41.0 78.2 32.5" stroke-width="13.0"/>
+    <path d="M 58.7 84.0 Q 55.6 40.2 47.7 46.6" stroke-width="13.0"/>
+    <path d="M 46.2 85.8 Q 37.3 46.5 41.2 49.0" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms2-3" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 51.8 80.9 L 47.5 49.6"/>
+      <path d="M 64.8 80.5 L 66.0 48.3"/>
+      <path d="M 76.0 83.3 L 83.0 56.4"/>
+    </g>
+  </mask>
+  <g mask="url(#ms2-3)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 28.5 110.6 Q 59.6 83.1 54.7 66.0" stroke-width="15.0"/>
+    <path d="M 79.3 89.3 Q 92.7 55.4 95.1 49.3" stroke-width="13.0"/>
+    <path d="M 70.6 84.9 Q 76.8 40.9 78.0 32.4" stroke-width="13.0"/>
+    <path d="M 58.7 84.0 Q 55.7 39.3 49.6 42.3" stroke-width="13.0"/>
+    <path d="M 46.1 85.8 Q 37.5 45.6 39.9 46.0" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms2-4" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 51.8 80.9 L 47.6 48.9"/>
+      <path d="M 64.8 80.5 L 66.0 47.6"/>
+      <path d="M 76.0 83.3 L 82.8 56.4"/>
+    </g>
+  </mask>
+  <g mask="url(#ms2-4)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 27.0 108.3 Q 64.1 90.5 62.1 76.1" stroke-width="15.0"/>
+    <path d="M 79.5 89.4 Q 92.3 55.3 94.6 49.1" stroke-width="13.0"/>
+    <path d="M 70.7 84.9 Q 76.6 40.9 77.7 32.4" stroke-width="13.0"/>
+    <path d="M 58.6 84.0 Q 55.8 38.3 51.5 37.6" stroke-width="13.0"/>
+    <path d="M 46.0 85.8 Q 37.7 44.7 38.7 42.6" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms2-5" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 51.7 81.0 L 47.7 48.2"/>
+      <path d="M 64.8 80.5 L 66.0 46.8"/>
+      <path d="M 76.1 83.3 L 82.6 56.3"/>
+    </g>
+  </mask>
+  <g mask="url(#ms2-5)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 26.1 105.7 Q 66.4 98.7 69.0 90.2" stroke-width="15.0"/>
+    <path d="M 79.6 89.4 Q 92.0 55.2 94.2 49.0" stroke-width="13.0"/>
+    <path d="M 70.7 84.9 Q 76.4 40.9 77.5 32.4" stroke-width="13.0"/>
+    <path d="M 58.6 84.0 Q 55.9 37.4 53.5 32.5" stroke-width="13.0"/>
+    <path d="M 45.9 85.8 Q 37.9 43.8 37.7 38.8" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms2-6" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 51.7 81.0 L 47.9 47.5"/>
+      <path d="M 64.8 80.5 L 66.0 46.1"/>
+      <path d="M 76.2 83.3 L 82.4 56.3"/>
+    </g>
+  </mask>
+  <g mask="url(#ms2-6)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 26.1 103.0 Q 66.4 107.2 74.0 108.0" stroke-width="15.0"/>
+    <path d="M 79.7 89.5 Q 91.6 55.0 93.7 48.8" stroke-width="13.0"/>
+    <path d="M 70.8 84.9 Q 76.2 40.9 77.2 32.3" stroke-width="13.0"/>
+    <path d="M 58.5 84.0 Q 56.0 36.5 55.5 27.1" stroke-width="13.0"/>
+    <path d="M 45.7 85.8 Q 38.2 42.9 36.7 34.6" stroke-width="13.0"/>
+  </g>
+</svg></div></div>
+</section>
+<section>
+<h2>śikhara &rarr; alapadma <em>&mdash; closed fist with raised thumb to full bloom</em></h2>
+<div class="strip"><div class="frame end"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf3-0" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 77.8 84.7 Q 79.4 80.0 72.6 89.5"/>
+      <path d="M 69.2 81.4 Q 69.8 76.4 66.3 87.9"/>
+      <path d="M 58.8 81.0 Q 58.5 76.0 59.6 88.0"/>
+      <path d="M 48.0 81.7 Q 47.2 76.8 52.1 87.5"/>
+    </g>
+  </mask>
+  <g mask="url(#mf3-0)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 39.6 113.3 Q 22.6 69.0 20.8 60.1" stroke-width="15.0"/>
+    <path d="M 79.7 89.5 Q 84.4 76.0 84.7 75.0" stroke-width="13.0"/>
+    <path d="M 70.8 84.9 Q 72.7 69.5 72.8 68.2" stroke-width="13.0"/>
+    <path d="M 58.5 84.0 Q 57.7 68.0 57.6 66.5" stroke-width="13.0"/>
+    <path d="M 45.7 85.8 Q 43.1 70.7 42.8 69.4" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.00</div></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf3-1" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 77.8 84.7 Q 79.9 80.1 75.1 87.2"/>
+      <path d="M 69.2 81.4 Q 70.0 76.5 67.7 84.8"/>
+      <path d="M 58.8 81.0 Q 58.4 76.0 59.2 84.6"/>
+      <path d="M 48.0 81.7 Q 46.8 76.9 50.2 84.7"/>
+    </g>
+  </mask>
+  <g mask="url(#mf3-1)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 39.7 113.3 Q 22.1 69.6 19.9 60.7" stroke-width="15.0"/>
+    <path d="M 78.9 89.1 Q 86.2 72.8 87.1 71.0" stroke-width="13.0"/>
+    <path d="M 70.4 84.9 Q 73.6 64.8 74.0 62.3" stroke-width="13.0"/>
+    <path d="M 58.8 84.0 Q 57.1 62.8 56.9 59.9" stroke-width="13.0"/>
+    <path d="M 46.5 85.7 Q 41.5 66.2 40.9 63.8" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.17</div></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf3-2" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.3 80.9 L 48.4 63.1"/>
+      <path d="M 64.7 80.5 L 65.5 62.0"/>
+      <path d="M 75.4 83.1 L 80.8 68.5"/>
+    </g>
+  </mask>
+  <g mask="url(#mf3-2)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 39.9 113.2 Q 21.6 70.1 19.1 61.4" stroke-width="15.0"/>
+    <path d="M 78.1 88.7 Q 88.7 69.9 90.1 67.3" stroke-width="13.0"/>
+    <path d="M 70.1 84.8 Q 74.9 60.1 75.7 56.4" stroke-width="13.0"/>
+    <path d="M 59.1 83.9 Q 56.2 57.5 55.8 53.4" stroke-width="13.0"/>
+    <path d="M 47.2 85.5 Q 39.2 62.0 38.0 58.5" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.33</div></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf3-3" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.6 80.8 L 46.7 59.5"/>
+      <path d="M 64.7 80.5 L 65.8 58.1"/>
+      <path d="M 75.1 83.0 L 82.6 65.9"/>
+    </g>
+  </mask>
+  <g mask="url(#mf3-3)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 40.1 113.1 Q 21.1 70.6 18.2 62.1" stroke-width="15.0"/>
+    <path d="M 77.3 88.2 Q 91.7 67.4 93.8 64.2" stroke-width="13.0"/>
+    <path d="M 69.7 84.7 Q 76.6 55.6 77.7 50.7" stroke-width="13.0"/>
+    <path d="M 59.3 83.9 Q 55.1 52.4 54.4 47.0" stroke-width="13.0"/>
+    <path d="M 47.9 85.2 Q 36.3 58.1 34.4 53.6" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.50</div></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf3-4" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.9 80.7 L 44.7 56.1"/>
+      <path d="M 64.7 80.5 L 66.1 54.1"/>
+      <path d="M 74.7 82.8 L 84.7 63.6"/>
+    </g>
+  </mask>
+  <g mask="url(#mf3-4)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 40.2 113.1 Q 20.7 71.2 17.4 62.9" stroke-width="15.0"/>
+    <path d="M 76.6 87.7 Q 95.1 65.4 98.2 61.7" stroke-width="13.0"/>
+    <path d="M 69.4 84.6 Q 78.5 51.1 80.2 45.1" stroke-width="13.0"/>
+    <path d="M 59.6 83.9 Q 53.7 47.3 52.6 40.6" stroke-width="13.0"/>
+    <path d="M 48.6 84.9 Q 32.8 54.6 30.0 49.2" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.67</div></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf3-5" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 53.2 80.6 L 42.3 52.8"/>
+      <path d="M 64.7 80.5 L 66.4 50.1"/>
+      <path d="M 74.4 82.6 L 87.2 61.5"/>
+    </g>
+  </mask>
+  <g mask="url(#mf3-5)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 40.4 113.0 Q 20.2 71.7 16.6 63.6" stroke-width="15.0"/>
+    <path d="M 75.9 87.1 Q 99.0 63.9 103.0 59.9" stroke-width="13.0"/>
+    <path d="M 69.0 84.5 Q 80.8 46.8 83.0 39.7" stroke-width="13.0"/>
+    <path d="M 59.9 83.8 Q 52.0 42.2 50.5 34.3" stroke-width="13.0"/>
+    <path d="M 49.3 84.5 Q 28.7 51.5 24.9 45.4" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.83</div></div><div class="frame end"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf3-6" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 53.5 80.5 L 39.6 49.7"/>
+      <path d="M 64.6 80.5 L 66.8 46.2"/>
+      <path d="M 74.1 82.4 L 89.9 59.6"/>
+    </g>
+  </mask>
+  <g mask="url(#mf3-6)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 40.5 112.9 Q 19.8 72.2 15.8 64.3" stroke-width="15.0"/>
+    <path d="M 75.3 86.4 Q 103.2 63.0 108.3 58.8" stroke-width="13.0"/>
+    <path d="M 68.7 84.4 Q 83.4 42.6 86.3 34.4" stroke-width="13.0"/>
+    <path d="M 60.1 83.8 Q 50.0 37.3 48.0 28.1" stroke-width="13.0"/>
+    <path d="M 49.9 84.1 Q 24.1 48.9 19.1 42.2" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">1.00</div></div></div>
+<div class="sm"><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms3-0" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 77.8 84.7 Q 79.4 80.0 72.6 89.5"/>
+      <path d="M 69.2 81.4 Q 69.8 76.4 66.3 87.9"/>
+      <path d="M 58.8 81.0 Q 58.5 76.0 59.6 88.0"/>
+      <path d="M 48.0 81.7 Q 47.2 76.8 52.1 87.5"/>
+    </g>
+  </mask>
+  <g mask="url(#ms3-0)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 39.6 113.3 Q 22.6 69.0 20.8 60.1" stroke-width="15.0"/>
+    <path d="M 79.7 89.5 Q 84.4 76.0 84.7 75.0" stroke-width="13.0"/>
+    <path d="M 70.8 84.9 Q 72.7 69.5 72.8 68.2" stroke-width="13.0"/>
+    <path d="M 58.5 84.0 Q 57.7 68.0 57.6 66.5" stroke-width="13.0"/>
+    <path d="M 45.7 85.8 Q 43.1 70.7 42.8 69.4" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms3-1" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 77.8 84.7 Q 79.9 80.1 75.1 87.2"/>
+      <path d="M 69.2 81.4 Q 70.0 76.5 67.7 84.8"/>
+      <path d="M 58.8 81.0 Q 58.4 76.0 59.2 84.6"/>
+      <path d="M 48.0 81.7 Q 46.8 76.9 50.2 84.7"/>
+    </g>
+  </mask>
+  <g mask="url(#ms3-1)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 39.7 113.3 Q 22.1 69.6 19.9 60.7" stroke-width="15.0"/>
+    <path d="M 78.9 89.1 Q 86.2 72.8 87.1 71.0" stroke-width="13.0"/>
+    <path d="M 70.4 84.9 Q 73.6 64.8 74.0 62.3" stroke-width="13.0"/>
+    <path d="M 58.8 84.0 Q 57.1 62.8 56.9 59.9" stroke-width="13.0"/>
+    <path d="M 46.5 85.7 Q 41.5 66.2 40.9 63.8" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms3-2" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.3 80.9 L 48.4 63.1"/>
+      <path d="M 64.7 80.5 L 65.5 62.0"/>
+      <path d="M 75.4 83.1 L 80.8 68.5"/>
+    </g>
+  </mask>
+  <g mask="url(#ms3-2)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 39.9 113.2 Q 21.6 70.1 19.1 61.4" stroke-width="15.0"/>
+    <path d="M 78.1 88.7 Q 88.7 69.9 90.1 67.3" stroke-width="13.0"/>
+    <path d="M 70.1 84.8 Q 74.9 60.1 75.7 56.4" stroke-width="13.0"/>
+    <path d="M 59.1 83.9 Q 56.2 57.5 55.8 53.4" stroke-width="13.0"/>
+    <path d="M 47.2 85.5 Q 39.2 62.0 38.0 58.5" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms3-3" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.6 80.8 L 46.7 59.5"/>
+      <path d="M 64.7 80.5 L 65.8 58.1"/>
+      <path d="M 75.1 83.0 L 82.6 65.9"/>
+    </g>
+  </mask>
+  <g mask="url(#ms3-3)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 40.1 113.1 Q 21.1 70.6 18.2 62.1" stroke-width="15.0"/>
+    <path d="M 77.3 88.2 Q 91.7 67.4 93.8 64.2" stroke-width="13.0"/>
+    <path d="M 69.7 84.7 Q 76.6 55.6 77.7 50.7" stroke-width="13.0"/>
+    <path d="M 59.3 83.9 Q 55.1 52.4 54.4 47.0" stroke-width="13.0"/>
+    <path d="M 47.9 85.2 Q 36.3 58.1 34.4 53.6" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms3-4" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.9 80.7 L 44.7 56.1"/>
+      <path d="M 64.7 80.5 L 66.1 54.1"/>
+      <path d="M 74.7 82.8 L 84.7 63.6"/>
+    </g>
+  </mask>
+  <g mask="url(#ms3-4)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 40.2 113.1 Q 20.7 71.2 17.4 62.9" stroke-width="15.0"/>
+    <path d="M 76.6 87.7 Q 95.1 65.4 98.2 61.7" stroke-width="13.0"/>
+    <path d="M 69.4 84.6 Q 78.5 51.1 80.2 45.1" stroke-width="13.0"/>
+    <path d="M 59.6 83.9 Q 53.7 47.3 52.6 40.6" stroke-width="13.0"/>
+    <path d="M 48.6 84.9 Q 32.8 54.6 30.0 49.2" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms3-5" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 53.2 80.6 L 42.3 52.8"/>
+      <path d="M 64.7 80.5 L 66.4 50.1"/>
+      <path d="M 74.4 82.6 L 87.2 61.5"/>
+    </g>
+  </mask>
+  <g mask="url(#ms3-5)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 40.4 113.0 Q 20.2 71.7 16.6 63.6" stroke-width="15.0"/>
+    <path d="M 75.9 87.1 Q 99.0 63.9 103.0 59.9" stroke-width="13.0"/>
+    <path d="M 69.0 84.5 Q 80.8 46.8 83.0 39.7" stroke-width="13.0"/>
+    <path d="M 59.9 83.8 Q 52.0 42.2 50.5 34.3" stroke-width="13.0"/>
+    <path d="M 49.3 84.5 Q 28.7 51.5 24.9 45.4" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms3-6" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 53.5 80.5 L 39.6 49.7"/>
+      <path d="M 64.6 80.5 L 66.8 46.2"/>
+      <path d="M 74.1 82.4 L 89.9 59.6"/>
+    </g>
+  </mask>
+  <g mask="url(#ms3-6)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 40.5 112.9 Q 19.8 72.2 15.8 64.3" stroke-width="15.0"/>
+    <path d="M 75.3 86.4 Q 103.2 63.0 108.3 58.8" stroke-width="13.0"/>
+    <path d="M 68.7 84.4 Q 83.4 42.6 86.3 34.4" stroke-width="13.0"/>
+    <path d="M 60.1 83.8 Q 50.0 37.3 48.0 28.1" stroke-width="13.0"/>
+    <path d="M 49.9 84.1 Q 24.1 48.9 19.1 42.2" stroke-width="13.0"/>
+  </g>
+</svg></div></div>
+</section>
+<section>
+<h2>kaṭakāmukha &rarr; triśūla <em>&mdash; pinch to a wide three-pronged spread</em></h2>
+<div class="strip"><div class="frame end"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf4-0" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 51.9 80.9 L 48.7 60.2"/>
+      <path d="M 64.8 80.5 L 65.6 59.2"/>
+      <path d="M 75.9 83.3 L 83.4 56.5"/>
+    </g>
+  </mask>
+  <g mask="url(#mf4-0)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 35.8 114.0 Q 36.6 71.6 44.0 54.0" stroke-width="15.0"/>
+    <path d="M 79.1 89.2 Q 93.3 55.7 95.9 49.6" stroke-width="13.0"/>
+    <path d="M 70.5 84.9 Q 77.1 41.0 78.4 32.5" stroke-width="13.0"/>
+    <path d="M 58.7 84.0 Q 55.7 42.1 44.0 54.0" stroke-width="13.0"/>
+    <path d="M 46.3 85.7 Q 37.4 48.2 44.0 54.0" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.00</div></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf4-1" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.0 80.9 L 48.5 59.8"/>
+      <path d="M 64.8 80.5 L 65.6 58.7"/>
+      <path d="M 75.8 83.3 L 82.8 59.5"/>
+    </g>
+  </mask>
+  <g mask="url(#mf4-1)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 33.5 113.7 Q 43.1 76.2 44.1 56.5" stroke-width="15.0"/>
+    <path d="M 79.0 89.1 Q 92.2 59.2 94.5 54.0" stroke-width="13.0"/>
+    <path d="M 70.4 84.9 Q 77.3 41.0 78.7 32.5" stroke-width="13.0"/>
+    <path d="M 58.8 84.0 Q 55.4 41.2 45.8 50.5" stroke-width="13.0"/>
+    <path d="M 46.4 85.7 Q 36.8 47.5 42.5 51.7" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.17</div></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf4-2" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.0 80.9 L 48.3 59.4"/>
+      <path d="M 64.8 80.5 L 65.6 58.3"/>
+      <path d="M 75.7 83.2 L 82.1 62.5"/>
+    </g>
+  </mask>
+  <g mask="url(#mf4-2)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 31.4 112.9 Q 47.6 81.8 46.2 61.4" stroke-width="15.0"/>
+    <path d="M 78.8 89.1 Q 90.9 62.7 92.9 58.4" stroke-width="13.0"/>
+    <path d="M 70.4 84.9 Q 77.5 41.0 78.9 32.6" stroke-width="13.0"/>
+    <path d="M 58.8 84.0 Q 55.2 40.3 47.5 46.6" stroke-width="13.0"/>
+    <path d="M 46.6 85.7 Q 36.3 46.8 40.8 49.2" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.33</div></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf4-3" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.1 80.9 L 46.4 49.8"/>
+      <path d="M 64.8 80.5 L 66.1 48.3"/>
+      <path d="M 75.7 83.2 L 81.3 65.5"/>
+    </g>
+  </mask>
+  <g mask="url(#mf4-3)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 29.4 111.5 Q 50.1 87.8 48.8 68.9" stroke-width="15.0"/>
+    <path d="M 78.7 89.0 Q 89.6 66.2 91.2 62.7" stroke-width="13.0"/>
+    <path d="M 70.3 84.9 Q 77.7 41.1 79.2 32.6" stroke-width="13.0"/>
+    <path d="M 58.9 84.0 Q 55.0 39.3 49.1 42.3" stroke-width="13.0"/>
+    <path d="M 46.7 85.6 Q 35.7 46.1 38.8 46.3" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.50</div></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf4-4" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.1 80.9 L 46.1 49.1"/>
+      <path d="M 64.8 80.5 L 66.1 47.6"/>
+      <path d="M 75.6 83.2 L 80.5 68.4"/>
+    </g>
+  </mask>
+  <g mask="url(#mf4-4)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 27.9 109.8 Q 50.4 93.6 50.7 78.7" stroke-width="15.0"/>
+    <path d="M 78.6 89.0 Q 88.2 69.6 89.4 67.0" stroke-width="13.0"/>
+    <path d="M 70.3 84.9 Q 77.9 41.1 79.4 32.6" stroke-width="13.0"/>
+    <path d="M 58.9 84.0 Q 54.8 38.4 50.6 37.7" stroke-width="13.0"/>
+    <path d="M 46.8 85.6 Q 35.1 45.4 36.6 43.1" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.67</div></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf4-5" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.2 80.9 L 45.8 48.5"/>
+      <path d="M 64.7 80.5 L 66.2 46.9"/>
+      <path d="M 77.8 84.7 Q 80.1 80.3 75.1 87.2"/>
+    </g>
+  </mask>
+  <g mask="url(#mf4-5)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 26.8 107.8 Q 49.0 98.6 50.9 90.1" stroke-width="15.0"/>
+    <path d="M 78.4 88.9 Q 86.6 73.0 87.5 71.2" stroke-width="13.0"/>
+    <path d="M 70.2 84.8 Q 78.1 41.2 79.7 32.7" stroke-width="13.0"/>
+    <path d="M 58.9 84.0 Q 54.5 37.5 52.0 32.7" stroke-width="13.0"/>
+    <path d="M 46.9 85.6 Q 34.5 44.7 34.1 39.7" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.83</div></div><div class="frame end"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf4-6" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.2 80.9 L 45.4 47.9"/>
+      <path d="M 64.7 80.5 L 66.2 46.1"/>
+      <path d="M 77.8 84.7 Q 80.2 80.3 72.6 89.5"/>
+    </g>
+  </mask>
+  <g mask="url(#mf4-6)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 26.1 105.6 Q 46.3 102.4 48.9 102.0" stroke-width="15.0"/>
+    <path d="M 78.3 88.8 Q 85.0 76.3 85.5 75.3" stroke-width="13.0"/>
+    <path d="M 70.2 84.8 Q 78.3 41.2 79.9 32.7" stroke-width="13.0"/>
+    <path d="M 59.0 84.0 Q 54.3 36.6 53.3 27.2" stroke-width="13.0"/>
+    <path d="M 47.0 85.5 Q 33.8 44.0 31.3 36.0" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">1.00</div></div></div>
+<div class="sm"><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms4-0" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 51.9 80.9 L 48.7 60.2"/>
+      <path d="M 64.8 80.5 L 65.6 59.2"/>
+      <path d="M 75.9 83.3 L 83.4 56.5"/>
+    </g>
+  </mask>
+  <g mask="url(#ms4-0)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 35.8 114.0 Q 36.6 71.6 44.0 54.0" stroke-width="15.0"/>
+    <path d="M 79.1 89.2 Q 93.3 55.7 95.9 49.6" stroke-width="13.0"/>
+    <path d="M 70.5 84.9 Q 77.1 41.0 78.4 32.5" stroke-width="13.0"/>
+    <path d="M 58.7 84.0 Q 55.7 42.1 44.0 54.0" stroke-width="13.0"/>
+    <path d="M 46.3 85.7 Q 37.4 48.2 44.0 54.0" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms4-1" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.0 80.9 L 48.5 59.8"/>
+      <path d="M 64.8 80.5 L 65.6 58.7"/>
+      <path d="M 75.8 83.3 L 82.8 59.5"/>
+    </g>
+  </mask>
+  <g mask="url(#ms4-1)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 33.5 113.7 Q 43.1 76.2 44.1 56.5" stroke-width="15.0"/>
+    <path d="M 79.0 89.1 Q 92.2 59.2 94.5 54.0" stroke-width="13.0"/>
+    <path d="M 70.4 84.9 Q 77.3 41.0 78.7 32.5" stroke-width="13.0"/>
+    <path d="M 58.8 84.0 Q 55.4 41.2 45.8 50.5" stroke-width="13.0"/>
+    <path d="M 46.4 85.7 Q 36.8 47.5 42.5 51.7" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms4-2" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.0 80.9 L 48.3 59.4"/>
+      <path d="M 64.8 80.5 L 65.6 58.3"/>
+      <path d="M 75.7 83.2 L 82.1 62.5"/>
+    </g>
+  </mask>
+  <g mask="url(#ms4-2)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 31.4 112.9 Q 47.6 81.8 46.2 61.4" stroke-width="15.0"/>
+    <path d="M 78.8 89.1 Q 90.9 62.7 92.9 58.4" stroke-width="13.0"/>
+    <path d="M 70.4 84.9 Q 77.5 41.0 78.9 32.6" stroke-width="13.0"/>
+    <path d="M 58.8 84.0 Q 55.2 40.3 47.5 46.6" stroke-width="13.0"/>
+    <path d="M 46.6 85.7 Q 36.3 46.8 40.8 49.2" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms4-3" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.1 80.9 L 46.4 49.8"/>
+      <path d="M 64.8 80.5 L 66.1 48.3"/>
+      <path d="M 75.7 83.2 L 81.3 65.5"/>
+    </g>
+  </mask>
+  <g mask="url(#ms4-3)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 29.4 111.5 Q 50.1 87.8 48.8 68.9" stroke-width="15.0"/>
+    <path d="M 78.7 89.0 Q 89.6 66.2 91.2 62.7" stroke-width="13.0"/>
+    <path d="M 70.3 84.9 Q 77.7 41.1 79.2 32.6" stroke-width="13.0"/>
+    <path d="M 58.9 84.0 Q 55.0 39.3 49.1 42.3" stroke-width="13.0"/>
+    <path d="M 46.7 85.6 Q 35.7 46.1 38.8 46.3" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms4-4" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.1 80.9 L 46.1 49.1"/>
+      <path d="M 64.8 80.5 L 66.1 47.6"/>
+      <path d="M 75.6 83.2 L 80.5 68.4"/>
+    </g>
+  </mask>
+  <g mask="url(#ms4-4)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 27.9 109.8 Q 50.4 93.6 50.7 78.7" stroke-width="15.0"/>
+    <path d="M 78.6 89.0 Q 88.2 69.6 89.4 67.0" stroke-width="13.0"/>
+    <path d="M 70.3 84.9 Q 77.9 41.1 79.4 32.6" stroke-width="13.0"/>
+    <path d="M 58.9 84.0 Q 54.8 38.4 50.6 37.7" stroke-width="13.0"/>
+    <path d="M 46.8 85.6 Q 35.1 45.4 36.6 43.1" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms4-5" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.2 80.9 L 45.8 48.5"/>
+      <path d="M 64.7 80.5 L 66.2 46.9"/>
+      <path d="M 77.8 84.7 Q 80.1 80.3 75.1 87.2"/>
+    </g>
+  </mask>
+  <g mask="url(#ms4-5)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 26.8 107.8 Q 49.0 98.6 50.9 90.1" stroke-width="15.0"/>
+    <path d="M 78.4 88.9 Q 86.6 73.0 87.5 71.2" stroke-width="13.0"/>
+    <path d="M 70.2 84.8 Q 78.1 41.2 79.7 32.7" stroke-width="13.0"/>
+    <path d="M 58.9 84.0 Q 54.5 37.5 52.0 32.7" stroke-width="13.0"/>
+    <path d="M 46.9 85.6 Q 34.5 44.7 34.1 39.7" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms4-6" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.2 80.9 L 45.4 47.9"/>
+      <path d="M 64.7 80.5 L 66.2 46.1"/>
+      <path d="M 77.8 84.7 Q 80.2 80.3 72.6 89.5"/>
+    </g>
+  </mask>
+  <g mask="url(#ms4-6)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 26.1 105.6 Q 46.3 102.4 48.9 102.0" stroke-width="15.0"/>
+    <path d="M 78.3 88.8 Q 85.0 76.3 85.5 75.3" stroke-width="13.0"/>
+    <path d="M 70.2 84.8 Q 78.3 41.2 79.9 32.7" stroke-width="13.0"/>
+    <path d="M 59.0 84.0 Q 54.3 36.6 53.3 27.2" stroke-width="13.0"/>
+    <path d="M 47.0 85.5 Q 33.8 44.0 31.3 36.0" stroke-width="13.0"/>
+  </g>
+</svg></div></div>
+</section>
+<section>
+<h2>padmakośa &rarr; mukula <em>&mdash; cupped bud tightening to a closed bud</em></h2>
+<div class="strip"><div class="frame end"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf5-0" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.3 80.9 L 45.7 50.6"/>
+      <path d="M 64.7 80.5 L 66.1 49.0"/>
+      <path d="M 75.4 83.1 L 84.2 59.1"/>
+    </g>
+  </mask>
+  <g mask="url(#mf5-0)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 37.2 113.9 Q 32.1 71.8 37.0 62.9" stroke-width="15.0"/>
+    <path d="M 78.2 88.7 Q 94.5 59.2 89.3 61.4" stroke-width="13.0"/>
+    <path d="M 70.1 84.8 Q 77.9 44.6 75.0 47.1" stroke-width="13.0"/>
+    <path d="M 59.0 83.9 Q 54.5 40.3 54.8 42.9" stroke-width="13.0"/>
+    <path d="M 47.2 85.5 Q 34.4 47.3 38.4 49.1" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.00</div></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf5-1" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.2 80.9 L 46.1 50.5"/>
+      <path d="M 64.7 80.5 L 66.1 49.0"/>
+      <path d="M 75.6 83.2 L 83.8 58.9"/>
+    </g>
+  </mask>
+  <g mask="url(#mf5-1)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 37.2 113.9 Q 32.0 71.5 37.6 60.6" stroke-width="15.0"/>
+    <path d="M 78.4 88.9 Q 93.9 58.9 82.5 58.3" stroke-width="13.0"/>
+    <path d="M 70.2 84.8 Q 77.6 44.5 70.4 46.2" stroke-width="13.0"/>
+    <path d="M 59.0 84.0 Q 54.8 40.3 53.5 42.6" stroke-width="13.0"/>
+    <path d="M 46.9 85.6 Q 35.1 47.1 39.5 47.9" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.17</div></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf5-2" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.1 80.9 L 46.5 50.5"/>
+      <path d="M 64.8 80.5 L 66.0 49.0"/>
+      <path d="M 75.7 83.2 L 83.4 58.8"/>
+    </g>
+  </mask>
+  <g mask="url(#mf5-2)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 37.2 113.9 Q 32.0 71.2 39.3 57.4" stroke-width="15.0"/>
+    <path d="M 78.7 89.0 Q 93.3 58.6 76.3 54.6" stroke-width="13.0"/>
+    <path d="M 70.3 84.9 Q 77.2 44.5 66.4 44.8" stroke-width="13.0"/>
+    <path d="M 58.9 84.0 Q 55.1 40.3 52.8 41.9" stroke-width="13.0"/>
+    <path d="M 46.7 85.6 Q 35.8 46.9 41.4 46.2" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.33</div></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf5-3" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.0 80.9 L 46.9 50.4"/>
+      <path d="M 64.8 80.5 L 66.0 49.0"/>
+      <path d="M 75.8 83.3 L 83.1 58.7"/>
+    </g>
+  </mask>
+  <g mask="url(#mf5-3)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 37.2 113.9 Q 31.9 70.9 41.9 53.1" stroke-width="15.0"/>
+    <path d="M 78.9 89.1 Q 92.7 58.3 70.5 50.3" stroke-width="13.0"/>
+    <path d="M 70.4 84.9 Q 76.8 44.4 62.9 42.9" stroke-width="13.0"/>
+    <path d="M 58.8 84.0 Q 55.3 40.3 52.7 40.6" stroke-width="13.0"/>
+    <path d="M 46.5 85.7 Q 36.6 46.7 43.9 43.9" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.50</div></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf5-4" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 51.9 80.9 L 48.7 59.3"/>
+      <path d="M 64.8 80.5 L 65.6 58.3"/>
+      <path d="M 75.9 83.3 L 80.8 65.5"/>
+    </g>
+  </mask>
+  <g mask="url(#mf5-4)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 37.2 113.9 Q 31.9 70.7 45.6 47.8" stroke-width="15.0"/>
+    <path d="M 79.2 89.2 Q 92.0 58.0 65.2 45.4" stroke-width="13.0"/>
+    <path d="M 70.6 84.9 Q 76.5 44.4 60.0 40.5" stroke-width="13.0"/>
+    <path d="M 58.7 84.0 Q 55.6 40.2 53.2 38.9" stroke-width="13.0"/>
+    <path d="M 46.2 85.8 Q 37.3 46.5 47.2 41.2" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.67</div></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf5-5" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 51.8 80.9 L 48.9 59.3"/>
+      <path d="M 64.8 80.5 L 65.6 58.3"/>
+      <path d="M 76.0 83.3 L 80.6 65.4"/>
+    </g>
+  </mask>
+  <g mask="url(#mf5-5)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 37.2 113.9 Q 31.9 70.4 50.3 41.4" stroke-width="15.0"/>
+    <path d="M 79.5 89.4 Q 91.4 57.8 60.4 40.0" stroke-width="13.0"/>
+    <path d="M 70.7 84.9 Q 76.1 44.3 57.7 37.5" stroke-width="13.0"/>
+    <path d="M 58.6 84.0 Q 55.9 40.2 54.3 36.7" stroke-width="13.0"/>
+    <path d="M 46.0 85.8 Q 38.0 46.4 51.3 37.9" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">0.83</div></div><div class="frame end"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="mf5-6" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 51.7 81.0 L 49.2 59.2"/>
+      <path d="M 64.8 80.5 L 65.6 58.3"/>
+      <path d="M 76.2 83.3 L 80.3 65.3"/>
+    </g>
+  </mask>
+  <g mask="url(#mf5-6)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 37.2 113.9 Q 31.8 70.1 56.0 34.0" stroke-width="15.0"/>
+    <path d="M 79.7 89.5 Q 90.7 57.5 56.0 34.0" stroke-width="13.0"/>
+    <path d="M 70.8 84.9 Q 75.8 44.3 56.0 34.0" stroke-width="13.0"/>
+    <path d="M 58.5 84.0 Q 56.2 40.2 56.0 34.0" stroke-width="13.0"/>
+    <path d="M 45.7 85.8 Q 38.7 46.2 56.0 34.0" stroke-width="13.0"/>
+  </g>
+</svg><div class="t">1.00</div></div></div>
+<div class="sm"><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms5-0" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.3 80.9 L 45.7 50.6"/>
+      <path d="M 64.7 80.5 L 66.1 49.0"/>
+      <path d="M 75.4 83.1 L 84.2 59.1"/>
+    </g>
+  </mask>
+  <g mask="url(#ms5-0)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 37.2 113.9 Q 32.1 71.8 37.0 62.9" stroke-width="15.0"/>
+    <path d="M 78.2 88.7 Q 94.5 59.2 89.3 61.4" stroke-width="13.0"/>
+    <path d="M 70.1 84.8 Q 77.9 44.6 75.0 47.1" stroke-width="13.0"/>
+    <path d="M 59.0 83.9 Q 54.5 40.3 54.8 42.9" stroke-width="13.0"/>
+    <path d="M 47.2 85.5 Q 34.4 47.3 38.4 49.1" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms5-1" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.2 80.9 L 46.1 50.5"/>
+      <path d="M 64.7 80.5 L 66.1 49.0"/>
+      <path d="M 75.6 83.2 L 83.8 58.9"/>
+    </g>
+  </mask>
+  <g mask="url(#ms5-1)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 37.2 113.9 Q 32.0 71.5 37.6 60.6" stroke-width="15.0"/>
+    <path d="M 78.4 88.9 Q 93.9 58.9 82.5 58.3" stroke-width="13.0"/>
+    <path d="M 70.2 84.8 Q 77.6 44.5 70.4 46.2" stroke-width="13.0"/>
+    <path d="M 59.0 84.0 Q 54.8 40.3 53.5 42.6" stroke-width="13.0"/>
+    <path d="M 46.9 85.6 Q 35.1 47.1 39.5 47.9" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms5-2" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.1 80.9 L 46.5 50.5"/>
+      <path d="M 64.8 80.5 L 66.0 49.0"/>
+      <path d="M 75.7 83.2 L 83.4 58.8"/>
+    </g>
+  </mask>
+  <g mask="url(#ms5-2)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 37.2 113.9 Q 32.0 71.2 39.3 57.4" stroke-width="15.0"/>
+    <path d="M 78.7 89.0 Q 93.3 58.6 76.3 54.6" stroke-width="13.0"/>
+    <path d="M 70.3 84.9 Q 77.2 44.5 66.4 44.8" stroke-width="13.0"/>
+    <path d="M 58.9 84.0 Q 55.1 40.3 52.8 41.9" stroke-width="13.0"/>
+    <path d="M 46.7 85.6 Q 35.8 46.9 41.4 46.2" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms5-3" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.0 80.9 L 46.9 50.4"/>
+      <path d="M 64.8 80.5 L 66.0 49.0"/>
+      <path d="M 75.8 83.3 L 83.1 58.7"/>
+    </g>
+  </mask>
+  <g mask="url(#ms5-3)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 37.2 113.9 Q 31.9 70.9 41.9 53.1" stroke-width="15.0"/>
+    <path d="M 78.9 89.1 Q 92.7 58.3 70.5 50.3" stroke-width="13.0"/>
+    <path d="M 70.4 84.9 Q 76.8 44.4 62.9 42.9" stroke-width="13.0"/>
+    <path d="M 58.8 84.0 Q 55.3 40.3 52.7 40.6" stroke-width="13.0"/>
+    <path d="M 46.5 85.7 Q 36.6 46.7 43.9 43.9" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms5-4" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 51.9 80.9 L 48.7 59.3"/>
+      <path d="M 64.8 80.5 L 65.6 58.3"/>
+      <path d="M 75.9 83.3 L 80.8 65.5"/>
+    </g>
+  </mask>
+  <g mask="url(#ms5-4)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 37.2 113.9 Q 31.9 70.7 45.6 47.8" stroke-width="15.0"/>
+    <path d="M 79.2 89.2 Q 92.0 58.0 65.2 45.4" stroke-width="13.0"/>
+    <path d="M 70.6 84.9 Q 76.5 44.4 60.0 40.5" stroke-width="13.0"/>
+    <path d="M 58.7 84.0 Q 55.6 40.2 53.2 38.9" stroke-width="13.0"/>
+    <path d="M 46.2 85.8 Q 37.3 46.5 47.2 41.2" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms5-5" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 51.8 80.9 L 48.9 59.3"/>
+      <path d="M 64.8 80.5 L 65.6 58.3"/>
+      <path d="M 76.0 83.3 L 80.6 65.4"/>
+    </g>
+  </mask>
+  <g mask="url(#ms5-5)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 37.2 113.9 Q 31.9 70.4 50.3 41.4" stroke-width="15.0"/>
+    <path d="M 79.5 89.4 Q 91.4 57.8 60.4 40.0" stroke-width="13.0"/>
+    <path d="M 70.7 84.9 Q 76.1 44.3 57.7 37.5" stroke-width="13.0"/>
+    <path d="M 58.6 84.0 Q 55.9 40.2 54.3 36.7" stroke-width="13.0"/>
+    <path d="M 46.0 85.8 Q 38.0 46.4 51.3 37.9" stroke-width="13.0"/>
+  </g>
+</svg></div><div class="frame"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" aria-hidden="true">
+  <mask id="ms5-6" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 51.7 81.0 L 49.2 59.2"/>
+      <path d="M 64.8 80.5 L 65.6 58.3"/>
+      <path d="M 76.2 83.3 L 80.3 65.3"/>
+    </g>
+  </mask>
+  <g mask="url(#ms5-6)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 37.2 113.9 Q 31.8 70.1 56.0 34.0" stroke-width="15.0"/>
+    <path d="M 79.7 89.5 Q 90.7 57.5 56.0 34.0" stroke-width="13.0"/>
+    <path d="M 70.8 84.9 Q 75.8 44.3 56.0 34.0" stroke-width="13.0"/>
+    <path d="M 58.5 84.0 Q 56.2 40.2 56.0 34.0" stroke-width="13.0"/>
+    <path d="M 45.7 85.8 Q 38.7 46.2 56.0 34.0" stroke-width="13.0"/>
+  </g>
+</svg></div></div>
+</section>
+</body></html>

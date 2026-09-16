@@ -1,0 +1,27 @@
+====================================================================================================
+FILE: site_home.html len 448693
+https://static.wixstatic.com/media/11062b_2381e8a6e7444f4f902e7b649aa3f0ac~mv2.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_2381e8a6e7444f4f902e7b649aa3f0ac~mv2.png
+https://static.wixstatic.com/media/11062b_55e4be1e75564866b6c28290f9a9d271~mv2.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_55e4be1e75564866b6c28290f9a9d271~mv2.png
+https://static.wixstatic.com/media/11062b_8dcadfa428954b1d919f8499f75aa27a~mv2.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_8dcadfa428954b1d919f8499f75aa27a~mv2.png
+https://static.wixstatic.com/media/11062b_94a6580a67244d17a4dc923b54b99fb4~mv2.png/v1/fill/w_20,h_20,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_94a6580a67244d17a4dc923b54b99fb4~mv2.png
+https://static.wixstatic.com/media/4c5ada_2d9538c11dea4c22a9e669aa256f475c%7Emv2.png/v1/fill/w_180%2Ch_180%2Clg_1%2Cusm_0.66_1.00_0.01/4c5ada_2d9538c11dea4c22a9e669aa256f475c%7Emv2.png
+https://static.wixstatic.com/media/4c5ada_2d9538c11dea4c22a9e669aa256f475c%7Emv2.png/v1/fill/w_192%2Ch_192%2Clg_1%2Cusm_0.66_1.00_0.01/4c5ada_2d9538c11dea4c22a9e669aa256f475c%7Emv2.png
+https://static.wixstatic.com/media/4c5ada_2d9538c11dea4c22a9e669aa256f475c%7Emv2.png/v1/fill/w_32%2Ch_32%2Clg_1%2Cusm_0.66_1.00_0.01/4c5ada_2d9538c11dea4c22a9e669aa256f475c%7Emv2.png
+https://static.wixstatic.com/media/4c5ada_2d9538c11dea4c22a9e669aa256f475c~mv2.png/v1/fill/w_45,h_42,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Logo.png
+https://static.wixstatic.com/media/4c5ada_ba6eb9f3113249e4944fd0a174b33455~mv2.jpg/v1/fill/w_165,h_104,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/4c5ada_ba6eb9f3113249e4944fd0a174b33455~mv2.jpg
+https://static.wixstatic.com/media/4c5ada_c0e50b8009b04468ae7a566425277e4b~mv2_d_5069_3384_s_4_2.jpg/v1/fill/w_2500,h_1668,al_c/4c5ada_c0e50b8009b04468ae7a566425277e4b~mv2_d_5069_3384_s_4_2.jpg
+https://static.wixstatic.com/media/a1fed5f687844a6e8f42e017f71dfcb4.png/v1/fill/w_20,h_20,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/a1fed5f687844a6e8f42e017f71dfcb4.png
+https://static.wixstatic.com/media/aebe5b6fd55f471a936c72ff2c8289d7.png/v1/fill/w_20,h_20,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/aebe5b6fd55f471a936c72ff2c8289d7.png
+Traceback (most recent call last):
+  File "C:\Projects\Shantikalaniketan\_research\analyze.py", line 34, in <module>
+    h = load(f)
+  File "C:\Projects\Shantikalaniketan\_research\analyze.py", line 4, in load
+    return pathlib.Path(p).read_text(encoding='utf-8', errors='ignore')
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sayon\AppData\Local\Python\pythoncore-3.14-64\Lib\pathlib\__init__.py", line 787, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sayon\AppData\Local\Python\pythoncore-3.14-64\Lib\pathlib\__init__.py", line 771, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 22] Invalid argument: '_research\\pages\\*.html'

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" role="img" aria-label="alapadma hasta">
+  <mask id="crease-alapadma" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 53.5 80.5 L 39.6 49.7"/>
+      <path d="M 64.6 80.5 L 66.8 46.2"/>
+      <path d="M 74.1 82.4 L 89.9 59.6"/>
+    </g>
+  </mask>
+  <g mask="url(#crease-alapadma)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 40.5 112.9 Q 19.8 72.2 15.8 64.3" stroke-width="15.0"/>
+    <path d="M 75.3 86.4 Q 103.2 63.0 108.3 58.8" stroke-width="13.0"/>
+    <path d="M 68.7 84.4 Q 83.4 42.6 86.3 34.4" stroke-width="13.0"/>
+    <path d="M 60.1 83.8 Q 50.0 37.3 48.0 28.1" stroke-width="13.0"/>
+    <path d="M 49.9 84.1 Q 24.1 48.9 19.1 42.2" stroke-width="13.0"/>
+  </g>
+</svg>

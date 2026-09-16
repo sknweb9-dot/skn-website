@@ -1,0 +1,29 @@
+MEDIA VISIBLE ONLY AFTER RENDER (not in the saved static HTML)
+======================================================================
+
+about: 1 media rendered, 0 NOT in static HTML
+
+contact: 1 media rendered, 0 NOT in static HTML
+
+director: 1 media rendered, 0 NOT in static HTML
+
+events: 11 media rendered, 0 NOT in static HTML
+
+founder: 2 media rendered, 0 NOT in static HTML
+
+gurukulam: 7 media rendered, 0 NOT in static HTML
+
+home: 1 media rendered, 0 NOT in static HTML
+
+logo: 1 media rendered, 0 NOT in static HTML
+
+photos: 9 media rendered, 0 NOT in static HTML
+
+shanti-kala-nikketan: 1 media rendered, 0 NOT in static HTML
+
+team: 7 media rendered, 0 NOT in static HTML
+
+videos: 0 media rendered, 0 NOT in static HTML
+
+
+TOTAL newly discovered media references: 0

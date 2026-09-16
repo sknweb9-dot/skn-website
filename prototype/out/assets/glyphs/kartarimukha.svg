@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" role="img" aria-label="kartarīmukha hasta">
+  <mask id="crease-kartarimukha" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 52.3 80.9 L 44.8 48.0"/>
+      <path d="M 77.8 84.7 Q 80.3 80.4 72.6 89.5"/>
+      <path d="M 69.2 81.4 Q 70.2 76.5 66.3 87.9"/>
+    </g>
+  </mask>
+  <g mask="url(#crease-kartarimukha)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 26.1 103.0 Q 66.4 107.2 74.0 108.0" stroke-width="15.0"/>
+    <path d="M 78.0 88.7 Q 85.1 76.3 85.6 75.4" stroke-width="13.0"/>
+    <path d="M 70.0 84.8 Q 73.1 69.6 73.4 68.3" stroke-width="13.0"/>
+    <path d="M 59.1 83.9 Q 53.9 36.6 52.8 27.3" stroke-width="13.0"/>
+    <path d="M 47.3 85.4 Q 32.9 44.3 30.1 36.4" stroke-width="13.0"/>
+  </g>
+</svg>

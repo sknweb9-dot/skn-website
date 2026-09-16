@@ -1,0 +1,87 @@
+{
+  "name": "SKN-dev",
+  "description": "Shantikalanikettan project development agent with browser automation and documentation tools",
+  "tools": [
+    "code",
+    "glob",
+    "grep",
+    "read",
+    "shell",
+    "write",
+    "@playwright",
+    "@chrome-devtools",
+    "@memory",
+    "@sequentialthinking",
+    "@context7"
+  ],
+  "allowedTools": [
+    "read",
+    "write",
+    "grep",
+    "glob",
+    "@builtin",
+    "@playwright",
+    "@chrome-devtools",
+    "@memory",
+    "@sequentialthinking",
+    "@context7"
+  ],
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp"
+      ]
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "chrome-devtools-mcp@latest",
+        "--no-usage-statistics"
+      ]
+    },
+    "memory": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ]
+    },
+    "sequentialthinking": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
+    },
+    "context7": {
+      "url": "https://mcp.context7.com/mcp"
+    }
+  },
+  "permissions": {
+    "rules": [
+      {
+        "capability": "fs_read",
+        "effect": "allow"
+      },
+      {
+        "capability": "fs_write",
+        "effect": "allow"
+      },
+      {
+        "capability": "mcp",
+        "match": [
+          "builtin/*",
+          "playwright/*",
+          "chrome-devtools/*",
+          "memory/*",
+          "sequentialthinking/*",
+          "context7/*"
+        ],
+        "effect": "allow"
+      }
+    ]
+  }
+}

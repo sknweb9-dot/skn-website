@@ -1,0 +1,61 @@
+12 YouTube links referenced by the site
+
+VIDEO    Shanti Kala Nikketan
+         url   : https://www.youtube.com/channel/UCDGm0LQ-24ZIKG-2DUAn2ew
+         pages : about, contact, director, events, founder, gurukulam, home, logo, photos, shanti-kala-nikketan, team, videos
+         label : YouTube | Youtube
+         note  : og:title (oEmbed returned HTTP 404)
+
+PLAYLIST Jeevan Utsav 2022 | A Celebration of Life through Dance
+         url   : https://www.youtube.com/playlist?list=PLxyyMzhr0f3HXB2Wls5HDTlEqUM6oLTUc
+         pages : events
+
+VIDEO    Nada Sudha - 27th Annual Music & Dance Festival 2025 - 2026
+         url   : https://www.youtube.com/watch?v=RDW0MOFKFhY&list=RDRDW0MOFKFhY&start_radio=1&t=72s
+         pages : events
+         note  : og:title (oEmbed returned HTTP 401)
+
+VIDEO    Bharatanatyam Offering to Lord Vinayaka | Kirusanthini | Toronto Temple Festival 2025
+         url   : https://www.youtube.com/watch?v=cQS1QZo-Eyk
+         pages : events
+         note  : og:title (oEmbed returned HTTP 401)
+
+VIDEO    Kum Aparna Manu | First Student | Bharatanatyam Arangetram
+         url   : https://www.youtube.com/watch?v=eAIGMW4FPY4&list=PLxyyMzhr0f3GdVTPoGr_MgdpFaGWbvVP5&index=9
+         pages : events
+
+VIDEO    Aparna Manu's Solo Perfomance
+         url   : https://www.youtube.com/watch?v=iD-Lf0YD8RY
+         pages : events
+         note  : og:title (oEmbed returned HTTP 401)
+
+VIDEO    Samarpanam Festival, Navratri 2025
+         url   : https://www.youtube.com/watch?v=uLpZ8hUFLZY&list=RDuLpZ8hUFLZY&start_radio=1
+         pages : events
+         note  : og:title (oEmbed returned HTTP 401)
+
+VIDEO    Kum Jahnavi | Arangetram | A Journey of Grace, Rhythm & Devotion
+         url   : https://www.youtube.com/watch?v=wmnYYbxA950
+         pages : events
+         note  : og:title (oEmbed returned HTTP 401)
+
+VIDEO    Smt Kirusanthini | Bharatanatyam Arangetram
+         url   : https://www.youtube.com/watch?v=wt4wETJMaXI&t=375s
+         pages : events
+         note  : og:title (oEmbed returned HTTP 401)
+
+VIDEO    Offering to Lord Shiva on Maha Shivaratri
+         url   : https://www.youtube.com/watch?v=x_zWuJIvNng&t=6s
+         pages : events
+         note  : og:title (oEmbed returned HTTP 401)
+
+PLAYLIST UDAAN - FLYING HIGH - October '23
+         url   : https://youtube.com/playlist?list=PLxyyMzhr0f3E-5yEp3Whr3hsbz6wC6GsO&si=Za9uNRzouIJkf2mH
+         pages : events
+         label : Udaan 2023
+         note  : og:title (oEmbed returned HTTP 401)
+
+PLAYLIST UDAAN 2025 : Where Tradition Takes Flight
+         url   : https://youtube.com/playlist?list=PLxyyMzhr0f3HS1_wu0bBvbhbLQolDyjzr&si=D4MoUl5itJTpTZti
+         pages : events
+         label : Udaan 2025

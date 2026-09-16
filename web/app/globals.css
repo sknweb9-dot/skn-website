@@ -1,0 +1,221 @@
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------------------
+   Design tokens — "Vibrant Temple Royalty".
+   Warm raw-silk cream ground, jewel-tone accents, no black anywhere as a
+   dominant surface. Tailwind v4 reads these directly, so --color-marigold
+   yields bg-marigold / text-marigold / border-marigold with no JS config.
+--------------------------------------------------------------------------- */
+@theme {
+  /* Base surfaces */
+  --color-cream: #fbf8f1;
+  --color-silk: #f4ebd9;
+  --color-silk-deep: #ebdfc6;
+
+  /* Jewel tones */
+  --color-teal: #0f4c5c;
+  --color-teal-deep: #143642;
+  --color-teal-lit: #1a6d82;
+  --color-kumkum: #a8201a;
+  --color-kumkum-lit: #c8322a;
+  --color-marigold: #ec9a29;
+  --color-marigold-deep: #c97d16;
+
+  /* Ink */
+  --color-ink: #2b1e16;
+  --color-ink-soft: #5c4a3d;
+  --color-ink-faint: #8a7565;
+
+  --font-display: var(--font-cinzel), 'Times New Roman', serif;
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-temple: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-rise: rise 0.9s var(--ease-temple) both;
+  --animate-breathe: breathe 6s ease-in-out infinite;
+
+  /* The arch aperture ratio. The source frames are 720x1280, but the bottom
+     22% carries the video's burned-in gesture label and is cropped away at draw
+     time — so the visible plate is 720x998. Keep this in step with
+     VISIBLE_FRAME_HEIGHT in lib/mudras.ts. */
+  --arch-ratio: 0.7215; /* 720 / 998 */
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 1.4rem, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+--------------------------------------------------------------------------- */
+:root {
+  color-scheme: light;
+  /* Lenis drives scrolling; native smooth scroll fights it. */
+  scroll-behavior: auto;
+}
+
+html {
+  background-color: var(--color-cream);
+  -webkit-text-size-adjust: 100%;
+  /* Safety net, not a fix. `overflow-x: clip` on body alone does not stop the
+     document scrolling sideways — html remains the scroller — so a single
+     unbreakable word wide enough to overflow its grid cell can put the whole
+     page into horizontal scroll. Causes still get fixed at the source; this
+     stops one from shipping as a sitewide layout bug. */
+  overflow-x: clip;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-synthesis-weight: none;
+  overflow-x: clip;
+}
+
+/* Lenis sets these itself, but declaring them avoids a first-paint jump. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+::selection {
+  background-color: var(--color-marigold);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-teal);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------------------------------------------------------------------------
+   Utilities
+--------------------------------------------------------------------------- */
+@utility text-balance-tight {
+  text-wrap: balance;
+  letter-spacing: -0.015em;
+}
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-marigold-deep);
+}
+
+/* Frosted warm glass. The editorial card treatment used across every act.
+   Opacity is high (88%) on purpose: where a card overlaps the arch, a more
+   transparent panel let the aperture's edge show through as a hard rectangular
+   seam cutting across the curve. At this weight it reads as a stone plinth the
+   arch rises behind. */
+@utility glass {
+  background-color: color-mix(in oklab, white 88%, var(--color-silk));
+  backdrop-filter: blur(14px) saturate(1.1);
+  -webkit-backdrop-filter: blur(14px) saturate(1.1);
+  border: 1px solid color-mix(in oklab, var(--color-marigold) 34%, transparent);
+  color: var(--color-ink);
+  box-shadow:
+    0 1px 0 0 color-mix(in oklab, white 70%, transparent) inset,
+    0 24px 60px -30px color-mix(in oklab, var(--color-teal-deep) 45%, transparent);
+}
+
+/* Marigold hairline that fades at both ends — section divider. */
+@utility rule-fade {
+  height: 1px;
+  border: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in oklab, var(--color-marigold) 62%, transparent),
+    transparent
+  );
+}
+
+/* Gold-to-kumkum treatment for display numerals and accents. Tuned for a light
+   ground — a pale foil gradient would vanish on cream. */
+@utility foil {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-marigold-deep) 0%,
+    var(--color-marigold) 34%,
+    #f7c46b 50%,
+    var(--color-marigold) 66%,
+    var(--color-kumkum) 100%
+  );
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* The temple arch aperture. Applied as a mask so it scales with the element,
+   which clip-path: path() would not. Path is drawn for a 720x1000 box to match
+   --arch-ratio; ArchOutline strokes the identical path. */
+@utility arch {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 720 1000' preserveAspectRatio='none'%3E%3Cpath d='M0 1000V420C0 196 150 54 360 24c210 30 360 172 360 396v580Z' fill='%23fff'/%3E%3C/svg%3E");
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 720 1000' preserveAspectRatio='none'%3E%3Cpath d='M0 1000V420C0 196 150 54 360 24c210 30 360 172 360 396v580Z' fill='%23fff'/%3E%3C/svg%3E");
+  -webkit-mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+}
+
+/* Fine film grain over a light ground. Pure CSS, no image request. */
+@utility grain {
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.055;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+/* Masks the top and bottom of a scrolling column. */
+@utility mask-y {
+  mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent);
+}
+
+/* ---------------------------------------------------------------------------
+   Motion preferences. GSAP timelines additionally check this in JS so pinned
+   sections collapse into a plain document rather than merely stop animating.
+--------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,166 @@
+- generic [active] [ref=f6e1]:
+  - link "Skip to content" [ref=f6e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner:
+    - generic:
+      - link "Shanti Kala Nikketan — home" [ref=f6e3] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f6e4]:
+          - generic [ref=f6e5]: Shanti Kala Nikketan
+          - generic [ref=f6e6]: Academy of Fine Arts
+      - generic:
+        - paragraph [ref=f6e7]: Chennai·Global
+        - button "Book trial" [ref=f6e8]
+  - main [ref=f6e9]:
+    - generic [ref=f6e11]:
+      - paragraph [ref=f6e12]: Locations
+      - heading "Many rooms. One syllabus." [level=1] [ref=f6e13]
+      - paragraph [ref=f6e14]: The Kalakshetra style of Bharatanatyam is taught identically wherever we teach, in the Gurukulam manner — 16 weekly batches across 3 Chennai neighbourhoods, an online batch, and our Canadian branch.
+      - paragraph [ref=f6e15]:
+        - generic [aria-hidden] [ref=f6e16]: ●
+        - text: 10 batches taking admissions now
+    - list [ref=f6e19]:
+      - listitem [ref=f6e20]:
+        - link [ref=f6e21] [cursor=pointer]:
+          - /url: /locations/chennai
+          - img "Shanti Kala Nikketan in Chennai" [ref=f6e23]
+          - generic [ref=f6e24]:
+            - paragraph [ref=f6e25]: Tamil Nadu, India
+            - heading "ChennaiFounding school" [level=2] [ref=f6e29]
+            - paragraph [ref=f6e30]: Where Shanti Kala Nikketan began in 2009, and now five venues across Thiruvanmiyur, Sholinganallur and Medavakkam — the Kalakshetra style taught in the Gurukulam manner.
+            - paragraph [ref=f6e31]: 5 venues · Led by Smt. Sunitta Menghanaani
+            - generic [ref=f6e32]:
+              - text: Batches and timings
+              - generic [aria-hidden] [ref=f6e33]: →
+      - listitem [ref=f6e34]:
+        - link [ref=f6e35] [cursor=pointer]:
+          - /url: /locations/scarborough
+          - img "Shanti Kala Nikketan in Scarborough" [ref=f6e37]
+          - generic [ref=f6e38]:
+            - paragraph [ref=f6e39]: Ontario, Canada
+            - heading "Scarborough" [level=2] [ref=f6e43]
+            - paragraph [ref=f6e44]: Our Canadian branch, running individual and group classes at Morningside and Finch under Kalakshetra-trained faculty.
+            - paragraph [ref=f6e45]: 1 venue · Led by S. Kirusanthini
+            - generic [ref=f6e46]:
+              - text: Batches and timings
+              - generic [aria-hidden] [ref=f6e47]: →
+    - generic [ref=f6e49]:
+      - paragraph [ref=f6e50]: One to one
+      - heading "12 students taught individually" [level=2] [ref=f6e51]
+      - paragraph [ref=f6e52]: Alongside the group batches, the Gurukulam runs one to one — in person in Chennai, and online wherever a student happens to be.
+      - generic [ref=f6e53]:
+        - generic [ref=f6e54]:
+          - term [ref=f6e55]: Chennai
+          - definition [ref=f6e56]:
+            - text: 8 students
+            - generic [ref=f6e57]: offline
+        - generic [ref=f6e58]:
+          - term [ref=f6e59]: Bangalore
+          - definition [ref=f6e60]:
+            - text: 1 student
+            - generic [ref=f6e61]: online
+        - generic [ref=f6e62]:
+          - term [ref=f6e63]: Odisha
+          - definition [ref=f6e64]: 1 student
+        - generic [ref=f6e65]:
+          - term [ref=f6e66]: USA
+          - definition [ref=f6e67]:
+            - text: 2 students
+            - generic [ref=f6e68]: online
+    - generic [ref=f6e70]:
+      - heading "Not sure which batch fits?" [level=2] [ref=f6e71]
+      - paragraph [ref=f6e72]: Tell us your child’s age and where you are, and we will suggest the nearest batch at the right level.
+      - generic [ref=f6e73]:
+        - button "Schedule a trial session" [ref=f6e74]
+        - link "The six levels" [ref=f6e78] [cursor=pointer]:
+          - /url: /curriculum
+          - text: The six levels
+          - generic [aria-hidden] [ref=f6e79]: →
+  - contentinfo [ref=f6e80]:
+    - generic [ref=f6e81]:
+      - generic [ref=f6e82]:
+        - generic [ref=f6e83]:
+          - term [ref=f6e84]: Years of lineage
+          - definition [ref=f6e85]:
+            - generic [ref=f6e86]: "17"
+            - generic [ref=f6e87]: Years of lineage
+        - generic [ref=f6e88]:
+          - term [ref=f6e89]: Students taught
+          - definition [ref=f6e90]:
+            - generic [ref=f6e91]: "324"
+            - generic [ref=f6e92]: Students taught
+        - generic [ref=f6e93]:
+          - term [ref=f6e94]: Stages performed
+          - definition [ref=f6e95]:
+            - generic [ref=f6e96]: "20"
+            - generic [ref=f6e97]: Stages performed
+        - generic [ref=f6e98]:
+          - term [ref=f6e99]: Bani and pedagogy
+          - definition [ref=f6e100]:
+            - generic [ref=f6e101]: Kalakshetra
+            - generic [ref=f6e102]: Bani and pedagogy
+      - generic [ref=f6e103]:
+        - generic [ref=f6e104]:
+          - generic [ref=f6e106]:
+            - generic [ref=f6e107]: Shanti Kala Nikketan
+            - generic [ref=f6e108]: Academy of Fine Arts
+          - paragraph [ref=f6e109]: Kalakshetra style of Bharatanatyam, taught in the Gurukulam tradition since 18 April 2009.
+          - generic [ref=f6e110]:
+            - paragraph [ref=f6e111]:
+              - link "shantikalanikketan@gmail.com" [ref=f6e112] [cursor=pointer]:
+                - /url: mailto:shantikalanikketan@gmail.com
+            - paragraph [ref=f6e113]:
+              - link "+91 98840 22306" [ref=f6e114] [cursor=pointer]:
+                - /url: tel:+919884022306
+        - navigation "Sections" [ref=f6e115]:
+          - heading "Explore" [level=2] [ref=f6e116]
+          - list [ref=f6e117]:
+            - listitem [ref=f6e118]:
+              - link "The academy" [ref=f6e119] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=f6e120]:
+              - link "Our lineage" [ref=f6e121] [cursor=pointer]:
+                - /url: /lineage
+            - listitem [ref=f6e122]:
+              - link "Curriculum" [ref=f6e123] [cursor=pointer]:
+                - /url: /curriculum
+            - listitem [ref=f6e124]:
+              - link "The 28 hastas" [ref=f6e125] [cursor=pointer]:
+                - /url: /hastas
+            - listitem [ref=f6e126]:
+              - link "Performances" [ref=f6e127] [cursor=pointer]:
+                - /url: /performances
+            - listitem [ref=f6e128]:
+              - link "Locations" [ref=f6e129] [cursor=pointer]:
+                - /url: /locations
+        - generic [ref=f6e130]:
+          - heading "Where we teach" [level=2] [ref=f6e131]
+          - list [ref=f6e132]:
+            - listitem [ref=f6e133]:
+              - link "Chennai · Sholinganallur Tamil Nadu, India" [ref=f6e134] [cursor=pointer]:
+                - /url: /locations/chennai
+                - generic [ref=f6e135]:
+                  - text: Chennai
+                  - generic [ref=f6e136]: · Sholinganallur
+                - generic [ref=f6e137]: Tamil Nadu, India
+            - listitem [ref=f6e138]:
+              - link "Scarborough · Morningside & Finch Ontario, Canada" [ref=f6e139] [cursor=pointer]:
+                - /url: /locations/scarborough
+                - generic [ref=f6e140]:
+                  - text: Scarborough
+                  - generic [ref=f6e141]: · Morningside & Finch
+                - generic [ref=f6e142]: Ontario, Canada
+          - list [ref=f6e143]:
+            - listitem [ref=f6e144]:
+              - link "instagram" [ref=f6e145] [cursor=pointer]:
+                - /url: https://www.instagram.com/shantikalanikketan
+            - listitem [ref=f6e146]:
+              - link "facebook" [ref=f6e147] [cursor=pointer]:
+                - /url: https://www.facebook.com/shantikalanikketan
+            - listitem [ref=f6e148]:
+              - link "youtube" [ref=f6e149] [cursor=pointer]:
+                - /url: https://www.youtube.com/channel/UCDGm0LQ-24ZIKG-2DUAn2ew
+      - generic [ref=f6e150]:
+        - paragraph [ref=f6e151]: © 2026 Shanti Kala Nikketan Academy of Fine Arts
+        - paragraph [ref=f6e152]: 11018, Ground Floor, Tower 11, Prestige Courtyard, Model School Extension Road, Sholinganallur
+  - button "Open Next.js Dev Tools" [ref=f6e158] [cursor=pointer]

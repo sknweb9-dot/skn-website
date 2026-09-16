@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" role="img" aria-label="mayūra hasta">
+  <mask id="crease-mayura" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="140">
+    <rect width="120" height="140" fill="#fff"/>
+    <g stroke="#000" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <path d="M 51.9 80.9 L 47.0 47.6"/>
+      <path d="M 64.8 80.5 L 65.6 59.2"/>
+      <path d="M 75.9 83.3 L 80.6 66.1"/>
+    </g>
+  </mask>
+  <g mask="url(#crease-mayura)" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 33 86 Q 33 72 47 71 L 76 71 Q 88 72 88 85 L 89 107 Q 90 123 74 128 Q 55 132 42 124 Q 33 117 33 104 Z" stroke="none"/>
+    <path d="M 35.8 114.0 Q 36.6 71.6 44.0 54.0" stroke-width="15.0"/>
+    <path d="M 79.3 89.3 Q 92.9 55.5 95.4 49.4" stroke-width="13.0"/>
+    <path d="M 70.6 84.9 Q 76.2 46.1 44.0 54.0" stroke-width="13.0"/>
+    <path d="M 58.7 84.0 Q 55.4 36.5 54.8 27.1" stroke-width="13.0"/>
+    <path d="M 46.2 85.8 Q 36.7 43.2 34.9 35.0" stroke-width="13.0"/>
+  </g>
+</svg>

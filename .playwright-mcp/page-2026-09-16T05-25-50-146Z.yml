@@ -1,0 +1,702 @@
+- generic [active] [ref=f34e1]:
+  - link "Skip to content" [ref=f34e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner:
+    - generic:
+      - link "Shanti Kala Nikketan — home" [ref=f34e3] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f34e4]:
+          - generic [ref=f34e5]: Shanti Kala Nikketan
+          - generic [ref=f34e6]: Academy of Fine Arts
+      - generic:
+        - paragraph [ref=f34e7]: Chennai·Global
+        - button "Book trial" [ref=f34e8]
+  - main [ref=f34e9]:
+    - generic [ref=f34e11]:
+      - paragraph [ref=f34e12]: Reference
+      - heading "Twenty-eight gestures, in order" [level=1] [ref=f34e13]
+      - paragraph [ref=f34e14]: The asamyuta hastas — single-hand gestures — in the sequence the Abhinaya Darpana sets down, and the sequence our students learn them in. Each carries a literal meaning and a documented set of uses, and one gesture may serve a dozen unrelated ideas.
+      - generic [ref=f34e16]:
+        - button "Learn them properly" [ref=f34e17]
+        - link "The six levels" [ref=f34e21] [cursor=pointer]:
+          - /url: /curriculum
+          - text: The six levels
+          - generic [aria-hidden] [ref=f34e22]: →
+    - generic [ref=f34e24]:
+      - paragraph [ref=f34e25]: Jump to
+      - heading "The sequence" [level=2] [ref=f34e26]
+      - generic [ref=f34e27]:
+        - list [ref=f34e28]:
+          - listitem [ref=f34e29]:
+            - link "01 Patāka" [ref=f34e30] [cursor=pointer]:
+              - /url: "#pataka"
+              - generic [ref=f34e31]: "01"
+              - text: Patāka
+          - listitem [ref=f34e32]:
+            - link "02 Tripatāka" [ref=f34e33] [cursor=pointer]:
+              - /url: "#tripataka"
+              - generic [ref=f34e34]: "02"
+              - text: Tripatāka
+          - listitem [ref=f34e35]:
+            - link "03 Ardhapatāka" [ref=f34e36] [cursor=pointer]:
+              - /url: "#ardhapataka"
+              - generic [ref=f34e37]: "03"
+              - text: Ardhapatāka
+          - listitem [ref=f34e38]:
+            - link "04 Kartarīmukha" [ref=f34e39] [cursor=pointer]:
+              - /url: "#kartarimukha"
+              - generic [ref=f34e40]: "04"
+              - text: Kartarīmukha
+          - listitem [ref=f34e41]:
+            - link "05 Mayūra" [ref=f34e42] [cursor=pointer]:
+              - /url: "#mayura"
+              - generic [ref=f34e43]: "05"
+              - text: Mayūra
+          - listitem [ref=f34e44]:
+            - link "06 Ardhacandra" [ref=f34e45] [cursor=pointer]:
+              - /url: "#ardhacandra"
+              - generic [ref=f34e46]: "06"
+              - text: Ardhacandra
+          - listitem [ref=f34e47]:
+            - link "07 Arāla" [ref=f34e48] [cursor=pointer]:
+              - /url: "#arala"
+              - generic [ref=f34e49]: "07"
+              - text: Arāla
+          - listitem [ref=f34e50]:
+            - link "08 Śukatuṇḍa" [ref=f34e51] [cursor=pointer]:
+              - /url: "#sukatunda"
+              - generic [ref=f34e52]: "08"
+              - text: Śukatuṇḍa
+          - listitem [ref=f34e53]:
+            - link "09 Muṣṭi" [ref=f34e54] [cursor=pointer]:
+              - /url: "#musti"
+              - generic [ref=f34e55]: "09"
+              - text: Muṣṭi
+          - listitem [ref=f34e56]:
+            - link "10 Śikhara" [ref=f34e57] [cursor=pointer]:
+              - /url: "#sikhara"
+              - generic [ref=f34e58]: "10"
+              - text: Śikhara
+          - listitem [ref=f34e59]:
+            - link "11 Kapittha" [ref=f34e60] [cursor=pointer]:
+              - /url: "#kapittha"
+              - generic [ref=f34e61]: "11"
+              - text: Kapittha
+          - listitem [ref=f34e62]:
+            - link "12 Kaṭakāmukha" [ref=f34e63] [cursor=pointer]:
+              - /url: "#katakamukha"
+              - generic [ref=f34e64]: "12"
+              - text: Kaṭakāmukha
+          - listitem [ref=f34e65]:
+            - link "13 Sūcī" [ref=f34e66] [cursor=pointer]:
+              - /url: "#suci"
+              - generic [ref=f34e67]: "13"
+              - text: Sūcī
+          - listitem [ref=f34e68]:
+            - link "14 Candrakalā" [ref=f34e69] [cursor=pointer]:
+              - /url: "#candrakala"
+              - generic [ref=f34e70]: "14"
+              - text: Candrakalā
+          - listitem [ref=f34e71]:
+            - link "15 Padmakōśa" [ref=f34e72] [cursor=pointer]:
+              - /url: "#padmakosa"
+              - generic [ref=f34e73]: "15"
+              - text: Padmakōśa
+          - listitem [ref=f34e74]:
+            - link "16 Sarpaśīrṣa" [ref=f34e75] [cursor=pointer]:
+              - /url: "#sarpasirsa"
+              - generic [ref=f34e76]: "16"
+              - text: Sarpaśīrṣa
+          - listitem [ref=f34e77]:
+            - link "17 Mṛgaśīrṣa" [ref=f34e78] [cursor=pointer]:
+              - /url: "#mrgasirsa"
+              - generic [ref=f34e79]: "17"
+              - text: Mṛgaśīrṣa
+          - listitem [ref=f34e80]:
+            - link "18 Siṃhamukha" [ref=f34e81] [cursor=pointer]:
+              - /url: "#simhamukha"
+              - generic [ref=f34e82]: "18"
+              - text: Siṃhamukha
+          - listitem [ref=f34e83]:
+            - link "19 Kāṅgūla" [ref=f34e84] [cursor=pointer]:
+              - /url: "#kangula"
+              - generic [ref=f34e85]: "19"
+              - text: Kāṅgūla
+          - listitem [ref=f34e86]:
+            - link "20 Alapadma" [ref=f34e87] [cursor=pointer]:
+              - /url: "#alapadma"
+              - generic [ref=f34e88]: "20"
+              - text: Alapadma
+          - listitem [ref=f34e89]:
+            - link "21 Catura" [ref=f34e90] [cursor=pointer]:
+              - /url: "#catura"
+              - generic [ref=f34e91]: "21"
+              - text: Catura
+          - listitem [ref=f34e92]:
+            - link "22 Bhramara" [ref=f34e93] [cursor=pointer]:
+              - /url: "#bhramara"
+              - generic [ref=f34e94]: "22"
+              - text: Bhramara
+          - listitem [ref=f34e95]:
+            - link "23 Haṃsāsya" [ref=f34e96] [cursor=pointer]:
+              - /url: "#hamsasya"
+              - generic [ref=f34e97]: "23"
+              - text: Haṃsāsya
+          - listitem [ref=f34e98]:
+            - link "24 Haṃsapakṣa" [ref=f34e99] [cursor=pointer]:
+              - /url: "#hamsapaksa"
+              - generic [ref=f34e100]: "24"
+              - text: Haṃsapakṣa
+          - listitem [ref=f34e101]:
+            - link "25 Sandaṃśa" [ref=f34e102] [cursor=pointer]:
+              - /url: "#sandamsa"
+              - generic [ref=f34e103]: "25"
+              - text: Sandaṃśa
+          - listitem [ref=f34e104]:
+            - link "26 Mukula" [ref=f34e105] [cursor=pointer]:
+              - /url: "#mukula"
+              - generic [ref=f34e106]: "26"
+              - text: Mukula
+          - listitem [ref=f34e107]:
+            - link "27 Tāmracūḍa" [ref=f34e108] [cursor=pointer]:
+              - /url: "#tamracuda"
+              - generic [ref=f34e109]: "27"
+              - text: Tāmracūḍa
+          - listitem [ref=f34e110]:
+            - link "28 Triśūla" [ref=f34e111] [cursor=pointer]:
+              - /url: "#trisula"
+              - generic [ref=f34e112]: "28"
+              - text: Triśūla
+        - paragraph [ref=f34e113]: The stills below are taken from our own teaching footage, which carries the gesture name in frame — 8 of the twenty-eight also have their Sanskrit verse transcribed from the academy’s Theory Class lessons.
+    - list [ref=f34e117]:
+      - listitem [ref=f34e118]:
+        - img "The Patāka hasta — the flag" [ref=f34e119]
+        - generic [ref=f34e120]:
+          - paragraph [ref=f34e121]: "01"
+          - heading "Patāka" [level=3] [ref=f34e122]
+          - paragraph [ref=f34e123]: the flag
+          - heading "Viniyoga" [level=4] [ref=f34e124]
+          - list [ref=f34e125]:
+            - listitem [ref=f34e126]: the beginning of dance
+            - listitem [ref=f34e127]: clouds
+            - listitem [ref=f34e128]: a forest
+            - listitem [ref=f34e129]: refusal
+            - listitem [ref=f34e130]: night
+            - listitem [ref=f34e131]: a river
+            - listitem [ref=f34e132]: wind
+            - listitem [ref=f34e133]: benediction
+          - paragraph [ref=f34e134]: The first gesture a child is ever taught, and the last one they will ever outgrow. The hand that opens the dance is the same hand that gives the blessing at its end.
+      - listitem [ref=f34e135]:
+        - img "The Tripatāka hasta — three parts of the flag" [ref=f34e136]
+        - generic [ref=f34e137]:
+          - paragraph [ref=f34e138]: "02"
+          - heading "Tripatāka" [level=3] [ref=f34e139]
+          - paragraph [ref=f34e140]: three parts of the flag
+          - heading "Viniyoga" [level=4] [ref=f34e141]
+          - list [ref=f34e142]:
+            - listitem [ref=f34e143]: a crown
+            - listitem [ref=f34e144]: a tree
+            - listitem [ref=f34e145]: the vajra
+            - listitem [ref=f34e146]: Indra
+            - listitem [ref=f34e147]: a lamp
+            - listitem [ref=f34e148]: rising flames
+            - listitem [ref=f34e149]: an arrow
+      - listitem [ref=f34e150]:
+        - img "The Ardhapatāka hasta — half a flag" [ref=f34e151]
+        - generic [ref=f34e152]:
+          - paragraph [ref=f34e153]: "03"
+          - heading "Ardhapatāka" [level=3] [ref=f34e154]
+          - paragraph [ref=f34e155]: half a flag
+          - heading "Viniyoga" [level=4] [ref=f34e156]
+          - list [ref=f34e157]:
+            - listitem [ref=f34e158]: tender shoots
+            - listitem [ref=f34e159]: a writing tablet
+            - listitem [ref=f34e160]: a knife
+            - listitem [ref=f34e161]: a banner
+            - listitem [ref=f34e162]: a tower
+            - listitem [ref=f34e163]: a horn
+            - listitem [ref=f34e164]: a riverbank
+      - listitem [ref=f34e165]:
+        - img "The Kartarīmukha hasta — the scissors' blades" [ref=f34e166]
+        - generic [ref=f34e167]:
+          - paragraph [ref=f34e168]: "04"
+          - heading "Kartarīmukha" [level=3] [ref=f34e169]
+          - paragraph [ref=f34e170]: the scissors' blades
+          - heading "Viniyoga" [level=4] [ref=f34e171]
+          - list [ref=f34e172]:
+            - listitem [ref=f34e173]: separation of man and woman
+            - listitem [ref=f34e174]: opposition
+            - listitem [ref=f34e175]: the corner of the eye
+            - listitem [ref=f34e176]: lightning
+            - listitem [ref=f34e177]: a creeper
+            - listitem [ref=f34e178]: falling
+      - listitem [ref=f34e179]:
+        - img "The Mayūra hasta — the peacock" [ref=f34e180]
+        - generic [ref=f34e181]:
+          - paragraph [ref=f34e182]: "05"
+          - heading "Mayūra" [level=3] [ref=f34e183]
+          - paragraph [ref=f34e184]: the peacock
+          - heading "Viniyoga" [level=4] [ref=f34e185]
+          - list [ref=f34e186]:
+            - listitem [ref=f34e187]: a peacock's beak
+            - listitem [ref=f34e188]: a creeper
+            - listitem [ref=f34e189]: a bird
+            - listitem [ref=f34e190]: wiping away tears
+            - listitem [ref=f34e191]: the forehead mark
+            - listitem [ref=f34e192]: parting the hair
+      - listitem [ref=f34e193]:
+        - img "The Ardhacandra hasta — the half moon" [ref=f34e194]
+        - generic [ref=f34e195]:
+          - paragraph [ref=f34e196]: "06"
+          - heading "Ardhacandra" [level=3] [ref=f34e197]
+          - paragraph [ref=f34e198]: the half moon
+          - heading "Viniyoga" [level=4] [ref=f34e199]
+          - list [ref=f34e200]:
+            - listitem [ref=f34e201]: the moon on the eighth night
+            - listitem [ref=f34e202]: a spear
+            - listitem [ref=f34e203]: consecrating an image
+            - listitem [ref=f34e204]: the waist
+            - listitem [ref=f34e205]: anxiety
+            - listitem [ref=f34e206]: oneself
+            - listitem [ref=f34e207]: meditation
+            - listitem [ref=f34e208]: greeting
+            - listitem [ref=f34e209]: rising to stand
+          - paragraph [ref=f34e210]: One hand holds the moon at half. It is the gesture of the self — of prayer, and of standing up. Children learn very early that the same shape can mean anxiety or devotion, and that the difference is entirely in the eyes.
+      - listitem [ref=f34e211]:
+        - img "The Arāla hasta — bent" [ref=f34e212]
+        - generic [ref=f34e213]:
+          - paragraph [ref=f34e214]: "07"
+          - heading "Arāla" [level=3] [ref=f34e215]
+          - paragraph [ref=f34e216]: bent
+          - heading "Viniyoga" [level=4] [ref=f34e217]
+          - list [ref=f34e218]:
+            - listitem [ref=f34e219]: drinking poison
+            - listitem [ref=f34e220]: drinking nectar
+            - listitem [ref=f34e221]: a violent wind
+      - listitem [ref=f34e222]:
+        - img "The Śukatuṇḍa hasta — the parrot's beak" [ref=f34e223]
+        - generic [ref=f34e224]:
+          - paragraph [ref=f34e225]: "08"
+          - heading "Śukatuṇḍa" [level=3] [ref=f34e226]
+          - paragraph [ref=f34e227]: the parrot's beak
+          - heading "Viniyoga" [level=4] [ref=f34e228]
+          - list [ref=f34e229]:
+            - listitem [ref=f34e230]: shooting an arrow
+            - listitem [ref=f34e231]: a spear
+            - listitem [ref=f34e232]: mystery
+            - listitem [ref=f34e233]: recollection
+            - listitem [ref=f34e234]: ferocity
+            - listitem [ref=f34e235]: harsh speech
+      - listitem [ref=f34e236]:
+        - img "The Muṣṭi hasta — the closed fist" [ref=f34e237]
+        - generic [ref=f34e238]:
+          - paragraph [ref=f34e239]: "09"
+          - heading "Muṣṭi" [level=3] [ref=f34e240]
+          - paragraph [ref=f34e241]: the closed fist
+          - heading "Viniyoga" [level=4] [ref=f34e242]
+          - list [ref=f34e243]:
+            - listitem [ref=f34e244]: steadiness
+            - listitem [ref=f34e245]: grasping hair
+            - listitem [ref=f34e246]: holding things
+            - listitem [ref=f34e247]: wrestling
+            - listitem [ref=f34e248]: running
+          - paragraph [ref=f34e249]: Steadiness, made visible. Before a dancer can express anything, the hand must first learn to hold — and to hold nothing at all without trembling.
+      - listitem [ref=f34e250]:
+        - img "The Śikhara hasta — the spire" [ref=f34e251]
+        - generic [ref=f34e252]:
+          - paragraph [ref=f34e253]: "10"
+          - heading "Śikhara" [level=3] [ref=f34e254]
+          - paragraph [ref=f34e255]: the spire
+          - heading "Viniyoga" [level=4] [ref=f34e256]
+          - list [ref=f34e257]:
+            - listitem [ref=f34e258]: the god of love
+            - listitem [ref=f34e259]: a bow
+            - listitem [ref=f34e260]: a pillar
+            - listitem [ref=f34e261]: silence
+            - listitem [ref=f34e262]: a tooth
+            - listitem [ref=f34e263]: questioning
+            - listitem [ref=f34e264]: saying no
+            - listitem [ref=f34e265]: an embrace
+            - listitem [ref=f34e266]: firmness
+      - listitem [ref=f34e267]:
+        - img "The Kapittha hasta — the wood apple" [ref=f34e268]
+        - generic [ref=f34e269]:
+          - paragraph [ref=f34e270]: "11"
+          - heading "Kapittha" [level=3] [ref=f34e271]
+          - paragraph [ref=f34e272]: the wood apple
+          - heading "Viniyoga" [level=4] [ref=f34e273]
+          - list [ref=f34e274]:
+            - listitem [ref=f34e275]: Lakshmi
+            - listitem [ref=f34e276]: Saraswati
+            - listitem [ref=f34e277]: holding cymbals
+            - listitem [ref=f34e278]: milking a cow
+            - listitem [ref=f34e279]: holding the end of a garment
+            - listitem [ref=f34e280]: holding a flower
+      - listitem [ref=f34e281]:
+        - img "The Kaṭakāmukha hasta — the opening of a bracelet" [ref=f34e282]
+        - generic [ref=f34e283]:
+          - paragraph [ref=f34e284]: "12"
+          - heading "Kaṭakāmukha" [level=3] [ref=f34e285]
+          - paragraph [ref=f34e286]: the opening of a bracelet
+          - heading "Viniyoga" [level=4] [ref=f34e287]
+          - list [ref=f34e288]:
+            - listitem [ref=f34e289]: plucking flowers
+            - listitem [ref=f34e290]: a pearl necklace
+            - listitem [ref=f34e291]: drawing an arrow
+            - listitem [ref=f34e292]: speech
+            - listitem [ref=f34e293]: glances
+            - listitem [ref=f34e294]: camphor
+            - listitem [ref=f34e295]: betel
+      - listitem [ref=f34e296]:
+        - img "The Sūcī hasta — the needle" [ref=f34e297]
+        - generic [ref=f34e298]:
+          - paragraph [ref=f34e299]: "13"
+          - heading "Sūcī" [level=3] [ref=f34e300]
+          - paragraph [ref=f34e301]: the needle
+          - heading "Viniyoga" [level=4] [ref=f34e302]
+          - list [ref=f34e303]:
+            - listitem [ref=f34e304]: the number one
+            - listitem [ref=f34e305]: Parabrahman
+            - listitem [ref=f34e306]: the sun
+            - listitem [ref=f34e307]: a city
+            - listitem [ref=f34e308]: the world
+            - listitem [ref=f34e309]: saying "thus"
+            - listitem [ref=f34e310]: threatening
+            - listitem [ref=f34e311]: a wheel
+            - listitem [ref=f34e312]: thunder
+            - listitem [ref=f34e313]: an umbrella
+            - listitem [ref=f34e314]: understanding
+          - paragraph [ref=f34e315]: A single finger, and it can mean the number one, the sun, or the absolute. Learning that scale of meaning in one gesture is how a child begins to grasp that precision and imagination are not opposites.
+      - listitem [ref=f34e316]:
+        - img "The Candrakalā hasta — the digit of the moon" [ref=f34e317]
+        - generic [ref=f34e318]:
+          - paragraph [ref=f34e319]: "14"
+          - heading "Candrakalā" [level=3] [ref=f34e320]
+          - paragraph [ref=f34e321]: the digit of the moon
+          - heading "Viniyoga" [level=4] [ref=f34e322]
+          - list [ref=f34e323]:
+            - listitem [ref=f34e324]: the moon on the first night
+            - listitem [ref=f34e325]: the face
+            - listitem [ref=f34e326]: the crescent in Shiva's hair
+            - listitem [ref=f34e327]: measuring a cubit
+            - listitem [ref=f34e328]: the Ganga
+      - listitem [ref=f34e329]:
+        - img "The Padmakōśa hasta — the lotus bud" [ref=f34e330]
+        - generic [ref=f34e331]:
+          - paragraph [ref=f34e332]: "15"
+          - heading "Padmakōśa" [level=3] [ref=f34e333]
+          - paragraph [ref=f34e334]: the lotus bud
+          - heading "Viniyoga" [level=4] [ref=f34e335]
+          - list [ref=f34e336]:
+            - listitem [ref=f34e337]: fruit
+            - listitem [ref=f34e338]: a bell
+            - listitem [ref=f34e339]: an egg
+            - listitem [ref=f34e340]: a water lily
+            - listitem [ref=f34e341]: a cluster of flowers
+            - listitem [ref=f34e342]: an offering of food
+          - paragraph [ref=f34e343]: "The hand becomes a vessel — not yet open, not yet given. In the Gurukulam this is the shape of what a student is: holding something that has not bloomed, and learning the patience to let it."
+      - listitem [ref=f34e344]:
+        - img "The Sarpaśīrṣa hasta — the serpent's head" [ref=f34e345]
+        - generic [ref=f34e346]:
+          - paragraph [ref=f34e347]: "16"
+          - heading "Sarpaśīrṣa" [level=3] [ref=f34e348]
+          - paragraph [ref=f34e349]: the serpent's head
+          - heading "Viniyoga" [level=4] [ref=f34e350]
+          - list [ref=f34e351]:
+            - listitem [ref=f34e352]: sandal paste
+            - listitem [ref=f34e353]: a snake
+            - listitem [ref=f34e354]: slow movement
+            - listitem [ref=f34e355]: offering water to the gods
+            - listitem [ref=f34e356]: nourishing
+            - listitem [ref=f34e357]: an elephant's ears
+      - listitem [ref=f34e358]:
+        - img "The Mṛgaśīrṣa hasta — the deer's head" [ref=f34e359]
+        - generic [ref=f34e360]:
+          - paragraph [ref=f34e361]: "17"
+          - heading "Mṛgaśīrṣa" [level=3] [ref=f34e362]
+          - paragraph [ref=f34e363]: the deer's head
+          - heading "Viniyoga" [level=4] [ref=f34e364]
+          - list [ref=f34e365]:
+            - listitem [ref=f34e366]: women
+            - listitem [ref=f34e367]: the cheek
+            - listitem [ref=f34e368]: a mirror
+            - listitem [ref=f34e369]: practising steps
+            - listitem [ref=f34e370]: discussion
+            - listitem [ref=f34e371]: the number three
+            - listitem [ref=f34e372]: calling the beloved
+            - listitem [ref=f34e373]: fear
+      - listitem [ref=f34e374]:
+        - img "The Siṃhamukha hasta — the lion's face" [ref=f34e375]
+        - generic [ref=f34e376]:
+          - paragraph [ref=f34e377]: "18"
+          - heading "Siṃhamukha" [level=3] [ref=f34e378]
+          - paragraph [ref=f34e379]: the lion's face
+          - heading "Viniyoga" [level=4] [ref=f34e380]
+          - list [ref=f34e381]:
+            - listitem [ref=f34e382]: the sacred fire offering
+            - listitem [ref=f34e383]: coral
+            - listitem [ref=f34e384]: a pearl
+            - listitem [ref=f34e385]: a lotus garland
+            - listitem [ref=f34e386]: an elephant
+            - listitem [ref=f34e387]: sacred grass
+            - listitem [ref=f34e388]: medicine
+            - listitem [ref=f34e389]: a tortoise
+          - paragraph [ref=f34e390]: Named for the lion, used for the offering into fire. The tradition rarely lets a gesture stay literal for long — the fierce and the devotional share a single hand.
+      - listitem [ref=f34e391]:
+        - img "The Kāṅgūla hasta — the tail-shaped hand" [ref=f34e392]
+        - generic [ref=f34e393]:
+          - paragraph [ref=f34e394]: "19"
+          - heading "Kāṅgūla" [level=3] [ref=f34e395]
+          - paragraph [ref=f34e396]: the tail-shaped hand
+          - heading "Viniyoga" [level=4] [ref=f34e397]
+          - list [ref=f34e398]:
+            - listitem [ref=f34e399]: the lakuca fruit
+            - listitem [ref=f34e400]: small bells
+            - listitem [ref=f34e401]: a great bell
+            - listitem [ref=f34e402]: the cakora bird
+            - listitem [ref=f34e403]: a betel nut tree
+            - listitem [ref=f34e404]: a white water lily
+            - listitem [ref=f34e405]: a coconut
+          - group [ref=f34e406]:
+            - generic "Shloka and gloss" [ref=f34e407] [cursor=pointer]
+      - listitem [ref=f34e408]:
+        - img "The Alapadma hasta — the fully bloomed lotus" [ref=f34e409]
+        - generic [ref=f34e410]:
+          - paragraph [ref=f34e411]: "20"
+          - heading "Alapadma" [level=3] [ref=f34e412]
+          - paragraph [ref=f34e413]: the fully bloomed lotus
+          - heading "Viniyoga" [level=4] [ref=f34e414]
+          - list [ref=f34e415]:
+            - listitem [ref=f34e416]: a lotus in full bloom
+            - listitem [ref=f34e417]: circular movement
+            - listitem [ref=f34e418]: separation
+            - listitem [ref=f34e419]: a mirror
+            - listitem [ref=f34e420]: the full moon
+            - listitem [ref=f34e421]: beauty
+            - listitem [ref=f34e422]: a village
+            - listitem [ref=f34e423]: a lake
+            - listitem [ref=f34e424]: praise
+          - paragraph [ref=f34e425]: The bud has opened. Separation and the full moon, a lake and a village, praise itself — all held in one spread palm. This is the gesture students reach for when a song turns from describing the world to loving it.
+          - group [ref=f34e426]:
+            - generic "Shloka and gloss" [ref=f34e427] [cursor=pointer]
+      - listitem [ref=f34e428]:
+        - img "The Catura hasta — the clever one" [ref=f34e429]
+        - generic [ref=f34e430]:
+          - paragraph [ref=f34e431]: "21"
+          - heading "Catura" [level=3] [ref=f34e432]
+          - paragraph [ref=f34e433]: the clever one
+          - heading "Viniyoga" [level=4] [ref=f34e434]
+          - list [ref=f34e435]:
+            - listitem [ref=f34e436]: musk
+            - listitem [ref=f34e437]: a little
+            - listitem [ref=f34e438]: gold
+            - listitem [ref=f34e439]: sorrow
+            - listitem [ref=f34e440]: taste
+            - listitem [ref=f34e441]: the eyes
+            - listitem [ref=f34e442]: a promise
+            - listitem [ref=f34e443]: sweetness
+            - listitem [ref=f34e444]: a slow walk
+            - listitem [ref=f34e445]: the face
+          - group [ref=f34e446]:
+            - generic "Shloka and gloss" [ref=f34e447] [cursor=pointer]
+      - listitem [ref=f34e448]:
+        - img "The Bhramara hasta — the bee" [ref=f34e449]
+        - generic [ref=f34e450]:
+          - paragraph [ref=f34e451]: "22"
+          - heading "Bhramara" [level=3] [ref=f34e452]
+          - paragraph [ref=f34e453]: the bee
+          - heading "Viniyoga" [level=4] [ref=f34e454]
+          - list [ref=f34e455]:
+            - listitem [ref=f34e456]: a bee
+            - listitem [ref=f34e457]: a parrot
+            - listitem [ref=f34e458]: wings
+            - listitem [ref=f34e459]: a crane
+            - listitem [ref=f34e460]: the cuckoo
+          - group [ref=f34e461]:
+            - generic "Shloka and gloss" [ref=f34e462] [cursor=pointer]
+      - listitem [ref=f34e463]:
+        - img "The Haṃsāsya hasta — the swan's face" [ref=f34e464]
+        - generic [ref=f34e465]:
+          - paragraph [ref=f34e466]: "23"
+          - heading "Haṃsāsya" [level=3] [ref=f34e467]
+          - paragraph [ref=f34e468]: the swan's face
+          - heading "Viniyoga" [level=4] [ref=f34e469]
+          - list [ref=f34e470]:
+            - listitem [ref=f34e471]: tying the mangalsutra
+            - listitem [ref=f34e472]: giving instruction
+            - listitem [ref=f34e473]: certainty
+            - listitem [ref=f34e474]: a pearl necklace
+            - listitem [ref=f34e475]: jasmine
+            - listitem [ref=f34e476]: painting
+            - listitem [ref=f34e477]: a bite
+          - group [ref=f34e478]:
+            - generic "Shloka and gloss" [ref=f34e479] [cursor=pointer]
+      - listitem [ref=f34e480]:
+        - img "The Haṃsapakṣa hasta — the swan's wing" [ref=f34e481]
+        - generic [ref=f34e482]:
+          - paragraph [ref=f34e483]: "24"
+          - heading "Haṃsapakṣa" [level=3] [ref=f34e484]
+          - paragraph [ref=f34e485]: the swan's wing
+          - heading "Viniyoga" [level=4] [ref=f34e486]
+          - list [ref=f34e487]:
+            - listitem [ref=f34e488]: the number six
+            - listitem [ref=f34e489]: the building of a bridge
+            - listitem [ref=f34e490]: writing with the nails
+            - listitem [ref=f34e491]: covering
+          - paragraph [ref=f34e492]: A bridge, and the act of covering. The academy teaches each gesture with its verse — so a nine-year-old learns Sanskrit grammar and the shape of a swan’s wing in the same breath.
+          - group [ref=f34e493]:
+            - generic "Shloka and gloss" [ref=f34e494] [cursor=pointer]
+      - listitem [ref=f34e495]:
+        - img "The Sandaṃśa hasta — the pincers" [ref=f34e496]
+        - generic [ref=f34e497]:
+          - paragraph [ref=f34e498]: "25"
+          - heading "Sandaṃśa" [level=3] [ref=f34e499]
+          - paragraph [ref=f34e500]: the pincers
+          - heading "Viniyoga" [level=4] [ref=f34e501]
+          - list [ref=f34e502]:
+            - listitem [ref=f34e503]: the belly
+            - listitem [ref=f34e504]: an offering to God
+            - listitem [ref=f34e505]: a wound
+            - listitem [ref=f34e506]: a worm
+            - listitem [ref=f34e507]: great fear
+            - listitem [ref=f34e508]: worship
+            - listitem [ref=f34e509]: the number five
+          - group [ref=f34e510]:
+            - generic "Shloka and gloss" [ref=f34e511] [cursor=pointer]
+      - listitem [ref=f34e512]:
+        - img "The Mukula hasta — the bud" [ref=f34e513]
+        - generic [ref=f34e514]:
+          - paragraph [ref=f34e515]: "26"
+          - heading "Mukula" [level=3] [ref=f34e516]
+          - paragraph [ref=f34e517]: the bud
+          - heading "Viniyoga" [level=4] [ref=f34e518]
+          - list [ref=f34e519]:
+            - listitem [ref=f34e520]: a water lily
+            - listitem [ref=f34e521]: eating
+            - listitem [ref=f34e522]: the five arrows of Manmatha
+            - listitem [ref=f34e523]: placing religious marks
+            - listitem [ref=f34e524]: the navel
+            - listitem [ref=f34e525]: a plantain flower
+          - group [ref=f34e526]:
+            - generic "Shloka and gloss" [ref=f34e527] [cursor=pointer]
+      - listitem [ref=f34e528]:
+        - img "The Tāmracūḍa hasta — the cock's comb" [ref=f34e529]
+        - generic [ref=f34e530]:
+          - paragraph [ref=f34e531]: "27"
+          - heading "Tāmracūḍa" [level=3] [ref=f34e532]
+          - paragraph [ref=f34e533]: the cock's comb
+          - heading "Viniyoga" [level=4] [ref=f34e534]
+          - list [ref=f34e535]:
+            - listitem [ref=f34e536]: writing
+            - listitem [ref=f34e537]: the number twelve
+            - listitem [ref=f34e538]: the crowing of a cock
+            - listitem [ref=f34e539]: a calf
+          - paragraph [ref=f34e540]: Twenty-eight gestures, learned one at a time, over years. No shortcut exists — which is exactly the lesson. A child who can do this can do anything that asks for patience.
+      - listitem [ref=f34e541]:
+        - img "The Triśūla hasta — the trident" [ref=f34e542]
+        - generic [ref=f34e543]:
+          - paragraph [ref=f34e544]: "28"
+          - heading "Triśūla" [level=3] [ref=f34e545]
+          - paragraph [ref=f34e546]: the trident
+          - heading "Viniyoga" [level=4] [ref=f34e547]
+          - list [ref=f34e548]:
+            - listitem [ref=f34e549]: a bilva leaf
+            - listitem [ref=f34e550]: the number three
+            - listitem [ref=f34e551]: a wood apple leaf
+    - generic [ref=f34e555]:
+      - heading "Learning them is not memorising them" [level=2] [ref=f34e556]
+      - paragraph [ref=f34e557]: A gesture is only useful when the eyes, the neck and the rhythm arrive with it. That is what the six levels are for — and why the same hand can mean anxiety or devotion depending on nothing but the gaze.
+      - generic [ref=f34e558]:
+        - button "Schedule a trial session" [ref=f34e559]
+        - link "The six levels" [ref=f34e563] [cursor=pointer]:
+          - /url: /curriculum
+          - text: The six levels
+          - generic [aria-hidden] [ref=f34e564]: →
+  - contentinfo [ref=f34e565]:
+    - generic [ref=f34e566]:
+      - generic [ref=f34e567]:
+        - generic [ref=f34e568]:
+          - term [ref=f34e569]: Years of lineage
+          - definition [ref=f34e570]:
+            - generic [ref=f34e571]: "17"
+            - generic [ref=f34e572]: Years of lineage
+        - generic [ref=f34e573]:
+          - term [ref=f34e574]: Students taught
+          - definition [ref=f34e575]:
+            - generic [ref=f34e576]: "324"
+            - generic [ref=f34e577]: Students taught
+        - generic [ref=f34e578]:
+          - term [ref=f34e579]: Stages performed
+          - definition [ref=f34e580]:
+            - generic [ref=f34e581]: "20"
+            - generic [ref=f34e582]: Stages performed
+        - generic [ref=f34e583]:
+          - term [ref=f34e584]: Bani and pedagogy
+          - definition [ref=f34e585]:
+            - generic [ref=f34e586]: Kalakshetra
+            - generic [ref=f34e587]: Bani and pedagogy
+      - generic [ref=f34e588]:
+        - generic [ref=f34e589]:
+          - generic [ref=f34e591]:
+            - generic [ref=f34e592]: Shanti Kala Nikketan
+            - generic [ref=f34e593]: Academy of Fine Arts
+          - paragraph [ref=f34e594]: Kalakshetra style of Bharatanatyam, taught in the Gurukulam tradition since 18 April 2009.
+          - generic [ref=f34e595]:
+            - paragraph [ref=f34e596]:
+              - link "shantikalanikketan@gmail.com" [ref=f34e597] [cursor=pointer]:
+                - /url: mailto:shantikalanikketan@gmail.com
+            - paragraph [ref=f34e598]:
+              - link "+91 98840 22306" [ref=f34e599] [cursor=pointer]:
+                - /url: tel:+919884022306
+        - navigation "Sections" [ref=f34e600]:
+          - heading "Explore" [level=2] [ref=f34e601]
+          - list [ref=f34e602]:
+            - listitem [ref=f34e603]:
+              - link "The academy" [ref=f34e604] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=f34e605]:
+              - link "Our lineage" [ref=f34e606] [cursor=pointer]:
+                - /url: /lineage
+            - listitem [ref=f34e607]:
+              - link "Curriculum" [ref=f34e608] [cursor=pointer]:
+                - /url: /curriculum
+            - listitem [ref=f34e609]:
+              - link "The 28 hastas" [ref=f34e610] [cursor=pointer]:
+                - /url: /hastas
+            - listitem [ref=f34e611]:
+              - link "Performances" [ref=f34e612] [cursor=pointer]:
+                - /url: /performances
+            - listitem [ref=f34e613]:
+              - link "Locations" [ref=f34e614] [cursor=pointer]:
+                - /url: /locations
+        - generic [ref=f34e615]:
+          - heading "Where we teach" [level=2] [ref=f34e616]
+          - list [ref=f34e617]:
+            - listitem [ref=f34e618]:
+              - link "Chennai · Sholinganallur Tamil Nadu, India" [ref=f34e619] [cursor=pointer]:
+                - /url: /locations/chennai
+                - generic [ref=f34e620]:
+                  - text: Chennai
+                  - generic [ref=f34e621]: · Sholinganallur
+                - generic [ref=f34e622]: Tamil Nadu, India
+            - listitem [ref=f34e623]:
+              - link "Scarborough · Morningside & Finch Ontario, Canada" [ref=f34e624] [cursor=pointer]:
+                - /url: /locations/scarborough
+                - generic [ref=f34e625]:
+                  - text: Scarborough
+                  - generic [ref=f34e626]: · Morningside & Finch
+                - generic [ref=f34e627]: Ontario, Canada
+          - list [ref=f34e628]:
+            - listitem [ref=f34e629]:
+              - link "instagram" [ref=f34e630] [cursor=pointer]:
+                - /url: https://www.instagram.com/shantikalanikketan
+            - listitem [ref=f34e631]:
+              - link "facebook" [ref=f34e632] [cursor=pointer]:
+                - /url: https://www.facebook.com/shantikalanikketan
+            - listitem [ref=f34e633]:
+              - link "youtube" [ref=f34e634] [cursor=pointer]:
+                - /url: https://www.youtube.com/channel/UCDGm0LQ-24ZIKG-2DUAn2ew
+      - generic [ref=f34e635]:
+        - paragraph [ref=f34e636]: © 2026 Shanti Kala Nikketan Academy of Fine Arts
+        - paragraph [ref=f34e637]: 11018, Ground Floor, Tower 11, Prestige Courtyard, Model School Extension Road, Sholinganallur
+  - button "Open Next.js Dev Tools" [ref=f34e643] [cursor=pointer]

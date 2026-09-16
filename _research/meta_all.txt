@@ -1,0 +1,264 @@
+====================================================================================================
+FILE: C:\Projects\Shantikalaniketan\_research\pages\about.html len 364159
+['About | Shanti Kala Nikketan']
+<meta name="description" content="Shanti Kala Nikketan nurtures Gurukulam style of education where the students practice Classical art form along with the much-needed infusion of literature and mythology, to assist in holistic development. "/>
+<meta property="og:title" content="About | Shanti Kala Nikketan"/>
+<meta property="og:description" content="Shanti Kala Nikketan nurtures Gurukulam style of education where the students practice Classical art form along with the much-needed infusion of literature and mythology, to assist in holistic development. "/>
+<meta property="og:image" content="https://static.wixstatic.com/media/4c5ada_b714b4e445db441ea419931aedb407c0~mv2_d_4553_3040_s_4_2.jpg/v1/fill/w_2500,h_1669,al_c/4c5ada_b714b4e445db441ea419931aedb407c0~mv2_d_4553_3040_s_4_2.jpg"/>
+<meta property="og:image:width" content="2500"/>
+<meta property="og:image:height" content="1669"/>
+<meta property="og:url" content="https://www.shantikalanikketan.com/about"/>
+<meta property="og:site_name" content="Shanti Kala Nikketan"/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="About | Shanti Kala Nikketan"/>
+<meta name="twitter:description" content="Shanti Kala Nikketan nurtures Gurukulam style of education where the students practice Classical art form along with the much-needed infusion of literature and mythology, to assist in holistic development. "/>
+<meta name="twitter:image" content="https://static.wixstatic.com/media/4c5ada_b714b4e445db441ea419931aedb407c0~mv2_d_4553_3040_s_4_2.jpg/v1/fill/w_2500,h_1669,al_c/4c5ada_b714b4e445db441ea419931aedb407c0~mv2_d_4553_3040_s_4_2.jpg"/>
+wix 465
+squarespace 0
+wp-content 0
+elementor 3
+shopify 0
+webflow 0
+====================================================================================================
+FILE: C:\Projects\Shantikalaniketan\_research\pages\contact.html len 405284
+['Contact | Shanti Kala Nikketan']
+<meta name="description" content="Contact us to know more about Shanti Kala Nikketan"/>
+<meta property="og:title" content="Contact | Shanti Kala Nikketan"/>
+<meta property="og:description" content="Contact details of Shanti Kala Nikketan"/>
+<meta property="og:image" content="https://static.wixstatic.com/media/4c5ada_89d0aed962e74239bf7c3c527104dad4~mv2_d_5535_3215_s_4_2.jpg/v1/fill/w_2500,h_1452,al_c/4c5ada_89d0aed962e74239bf7c3c527104dad4~mv2_d_5535_3215_s_4_2.jpg"/>
+<meta property="og:image:width" content="2500"/>
+<meta property="og:image:height" content="1452"/>
+<meta property="og:url" content="https://www.shantikalanikketan.com/contact"/>
+<meta property="og:site_name" content="Shanti Kala Nikketan"/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Contact | Shanti Kala Nikketan"/>
+<meta name="twitter:description" content="Contact details of Shanti Kala Nikketan"/>
+<meta name="twitter:image" content="https://static.wixstatic.com/media/4c5ada_89d0aed962e74239bf7c3c527104dad4~mv2_d_5535_3215_s_4_2.jpg/v1/fill/w_2500,h_1452,al_c/4c5ada_89d0aed962e74239bf7c3c527104dad4~mv2_d_5535_3215_s_4_2.jpg"/>
+wix 521
+squarespace 0
+wp-content 0
+elementor 3
+shopify 0
+webflow 0
+====================================================================================================
+FILE: C:\Projects\Shantikalaniketan\_research\pages\director.html len 366783
+['Director | Shanti Kala Nikketan']
+<meta name="description" content="Sunitta Menghanaani, a budding yet profound Bharatanatyam artiste and teacher, hails from Pune, but has made her karmabhumi - Chennai. "/>
+<meta property="og:title" content="Director | Shanti Kala Nikketan"/>
+<meta property="og:description" content="Sunitta Menghanaani, a budding yet profound Bharatanatyam artiste and teacher, hails from Pune, but has made her karmabhumi - Chennai. "/>
+<meta property="og:image" content="https://static.wixstatic.com/media/4c5ada_c0e50b8009b04468ae7a566425277e4b~mv2_d_5069_3384_s_4_2.jpg/v1/fill/w_2500,h_1668,al_c/4c5ada_c0e50b8009b04468ae7a566425277e4b~mv2_d_5069_3384_s_4_2.jpg"/>
+<meta property="og:image:width" content="2500"/>
+<meta property="og:image:height" content="1668"/>
+<meta property="og:url" content="https://www.shantikalanikketan.com/director"/>
+<meta property="og:site_name" content="Shanti Kala Nikketan"/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Director | Shanti Kala Nikketan"/>
+<meta name="twitter:description" content="Sunitta Menghanaani, a budding yet profound Bharatanatyam artiste and teacher, hails from Pune, but has made her karmabhumi - Chennai. "/>
+<meta name="twitter:image" content="https://static.wixstatic.com/media/4c5ada_c0e50b8009b04468ae7a566425277e4b~mv2_d_5069_3384_s_4_2.jpg/v1/fill/w_2500,h_1668,al_c/4c5ada_c0e50b8009b04468ae7a566425277e4b~mv2_d_5069_3384_s_4_2.jpg"/>
+wix 477
+squarespace 0
+wp-content 0
+elementor 3
+shopify 0
+webflow 0
+====================================================================================================
+FILE: C:\Projects\Shantikalaniketan\_research\pages\events.html len 423206
+['Events | Shanti Kala Nikketan']
+<meta name="description" content="Events happened in the past and upcoming events. Shanti Kala Nikketan, Academy of Fine Arts, stage dance programs of our children every year."/>
+<meta property="og:title" content="Events | Shanti Kala Nikketan"/>
+<meta property="og:description" content="Events happened in the past and upcoming events. Shanti Kala Nikketan, Academy of Fine Arts, stage dance programs of our children every year."/>
+<meta property="og:image" content="https://static.wixstatic.com/media/4c5ada_6581677fcb074974b436af5088eb3607~mv2_d_5760_3840_s_4_2.jpg/v1/fill/w_2500,h_1666,al_c/4c5ada_6581677fcb074974b436af5088eb3607~mv2_d_5760_3840_s_4_2.jpg"/>
+<meta property="og:image:width" content="2500"/>
+<meta property="og:image:height" content="1666"/>
+<meta property="og:url" content="https://www.shantikalanikketan.com/events"/>
+<meta property="og:site_name" content="Shanti Kala Nikketan"/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Events | Shanti Kala Nikketan"/>
+<meta name="twitter:description" content="Events happened in the past and upcoming events. Shanti Kala Nikketan, Academy of Fine Arts, stage dance programs of our children every year."/>
+<meta name="twitter:image" content="https://static.wixstatic.com/media/4c5ada_6581677fcb074974b436af5088eb3607~mv2_d_5760_3840_s_4_2.jpg/v1/fill/w_2500,h_1666,al_c/4c5ada_6581677fcb074974b436af5088eb3607~mv2_d_5760_3840_s_4_2.jpg"/>
+wix 572
+squarespace 0
+wp-content 0
+elementor 3
+shopify 0
+webflow 0
+====================================================================================================
+FILE: C:\Projects\Shantikalaniketan\_research\pages\founder.html len 372626
+['Founder | Shanti Kala Nikketan']
+<meta name="description" content="Our Fine Art Academy's Founder is Om Guru Om, a spiritual ambassodor. For him, Art is essentially an affirmation, benediction or reverence of the existence - the Divinity. The beautiful experience of every art form is that it takes you closer to God and merge with i
+<meta property="og:title" content="Founder | Shanti Kala Nikketan"/>
+<meta property="og:description" content="Our Fine Art Academy's Founder is Om Guru Om, a spiritual ambassodor. For him, Art is essentially an affirmation, benediction or reverence of the existence - the Divinity. The beautiful experience of every art form is that it takes you closer to God and merge
+<meta property="og:image" content="https://static.wixstatic.com/media/4c5ada_f596ac32810c49d8b667aae421c65710~mv2_d_2210_2368_s_2.jpg/v1/fill/w_2500,h_2678,al_c/4c5ada_f596ac32810c49d8b667aae421c65710~mv2_d_2210_2368_s_2.jpg"/>
+<meta property="og:image:width" content="2500"/>
+<meta property="og:image:height" content="2678"/>
+<meta property="og:url" content="https://www.shantikalanikketan.com/founder"/>
+<meta property="og:site_name" content="Shanti Kala Nikketan"/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Founder | Shanti Kala Nikketan"/>
+<meta name="twitter:description" content="Our Fine Art Academy's Founder is Om Guru Om, a spiritual ambassodor. For him, Art is essentially an affirmation, benediction or reverence of the existence - the Divinity. The beautiful experience of every art form is that it takes you closer to God and merg
+<meta name="twitter:image" content="https://static.wixstatic.com/media/4c5ada_f596ac32810c49d8b667aae421c65710~mv2_d_2210_2368_s_2.jpg/v1/fill/w_2500,h_2678,al_c/4c5ada_f596ac32810c49d8b667aae421c65710~mv2_d_2210_2368_s_2.jpg"/>
+wix 500
+squarespace 0
+wp-content 0
+elementor 3
+shopify 0
+webflow 0
+====================================================================================================
+FILE: C:\Projects\Shantikalaniketan\_research\pages\gurukulam.html len 398658
+['Gurukulam | Shanti Kala Nikketan']
+<meta name="description" content="A platform for sowing the seeds of Indian Art forms and nuture them as cultural ambassadors for the society"/>
+<meta property="og:title" content="Gurukulam | Shanti Kala Nikketan"/>
+<meta property="og:description" content="A platform for sowing the seeds of Indian Art forms and nuture them as cultural ambassadors for the society"/>
+<meta property="og:image" content="https://static.wixstatic.com/media/4c5ada_49932973247a480c9bfe659e13f62653~mv2_d_4609_3077_s_4_2.jpg/v1/fill/w_2500,h_1669,al_c/4c5ada_49932973247a480c9bfe659e13f62653~mv2_d_4609_3077_s_4_2.jpg"/>
+<meta property="og:image:width" content="2500"/>
+<meta property="og:image:height" content="1669"/>
+<meta property="og:url" content="https://www.shantikalanikketan.com/gurukulam"/>
+<meta property="og:site_name" content="Shanti Kala Nikketan"/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Gurukulam | Shanti Kala Nikketan"/>
+<meta name="twitter:description" content="A platform for sowing the seeds of Indian Art forms and nuture them as cultural ambassadors for the society"/>
+<meta name="twitter:image" content="https://static.wixstatic.com/media/4c5ada_49932973247a480c9bfe659e13f62653~mv2_d_4609_3077_s_4_2.jpg/v1/fill/w_2500,h_1669,al_c/4c5ada_49932973247a480c9bfe659e13f62653~mv2_d_4609_3077_s_4_2.jpg"/>
+wix 630
+squarespace 0
+wp-content 0
+elementor 3
+shopify 0
+webflow 0
+====================================================================================================
+FILE: C:\Projects\Shantikalaniketan\_research\pages\home.html len 448693
+['Dance Institute | Shanti Kala Nikketan']
+<meta name="description" content="Shanti Kala Nikketan, Academy of Fine Arts, nurtures Gurukulam style of education where the students practice Classical art form along with the much-needed infusion of literature and mythology, to assist in holistic development. We teach bharatanatyam, Indian Classi
+<meta property="og:title" content="Dance Institute | Shanti Kala Nikketan"/>
+<meta property="og:description" content="Shanti Kala Nikketan nurtures Gurukulam style of education where the students practice Classical art form along with the much-needed infusion of literature and mythology, to assist in holistic development. "/>
+<meta property="og:image" content="https://static.wixstatic.com/media/4c5ada_c0e50b8009b04468ae7a566425277e4b~mv2_d_5069_3384_s_4_2.jpg/v1/fill/w_2500,h_1668,al_c/4c5ada_c0e50b8009b04468ae7a566425277e4b~mv2_d_5069_3384_s_4_2.jpg"/>
+<meta property="og:image:width" content="2500"/>
+<meta property="og:image:height" content="1668"/>
+<meta property="og:url" content="https://www.shantikalanikketan.com"/>
+<meta property="og:site_name" content="Shanti Kala Nikketan"/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Dance Institute | Shanti Kala Nikketan"/>
+<meta name="twitter:description" content="Shanti Kala Nikketan nurtures Gurukulam style of education where the students practice Classical art form along with the much-needed infusion of literature and mythology, to assist in holistic development. "/>
+<meta name="twitter:image" content="https://static.wixstatic.com/media/4c5ada_c0e50b8009b04468ae7a566425277e4b~mv2_d_5069_3384_s_4_2.jpg/v1/fill/w_2500,h_1668,al_c/4c5ada_c0e50b8009b04468ae7a566425277e4b~mv2_d_5069_3384_s_4_2.jpg"/>
+wix 652
+squarespace 0
+wp-content 0
+elementor 3
+shopify 0
+webflow 0
+====================================================================================================
+FILE: C:\Projects\Shantikalaniketan\_research\pages\logo.html len 365420
+['Logo | Shanti Kala Nikketan']
+<meta name="description" content="The logo of Shanti Kala Nikketan is a symbiosis of dance, music and the fine arts. The circle in the logo is the representation of the inter connectivity of the various art forms in their journey towards the infinite."/>
+<meta property="og:title" content="Logo | Shanti Kala Nikketan"/>
+<meta property="og:description" content="The logo of Shanti Kala Nikketan is a symbiosis of dance, music and the fine arts. The circle in the logo is the representation of the inter connectivity of the various art forms in their journey towards the infinite."/>
+<meta property="og:image" content="https://static.wixstatic.com/media/4c5ada_fb42c93141474ab4bc257ebebb795915~mv2_d_1654_1654_s_2.png/v1/fill/w_2500,h_2500,al_c/4c5ada_fb42c93141474ab4bc257ebebb795915~mv2_d_1654_1654_s_2.png"/>
+<meta property="og:image:width" content="2500"/>
+<meta property="og:image:height" content="2500"/>
+<meta property="og:url" content="https://www.shantikalanikketan.com/logo"/>
+<meta property="og:site_name" content="Shanti Kala Nikketan"/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Logo | Shanti Kala Nikketan"/>
+<meta name="twitter:description" content="The logo of Shanti Kala Nikketan is a symbiosis of dance, music and the fine arts. The circle in the logo is the representation of the inter connectivity of the various art forms in their journey towards the infinite."/>
+<meta name="twitter:image" content="https://static.wixstatic.com/media/4c5ada_fb42c93141474ab4bc257ebebb795915~mv2_d_1654_1654_s_2.png/v1/fill/w_2500,h_2500,al_c/4c5ada_fb42c93141474ab4bc257ebebb795915~mv2_d_1654_1654_s_2.png"/>
+wix 472
+squarespace 0
+wp-content 0
+elementor 3
+shopify 0
+webflow 0
+====================================================================================================
+FILE: C:\Projects\Shantikalaniketan\_research\pages\photos.html len 379566
+['Photos | Shanti Kala Nikketan']
+<meta name="description" content="Photos of students from our past events and classes. "/>
+<meta property="og:title" content="Photos | Shanti Kala Nikketan"/>
+<meta property="og:description" content="Photos of students from our past events and classes. "/>
+<meta property="og:image" content="https://static.wixstatic.com/media/4c5ada_963259f75b4142449f3f684d82948c63~mv2_d_6022_4020_s_4_2.jpg/v1/fill/w_2500,h_1668,al_c/4c5ada_963259f75b4142449f3f684d82948c63~mv2_d_6022_4020_s_4_2.jpg"/>
+<meta property="og:image:width" content="2500"/>
+<meta property="og:image:height" content="1668"/>
+<meta property="og:url" content="https://www.shantikalanikketan.com/photos"/>
+<meta property="og:site_name" content="Shanti Kala Nikketan"/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Photos | Shanti Kala Nikketan"/>
+<meta name="twitter:description" content="Photos of students from our past events and classes. "/>
+<meta name="twitter:image" content="https://static.wixstatic.com/media/4c5ada_963259f75b4142449f3f684d82948c63~mv2_d_6022_4020_s_4_2.jpg/v1/fill/w_2500,h_1668,al_c/4c5ada_963259f75b4142449f3f684d82948c63~mv2_d_6022_4020_s_4_2.jpg"/>
+wix 482
+squarespace 0
+wp-content 0
+elementor 3
+shopify 0
+webflow 0
+====================================================================================================
+FILE: C:\Projects\Shantikalaniketan\_research\pages\shanti-kala-nikketan.html len 370854
+['Shanti Kala Nikketan | Dance Institute']
+<meta name="description" content="Shanti Kala Nikketan nurtures Gurukulam style of education where the students practice Classical art form along with the much-needed infusion of literature and mythology, to assist in holistic development. "/>
+<meta property="og:title" content="Shanti Kala Nikketan | Dance Institute"/>
+<meta property="og:description" content="Shanti Kala Nikketan nurtures Gurukulam style of education where the students practice Classical art form along with the much-needed infusion of literature and mythology, to assist in holistic development. "/>
+<meta property="og:image" content="https://static.wixstatic.com/media/4c5ada_5c13c67cb4c84200a7ef8804638ef3e9~mv2_d_5648_3225_s_4_2.jpg/v1/fill/w_2500,h_1427,al_c/4c5ada_5c13c67cb4c84200a7ef8804638ef3e9~mv2_d_5648_3225_s_4_2.jpg"/>
+<meta property="og:image:width" content="2500"/>
+<meta property="og:image:height" content="1427"/>
+<meta property="og:url" content="https://www.shantikalanikketan.com/shanti-kala-nikketan"/>
+<meta property="og:site_name" content="Shanti Kala Nikketan"/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Shanti Kala Nikketan | Dance Institute"/>
+<meta name="twitter:description" content="Shanti Kala Nikketan nurtures Gurukulam style of education where the students practice Classical art form along with the much-needed infusion of literature and mythology, to assist in holistic development. "/>
+<meta name="twitter:image" content="https://static.wixstatic.com/media/4c5ada_5c13c67cb4c84200a7ef8804638ef3e9~mv2_d_5648_3225_s_4_2.jpg/v1/fill/w_2500,h_1427,al_c/4c5ada_5c13c67cb4c84200a7ef8804638ef3e9~mv2_d_5648_3225_s_4_2.jpg"/>
+wix 487
+squarespace 0
+wp-content 0
+elementor 3
+shopify 0
+webflow 0
+====================================================================================================
+FILE: C:\Projects\Shantikalaniketan\_research\pages\team.html len 395898
+['Team | Shanti Kala Nikketan']
+<meta name="description" content="We have well-versed team of insturctors in Kalakshetra bani style bharatanatyam "/>
+<meta property="og:title" content="Team | Shanti Kala Nikketan"/>
+<meta property="og:description" content="We have well-versed team of insturctors in Kalakshetra bani style bharatanatyam "/>
+<meta property="og:image" content="https://static.wixstatic.com/media/4c5ada_c0e50b8009b04468ae7a566425277e4b~mv2_d_5069_3384_s_4_2.jpg/v1/fill/w_2500,h_1668,al_c/4c5ada_c0e50b8009b04468ae7a566425277e4b~mv2_d_5069_3384_s_4_2.jpg"/>
+<meta property="og:image:width" content="2500"/>
+<meta property="og:image:height" content="1668"/>
+<meta property="og:url" content="https://www.shantikalanikketan.com/team"/>
+<meta property="og:site_name" content="Shanti Kala Nikketan"/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Team | Shanti Kala Nikketan"/>
+<meta name="twitter:description" content="We have well-versed team of insturctors in Kalakshetra bani style bharatanatyam "/>
+<meta name="twitter:image" content="https://static.wixstatic.com/media/4c5ada_c0e50b8009b04468ae7a566425277e4b~mv2_d_5069_3384_s_4_2.jpg/v1/fill/w_2500,h_1668,al_c/4c5ada_c0e50b8009b04468ae7a566425277e4b~mv2_d_5069_3384_s_4_2.jpg"/>
+wix 608
+squarespace 0
+wp-content 0
+elementor 3
+shopify 0
+webflow 0
+====================================================================================================
+FILE: C:\Projects\Shantikalaniketan\_research\pages\videos.html len 676944
+['Videos | Shanti Kala Nikketan']
+<meta name="description" content="Videos of Shanti Kala Nikketan taken from different events and classes"/>
+<meta property="og:title" content="Videos | Shanti Kala Nikketan"/>
+<meta property="og:description" content="Videos of Shanti Kala Nikketan taken from different events and classes"/>
+<meta property="og:image" content="https://static.wixstatic.com/media/4c5ada_f537640b9718437998ea4caf0d24703a~mv2_d_5760_3840_s_4_2.jpg/v1/fill/w_2500,h_1666,al_c/4c5ada_f537640b9718437998ea4caf0d24703a~mv2_d_5760_3840_s_4_2.jpg"/>
+<meta property="og:image:width" content="2500"/>
+<meta property="og:image:height" content="1666"/>
+<meta property="og:url" content="https://www.shantikalanikketan.com/videos"/>
+<meta property="og:site_name" content="Shanti Kala Nikketan"/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Videos | Shanti Kala Nikketan"/>
+<meta name="twitter:description" content="Videos of Shanti Kala Nikketan taken from different events and classes"/>
+<meta name="twitter:image" content="https://static.wixstatic.com/media/4c5ada_f537640b9718437998ea4caf0d24703a~mv2_d_5760_3840_s_4_2.jpg/v1/fill/w_2500,h_1666,al_c/4c5ada_f537640b9718437998ea4caf0d24703a~mv2_d_5760_3840_s_4_2.jpg"/>
+wix 1147
+squarespace 0
+wp-content 0
+elementor 3
+shopify 0
+webflow 0

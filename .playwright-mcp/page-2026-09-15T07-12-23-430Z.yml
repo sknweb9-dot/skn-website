@@ -1,0 +1,230 @@
+- generic [active] [ref=f5e1]:
+  - link "Skip to content" [ref=f5e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner:
+    - generic:
+      - link "Shanti Kala Nikketan — home" [ref=f5e3] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f5e4]:
+          - generic [ref=f5e5]: Shanti Kala Nikketan
+          - generic [ref=f5e6]: Academy of Fine Arts
+      - generic:
+        - paragraph [ref=f5e7]: Chennai·Global
+        - button "Book trial" [ref=f5e8]
+  - main [ref=f5e9]:
+    - generic [ref=f5e10]:
+      - generic [ref=f5e11]:
+        - paragraph [ref=f5e12]: Shanti Kala Nikketan
+        - paragraph [ref=f5e13]: 0%
+        - paragraph [ref=f5e15]: Preparing the gestures
+      - generic [ref=f5e16]:
+        - generic [ref=f5e17]:
+          - img "A dancer's hand forming the asamyuta hastas of Bharatanatyam, one gesture flowing into the next" [ref=f5e21]
+          - generic:
+            - generic:
+              - generic:
+                - article:
+                  - paragraph: Chennai · Scarborough · Delhi
+                  - heading "Not just an artform. A way of life." [level=2]
+                  - generic:
+                    - paragraph: Classical Kalakshetra Bharatanatyam, taught in the Gurukulam tradition since 2009. Cultivating discipline, grace, and spiritual poise.
+                  - generic:
+                    - paragraph: Patākathe flag
+                  - button "Schedule a trial session" [ref=f5e23]
+                - paragraph: Scroll to begin the journey ↓
+            - generic:
+              - generic:
+                - article:
+                  - paragraph: About
+                  - heading "Not merely a performing art" [level=2]
+                  - generic:
+                    - paragraph: At SKN, students are encouraged to develop a deeper appreciation of Bharatanatyam by exploring its connection with literature, mythology, music, and philosophy.
+                    - paragraph: The foundation of our teaching lies in the sacred bond between Guru and Shishya — a relationship built on trust, dedication, mutual respect, and lifelong learning.
+                  - generic:
+                    - paragraph: Ardhacandrathe half moon
+                  - link "The academy" [ref=f5e28] [cursor=pointer]:
+                    - /url: /about
+                    - text: The academy
+                    - generic [aria-hidden] [ref=f5e29]: →
+            - generic:
+              - generic:
+                - article:
+                  - paragraph: Our Founder — Om – Guru – Om
+                  - heading "Art is not ordinary" [level=2]
+                  - generic:
+                    - paragraph: It is the Divine expressing itself through the artist. The formless finds form and reveals itself to the world.
+                    - paragraph: Inspired by that vision, Co-Founder & Artistic Director Sunitta Menghanaani has nurtured SKN into an institution where learning extends far beyond mastering dance.
+                  - generic:
+                    - paragraph: Sūcīthe needle
+                  - link "Our lineage" [ref=f5e31] [cursor=pointer]:
+                    - /url: /lineage
+                    - text: Our lineage
+                    - generic [aria-hidden] [ref=f5e32]: →
+            - generic:
+              - generic:
+                - article:
+                  - paragraph: Our Gurukulam Approach
+                  - heading "Six levels, not six terms" [level=2]
+                  - generic:
+                    - paragraph: A gentle introduction from age three and a half, then six graded levels — Foundation to Mastery — each building naturally upon the last.
+                    - paragraph: Students develop a strong foundation before progressing towards advanced repertoire, and ultimately, the Arangetram.
+                  - generic:
+                    - paragraph: Padmakōśathe lotus bud
+                  - link "The six levels" [ref=f5e34] [cursor=pointer]:
+                    - /url: /curriculum
+                    - text: The six levels
+                    - generic [aria-hidden] [ref=f5e35]: →
+            - generic:
+              - generic:
+                - article:
+                  - paragraph: Performance & Arangetram
+                  - heading "The bud opens" [level=2]
+                  - generic:
+                    - paragraph: After Level 6 comes a period of intensive rehearsal, stagecraft, and individual mentoring, culminating in the Arangetram — a formal debut as a Bharatanatyam performer.
+                    - paragraph: "And before that, Udaan: our own showcase, created so that every dancer has a stage, irrespective of their stage of learning."
+                  - generic:
+                    - paragraph: Alapadmathe fully bloomed lotus
+                  - link "Performances" [ref=f5e37] [cursor=pointer]:
+                    - /url: /performances
+                    - text: Performances
+                    - generic [aria-hidden] [ref=f5e38]: →
+            - generic:
+              - generic:
+                - article:
+                  - paragraph: Begin
+                  - heading "Begin your child's journey" [level=2]
+                  - generic:
+                    - paragraph: Experience one trial session to witness how classical art transforms posture, confidence, and culture.
+                  - generic:
+                    - paragraph: Tāmracūḍathe cock's comb
+                  - generic [ref=f5e39]:
+                    - button "Schedule a trial session" [ref=f5e40]
+                    - link "Our schools" [ref=f5e44] [cursor=pointer]:
+                      - /url: /locations
+                      - text: Our schools
+                      - generic [aria-hidden] [ref=f5e45]: →
+        - navigation "Chapters" [ref=f5e46]:
+          - 'button "Invocation Act 1: Invocation" [ref=f5e47]':
+            - generic [ref=f5e48]: Invocation
+            - generic [ref=f5e50]: "Act 1: Invocation"
+          - 'button "Philosophy Act 2: Philosophy" [ref=f5e51]':
+            - generic [ref=f5e52]: Philosophy
+            - generic [ref=f5e54]: "Act 2: Philosophy"
+          - 'button "Lineage Act 3: Lineage" [ref=f5e55]':
+            - generic [ref=f5e56]: Lineage
+            - generic [ref=f5e58]: "Act 3: Lineage"
+          - 'button "Curriculum Act 4: Curriculum" [ref=f5e59]':
+            - generic [ref=f5e60]: Curriculum
+            - generic [ref=f5e62]: "Act 4: Curriculum"
+          - 'button "Arangetram Act 5: Arangetram" [ref=f5e63]':
+            - generic [ref=f5e64]: Arangetram
+            - generic [ref=f5e66]: "Act 5: Arangetram"
+          - 'button "Visit Act 6: Visit" [ref=f5e67]':
+            - generic [ref=f5e68]: Visit
+            - generic [ref=f5e70]: "Act 6: Visit"
+    - generic [ref=f5e72]:
+      - generic [ref=f5e73]:
+        - paragraph [ref=f5e74]: In their words
+        - heading "What parents say" [level=2] [ref=f5e75]
+      - list [aria-hidden] [ref=f5e76]:
+        - listitem [ref=f5e77]
+        - listitem [ref=f5e86]
+        - listitem [ref=f5e95]
+      - paragraph [ref=f5e104]:
+        - text: This section is reserved for parent testimonials. Send quotes to
+        - link "shantikalanikketan@gmail.com" [ref=f5e105] [cursor=pointer]:
+          - /url: mailto:shantikalanikketan@gmail.com
+        - text: with the parent’s name, their child’s current level, and how long they have been with the academy.
+  - contentinfo [ref=f5e106]:
+    - generic [ref=f5e107]:
+      - generic [ref=f5e108]:
+        - generic [ref=f5e109]:
+          - term [ref=f5e110]: Years of lineage
+          - definition [ref=f5e111]:
+            - generic [ref=f5e112]: "17"
+            - generic [ref=f5e113]: Years of lineage
+        - generic [ref=f5e114]:
+          - term [ref=f5e115]: Students taught
+          - definition [ref=f5e116]:
+            - generic [ref=f5e117]: "324"
+            - generic [ref=f5e118]: Students taught
+        - generic [ref=f5e119]:
+          - term [ref=f5e120]: Stages performed
+          - definition [ref=f5e121]:
+            - generic [ref=f5e122]: "20"
+            - generic [ref=f5e123]: Stages performed
+        - generic [ref=f5e124]:
+          - term [ref=f5e125]: Bani and pedagogy
+          - definition [ref=f5e126]:
+            - generic [ref=f5e127]: Kalakshetra
+            - generic [ref=f5e128]: Bani and pedagogy
+      - generic [ref=f5e129]:
+        - generic [ref=f5e130]:
+          - generic [ref=f5e132]:
+            - generic [ref=f5e133]: Shanti Kala Nikketan
+            - generic [ref=f5e134]: Academy of Fine Arts
+          - paragraph [ref=f5e135]: Kalakshetra style of Bharatanatyam, taught in the Gurukulam tradition since 18 April 2009.
+          - generic [ref=f5e136]:
+            - paragraph [ref=f5e137]:
+              - link "shantikalanikketan@gmail.com" [ref=f5e138] [cursor=pointer]:
+                - /url: mailto:shantikalanikketan@gmail.com
+            - paragraph [ref=f5e139]:
+              - link "+91 98840 22306" [ref=f5e140] [cursor=pointer]:
+                - /url: tel:+919884022306
+        - navigation "Sections" [ref=f5e141]:
+          - heading "Explore" [level=2] [ref=f5e142]
+          - list [ref=f5e143]:
+            - listitem [ref=f5e144]:
+              - link "The academy" [ref=f5e145] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=f5e146]:
+              - link "Our lineage" [ref=f5e147] [cursor=pointer]:
+                - /url: /lineage
+            - listitem [ref=f5e148]:
+              - link "Curriculum" [ref=f5e149] [cursor=pointer]:
+                - /url: /curriculum
+            - listitem [ref=f5e150]:
+              - link "The 28 hastas" [ref=f5e151] [cursor=pointer]:
+                - /url: /hastas
+            - listitem [ref=f5e152]:
+              - link "Performances" [ref=f5e153] [cursor=pointer]:
+                - /url: /performances
+            - listitem [ref=f5e154]:
+              - link "Locations" [ref=f5e155] [cursor=pointer]:
+                - /url: /locations
+        - generic [ref=f5e156]:
+          - heading "Where we teach" [level=2] [ref=f5e157]
+          - list [ref=f5e158]:
+            - listitem [ref=f5e159]:
+              - link "Chennai · Sholinganallur Tamil Nadu, India" [ref=f5e160] [cursor=pointer]:
+                - /url: /locations/chennai
+                - generic [ref=f5e161]:
+                  - text: Chennai
+                  - generic [ref=f5e162]: · Sholinganallur
+                - generic [ref=f5e163]: Tamil Nadu, India
+            - listitem [ref=f5e164]:
+              - link "Scarborough · Morningside & Finch Ontario, Canada" [ref=f5e165] [cursor=pointer]:
+                - /url: /locations/scarborough
+                - generic [ref=f5e166]:
+                  - text: Scarborough
+                  - generic [ref=f5e167]: · Morningside & Finch
+                - generic [ref=f5e168]: Ontario, Canada
+            - listitem [ref=f5e169]:
+              - link "Delhi Delhi, India" [ref=f5e170] [cursor=pointer]:
+                - /url: /locations/delhi
+                - generic [ref=f5e171]: Delhi
+                - generic [ref=f5e172]: Delhi, India
+          - list [ref=f5e173]:
+            - listitem [ref=f5e174]:
+              - link "instagram" [ref=f5e175] [cursor=pointer]:
+                - /url: https://www.instagram.com/shantikalanikketan
+            - listitem [ref=f5e176]:
+              - link "facebook" [ref=f5e177] [cursor=pointer]:
+                - /url: https://www.facebook.com/shantikalanikketan
+            - listitem [ref=f5e178]:
+              - link "youtube" [ref=f5e179] [cursor=pointer]:
+                - /url: https://www.youtube.com/channel/UCDGm0LQ-24ZIKG-2DUAn2ew
+      - generic [ref=f5e180]:
+        - paragraph [ref=f5e181]: © 2026 Shanti Kala Nikketan Academy of Fine Arts
+        - paragraph [ref=f5e182]: 11018, Ground Floor, Tower 11, Prestige Courtyard, Model School Extension Road, Sholinganallur
+  - button "Open Next.js Dev Tools" [ref=f5e188] [cursor=pointer]

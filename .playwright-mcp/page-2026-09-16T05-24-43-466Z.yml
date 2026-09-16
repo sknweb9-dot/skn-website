@@ -1,0 +1,357 @@
+- generic [active] [ref=f32e1]:
+  - link "Skip to content" [ref=f32e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner:
+    - generic:
+      - link "Shanti Kala Nikketan — home" [ref=f32e3] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f32e4]:
+          - generic [ref=f32e5]: Shanti Kala Nikketan
+          - generic [ref=f32e6]: Academy of Fine Arts
+      - generic:
+        - paragraph [ref=f32e7]: Chennai·Global
+        - button "Book trial" [ref=f32e8]
+  - main [ref=f32e9]:
+    - generic [ref=f32e11]:
+      - paragraph [ref=f32e12]: Our Gurukulam Approach
+      - heading "Six levels, not six terms" [level=1] [ref=f32e13]
+      - paragraph [ref=f32e14]: At SKN, Bharatanatyam is not simply taught — it is experienced as a lifelong journey of learning, discipline, and self-discovery.
+      - generic [ref=f32e16]:
+        - button "Schedule a trial session" [ref=f32e17]
+        - link "Batches and timings" [ref=f32e21] [cursor=pointer]:
+          - /url: /locations
+          - text: Batches and timings
+          - generic [aria-hidden] [ref=f32e22]: →
+    - generic [ref=f32e26]:
+      - paragraph [ref=f32e27]: Rooted in the timeless Gurukulam tradition and the Kalakshetra bani, our curriculum has been thoughtfully designed to guide every student through a structured progression of technical excellence, artistic expression, theoretical understanding, and stage confidence.
+      - paragraph [ref=f32e28]: Each level builds naturally upon the previous one, ensuring that students develop a strong foundation before progressing towards advanced repertoire and ultimately, the Arangetram.
+    - generic [ref=f32e30]:
+      - paragraph [ref=f32e31]: Introductory Programme
+      - heading "Introduction to the Arts" [level=2] [ref=f32e32]
+      - paragraph [ref=f32e33]: Ages 3.5 – 6 years
+      - generic [ref=f32e35]:
+        - generic [ref=f32e36]:
+          - paragraph [ref=f32e37]: A gentle and joyful introduction designed for young children to develop rhythm, coordination, concentration, confidence, and cultural values. Through Sanskrit shlokas, devotional themes, storytelling, creative movement, rhythm exercises, and expressive dance activities, children are introduced to Indian culture in an engaging and age-appropriate manner before beginning formal Bharatanatyam training.
+          - paragraph [ref=f32e38]: Formal Bharatanatyam training begins from Level 1.
+          - generic [ref=f32e39]:
+            - generic [ref=f32e40]:
+              - heading "Introduced through" [level=3] [ref=f32e41]
+              - list [ref=f32e42]:
+                - listitem [ref=f32e43]: Sanskrit shlokas
+                - listitem [ref=f32e44]: Devotional themes
+                - listitem [ref=f32e45]: Storytelling
+                - listitem [ref=f32e46]: Rhythm exercises
+            - generic [ref=f32e47]:
+              - heading "What it develops" [level=3] [ref=f32e48]
+              - list [ref=f32e49]:
+                - listitem [ref=f32e50]: Listening and attention
+                - listitem [ref=f32e51]: Gross motor coordination
+                - listitem [ref=f32e52]: Comfort in front of others
+        - figure [ref=f32e53]:
+          - img "Young children in an introductory Bharatanatyam class" [ref=f32e54]
+    - generic [ref=f32e56]:
+      - paragraph [ref=f32e57]: The six levels of learning
+      - heading "Each level builds on the last" [level=2] [ref=f32e58]
+      - paragraph [ref=f32e59]: Progression is by readiness, not by calendar. A level is complete when the technique underneath it is secure.
+      - list [ref=f32e61]:
+        - listitem [ref=f32e62]:
+          - generic [ref=f32e63]:
+            - generic [ref=f32e64]:
+              - generic [ref=f32e65]:
+                - generic [ref=f32e66]: Level 1
+                - heading "Foundation" [level=3] [ref=f32e67]
+              - paragraph [ref=f32e68]: Students establish a strong technical foundation through basic Adavus, Hastas, rhythm training, introductory theory, and devotional compositions such as Mallari and Nottuswaram.
+              - generic [ref=f32e69]:
+                - generic [ref=f32e70]: Basic Adavus
+                - generic [ref=f32e71]: Hastas
+                - generic [ref=f32e72]: Mallari
+                - generic [ref=f32e73]: Nottuswaram
+            - generic [ref=f32e74]:
+              - heading "What it develops" [level=4] [ref=f32e75]
+              - list [ref=f32e76]:
+                - listitem [ref=f32e77]: Posture and alignment
+                - listitem [ref=f32e78]: Counting and rhythm (tala)
+                - listitem [ref=f32e79]: Following multi-step instruction
+              - generic [ref=f32e80]:
+                - heading "Running now" [level=4] [ref=f32e81]
+                - list [ref=f32e82]:
+                  - listitem [ref=f32e83]:
+                    - text: Appswamy Springs
+                    - generic [ref=f32e84]: Mon & Fri · 6 pm – 7 pm
+                    - generic [ref=f32e85]: Admission open
+                  - listitem [ref=f32e86]:
+                    - text: Adroit
+                    - generic [ref=f32e87]: Tue & Thu · 5 pm – 6 pm
+                    - generic [ref=f32e88]: Admission open
+                  - listitem [ref=f32e89]:
+                    - text: Prestige Courtyards
+                    - generic [ref=f32e90]: Tue & Thu · 7.15 pm – 8.15 pm
+                    - generic [ref=f32e91]: Admission open
+                  - listitem [ref=f32e92]:
+                    - text: Casagrand Riviera
+                    - generic [ref=f32e93]: Mon & Wed · 5 pm – 6 pm
+                    - generic [ref=f32e94]: Admission open
+                  - listitem [ref=f32e95]:
+                    - text: Casagrand Tranquil
+                    - generic [ref=f32e96]: Tue & Thu · 5.30 pm – 6.30 pm
+                    - generic [ref=f32e97]: Admission open
+                  - listitem [ref=f32e98]:
+                    - text: Online group class
+                    - generic [ref=f32e99]: Wed & Sat · 5 pm – 6 pm
+                    - generic [ref=f32e100]: Admission open
+                  - listitem [ref=f32e101]:
+                    - text: Scarborough
+                    - generic [ref=f32e102]: Sat · 10 am – 11 am
+                    - generic [ref=f32e103]: Admission open
+                  - listitem [ref=f32e104]:
+                    - text: Scarborough
+                    - generic [ref=f32e105]: Sat · 11.15 am – 12.15 pm
+                    - generic [ref=f32e106]: Admission open
+        - listitem [ref=f32e107]:
+          - generic [ref=f32e108]:
+            - generic [ref=f32e109]:
+              - generic [ref=f32e110]:
+                - generic [ref=f32e111]: Level 2
+                - heading "Technique Development" [level=3] [ref=f32e112]
+              - paragraph [ref=f32e113]: Building strength, precision, and coordination through advanced Adavus while expanding theoretical knowledge and introducing traditional repertoire including Kauthuvam and Todayamangalam.
+              - generic [ref=f32e114]:
+                - generic [ref=f32e115]: Advanced Adavus
+                - generic [ref=f32e116]: Kauthuvam
+                - generic [ref=f32e117]: Todayamangalam
+            - generic [ref=f32e118]:
+              - heading "What it develops" [level=4] [ref=f32e119]
+              - list [ref=f32e120]:
+                - listitem [ref=f32e121]: Core strength and stamina
+                - listitem [ref=f32e122]: Balance and spatial control
+                - listitem [ref=f32e123]: Sustained practice habits
+              - generic [ref=f32e124]:
+                - heading "Running now" [level=4] [ref=f32e125]
+                - list [ref=f32e126]:
+                  - listitem [ref=f32e127]:
+                    - text: Appswamy Springs
+                    - generic [ref=f32e128]: Mon & Fri · 6 pm – 7 pm
+                  - listitem [ref=f32e129]:
+                    - text: Appswamy Springs
+                    - generic [ref=f32e130]: Mon · 7 pm – 8 pm
+                  - listitem [ref=f32e131]:
+                    - text: Adroit
+                    - generic [ref=f32e132]: Tue & Thu · 6 pm – 7 pm
+                  - listitem [ref=f32e133]:
+                    - text: Prestige Courtyards
+                    - generic [ref=f32e134]: Tue & Thu · 6.15 pm – 7.15 pm
+        - listitem [ref=f32e135]:
+          - generic [ref=f32e136]:
+            - generic [ref=f32e137]:
+              - generic [ref=f32e138]:
+                - generic [ref=f32e139]: Level 3
+                - heading "Margam Preparation" [level=3] [ref=f32e140]
+              - paragraph [ref=f32e141]: Students begin their journey into the classical Margam, learning foundational performance pieces such as Alarippu, while continuing to strengthen technique and musical understanding through Tevaram and Divya Prabandham.
+              - generic [ref=f32e142]:
+                - generic [ref=f32e143]: Alarippu
+                - generic [ref=f32e144]: Tevaram
+                - generic [ref=f32e145]: Divya Prabandham
+            - generic [ref=f32e146]:
+              - heading "What it develops" [level=4] [ref=f32e147]
+              - list [ref=f32e148]:
+                - listitem [ref=f32e149]: Memory for long sequences
+                - listitem [ref=f32e150]: Musical understanding
+                - listitem [ref=f32e151]: Independent self-correction
+              - generic [ref=f32e152]:
+                - heading "Running now" [level=4] [ref=f32e153]
+                - list [ref=f32e154]:
+                  - listitem [ref=f32e155]:
+                    - text: Appswamy Springs
+                    - generic [ref=f32e156]: Mon & Fri · 5 pm – 6 pm
+        - listitem [ref=f32e157]:
+          - generic [ref=f32e158]:
+            - generic [ref=f32e159]:
+              - generic [ref=f32e160]:
+                - generic [ref=f32e161]: Level 4
+                - heading "Repertoire & Expression" [level=3] [ref=f32e162]
+              - paragraph [ref=f32e163]: Students expand their artistic vocabulary through Jatiswaram, Shabdam, Keerthanam, and Virutham, while developing expressive storytelling, abhinaya, and a deeper appreciation of Bharatanatyam's cultural heritage.
+              - generic [ref=f32e164]:
+                - generic [ref=f32e165]: Jatiswaram
+                - generic [ref=f32e166]: Shabdam
+                - generic [ref=f32e167]: Keerthanam
+                - generic [ref=f32e168]: Virutham
+            - generic [ref=f32e169]:
+              - heading "What it develops" [level=4] [ref=f32e170]
+              - list [ref=f32e171]:
+                - listitem [ref=f32e172]: Emotional articulation (abhinaya)
+                - listitem [ref=f32e173]: Narrative interpretation
+                - listitem [ref=f32e174]: Cultural literacy
+              - generic [ref=f32e175]:
+                - heading "Running now" [level=4] [ref=f32e176]
+                - list [ref=f32e177]:
+                  - listitem [ref=f32e178]:
+                    - text: Casagrand Riviera
+                    - generic [ref=f32e179]: Mon & Wed · 6 pm – 7 pm
+        - listitem [ref=f32e180]:
+          - generic [ref=f32e181]:
+            - generic [ref=f32e182]:
+              - generic [ref=f32e183]:
+                - generic [ref=f32e184]: Level 5
+                - heading "Advanced Artistry" [level=3] [ref=f32e185]
+              - paragraph [ref=f32e186]: Technical excellence is refined through Thillana, Ashtapadi, Bhajan, and Javali, alongside advanced study of theory, literature, composers, and expressive interpretation.
+              - generic [ref=f32e187]:
+                - generic [ref=f32e188]: Thillana
+                - generic [ref=f32e189]: Ashtapadi
+                - generic [ref=f32e190]: Bhajan
+                - generic [ref=f32e191]: Javali
+            - generic [ref=f32e192]:
+              - heading "What it develops" [level=4] [ref=f32e193]
+              - list [ref=f32e194]:
+                - listitem [ref=f32e195]: Technical precision
+                - listitem [ref=f32e196]: Interpretive judgement
+                - listitem [ref=f32e197]: Knowledge of composers and texts
+              - paragraph [ref=f32e198]: Taught one to one at present. Write to us for availability.
+        - listitem [ref=f32e199]:
+          - generic [ref=f32e200]:
+            - generic [ref=f32e201]:
+              - generic [ref=f32e202]:
+                - generic [ref=f32e203]: Level 6
+                - heading "Mastery" [level=3] [ref=f32e204]
+              - paragraph [ref=f32e205]: The final academic level focuses on the most demanding elements of the Bharatanatyam repertoire, including Varnam, Padam, and Swarajathi, cultivating technical maturity, artistic excellence, and independent performance ability.
+              - generic [ref=f32e206]:
+                - generic [ref=f32e207]: Varnam
+                - generic [ref=f32e208]: Padam
+                - generic [ref=f32e209]: Swarajathi
+            - generic [ref=f32e210]:
+              - heading "What it develops" [level=4] [ref=f32e211]
+              - list [ref=f32e212]:
+                - listitem [ref=f32e213]: Technical maturity
+                - listitem [ref=f32e214]: Artistic excellence
+                - listitem [ref=f32e215]: Independent performance ability
+              - paragraph [ref=f32e216]: Taught one to one at present. Write to us for availability.
+    - generic [ref=f32e218]:
+      - paragraph [ref=f32e219]: Performance & Arangetram
+      - heading "The Debut" [level=2] [ref=f32e220]
+      - generic [ref=f32e222]:
+        - generic [ref=f32e223]:
+          - paragraph [ref=f32e224]: Following successful completion of Level 6, students enter a dedicated Performance & Arangetram Programme.
+          - paragraph [ref=f32e225]: This is not a teaching level but a period of intensive rehearsals, stagecraft, performance refinement, stamina building, orchestra rehearsals, and individual mentoring, culminating in the student's Arangetram — a significant milestone marking their formal debut as a Bharatanatyam performer.
+          - generic [ref=f32e226]:
+            - heading "The programme covers" [level=3] [ref=f32e227]
+            - list [ref=f32e228]:
+              - listitem [ref=f32e229]: Intensive rehearsals
+              - listitem [ref=f32e230]: Stagecraft and performance refinement
+              - listitem [ref=f32e231]: Stamina building
+              - listitem [ref=f32e232]: Orchestra rehearsals
+              - listitem [ref=f32e233]: Individual mentoring
+        - figure [ref=f32e234]:
+          - img "A student's Arangetram — her formal debut as a Bharatanatyam performer" [ref=f32e235]
+    - generic [ref=f32e237]:
+      - paragraph [ref=f32e238]: Not only for children
+      - heading "Adults follow the same syllabus" [level=2] [ref=f32e239]
+      - paragraph [ref=f32e240]: Beginning late changes the pace, not the path. Adults work through the same graded levels, in batches of their own.
+      - generic [ref=f32e241]:
+        - list [ref=f32e242]:
+          - listitem [ref=f32e243]:
+            - paragraph [ref=f32e244]: AS5
+            - heading "Level 2 — Technique Development" [level=3] [ref=f32e245]
+            - paragraph [ref=f32e246]: Appswamy Springs
+            - paragraph [ref=f32e247]: Mon · 7 pm – 8 pm
+          - listitem [ref=f32e248]:
+            - paragraph [ref=f32e249]: CA2
+            - heading "Level 1 — Foundation" [level=3] [ref=f32e250]
+            - paragraph [ref=f32e251]: Scarborough
+            - paragraph [ref=f32e252]: Sat · 11.15 am – 12.15 pm (provisional)
+        - button "Enquire about adult batches" [ref=f32e254]
+    - generic [ref=f32e261]:
+      - button "Schedule a trial session" [ref=f32e262]
+      - link "The 28 hastas" [ref=f32e266] [cursor=pointer]:
+        - /url: /hastas
+        - text: The 28 hastas
+        - generic [aria-hidden] [ref=f32e267]: →
+      - link "Batches and timings" [ref=f32e268] [cursor=pointer]:
+        - /url: /locations
+        - text: Batches and timings
+        - generic [aria-hidden] [ref=f32e269]: →
+  - contentinfo [ref=f32e270]:
+    - generic [ref=f32e271]:
+      - generic [ref=f32e272]:
+        - generic [ref=f32e273]:
+          - term [ref=f32e274]: Years of lineage
+          - definition [ref=f32e275]:
+            - generic [ref=f32e276]: "17"
+            - generic [ref=f32e277]: Years of lineage
+        - generic [ref=f32e278]:
+          - term [ref=f32e279]: Students taught
+          - definition [ref=f32e280]:
+            - generic [ref=f32e281]: "324"
+            - generic [ref=f32e282]: Students taught
+        - generic [ref=f32e283]:
+          - term [ref=f32e284]: Stages performed
+          - definition [ref=f32e285]:
+            - generic [ref=f32e286]: "20"
+            - generic [ref=f32e287]: Stages performed
+        - generic [ref=f32e288]:
+          - term [ref=f32e289]: Bani and pedagogy
+          - definition [ref=f32e290]:
+            - generic [ref=f32e291]: Kalakshetra
+            - generic [ref=f32e292]: Bani and pedagogy
+      - generic [ref=f32e293]:
+        - generic [ref=f32e294]:
+          - generic [ref=f32e296]:
+            - generic [ref=f32e297]: Shanti Kala Nikketan
+            - generic [ref=f32e298]: Academy of Fine Arts
+          - paragraph [ref=f32e299]: Kalakshetra style of Bharatanatyam, taught in the Gurukulam tradition since 18 April 2009.
+          - generic [ref=f32e300]:
+            - paragraph [ref=f32e301]:
+              - link "shantikalanikketan@gmail.com" [ref=f32e302] [cursor=pointer]:
+                - /url: mailto:shantikalanikketan@gmail.com
+            - paragraph [ref=f32e303]:
+              - link "+91 98840 22306" [ref=f32e304] [cursor=pointer]:
+                - /url: tel:+919884022306
+        - navigation "Sections" [ref=f32e305]:
+          - heading "Explore" [level=2] [ref=f32e306]
+          - list [ref=f32e307]:
+            - listitem [ref=f32e308]:
+              - link "The academy" [ref=f32e309] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=f32e310]:
+              - link "Our lineage" [ref=f32e311] [cursor=pointer]:
+                - /url: /lineage
+            - listitem [ref=f32e312]:
+              - link "Curriculum" [ref=f32e313] [cursor=pointer]:
+                - /url: /curriculum
+            - listitem [ref=f32e314]:
+              - link "The 28 hastas" [ref=f32e315] [cursor=pointer]:
+                - /url: /hastas
+            - listitem [ref=f32e316]:
+              - link "Performances" [ref=f32e317] [cursor=pointer]:
+                - /url: /performances
+            - listitem [ref=f32e318]:
+              - link "Locations" [ref=f32e319] [cursor=pointer]:
+                - /url: /locations
+        - generic [ref=f32e320]:
+          - heading "Where we teach" [level=2] [ref=f32e321]
+          - list [ref=f32e322]:
+            - listitem [ref=f32e323]:
+              - link "Chennai · Sholinganallur Tamil Nadu, India" [ref=f32e324] [cursor=pointer]:
+                - /url: /locations/chennai
+                - generic [ref=f32e325]:
+                  - text: Chennai
+                  - generic [ref=f32e326]: · Sholinganallur
+                - generic [ref=f32e327]: Tamil Nadu, India
+            - listitem [ref=f32e328]:
+              - link "Scarborough · Morningside & Finch Ontario, Canada" [ref=f32e329] [cursor=pointer]:
+                - /url: /locations/scarborough
+                - generic [ref=f32e330]:
+                  - text: Scarborough
+                  - generic [ref=f32e331]: · Morningside & Finch
+                - generic [ref=f32e332]: Ontario, Canada
+          - list [ref=f32e333]:
+            - listitem [ref=f32e334]:
+              - link "instagram" [ref=f32e335] [cursor=pointer]:
+                - /url: https://www.instagram.com/shantikalanikketan
+            - listitem [ref=f32e336]:
+              - link "facebook" [ref=f32e337] [cursor=pointer]:
+                - /url: https://www.facebook.com/shantikalanikketan
+            - listitem [ref=f32e338]:
+              - link "youtube" [ref=f32e339] [cursor=pointer]:
+                - /url: https://www.youtube.com/channel/UCDGm0LQ-24ZIKG-2DUAn2ew
+      - generic [ref=f32e340]:
+        - paragraph [ref=f32e341]: © 2026 Shanti Kala Nikketan Academy of Fine Arts
+        - paragraph [ref=f32e342]: 11018, Ground Floor, Tower 11, Prestige Courtyard, Model School Extension Road, Sholinganallur
+  - button "Open Next.js Dev Tools" [ref=f32e348] [cursor=pointer]

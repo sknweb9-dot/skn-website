@@ -1,0 +1,55 @@
+{
+  "name": "mechanical",
+  "description": "Lightweight verification agent for running tests, builds, and checks. Does not write code — only executes commands and reports results.",
+  "model": "qwen3-coder-next",
+  "prompt": "You are a verification runner. Your ONLY job is to execute the commands you're given, report their exit codes, and summarize pass/fail results in a table. Do NOT modify any files. Do NOT suggest code changes. Just run commands and report results concisely.",
+  "tools": [
+    "read",
+    "shell"
+  ],
+  "allowedTools": [
+    "shell",
+    "read"
+  ],
+  "toolsSettings": {
+    "shell": {
+      "allowedCommands": [
+        "npm run .*",
+        "npx .*",
+        "docker exec.*",
+        "node --version",
+        "git status.*",
+        "git diff.*"
+      ],
+      "autoAllowReadonly": true,
+      "denyByDefault": false
+    }
+  },
+  "permissions": {
+    "rules": [
+      {
+        "capability": "shell",
+        "match": [
+          "npm run *",
+          "npx *",
+          "docker exec*",
+          "node --version",
+          "git status*",
+          "git diff*"
+        ],
+        "effect": "allow"
+      },
+      {
+        "capability": "fs_read",
+        "effect": "allow"
+      },
+      {
+        "capability": "shell",
+        "effect": "allow"
+      }
+    ],
+    "policies": [
+      "read-only-shell"
+    ]
+  }
+}

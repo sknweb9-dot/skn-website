@@ -1,0 +1,342 @@
+- generic [active] [ref=f1e1]:
+  - link "Skip to content" [ref=f1e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner:
+    - generic:
+      - link "Shanti Kala Nikketan — home" [ref=f1e3] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f1e4]:
+          - generic [ref=f1e5]: Shanti Kala Nikketan
+          - generic [ref=f1e6]: Academy of Fine Arts
+      - generic:
+        - paragraph [ref=f1e7]: Chennai·Global
+        - button "Book trial" [ref=f1e8]
+  - main [ref=f1e9]:
+    - generic [ref=f1e11]:
+      - link "All locations" [ref=f1e12] [cursor=pointer]:
+        - /url: /locations
+      - paragraph [ref=f1e15]: Tamil Nadu, India
+      - heading "Bharatanatyam in Chennai" [level=1] [ref=f1e19]
+      - paragraph [ref=f1e20]: Where Shanti Kala Nikketan began in 2009, and now five venues across Thiruvanmiyur, Sholinganallur and Medavakkam — the Kalakshetra style taught in the Gurukulam manner.
+      - generic [ref=f1e21]:
+        - button "Schedule a trial session" [ref=f1e22]
+        - link "Directions" [ref=f1e26] [cursor=pointer]:
+          - /url: https://www.google.com/maps/search/?api=1&query=11018%2C%20Ground%20Floor%2C%20Tower%2011%2C%20Prestige%20Courtyard%2C%20Model%20School%20Extension%20Road%2C%20Sholinganallur%2C%20Chennai%20600119
+    - generic [ref=f1e30]:
+      - paragraph [ref=f1e31]: Where and when
+      - heading "6 places to begin" [level=2] [ref=f1e32]
+      - generic [ref=f1e33]:
+        - paragraph [ref=f1e34]:
+          - text: Classes run in weekly batches, grouped by level rather than by age.
+          - strong [ref=f1e35]: 7 batches are currently taking admissions.
+        - list [ref=f1e36]:
+          - listitem [ref=f1e37]:
+            - generic [ref=f1e38]:
+              - heading "Appswamy Springs · Thiruvanmiyur" [level=3] [ref=f1e39]:
+                - text: Appswamy Springs
+                - generic [ref=f1e40]: · Thiruvanmiyur
+              - paragraph [ref=f1e41]: 5 batches
+            - list [ref=f1e42]:
+              - listitem [ref=f1e43]:
+                - generic [ref=f1e44]: AS1
+                - generic [ref=f1e45]: Level 3 — Margam Preparation
+                - generic [ref=f1e46]: Mon & Fri · 5 pm – 6 pm
+              - listitem [ref=f1e47]:
+                - generic [ref=f1e48]: AS2
+                - generic [ref=f1e49]: Level 2 — Technique Development
+                - generic [ref=f1e50]: Mon & Fri · 6 pm – 7 pm
+              - listitem [ref=f1e51]:
+                - generic [ref=f1e52]: AS3
+                - generic [ref=f1e53]: Introductory Programme — Introduction to the Arts
+                - generic [ref=f1e54]: Mon & Fri · 5 pm – 6 pm
+                - generic [ref=f1e55]: Admission open
+              - listitem [ref=f1e56]:
+                - generic [ref=f1e57]: AS4
+                - generic [ref=f1e58]: Level 1 — Foundation
+                - generic [ref=f1e59]: Mon & Fri · 6 pm – 7 pm
+                - generic [ref=f1e60]: Admission open
+              - listitem [ref=f1e61]:
+                - generic [ref=f1e62]: AS5
+                - generic [ref=f1e63]: Level 2 — Technique DevelopmentAdults
+                - generic [ref=f1e64]: Mon · 7 pm – 8 pm
+            - button "Enquire about Appswamy Springs" [ref=f1e66]
+          - listitem [ref=f1e70]:
+            - generic [ref=f1e71]:
+              - heading "Adroit · Sholinganallur" [level=3] [ref=f1e72]:
+                - text: Adroit
+                - generic [ref=f1e73]: · Sholinganallur
+              - paragraph [ref=f1e74]: 2 batches
+            - list [ref=f1e75]:
+              - listitem [ref=f1e76]:
+                - generic [ref=f1e77]: AD1
+                - generic [ref=f1e78]: Level 2 — Technique Development
+                - generic [ref=f1e79]: Tue & Thu · 6 pm – 7 pm
+              - listitem [ref=f1e80]:
+                - generic [ref=f1e81]: AD2
+                - generic [ref=f1e82]: Level 1 — Foundation
+                - generic [ref=f1e83]: Tue & Thu · 5 pm – 6 pm
+                - generic [ref=f1e84]: Admission open
+            - button "Enquire about Adroit" [ref=f1e86]
+          - listitem [ref=f1e90]:
+            - generic [ref=f1e91]:
+              - heading "Prestige Courtyards · Sholinganallur" [level=3] [ref=f1e92]:
+                - text: Prestige Courtyards
+                - generic [ref=f1e93]: · Sholinganallur
+              - paragraph [ref=f1e94]: 2 batches
+            - paragraph [ref=f1e95]: 11018, Ground Floor, Tower 11, Prestige Courtyard, Model School Extension Road, Sholinganallur
+            - list [ref=f1e96]:
+              - listitem [ref=f1e97]:
+                - generic [ref=f1e98]: PC1
+                - generic [ref=f1e99]: Level 2 — Technique Development
+                - generic [ref=f1e100]: Tue & Thu · 6.15 pm – 7.15 pm
+              - listitem [ref=f1e101]:
+                - generic [ref=f1e102]: PC2
+                - generic [ref=f1e103]: Level 1 — Foundation
+                - generic [ref=f1e104]: Tue & Thu · 7.15 pm – 8.15 pm
+                - generic [ref=f1e105]: Admission open
+            - button "Enquire about Prestige Courtyards" [ref=f1e107]
+          - listitem [ref=f1e111]:
+            - generic [ref=f1e112]:
+              - heading "Casagrand Riviera · Medavakkam" [level=3] [ref=f1e113]:
+                - text: Casagrand Riviera
+                - generic [ref=f1e114]: · Medavakkam
+              - paragraph [ref=f1e115]: 2 batches
+            - list [ref=f1e116]:
+              - listitem [ref=f1e117]:
+                - generic [ref=f1e118]: CG R1
+                - generic [ref=f1e119]: Level 4 — Repertoire & Expression
+                - generic [ref=f1e120]: Mon & Wed · 6 pm – 7 pm
+              - listitem [ref=f1e121]:
+                - generic [ref=f1e122]: CG R2
+                - generic [ref=f1e123]: Level 1 — Foundation
+                - generic [ref=f1e124]: Mon & Wed · 5 pm – 6 pm
+                - generic [ref=f1e125]: Admission open
+            - button "Enquire about Casagrand Riviera" [ref=f1e127]
+          - listitem [ref=f1e131]:
+            - generic [ref=f1e132]:
+              - heading "Casagrand Tranquil · Medavakkam" [level=3] [ref=f1e133]:
+                - text: Casagrand Tranquil
+                - generic [ref=f1e134]: · Medavakkam
+              - paragraph [ref=f1e135]: 1 batches
+            - list [ref=f1e136]:
+              - listitem [ref=f1e137]:
+                - generic [ref=f1e138]: CG T1
+                - generic [ref=f1e139]: Level 1 — Foundation
+                - generic [ref=f1e140]: Tue & Thu · 5.30 pm – 6.30 pm
+                - generic [ref=f1e141]: Admission open
+            - button "Enquire about Casagrand Tranquil" [ref=f1e143]
+          - listitem [ref=f1e147]:
+            - generic [ref=f1e148]:
+              - heading "Online group class" [level=3] [ref=f1e149]
+              - paragraph [ref=f1e150]: Online
+            - list [ref=f1e151]:
+              - listitem [ref=f1e152]:
+                - generic [ref=f1e153]: ON1
+                - generic [ref=f1e154]: Level 1 — Foundation
+                - generic [ref=f1e155]: Wed & Sat · 5 pm – 6 pm
+                - generic [ref=f1e156]: Admission open
+            - button "Enquire about Online group class" [ref=f1e158]
+    - generic [ref=f1e163]:
+      - paragraph [ref=f1e164]: Who travels to us
+      - heading "Families from across Chennai" [level=2] [ref=f1e165]
+      - paragraph [ref=f1e166]: We hold classes in Thiruvanmiyur, Sholinganallur, Medavakkam. Students also travel from the neighbourhoods below — these are catchment areas, not separate venues.
+      - list [ref=f1e167]:
+        - listitem [ref=f1e168]: Sholinganallurvenue
+        - listitem [ref=f1e169]: Thiruvanmiyurvenue
+        - listitem [ref=f1e170]: Medavakkamvenue
+        - listitem [ref=f1e171]: Perungudi
+        - listitem [ref=f1e172]: Thoraipakkam
+        - listitem [ref=f1e173]: Karapakkam
+        - listitem [ref=f1e174]: Navalur
+        - listitem [ref=f1e175]: Siruseri
+        - listitem [ref=f1e176]: Velachery
+        - listitem [ref=f1e177]: Adyar
+        - listitem [ref=f1e178]: Pallikaranai
+        - listitem [ref=f1e179]: Kelambakkam
+        - listitem [ref=f1e180]: Egattur
+      - generic [ref=f1e181]:
+        - heading "Orient by" [level=3] [ref=f1e182]
+        - list [ref=f1e183]:
+          - listitem [ref=f1e184]: Prestige Courtyards, Tower 11
+          - listitem [ref=f1e185]: Off Rajiv Gandhi Salai (OMR)
+          - listitem [ref=f1e186]: Sholinganallur Junction
+          - listitem [ref=f1e187]: Model School Extension Road
+    - generic [ref=f1e189]:
+      - paragraph [ref=f1e190]: Who teaches here
+      - list [ref=f1e191]:
+        - listitem [ref=f1e192]:
+          - generic [ref=f1e193]:
+            - img "Sunitta Menghanaani" [ref=f1e194]
+            - generic [ref=f1e195]:
+              - heading "Sunitta Menghanaani" [level=3] [ref=f1e196]
+              - paragraph [ref=f1e197]: Co-founder & Director
+              - paragraph [ref=f1e198]: Sunitta Menghanaani, a profound Bharatanatyam artiste and teacher, hails from Pune, but has made her karmabhumi — Chennai. She began her journey into dance at the tender age of 3 under Smt Geeta Nair. The urge to follow her passion brought her down South and she graduated in Bharatanatyam from Kalakshetra Foundation, Rukmini Devi College of Fine Arts, Chennai. Sunitta started dissemination of her artistic knowledge with the firm belief that everyone can learn dance, and the only talent required is a talent to work hard.
+          - list [ref=f1e199]:
+            - listitem [ref=f1e200]: Graduate, Rukmini Devi College of Fine Arts, Kalakshetra Foundation
+            - listitem [ref=f1e201]: M.F.A., Kalai Kaveri College of Fine Arts, Trichy
+            - listitem [ref=f1e202]: Best Performer Award, Sri Parthasarathy Swamy Sabha
+            - listitem [ref=f1e203]: Exemplar Award, Dorai Foundation, Chennai
+    - generic [ref=f1e205]:
+      - paragraph [ref=f1e206]: The progression
+      - heading "From first shloka to Arangetram, in Chennai" [level=2] [ref=f1e207]
+      - list [ref=f1e208]:
+        - listitem [ref=f1e209]:
+          - paragraph [ref=f1e210]: "00"
+          - heading "Introductory Programme Introduction to the Arts" [level=3] [ref=f1e211]:
+            - text: Introductory Programme
+            - generic [ref=f1e212]: Introduction to the Arts
+          - paragraph [ref=f1e213]: Ages 3.5 – 6 years
+          - paragraph [ref=f1e214]: A gentle and joyful introduction designed for young children to develop rhythm, coordination, concentration, confidence, and cultural values. Through Sanskrit shlokas, devotional themes, storytelling, creative movement, rhythm exercises, and expressive dance activities, children are introduced to Indian culture in an engaging and age-appropriate manner before beginning formal Bharatanatyam training.
+        - listitem [ref=f1e215]:
+          - paragraph [ref=f1e216]: "01"
+          - heading "Level 1 Foundation" [level=3] [ref=f1e217]:
+            - text: Level 1
+            - generic [ref=f1e218]: Foundation
+          - paragraph [ref=f1e219]: Students establish a strong technical foundation through basic Adavus, Hastas, rhythm training, introductory theory, and devotional compositions such as Mallari and Nottuswaram.
+        - listitem [ref=f1e220]:
+          - paragraph [ref=f1e221]: "02"
+          - heading "Level 2 Technique Development" [level=3] [ref=f1e222]:
+            - text: Level 2
+            - generic [ref=f1e223]: Technique Development
+          - paragraph [ref=f1e224]: Building strength, precision, and coordination through advanced Adavus while expanding theoretical knowledge and introducing traditional repertoire including Kauthuvam and Todayamangalam.
+        - listitem [ref=f1e225]:
+          - paragraph [ref=f1e226]: "03"
+          - heading "Level 3 Margam Preparation" [level=3] [ref=f1e227]:
+            - text: Level 3
+            - generic [ref=f1e228]: Margam Preparation
+          - paragraph [ref=f1e229]: Students begin their journey into the classical Margam, learning foundational performance pieces such as Alarippu, while continuing to strengthen technique and musical understanding through Tevaram and Divya Prabandham.
+        - listitem [ref=f1e230]:
+          - paragraph [ref=f1e231]: "04"
+          - heading "Level 4 Repertoire & Expression" [level=3] [ref=f1e232]:
+            - text: Level 4
+            - generic [ref=f1e233]: Repertoire & Expression
+          - paragraph [ref=f1e234]: Students expand their artistic vocabulary through Jatiswaram, Shabdam, Keerthanam, and Virutham, while developing expressive storytelling, abhinaya, and a deeper appreciation of Bharatanatyam's cultural heritage.
+        - listitem [ref=f1e235]:
+          - paragraph [ref=f1e236]: "05"
+          - heading "Level 5 Advanced Artistry" [level=3] [ref=f1e237]:
+            - text: Level 5
+            - generic [ref=f1e238]: Advanced Artistry
+          - paragraph [ref=f1e239]: Technical excellence is refined through Thillana, Ashtapadi, Bhajan, and Javali, alongside advanced study of theory, literature, composers, and expressive interpretation.
+        - listitem [ref=f1e240]:
+          - paragraph [ref=f1e241]: "06"
+          - heading "Level 6 Mastery" [level=3] [ref=f1e242]:
+            - text: Level 6
+            - generic [ref=f1e243]: Mastery
+          - paragraph [ref=f1e244]: The final academic level focuses on the most demanding elements of the Bharatanatyam repertoire, including Varnam, Padam, and Swarajathi, cultivating technical maturity, artistic excellence, and independent performance ability.
+      - link "The full curriculum" [ref=f1e246] [cursor=pointer]:
+        - /url: /curriculum
+        - text: The full curriculum
+        - generic [aria-hidden] [ref=f1e247]: →
+    - generic [ref=f1e249]:
+      - paragraph [ref=f1e250]: Chennai · Questions
+      - generic [ref=f1e251]:
+        - generic [ref=f1e252]:
+          - term [ref=f1e253]: Where is your Bharatanatyam class in Chennai?
+          - definition [ref=f1e254]: "We teach at 5 venues across Chennai: Appswamy Springs (Thiruvanmiyur), Adroit (Sholinganallur), Prestige Courtyards (Sholinganallur), Casagrand Riviera (Medavakkam), Casagrand Tranquil (Medavakkam). Our registered address is 11018, Ground Floor, Tower 11, Prestige Courtyard, Model School Extension Road, Sholinganallur, Chennai 600119."
+        - generic [ref=f1e255]:
+          - term [ref=f1e256]: Which areas around Chennai do your students come from?
+          - definition [ref=f1e257]: We hold classes in Thiruvanmiyur, Sholinganallur, Medavakkam. Students also travel to us from Perungudi, Thoraipakkam, Karapakkam, Navalur, Siruseri, Velachery, Adyar, Pallikaranai, Kelambakkam, Egattur — those are catchment neighbourhoods rather than venues.
+        - generic [ref=f1e258]:
+          - term [ref=f1e259]: What style of Bharatanatyam is taught in Chennai?
+          - definition [ref=f1e260]: The Kalakshetra style of Bharatanatyam, taught through the Gurukulam method — identical to our founding school in Chennai, under Smt. Sunitta Menghanaani.
+        - generic [ref=f1e261]:
+          - term [ref=f1e262]: Can my child start Bharatanatyam in Chennai with no experience?
+          - definition [ref=f1e263]: Yes. Our Introductory Programme assumes nothing at all and takes children from age 3.5, and adults are welcome as beginners too. Bring comfortable clothes to a trial — no costume and no ghungroo needed.
+    - generic [ref=f1e266]:
+      - heading "Visit us in Chennai" [level=2] [ref=f1e267]
+      - paragraph [ref=f1e268]: 11018, Ground Floor, Tower 11, Prestige Courtyard, Model School Extension Road, Sholinganallur, 600119
+      - generic [ref=f1e269]:
+        - button "Schedule a trial session" [ref=f1e270]
+        - link "shantikalanikketan@gmail.com" [ref=f1e274] [cursor=pointer]:
+          - /url: mailto:shantikalanikketan@gmail.com
+        - link "+91 98840 22306" [ref=f1e278] [cursor=pointer]:
+          - /url: tel:+919884022306
+      - paragraph [ref=f1e281]: 17 years of unbroken teaching · Kalakshetra style of Bharatanatyam
+  - contentinfo [ref=f1e282]:
+    - generic [ref=f1e283]:
+      - generic [ref=f1e284]:
+        - generic [ref=f1e285]:
+          - term [ref=f1e286]: Years of lineage
+          - definition [ref=f1e287]:
+            - generic [ref=f1e288]: "17"
+            - generic [ref=f1e289]: Years of lineage
+        - generic [ref=f1e290]:
+          - term [ref=f1e291]: Students taught
+          - definition [ref=f1e292]:
+            - generic [ref=f1e293]: "324"
+            - generic [ref=f1e294]: Students taught
+        - generic [ref=f1e295]:
+          - term [ref=f1e296]: Stages performed
+          - definition [ref=f1e297]:
+            - generic [ref=f1e298]: "20"
+            - generic [ref=f1e299]: Stages performed
+        - generic [ref=f1e300]:
+          - term [ref=f1e301]: Bani and pedagogy
+          - definition [ref=f1e302]:
+            - generic [ref=f1e303]: Kalakshetra
+            - generic [ref=f1e304]: Bani and pedagogy
+      - generic [ref=f1e305]:
+        - generic [ref=f1e306]:
+          - generic [ref=f1e308]:
+            - generic [ref=f1e309]: Shanti Kala Nikketan
+            - generic [ref=f1e310]: Academy of Fine Arts
+          - paragraph [ref=f1e311]: Kalakshetra style of Bharatanatyam, taught in the Gurukulam tradition since 18 April 2009.
+          - generic [ref=f1e312]:
+            - paragraph [ref=f1e313]:
+              - link "shantikalanikketan@gmail.com" [ref=f1e314] [cursor=pointer]:
+                - /url: mailto:shantikalanikketan@gmail.com
+            - paragraph [ref=f1e315]:
+              - link "+91 98840 22306" [ref=f1e316] [cursor=pointer]:
+                - /url: tel:+919884022306
+        - navigation "Sections" [ref=f1e317]:
+          - heading "Explore" [level=2] [ref=f1e318]
+          - list [ref=f1e319]:
+            - listitem [ref=f1e320]:
+              - link "The academy" [ref=f1e321] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=f1e322]:
+              - link "Our lineage" [ref=f1e323] [cursor=pointer]:
+                - /url: /lineage
+            - listitem [ref=f1e324]:
+              - link "Curriculum" [ref=f1e325] [cursor=pointer]:
+                - /url: /curriculum
+            - listitem [ref=f1e326]:
+              - link "The 28 hastas" [ref=f1e327] [cursor=pointer]:
+                - /url: /hastas
+            - listitem [ref=f1e328]:
+              - link "Performances" [ref=f1e329] [cursor=pointer]:
+                - /url: /performances
+            - listitem [ref=f1e330]:
+              - link "Locations" [ref=f1e331] [cursor=pointer]:
+                - /url: /locations
+        - generic [ref=f1e332]:
+          - heading "Where we teach" [level=2] [ref=f1e333]
+          - list [ref=f1e334]:
+            - listitem [ref=f1e335]:
+              - link "Chennai · Sholinganallur Tamil Nadu, India" [ref=f1e336] [cursor=pointer]:
+                - /url: /locations/chennai
+                - generic [ref=f1e337]:
+                  - text: Chennai
+                  - generic [ref=f1e338]: · Sholinganallur
+                - generic [ref=f1e339]: Tamil Nadu, India
+            - listitem [ref=f1e340]:
+              - link "Scarborough · Morningside & Finch Ontario, Canada" [ref=f1e341] [cursor=pointer]:
+                - /url: /locations/scarborough
+                - generic [ref=f1e342]:
+                  - text: Scarborough
+                  - generic [ref=f1e343]: · Morningside & Finch
+                - generic [ref=f1e344]: Ontario, Canada
+          - list [ref=f1e345]:
+            - listitem [ref=f1e346]:
+              - link "instagram" [ref=f1e347] [cursor=pointer]:
+                - /url: https://www.instagram.com/shantikalanikketan
+            - listitem [ref=f1e348]:
+              - link "facebook" [ref=f1e349] [cursor=pointer]:
+                - /url: https://www.facebook.com/shantikalanikketan
+            - listitem [ref=f1e350]:
+              - link "youtube" [ref=f1e351] [cursor=pointer]:
+                - /url: https://www.youtube.com/channel/UCDGm0LQ-24ZIKG-2DUAn2ew
+      - generic [ref=f1e352]:
+        - paragraph [ref=f1e353]: © 2026 Shanti Kala Nikketan Academy of Fine Arts
+        - paragraph [ref=f1e354]: 11018, Ground Floor, Tower 11, Prestige Courtyard, Model School Extension Road, Sholinganallur
+  - button "Open Next.js Dev Tools" [ref=f1e360] [cursor=pointer]

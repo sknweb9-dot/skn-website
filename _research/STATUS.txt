@@ -1,0 +1,177 @@
+SHANTI KALA NIKKETAN - RESEARCH STATUS
+======================================
+Source: https://www.shantikalanikketan.com (Wix, client-rendered)
+Last updated: 2026-09-03
+
+
+ARTIFACTS IN _research/
+-----------------------
+pages/*.html            12 saved pages (raw HTML, fetched 2026-08-31)
+shots/desktop-*.png     12 full-page desktop screenshots (1440 wide)
+shots/mobile-*.png      12 full-page mobile screenshots (390 wide, iOS UA, DPR2)
+render_report.json      per page: title, height, rendered imgs, css backgrounds,
+                        computed fonts, computed colours, headings, iframes, form fields
+design_summary.txt      typography + palette rollup, per-page headings
+rendered_media.txt      media visible only after JS (result: none - see item a)
+verify_crawl.py         integrity check, report heights vs screenshot heights
+all_text.txt            visible text per page, all 12 pages
+images_all.txt          image/media URLs per page
+links_all.txt           links per page
+meta_all.txt            <title> + meta tags + platform fingerprint per page
+alts.txt                <img> alt text + ORIGINAL upload filenames per page
+media_inventory.txt     53 unique Wix media ids, cross-checked vs download manifest
+media_downloaded.txt    dimensions/sizes of the 45 files in assets/img
+jsonld.json             raw schema.org blocks from the crawled pages
+videos.json             10 Videos-page videos: id, title, duration, full verse text
+youtube.json/.txt       12 YouTube links (9 videos + 3 playlists + channel), titles resolved
+externals.txt           social profiles, email, third-party services, form fields
+extracted.txt           video ids + gallery media ids + labels
+robots.txt, sitemap.xml
+
+Scripts: analyze.py, extract.py, jsonld.py, alts.py, externals.py,
+media_inventory.py, yt_titles.py, yt_probe.py, fetch_media.py,
+verify_media.py, crawl.js
+
+
+KEY FACTS
+---------
+Founded         18 April 2009
+Address         11018, Ground Floor, Tower 11, Prestige Courtyard,
+                Model School Extension Road, Sholinganallur, Chennai 600119
+Phone           +91-98840-22306
+Email           shantikalanikketan@gmail.com
+Second branch   Scarborough, Canada (Morningside & Finch)
+Style           Kalakshetra style of Bharatanatyam, Gurukulam method
+Instagram       https://www.instagram.com/shantikalanikketan
+Facebook        http://www.facebook.com/shantikalanikketan   (site links over http)
+YouTube         https://www.youtube.com/channel/UCDGm0LQ-24ZIKG-2DUAn2ew
+Contact form    name, email, subject, message
+Analytics       none detected (no GTM/GA/Pixel/reCAPTCHA in the served HTML)
+
+
+CORRECTIONS NEEDED IN _build/content.py
+---------------------------------------
+1. VIDEOS - all 10 titles are invented. Real titles (see videos.json) are
+   Sanskrit hasta viniyoga lessons:
+     LRYJZI7M1bM  Mukula Hasta Viniyogah        0:30
+     e39ivEbqBcA  Sandamsa Hasta Viniyogah      0:32
+     I6bHj5fGtiA  Hamsapaksa Hasta Viniyogah    0:30
+     _dBDwVF8Jiw  Hamsasya Hasta Viniyogah      0:46
+     hOL47OYH_ec  Catura Hasta Viniyogah        0:46
+     jh3ML6T2RRk  Bhramara Hasta Viniyogah      0:28
+     qn37NYFdRe0  Alapadma Hasta Viniyogah      0:57
+     Key6fbXDNc0  Kangula Hasta Viniyogah       0:39
+     0d-RijftnT4  Talam (Basic Lesson)          1:36
+     7MNqijCnO6E  Talam - Ta dhi tom num        1:37
+   Each carries a full Sanskrit verse plus word-by-word gloss (in videos.json
+   and all_text.txt). None of that text is currently captured.
+   The page groups them under two headings: "Theory Class" and "Talam".
+
+2. Aparna Manu, Head of the Delhi Branch, is missing entirely. She is the
+   only person on the site's /director page. Her bio is in all_text.txt.
+   Note the site's page naming: /founder holds Om Guru Om AND Sunitta
+   Menghanaani ("Our Co-founder & Director"); /director holds Aparna Manu.
+
+3. Nine performance videos and three playlists linked from /events are not
+   captured (full list with resolved titles in youtube.txt), including:
+     UDAAN 2025 : Where Tradition Takes Flight            (playlist)
+     UDAAN - FLYING HIGH - October '23                    (playlist)
+     Jeevan Utsav 2022 | A Celebration of Life through Dance (playlist)
+     Kum Aparna Manu | First Student | Bharatanatyam Arangetram
+     Smt Kirusanthini | Bharatanatyam Arangetram
+     Kum Jahnavi | Arangetram | A Journey of Grace, Rhythm & Devotion
+     Nada Sudha - 27th Annual Music & Dance Festival 2025 - 2026
+     Bharatanatyam Offering to Lord Vinayaka | Kirusanthini | Toronto Temple Festival 2025
+     Samarpanam Festival, Navratri 2025
+     Offering to Lord Shiva on Maha Shivaratri
+     Aparna Manu's Solo Perfomance
+   Most are unlisted (oEmbed 401), so titles came from og:title.
+
+4. Team roles are partly invented. The live /team page states a role only for
+   S. Kirusanthini ("Head, Canada Branch") and Tejaswi J ("Senior Associate").
+   The "Faculty" / "Tutor" labels on the other five are not on the page,
+   though their bios describe those positions.
+
+5. Founder page has TWO portraits: sain1.jpg (Om Guru Om) and IMG_00810.jpg
+   (downloaded as founder-second.jpg) - unidentified, needs confirming.
+   content.py currently uses the /director page portrait (IMG_0520_edited.jpg)
+   for Sunitta instead.
+
+6. About page copy in build.py is authored, not transcribed. The live /about
+   page contains no body text in the served HTML - only the hero image
+   ("I Embrace Dance.jpg", alt "I am Dance"). Verify against
+   shots/desktop-about.png or with the owner.
+
+7. GALLERY in content.py reuses hero/stage images. The real /photos albums are
+   "Udaan 2025", "Jhanvi'sArangetram", "Udaan 2023" and one called
+   "Add a Title" (unfinished on the live site). Their images load from the Wix
+   pro-gallery API and are NOT in the saved HTML - see open items below.
+
+
+DESIGN TOKENS (from render_report.json / design_summary.txt)
+-----------------------------------------------------------
+Typefaces (Wix web-font names, by element count):
+  din-next-w01-light      primary text and most headings; 14/15/16px body,
+                          20/25/30/40/60px headings
+  futura-lt-w01-book      secondary, 12/14/15px, 700 at 25px
+  playfairdisplay-bold    accent display face, 25px
+  avenir-lt-w01_35-light  occasional, 16px
+  HelveticaNeue / Arial   Wix chrome and fallbacks (the 879x Arial 10px entry
+                          is editor scaffolding, not site design)
+
+Colours:
+  rgb(0,0,0)        black          primary text
+  rgb(96,94,94)     warm grey      secondary text
+  rgb(255,255,255)  white
+  rgb(47,46,46)     near-black
+  rgb(42,87,156)    mid blue
+  rgb(18,29,107)    deep navy
+  rgb(32,126,169)   teal accent
+  background        rgb(53,70,92) slate, rgb(0,65,94) deep navy,
+                    rgb(204,204,204) grey, rgb(0,0,0), rgb(255,255,255)
+  rgb(0,0,238)      appears 228x - this is the BROWSER DEFAULT link blue,
+                    i.e. many links on the live site are unstyled. Do not
+                    reproduce it; treat as a defect in the original.
+
+Page heights (desktop 1440 / mobile 390):
+  about, logo, photos, shanti-kala-nikketan fit one 900px screen on desktop.
+  Tallest: team 3231px desktop / 11550px mobile, events 2540 / 9698.
+
+
+OPEN ITEMS
+----------
+a. /photos album CONTENTS are still unretrieved, and this is now understood
+   rather than unknown. The rendered crawl found zero media beyond what the
+   static HTML already had, so the 9 images on that page are the album covers
+   plus placeholders. Album interiors open in a Wix lightbox, and robots.txt
+   disallows "*?lightbox=" - so they need either explicit clicking in a
+   browser session or the pro-gallery API. Note that six covers/images use the
+   b25591_ prefix (a different Wix media account, up to 8192px) and are almost
+   certainly Wix template placeholders, and one album on the live site is
+   still called "Add a Title" - the gallery looks unfinished at the source.
+
+b. Original-resolution media. assets/img holds web-sized derivatives (max
+   2000px, 8.9 MB total). Wix originals go up to 6142x3310 if wanted.
+
+c. About-page copy still unverified. The page has no body text in either the
+   served HTML or the rendered DOM (0 headings, 1 image, fits one screen), so
+   the copy currently in _build/build.py is authored. Confirm with the owner.
+
+
+DONE SINCE FIRST PASS
+---------------------
+- Rendered crawl completed: 24 full-page screenshots (12 desktop + 12 mobile)
+  and render_report.json for all 12 pages.
+- crawl.js rewritten: resumable (skips existing shots, merges the report),
+  concurrent (3 contexts), saves after every page, faster lazy-load settle.
+  The original version only wrote its report after all 24 loads, so an
+  interrupted run lost everything.
+- Mobile capture fixed. With a desktop UA at 390px Wix serves its desktop
+  layout and the page merely overflows to ~1164px; a genuine iOS UA plus
+  isMobile/hasTouch produces the real single-column mobile site.
+- Playwright: no install needed. Browsers were already cached in
+  %LOCALAPPDATA%\ms-playwright, and playwright 1.56.0 in the npx cache matches
+  a cached Chromium build (1.60.0 and the 1.63.0-alpha used by @playwright/mcp
+  both expect builds that are not present). Run with:
+    $env:NODE_PATH = "$env:LOCALAPPDATA\npm-cache\_npx\e78b33305587cb7c\node_modules"
+
