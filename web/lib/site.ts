@@ -220,10 +220,10 @@ export const FOUNDERS: Person[] = [
     name: 'Sunitta Menghanaani',
     role: 'Co-founder & Director',
     bio: 'Sunitta Menghanaani, a profound Bharatanatyam artiste and teacher, hails from Pune, but has made her karmabhumi — Chennai. She began her journey into dance at the tender age of 3 under Smt Geeta Nair. The urge to follow her passion brought her down South and she graduated in Bharatanatyam from Kalakshetra Foundation, Rukmini Devi College of Fine Arts, Chennai. Sunitta started dissemination of her artistic knowledge with the firm belief that everyone can learn dance, and the only talent required is a talent to work hard.',
-    // _research/STATUS.txt item 5: unidentified second portrait on the founders
-    // page, most likely Sunitta. Awaiting owner confirmation.
-    image: '/img/founder-second.jpg',
-    portraitConfirmed: false,
+    // Identity confirmed by the academy. The file was originally crawled as
+    // "founder-second.jpg"; renamed so the asset says who it is.
+    image: '/img/founder-sunitta.jpg',
+    portraitConfirmed: true,
     credentials: [
       'Graduate, Rukmini Devi College of Fine Arts, Kalakshetra Foundation',
       'M.F.A., Kalai Kaveri College of Fine Arts, Trichy',
@@ -251,10 +251,10 @@ export const FACULTY: Person[] = [
     // here because being the academy's first Arangetram graduate is a fact about
     // the lineage, not about Delhi.
     bio: 'Aparna has been learning the art form for 15 years under Smt. Sunitta Menghanaani, and was the first student of Shanti Kala Nikketan to complete her Arangetram. She is enthusiastic not only in learning the art of Bharatanatyam, but in carrying over the teachings she has received from her Guru to the next generation.',
-    // Per _research/STATUS.txt, the file saved as sunitta.jpg is in fact the
-    // /director page portrait, i.e. Aparna Manu. Flagged for owner confirmation.
-    image: '/img/sunitta.jpg',
-    portraitConfirmed: false,
+    // Identity confirmed by the academy: the file crawled as "sunitta.jpg" is in
+    // fact Aparna Manu, from the /director page. Renamed to match.
+    image: '/img/team-aparna.jpg',
+    portraitConfirmed: true,
   },
   {
     name: 'Tejaswi J',

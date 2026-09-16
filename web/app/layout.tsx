@@ -3,6 +3,7 @@ import { Cinzel, Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 import { SITE } from '@/lib/site';
 import SmoothScroll from '@/components/SmoothScroll';
+import HashScroll from '@/components/HashScroll';
 import { BookingProvider } from '@/components/BookingProvider';
 import { AmbientProvider } from '@/components/AmbientProvider';
 
@@ -125,7 +126,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         <BookingProvider>
           <AmbientProvider>
-            <SmoothScroll>{children}</SmoothScroll>
+            <SmoothScroll>
+              <HashScroll />
+              {children}
+            </SmoothScroll>
           </AmbientProvider>
         </BookingProvider>
       </body>

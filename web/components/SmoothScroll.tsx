@@ -6,8 +6,14 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
 
+type ScrollToOptions = {
+  offset?: number;
+  /** Jump without animating — used for deep links arriving on load. */
+  immediate?: boolean;
+};
+
 type LenisApi = {
-  scrollTo: (target: string | number | HTMLElement, opts?: { offset?: number }) => void;
+  scrollTo: (target: string | number | HTMLElement, opts?: ScrollToOptions) => void;
   stop: () => void;
   start: () => void;
 };
@@ -24,12 +30,15 @@ export function useSmoothScroll(): LenisApi {
 const nativeFallback: LenisApi = {
   scrollTo: (target, opts) => {
     if (typeof window === 'undefined') return;
+    const behavior: ScrollBehavior = opts?.immediate ? 'instant' : 'smooth';
     if (typeof target === 'number') {
-      window.scrollTo({ top: target + (opts?.offset ?? 0) });
+      window.scrollTo({ top: target + (opts?.offset ?? 0), behavior });
       return;
     }
     const el = typeof target === 'string' ? document.querySelector(target) : target;
-    el?.scrollIntoView({ block: 'start' });
+    if (!el) return;
+    const top = el.getBoundingClientRect().top + window.scrollY + (opts?.offset ?? 0);
+    window.scrollTo({ top, behavior });
   },
   stop: () => {
     if (typeof document !== 'undefined') document.body.style.overflow = 'hidden';
@@ -50,7 +59,10 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       scrollTo: (target, opts) => {
         const lenis = lenisRef.current;
         if (!lenis) return nativeFallback.scrollTo(target, opts);
-        lenis.scrollTo(target, { offset: opts?.offset ?? 0 });
+        lenis.scrollTo(target, {
+          offset: opts?.offset ?? 0,
+          immediate: opts?.immediate ?? false,
+        });
       },
       stop: () => {
         const lenis = lenisRef.current;

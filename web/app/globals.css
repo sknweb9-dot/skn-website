@@ -62,6 +62,20 @@
   }
 }
 
+/* Route transition. Opacity only, deliberately.
+   A transform here would make the wrapper a containing block for `position:
+   fixed`, which would break the fixed masthead on every page, and would also
+   interfere with the home page's sticky stage. Opacity creates a stacking
+   context but no containing block, so both stay correct. */
+@keyframes page-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 /* ---------------------------------------------------------------------------
    Base
 --------------------------------------------------------------------------- */
@@ -113,12 +127,24 @@ html.lenis body {
   border-radius: 2px;
 }
 
+/* Anchor targets must clear the fixed masthead. HashScroll applies the same
+   offset when it drives Lenis; this covers native jumps — a pasted deep link
+   before JS runs, or find-in-page. Keep the two values in step. */
+[id] {
+  scroll-margin-top: 6.5rem;
+}
+
 /* ---------------------------------------------------------------------------
    Utilities
 --------------------------------------------------------------------------- */
 @utility text-balance-tight {
   text-wrap: balance;
   letter-spacing: -0.015em;
+}
+
+/* Applied by app/template.tsx, which React remounts on every navigation. */
+@utility page-enter {
+  animation: page-in 0.42s var(--ease-temple) both;
 }
 
 @utility eyebrow {

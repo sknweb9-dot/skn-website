@@ -331,6 +331,19 @@ function ScrubStage() {
             need clear cream below the arch to sit on. Everything below is
             measured in svh so the same proportions hold on any viewport.
 
+            `max-h` reserves room beneath the arch. Centre acts now dock flush at
+            100% of the arch height rather than overlapping at 88%, so the card
+            starts a full 12% lower and the budget is tighter than before. The
+            card's height is content-driven in px, not svh, so without this cap a
+            tall arch on a short viewport pushed the card past the foot of the
+            stage, where `overflow-hidden` clipped it.
+
+            The reserve is larger below `sm` (27rem vs 22rem) because that is
+            where the cards are tallest: a narrow column wraps the same copy onto
+            far more lines, and act 2 at 360px wide is over 400px tall. One shared
+            cap would have had to serve the worst case and would have needlessly
+            shrunk the arch on desktop.
+
             Centring is done in the inline transform, NOT with -translate-x-1/2.
             Tailwind v4 compiles translate utilities to the standalone `translate`
             property, which composes with `transform` rather than being
@@ -340,7 +353,7 @@ function ScrubStage() {
           <div
             ref={archRef}
             style={{ transform: 'translate3d(-50%, 0, 0)' }}
-            className="absolute top-[7svh] left-1/2 h-[41svh] sm:top-[6svh] sm:h-[54svh] lg:h-[60svh]"
+            className="absolute top-[6svh] left-1/2 h-[36svh] max-h-[calc(95svh-27rem)] sm:top-[5svh] sm:h-[56svh] sm:max-h-[calc(95svh-22rem)] lg:h-[62svh]"
           >
             <figure className="relative m-0 h-full">
               <div
@@ -383,19 +396,23 @@ function ScrubStage() {
               <ArchOutline />
 
               {/*
-                Live gesture caption, sitting inside the arch's bottom fade.
+                Live gesture caption — dark kumkum on the arch's own bottom fade,
+                which has resolved to cream by this height. No plate behind it: a
+                frosted pill was tried and it read as a UI chip stuck on the
+                artwork rather than as part of the composition.
 
-                It lives here rather than below the arch because on mobile the
-                editorial card starts immediately under the aperture and would
-                occlude it. The fade has already resolved to cream by this point,
-                so ink-coloured text is readable against it.
+                This position is only legible because nothing covers it. The
+                centre acts dock their card flush *below* the arch rather than
+                overlapping its foot, precisely to keep this strip clear — see
+                ActPanel. If a card is ever moved back over the arch's bottom, the
+                caption has to move with it.
 
                 Named from the frame actually on screen rather than from the act's
                 anchor, so it stays truthful through the twenty-two transition
                 gestures the acts do not claim. Written imperatively for the same
                 reason the panels are.
               */}
-              <figcaption className="pointer-events-none absolute inset-x-0 bottom-[1%] flex items-center justify-center gap-2.5">
+              <figcaption className="pointer-events-none absolute inset-x-0 bottom-[2%] flex items-center justify-center gap-2.5">
                 <span aria-hidden className="rule-fade w-5 shrink-0 sm:w-8" />
                 <span className="text-center">
                   <span
@@ -410,20 +427,27 @@ function ScrubStage() {
                 <span aria-hidden className="rule-fade w-5 shrink-0 sm:w-8" />
               </figcaption>
             </figure>
-          </div>
 
-          {/* Copy layers. The container ignores pointer events; individual
-              controls opt back in. */}
-          <div className="pointer-events-none absolute inset-0">
-            {ACTS.map((act, i) => (
-              <ActPanel
-                key={act.id}
-                act={act}
-                ref={(el) => {
-                  panelsRef.current[i] = el;
-                }}
-              />
-            ))}
+            {/*
+              The editorial cards live inside the arch's transform group, so they
+              are carried by the same translate and scale as the aperture. That is
+              what makes the arch and its text read as one object rather than two
+              layers that happen to move together.
+
+              The container ignores pointer events; individual controls opt back
+              in, so a wheel gesture over a card still scrolls the stage.
+            */}
+            <div className="pointer-events-none absolute inset-0">
+              {ACTS.map((act, i) => (
+                <ActPanel
+                  key={act.id}
+                  act={act}
+                  ref={(el) => {
+                    panelsRef.current[i] = el;
+                  }}
+                />
+              ))}
+            </div>
           </div>
         </div>
 

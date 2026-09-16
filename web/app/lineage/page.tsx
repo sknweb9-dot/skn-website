@@ -85,9 +85,10 @@ export default function LineagePage() {
               sizes="(max-width: 1024px) 14rem, 18rem"
               className="h-auto w-full rounded-[1.25rem] object-cover"
             />
-            {/* _research/STATUS.txt item 5: this portrait was saved from the
-                founders page without a confirmed identity. Flagged in the data,
-                so the caption stays factual rather than asserting a name. */}
+            {/* Both founder-page portraits are now identity-confirmed by the
+                academy, so this caption should never render. Kept as a guard: if
+                an unverified portrait is ever added, the page says so rather than
+                silently asserting a name. */}
             {!DIRECTOR.portraitConfirmed ? (
               <figcaption className="mt-2 font-sans text-[0.65rem] leading-relaxed text-ink-faint">
                 Portrait pending confirmation by the academy.

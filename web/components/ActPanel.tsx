@@ -7,42 +7,49 @@ import Heading from './Heading';
 import TrialButton from './TrialButton';
 
 /**
- * One act's editorial column.
+ * One act's editorial column, docked to the arch.
  *
- * Placement rules, and why they are what they are:
+ * POSITIONING
+ * -----------
+ * These panels are children of the arch's transform group, so `100%` here means
+ * the arch's own width and height, and the card travels with the aperture as a
+ * single composed object rather than as a separate layer that happens to move at
+ * the same time.
  *
- *  - On desktop, `left` and `right` acts sit beside the arch so the hand is
- *    never obscured. `center` acts overlay the bottom third of the arch, which
- *    is the wrist and forearm — the least expressive part of the frame — so the
- *    gesture itself stays legible behind a frosted panel.
- *  - On mobile there is no room beside the arch, so every act overlays the
- *    bottom. The arch is short enough at 62svh that the fingers stay clear.
+ *  - Side acts dock to the arch's outer edge and overlap it by 2.5rem, so the
+ *    two visibly touch. The overlap lands on the arch's lower flank, which is
+ *    backdrop and forearm rather than the gesture itself.
+ *  - Centre acts sit flush beneath the arch — top edge meeting its foot, not
+ *    overlapping it. The arch's bottom fade dissolves into cream, so a card
+ *    butted against it appears to rise out of the mist, and crucially the
+ *    gesture caption in that bottom strip stays uncovered. An earlier cut
+ *    overlapped the arch's bottom 12% and buried the caption.
+ *  - Below `sm` there is no room to dock sideways, so every act uses the centre
+ *    arrangement.
  *
- * Opacity and transform are written directly by ScrollStage on every scroll
- * tick. Nothing here should set either, or the two will fight.
+ * Opacity and the vertical offset are written by ScrollStage on every scroll
+ * tick, and the card is fully transparent while the arch is travelling. Nothing
+ * here should set either, or the two will fight.
  */
 const ActPanel = forwardRef<HTMLDivElement, { act: Act }>(function ActPanel({ act }, ref) {
   const isCenter = act.side === 'center';
 
-  /**
-   * Centre acts sit in the clear cream below the arch. Side acts sit beside it
-   * on desktop, and drop to that same low position on mobile where there is no
-   * room beside.
-   *
-   * Right-hand acts carry an extra gutter (`+3rem`) so the card never runs under
-   * the chapter rail, which is anchored to the same edge.
-   */
-  const columnPosition = isCenter
-    ? 'bottom-[4svh] left-1/2 w-[min(92vw,36rem)] -translate-x-1/2'
-    : act.side === 'left'
-      ? 'bottom-[4svh] left-1/2 w-[min(92vw,36rem)] -translate-x-1/2 sm:bottom-auto sm:left-[4vw] sm:top-[24svh] sm:w-[min(36vw,25rem)] sm:translate-x-0 lg:left-[7vw] xl:w-[28rem]'
-      : 'bottom-[4svh] left-1/2 w-[min(92vw,36rem)] -translate-x-1/2 sm:bottom-auto sm:left-auto sm:right-[calc(4vw+3rem)] sm:top-[24svh] sm:w-[min(36vw,25rem)] sm:translate-x-0 lg:right-[calc(7vw+3rem)] xl:w-[28rem]';
+  // `top-[100%]` puts the card's top edge exactly on the arch's foot. The -mt-px
+  // closes the sub-pixel hairline that rounding can leave at some zoom levels.
+  const centred = 'left-1/2 top-[100%] -mt-px w-[min(92vw,32rem)] -translate-x-1/2';
+
+  const docked =
+    act.side === 'left'
+      ? 'sm:top-auto sm:bottom-[8%] sm:left-auto sm:right-[calc(100%-2.5rem)] sm:w-[min(34vw,23rem)] sm:translate-x-0 xl:w-[26rem]'
+      : 'sm:top-auto sm:bottom-[8%] sm:right-auto sm:left-[calc(100%-2.5rem)] sm:w-[min(34vw,23rem)] sm:translate-x-0 xl:w-[26rem]';
+
+  const position = isCenter ? `${centred} sm:w-[min(80vw,34rem)]` : `${centred} ${docked}`;
 
   return (
     <div ref={ref} className="absolute inset-0" style={{ opacity: 0 }}>
-      <div className={`absolute ${columnPosition}`}>
+      <div className={`absolute ${position}`}>
         <article
-          className={`glass grain rounded-[1.75rem] px-6 py-7 sm:px-8 sm:py-8 ${
+          className={`glass grain rounded-[1.75rem] px-6 py-6 sm:px-7 sm:py-7 ${
             isCenter ? 'text-center' : ''
           }`}
         >
@@ -55,25 +62,25 @@ const ActPanel = forwardRef<HTMLDivElement, { act: Act }>(function ActPanel({ ac
           */}
           <Heading
             level={act.index === 1 ? 1 : 2}
-            className={`mt-3 font-display font-semibold text-balance-tight text-teal-deep ${
+            className={`mt-2.5 font-display font-semibold text-balance-tight text-teal-deep ${
               act.index === 1
-                ? 'text-[clamp(1.5rem,3.6vw,2.45rem)] leading-[1.08]'
-                : 'text-[clamp(1.4rem,3.1vw,2.1rem)] leading-[1.14]'
+                ? 'text-[clamp(1.45rem,3.4vw,2.3rem)] leading-[1.08]'
+                : 'text-[clamp(1.3rem,2.9vw,1.95rem)] leading-[1.14]'
             }`}
           >
             {act.heading}
           </Heading>
 
-          <div className="mt-4 space-y-3">
+          <div className="mt-3.5 space-y-2.5">
             {act.body.map((para) => (
-              <p key={para.slice(0, 32)} className="text-[0.93rem] leading-relaxed text-ink-soft">
+              <p key={para.slice(0, 32)} className="text-[0.9rem] leading-relaxed text-ink-soft">
                 {para}
               </p>
             ))}
           </div>
 
           <div
-            className={`pointer-events-auto mt-6 flex flex-wrap items-center gap-3 ${
+            className={`pointer-events-auto mt-5 flex flex-wrap items-center gap-2.5 ${
               isCenter ? 'justify-center' : ''
             }`}
           >
@@ -92,13 +99,16 @@ const ActPanel = forwardRef<HTMLDivElement, { act: Act }>(function ActPanel({ ac
               </Link>
             ) : null}
           </div>
-        </article>
 
-        {act.index === 1 ? (
-          <p className="mt-4 text-center font-sans text-[0.65rem] tracking-[0.2em] text-ink-faint uppercase">
-            Scroll to begin the journey <span aria-hidden>↓</span>
-          </p>
-        ) : null}
+          {/* Inside the card rather than below it: the card is docked to the arch
+              and already reaches near the foot of the viewport, so an external
+              line had nowhere to sit. */}
+          {act.index === 1 ? (
+            <p className="mt-5 font-sans text-[0.62rem] tracking-[0.2em] text-ink-faint uppercase">
+              Scroll to begin the journey <span aria-hidden>↓</span>
+            </p>
+          ) : null}
+        </article>
       </div>
     </div>
   );

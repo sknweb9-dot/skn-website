@@ -3,6 +3,7 @@ import Link from 'next/link';
 import BookingModal from './BookingModal';
 import Footer from './Footer';
 import Nav from './Nav';
+import Reveal from './Reveal';
 
 /**
  * Chrome shared by every non-home route.
@@ -44,20 +45,24 @@ export function PageHero({
   return (
     <section className="border-b border-marigold/20 pt-[140px] pb-14 sm:pb-16">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <p className="eyebrow">{eyebrow}</p>
-        <h1 className="mt-4 max-w-3xl font-display text-[clamp(2rem,5.5vw,4rem)] leading-[1.02] font-semibold tracking-[-0.02em] text-teal-deep">
-          {title}
-          {accent ? (
-            <>
-              {' '}
-              <span className="foil">{accent}</span>
-            </>
+        {/* Staggered so the eyebrow, headline and lede arrive in reading order
+            rather than as one block. */}
+        <Reveal stagger y={22}>
+          <p className="eyebrow">{eyebrow}</p>
+          <h1 className="mt-4 max-w-3xl font-display text-[clamp(2rem,5.5vw,4rem)] leading-[1.02] font-semibold tracking-[-0.02em] text-teal-deep">
+            {title}
+            {accent ? (
+              <>
+                {' '}
+                <span className="foil">{accent}</span>
+              </>
+            ) : null}
+          </h1>
+          {lede ? (
+            <p className="mt-6 max-w-2xl text-[1.02rem] leading-relaxed text-ink-soft">{lede}</p>
           ) : null}
-        </h1>
-        {lede ? (
-          <p className="mt-6 max-w-2xl text-[1.02rem] leading-relaxed text-ink-soft">{lede}</p>
-        ) : null}
-        {children ? <div className="mt-8">{children}</div> : null}
+          {children ? <div className="mt-8">{children}</div> : null}
+        </Reveal>
       </div>
     </section>
   );
@@ -80,22 +85,33 @@ export function Section({
   children: ReactNode;
   id?: string;
 }) {
+  const hasHeader = Boolean(eyebrow || heading || lede);
+
   return (
     <section
       id={id}
       className={`border-t border-marigold/20 py-16 sm:py-20 ${tinted ? 'bg-silk/40' : ''}`}
     >
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
-        {heading ? (
-          <h2 className="mt-3 max-w-2xl font-display text-[clamp(1.6rem,3.8vw,2.5rem)] leading-[1.1] font-semibold text-teal-deep">
-            {heading}
-          </h2>
+        {hasHeader ? (
+          <Reveal stagger y={20}>
+            {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
+            {heading ? (
+              <h2 className="mt-3 max-w-2xl font-display text-[clamp(1.6rem,3.8vw,2.5rem)] leading-[1.1] font-semibold text-teal-deep">
+                {heading}
+              </h2>
+            ) : null}
+            {lede ? (
+              <p className="mt-4 max-w-2xl text-[0.98rem] leading-relaxed text-ink-soft">{lede}</p>
+            ) : null}
+          </Reveal>
         ) : null}
-        {lede ? (
-          <p className="mt-4 max-w-2xl text-[0.98rem] leading-relaxed text-ink-soft">{lede}</p>
-        ) : null}
-        <div className={eyebrow || heading || lede ? 'mt-10' : ''}>{children}</div>
+        {/* The body is revealed as one block. Staggering an unknown number of
+            children — twenty-eight hasta cards, twelve gallery images — reads as
+            a slow cascade rather than an entrance. */}
+        <Reveal className={hasHeader ? 'mt-10' : ''} delay={hasHeader ? 0.08 : 0}>
+          {children}
+        </Reveal>
       </div>
     </section>
   );

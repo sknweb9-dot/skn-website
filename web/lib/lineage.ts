@@ -51,13 +51,9 @@ export const FOUNDER = {
 export const DIRECTOR = {
   eyebrow: 'Our Co-Founder & Director',
   name: 'Sunitta Menghanaani',
-  /**
-   * _research/STATUS.txt item 5: the founders page carried an unlabelled second
-   * portrait, most likely Sunitta. Still awaiting owner confirmation, so this
-   * is flagged rather than asserted.
-   */
-  image: '/img/founder-second.jpg',
-  portraitConfirmed: false,
+  /** Identity confirmed by the academy. Renamed from the crawled filename. */
+  image: '/img/founder-sunitta.jpg',
+  portraitConfirmed: true,
   body: [
     'Sunitta Menghanaani is a Bharatanatyam artiste, educator, and choreographer whose journey reflects a lifelong dedication to the preservation and dissemination of Indian classical arts.',
     'Originally from Pune, she chose Chennai as her karmabhumi to pursue advanced training in Bharatanatyam. She began learning dance at the age of three under Smt. Geeta Nair and later graduated in Bharatanatyam from the prestigious Kalakshetra Foundation, Rukmini Devi College of Fine Arts, Chennai.',
