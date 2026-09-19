@@ -32,7 +32,12 @@ export default function FloatingCta() {
         shown ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-full opacity-0'
       } sm:inset-x-auto sm:bottom-7 sm:right-7`}
     >
-      <div className="flex items-stretch gap-px border-t border-marigold/20 bg-white/85 backdrop-blur-xl sm:gap-3 sm:border sm:border-marigold/20 sm:p-2">
+      {/* Cream, not white. This bar is the same kind of object as the masthead at
+          the other edge of the screen, and it carries the same plate: cream/85
+          over a blur. It was `bg-white/85` for as long as the component went
+          unrendered, and the moment it was mounted it read as a white patch stuck
+          to the foot of a cream page. */}
+      <div className="flex items-stretch gap-px border-t border-marigold/20 bg-cream/85 backdrop-blur-xl sm:gap-3 sm:border sm:border-marigold/20 sm:p-2">
         <a
           href={`tel:${SITE.phoneE164}`}
           tabIndex={shown ? 0 : -1}
