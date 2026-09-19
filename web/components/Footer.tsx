@@ -1,15 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { BRANCHES, METRICS, SITE, yearsOfLineage } from '@/lib/site';
+import { BRANCHES, METRICS, NAV_ROUTES, SITE, yearsOfLineage } from '@/lib/site';
 
-const ROUTES = [
-  { href: '/about', label: 'The academy' },
-  { href: '/lineage', label: 'Our lineage' },
-  { href: '/curriculum', label: 'Curriculum' },
-  { href: '/hastas', label: 'The 28 hastas' },
-  { href: '/performances', label: 'Performances' },
-  { href: '/locations', label: 'Locations' },
-];
+const ROUTES = NAV_ROUTES;
 
 export default function Footer() {
   const years = yearsOfLineage();

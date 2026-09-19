@@ -13,7 +13,6 @@ import {
   FRAME_COUNT,
   FRAME_HEIGHT,
   VISIBLE_FRAME_HEIGHT,
-  VISIBLE_RATIO,
   framePath,
   mudraAtProgress,
 } from '@/lib/mudras';
@@ -23,6 +22,7 @@ import ActPanel from './ActPanel';
 import ArchOutline from './ArchOutline';
 import ChapterRail from './ChapterRail';
 import FramePreloader from './FramePreloader';
+import ScrollCue from './ScrollCue';
 import StaticActs from './StaticActs';
 
 /**
@@ -30,6 +30,50 @@ import StaticActs from './StaticActs';
  * still saturating a decent link.
  */
 const PRELOAD_CONCURRENCY = 8;
+
+/**
+ * Frame loading is two passes, and only the first one gates the page.
+ *
+ * All 327 frames are 4.4 MB. Waiting for every one of them behind a full-screen
+ * preloader is a long stare at a percentage on mobile data, for a scrub that
+ * degrades gracefully anyway: draw() already falls back to the nearest loaded
+ * frame at or before the one requested.
+ *
+ * So every fourth frame is fetched first — 82 files, about 1.1 MB — and the
+ * preloader clears on that. The remaining three quarters stream in behind it and
+ * the scrub sharpens as they land, which on any reasonable connection happens
+ * before the reader has finished the first act.
+ *
+ * Dropping the other three quarters altogether was the obvious alternative and
+ * the wrong one: at 327 frames the desktop scrub is already at ~27.5px of scroll
+ * per frame, against a documented steppiness threshold of ~30 (see lib/mudras.ts).
+ * A quarter of the frames would put it at 110 and the gesture would stutter. The
+ * bytes are not the problem; blocking on them was.
+ */
+const COARSE_STEP = 4;
+
+/** Indices of the coarse pass, then everything else, in fetch order. */
+function loadOrder(): { coarse: number[]; refine: number[] } {
+  const coarse: number[] = [];
+  const refine: number[] = [];
+  for (let i = 1; i <= FRAME_COUNT; i += 1) {
+    if ((i - 1) % COARSE_STEP === 0) coarse.push(i);
+    else refine.push(i);
+  }
+  return { coarse, refine };
+}
+
+/**
+ * Honour Data Saver by stopping after the coarse pass. A reader who has asked
+ * their browser to spend less deserves a steppier scrub, not a silent 4.4 MB.
+ */
+function prefersLessData(): boolean {
+  const connection = (
+    navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } }
+  ).connection;
+  if (!connection) return false;
+  return Boolean(connection.saveData) || connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g';
+}
 
 /** Scroll distance allotted to each act, in svh. Six acts => 960svh total. */
 const ACT_SPAN_SVH = 160;
@@ -44,6 +88,28 @@ const ACT_SPAN_SVH = 160;
  */
 const ARCH_SHIFT = 0.13;
 const SHIFT_BREAKPOINT = 640;
+
+/**
+ * Where the crop sits when the aperture is broader than the footage.
+ *
+ * 0 keeps the top of the plate, 0.5 centres, 1 keeps the bottom. On phones the
+ * aperture is widened to ~0.89 (see --arch-ratio-phone) and cover-fit then has
+ * ~19% of the plate's height to discard. Centring it would cut the fingertips,
+ * which is the whole subject; the bottom of the plate is forearm and bangles.
+ * So the crop is biased upward and the loss is taken off the bottom.
+ *
+ * Where the aperture ratio matches the source — every breakpoint from `sm` up —
+ * the drawn height equals the canvas height and this term multiplies zero. No
+ * breakpoint logic is needed in JS.
+ */
+const CROP_BIAS = 0.18;
+
+/**
+ * Scroll progress over which the cue fades out. Deliberately short: the cue has
+ * said its piece the moment the page starts moving, and a hint that lingers
+ * reads as an instruction the reader has failed to follow.
+ */
+const CUE_FADE = 0.012;
 
 function archOffsetFor(side: ActSide): number {
   if (side === 'left') return ARCH_SHIFT;
@@ -87,6 +153,7 @@ function ScrubStage() {
   const apertureRef = useRef<HTMLDivElement>(null);
 
   const panelsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const cueRef = useRef<HTMLDivElement>(null);
   const mudraNameRef = useRef<HTMLSpanElement>(null);
   const mudraLiteralRef = useRef<HTMLSpanElement>(null);
   /** Order of the gesture last written to the caption. Guards redundant writes. */
@@ -136,7 +203,9 @@ function ScrubStage() {
       img.naturalWidth,
       cropH,
       (canvas.width - w) / 2,
-      (canvas.height - h) / 2,
+      // Biased rather than centred, so a broader-than-source aperture loses the
+      // forearm at the bottom instead of the fingertips at the top.
+      (canvas.height - h) * CROP_BIAS,
       w,
       h,
     );
@@ -173,14 +242,20 @@ function ScrubStage() {
     framesRef.current = new Array(FRAME_COUNT + 1).fill(null);
     loadedRef.current = new Array(FRAME_COUNT + 1).fill(false);
 
+    const { coarse, refine } = loadOrder();
+    const queue = prefersLessData() ? coarse : coarse.concat(refine);
+    const coarseCount = coarse.length;
+    setCoarseTotal(coarseCount);
+
     let cancelled = false;
-    let settled = 0;
-    let next = 1;
+    let coarseSettled = 0;
+    let cursor = 0;
 
     function pump() {
-      if (cancelled || next > FRAME_COUNT) return;
-      const index = next;
-      next += 1;
+      if (cancelled || cursor >= queue.length) return;
+      const index = queue[cursor];
+      cursor += 1;
+      const isCoarse = (index - 1) % COARSE_STEP === 0;
 
       const img = new Image();
       img.decoding = 'async';
@@ -190,8 +265,13 @@ function ScrubStage() {
       const done = (ok: boolean) => {
         if (cancelled) return;
         loadedRef.current[index] = ok;
-        settled += 1;
-        setLoadedCount(settled);
+        // Counted separately rather than inferred from the total: with eight
+        // requests in flight the completion order is not the queue order, so a
+        // plain tally would clear the preloader with coarse frames still missing.
+        if (isCoarse) {
+          coarseSettled += 1;
+          setCoarseLoaded(coarseSettled);
+        }
         // First frame in: paint immediately so the aperture is never empty.
         if (index === 1 && ok) draw(1);
         pump();
@@ -274,6 +354,13 @@ function ScrubStage() {
         setActiveAct(leader);
       }
 
+      // The cue retires as soon as the page moves at all. Written here rather
+      // than held in React state so it shares the panels' single style pass.
+      const cue = cueRef.current;
+      if (cue) {
+        cue.style.opacity = String(1 - Math.min(1, progress / CUE_FADE));
+      }
+
       // Caption whatever gesture is genuinely on screen.
       const live = mudraAtProgress(progress);
       if (live.order !== captionedRef.current) {
@@ -331,18 +418,34 @@ function ScrubStage() {
             need clear cream below the arch to sit on. Everything below is
             measured in svh so the same proportions hold on any viewport.
 
-            `max-h` reserves room beneath the arch. Centre acts now dock flush at
-            100% of the arch height rather than overlapping at 88%, so the card
-            starts a full 12% lower and the budget is tighter than before. The
-            card's height is content-driven in px, not svh, so without this cap a
+            SIZING, AND WHY THE TWO BREAKPOINTS DISAGREE
+            -------------------------------------------
+            From `sm` up the arch is sized by HEIGHT and its width follows from
+            the source aspect ratio. `max-h` reserves room beneath it for the
+            card: centre acts dock flush at 100% of the arch height, and the
+            card's height is content-driven in px, not svh, so without the cap a
             tall arch on a short viewport pushed the card past the foot of the
-            stage, where `overflow-hidden` clipped it.
+            stage where `overflow-hidden` clipped it.
 
-            The reserve is larger below `sm` (27rem vs 22rem) because that is
-            where the cards are tallest: a narrow column wraps the same copy onto
-            far more lines, and act 2 at 360px wide is over 400px tall. One shared
-            cap would have had to serve the worst case and would have needlessly
-            shrunk the arch on desktop.
+            On phones that arrangement failed. Sizing by height meant the 0.72
+            portrait ratio also throttled the width — 219px of an available
+            390px — while the card sat at 92vw and ran to 393px tall. The image
+            ended up a fifth of the composition by area and read as an accessory
+            above a block of text.
+
+            So below `sm` the arch is sized by WIDTH instead, against a broader
+            aperture (--arch-ratio-phone). The `min()` still honours a height
+            budget for the card, which is what keeps short viewports from
+            clipping; it is simply no longer the only term. The 1.1236 factor is
+            1 / 0.89, so when the width term wins the arch lands at exactly
+            84vw.
+
+            Verify after touching any of these numbers: the card must not reach
+            the foot of the stage at 360x800, 390x844 or 375x667, which is the
+            tightest of the three. The `phone-short` variant relaxes the reserve
+            from 23rem to 19rem, which is only safe because that variant also
+            drops the trailing paragraph from every act — the two numbers are a
+            pair and must move together.
 
             Centring is done in the inline transform, NOT with -translate-x-1/2.
             Tailwind v4 compiles translate utilities to the standalone `translate`
@@ -353,13 +456,16 @@ function ScrubStage() {
           <div
             ref={archRef}
             style={{ transform: 'translate3d(-50%, 0, 0)' }}
-            className="absolute top-[6svh] left-1/2 h-[36svh] max-h-[calc(95svh-27rem)] sm:top-[5svh] sm:h-[56svh] sm:max-h-[calc(95svh-22rem)] lg:h-[62svh]"
+            className="absolute top-[8svh] left-1/2 h-[min(calc(84vw*1.1236),calc(92svh-23rem))] phone-short:h-[min(calc(84vw*1.1236),calc(92svh-19rem))] sm:top-[5svh] sm:h-[56svh] sm:max-h-[calc(95svh-22rem)] lg:h-[62svh]"
           >
             <figure className="relative m-0 h-full">
+              {/* Inside the arch's transform group so it stays beside the
+                  aperture at every size — see the note in ScrollCue. */}
+              <ScrollCue ref={cueRef} />
+
               <div
                 ref={apertureRef}
-                className="arch relative h-full overflow-hidden bg-teal-deep shadow-[0_40px_120px_-50px_rgba(20,54,66,0.75)]"
-                style={{ aspectRatio: String(VISIBLE_RATIO) }}
+                className="arch relative h-full aspect-[var(--arch-ratio-phone)] overflow-hidden bg-teal-deep shadow-[0_40px_120px_-50px_rgba(20,54,66,0.75)] sm:aspect-[var(--arch-ratio)]"
               >
                 <canvas
                   ref={canvasRef}

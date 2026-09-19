@@ -49,7 +49,7 @@ const ActPanel = forwardRef<HTMLDivElement, { act: Act }>(function ActPanel({ ac
     <div ref={ref} className="absolute inset-0" style={{ opacity: 0 }}>
       <div className={`absolute ${position}`}>
         <article
-          className={`glass grain rounded-[1.75rem] px-6 py-6 sm:px-7 sm:py-7 ${
+          className={`glass grain rounded-[1.75rem] px-5 py-5 sm:px-7 sm:py-7 ${
             isCenter ? 'text-center' : ''
           }`}
         >
@@ -71,16 +71,32 @@ const ActPanel = forwardRef<HTMLDivElement, { act: Act }>(function ActPanel({ ac
             {act.heading}
           </Heading>
 
-          <div className="mt-3.5 space-y-2.5">
-            {act.body.map((para) => (
-              <p key={para.slice(0, 32)} className="text-[0.9rem] leading-relaxed text-ink-soft">
+          {/* Body copy is set a shade smaller and tighter on phones. Every line
+              saved here is a line the arch gets back: the card's height is the
+              subtrahend in the arch's own height budget (see ScrollStage), so
+              this is layout as much as typography. Held at 0.85rem / 1.55 — below
+              that it stops reading as editorial and starts reading as fine print.
+
+              On short phones the trailing paragraphs are dropped outright — see
+              the `phone-short` variant in globals.css for why, and note that the
+              headline, the opening paragraph and the link through to the full
+              page all survive, which is the whole argument of the act. Acts 1
+              and 6 have a single paragraph and are unaffected. */}
+          <div className="mt-3 space-y-2 sm:mt-3.5 sm:space-y-2.5">
+            {act.body.map((para, i) => (
+              <p
+                key={para.slice(0, 32)}
+                className={`text-[0.85rem] leading-[1.55] text-ink-soft sm:text-[0.9rem] sm:leading-relaxed ${
+                  i > 0 ? 'phone-short:hidden' : ''
+                }`}
+              >
                 {para}
               </p>
             ))}
           </div>
 
           <div
-            className={`pointer-events-auto mt-5 flex flex-wrap items-center gap-2.5 ${
+            className={`pointer-events-auto mt-4 flex flex-wrap items-center gap-2.5 sm:mt-5 ${
               isCenter ? 'justify-center' : ''
             }`}
           >
@@ -99,15 +115,6 @@ const ActPanel = forwardRef<HTMLDivElement, { act: Act }>(function ActPanel({ ac
               </Link>
             ) : null}
           </div>
-
-          {/* Inside the card rather than below it: the card is docked to the arch
-              and already reaches near the foot of the viewport, so an external
-              line had nowhere to sit. */}
-          {act.index === 1 ? (
-            <p className="mt-5 font-sans text-[0.62rem] tracking-[0.2em] text-ink-faint uppercase">
-              Scroll to begin the journey <span aria-hidden>↓</span>
-            </p>
-          ) : null}
         </article>
       </div>
     </div>

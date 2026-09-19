@@ -517,6 +517,27 @@ export const FAQS = [
 ] as const;
 
 // ---------------------------------------------------------------------------
+// Navigation
+// ---------------------------------------------------------------------------
+
+/**
+ * The site's routes, in narrative order: who we are, where we came from, what
+ * is taught, the vocabulary, the stage, the address.
+ *
+ * Canonical for both the masthead and the footer. `label` is the editorial name
+ * used where there is room; `short` is for the header bar, where six items plus
+ * a logo plus the booking control have to share one line.
+ */
+export const NAV_ROUTES = [
+  { href: '/about', label: 'The academy', short: 'Academy' },
+  { href: '/lineage', label: 'Our lineage', short: 'Lineage' },
+  { href: '/curriculum', label: 'Curriculum', short: 'Curriculum' },
+  { href: '/hastas', label: 'The 28 hastas', short: 'Hastas' },
+  { href: '/performances', label: 'Performances', short: 'Performances' },
+  { href: '/locations', label: 'Locations', short: 'Locations' },
+] as const;
+
+// ---------------------------------------------------------------------------
 // Booking
 // ---------------------------------------------------------------------------
 

@@ -33,12 +33,28 @@
 
   --animate-rise: rise 0.9s var(--ease-temple) both;
   --animate-breathe: breathe 6s ease-in-out infinite;
+  --animate-cue-arrow: cue-arrow 2.4s var(--ease-temple) infinite;
 
   /* The arch aperture ratio. The source frames are 720x1280, but the bottom
      22% carries the video's burned-in gesture label and is cropped away at draw
      time — so the visible plate is 720x998. Keep this in step with
      VISIBLE_FRAME_HEIGHT in lib/mudras.ts. */
   --arch-ratio: 0.7215; /* 720 / 998 */
+
+  /* The phone aperture is deliberately broader than the footage.
+     
+     A 0.72 portrait window and a text card cannot both be large in 844px, and
+     sizing the arch by height left it 219px wide on a 390px screen — an
+     accessory above a block of text. Widening the box to ~84vw makes the arch
+     the dominant object instead.
+
+     Nothing stretches: ScrollStage's draw() cover-fits the frame into whatever
+     box the canvas is given, and the arch mask is authored with
+     preserveAspectRatio="none" precisely so it adapts. The cost is that ~19% of
+     the plate's height is cropped, which is why draw() biases the crop upward —
+     see CROP_BIAS there. Broadening past ~0.92 starts to read as a squat arch
+     rather than a temple one. */
+  --arch-ratio-phone: 0.89;
 }
 
 @keyframes rise {
@@ -62,6 +78,30 @@
   }
 }
 
+/* The scroll cue. Two halves of one gesture: a lit segment falling down the
+   hairline, and the arrow beneath easing after it. Both run on the same 2.4s
+   cycle so they read as a single downward drift rather than two loops. */
+@keyframes cue-arrow {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.45;
+  }
+  45% {
+    transform: translateY(4px);
+    opacity: 1;
+  }
+}
+
+@keyframes cue-fall {
+  from {
+    background-position: 0 -120%;
+  }
+  to {
+    background-position: 0 220%;
+  }
+}
+
 /* Route transition. Opacity only, deliberately.
    A transform here would make the wrapper a containing block for `position:
    fixed`, which would break the fixed masthead on every page, and would also
@@ -75,6 +115,23 @@
     opacity: 1;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Variants
+--------------------------------------------------------------------------- */
+
+/* Short phones — iPhone SE and 8 at 375x667, and anything similar.
+   
+   Height, not width, is the binding constraint on the home stage: the arch's
+   own height budget is whatever is left after the act card, so a 358px card on
+   a 667px screen forces the arch back down to 219px wide and undoes the phone
+   layout entirely. Under this variant the acts drop to a single paragraph and
+   the arch reclaims the space.
+
+   Deliberately `width < 40rem` as well as `height < 45rem`, so a short laptop
+   window never loses copy. Googlebot's smartphone rendering uses a very tall
+   viewport, so indexed content is unaffected. */
+@custom-variant phone-short (@media (width < 40rem) and (height < 45rem));
 
 /* ---------------------------------------------------------------------------
    Base
@@ -230,6 +287,34 @@ html.lenis body {
 /* Masks the top and bottom of a scrolling column. */
 @utility mask-y {
   mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent);
+}
+
+/* The scroll cue's hairline, with a lit segment falling down it.
+
+   A component rather than a utility because it is one specific ornament used
+   once, and because the animation and the track have to agree about size. The
+   track is faint ink so it holds as a line even at the point in the cycle when
+   the marigold segment has travelled off the end. */
+.cue-rule {
+  display: block;
+  width: 1px;
+  height: 4.5rem;
+  background-color: color-mix(in oklab, var(--color-ink) 22%, transparent);
+  background-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--color-marigold) 45%,
+    var(--color-marigold) 55%,
+    transparent 100%
+  );
+  background-repeat: no-repeat;
+  background-size: 100% 60%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cue-rule {
+    animation: cue-fall 2.4s var(--ease-temple) infinite;
+  }
 }
 
 /* ---------------------------------------------------------------------------
