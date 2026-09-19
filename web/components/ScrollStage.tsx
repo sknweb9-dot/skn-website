@@ -434,7 +434,12 @@ function ScrubStage() {
   return (
     <div
       ref={sectionRef}
-      className="relative h-[var(--stage-span)] sm:h-[var(--stage-span-wide)]"
+      // bg-silk-deep is a backstop, not decoration. The sticky child covers this
+      // completely in normal operation, so it is only ever seen if the child
+      // under-covers the viewport again on some browser that reports `lvh` short.
+      // Matching the wash's own bottom edge means such a gap blends instead of
+      // flashing cream, which is how the last one announced itself.
+      className="relative bg-silk-deep h-[var(--stage-span)] sm:h-[var(--stage-span-wide)]"
       style={
         {
           '--stage-span': `${ACTS.length * ACT_SPAN_SVH_PHONE}svh`,
@@ -444,7 +449,38 @@ function ScrubStage() {
     >
       <FramePreloader loaded={coarseLoaded} total={COARSE_TOTAL} done={ready} />
 
-      <div className="sticky top-0 h-svh w-full overflow-hidden">
+      {/*
+        `lvh`, not `svh` — the large viewport height, measured as if the mobile
+        toolbar were hidden.
+
+        With `h-svh` this box was sized for the toolbar being *visible*. The
+        moment Chrome or Safari retracted the toolbar the viewport grew, the
+        pinned stage stopped reaching the bottom of the screen, and the strip
+        below it exposed the page's cream against this stage's `silk-deep`
+        gradient edge — a hard seam about 110px up from the foot of the screen,
+        reported as a white patch stuck to the bottom while scrolling.
+
+        `lvh` overshoots instead: when the toolbar *is* showing, the last ~56px of
+        the wash sits below the fold, which costs nothing because that region is
+        empty vignette. Everything inside is positioned in svh from the top, or
+        relative to the arch, so nothing moves.
+
+        The principle, worth keeping: size CONTENT against svh, because the
+        toolbar can reappear at any moment and the act card must not clip when it
+        does; size the BACKDROP against lvh, because it must cover the largest the
+        viewport can get. The arch's own height budget stays in svh for exactly
+        that reason.
+
+        Deliberately not `dvh`. That would track the viewport exactly, but it
+        changes height mid-scroll as the toolbar slides, resizing a sticky element
+        during the one interaction this whole page exists to serve.
+
+        NOTE FOR ANYONE VERIFYING THIS: it does not reproduce in DevTools device
+        emulation. There is no retractable toolbar there, so svh, lvh and dvh all
+        collapse to the same value and the seam cannot appear. Check on a real
+        phone, scrolled far enough down that the browser has hidden its chrome.
+      */}
+      <div className="sticky top-0 h-lvh w-full overflow-hidden">
         {/* Warm jewel-tone wash behind the arch, so the frame's dark backdrop
             reads as a lit cinematic window rather than a hole in the page. */}
         <div
