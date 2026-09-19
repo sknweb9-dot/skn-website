@@ -57,7 +57,7 @@ export default function HastasPage() {
             <li key={m.order}>
               <a
                 href={`#${slugify(m.name)}`}
-                className="inline-flex items-baseline gap-1.5 rounded-full border border-marigold/30 bg-white/50 px-3 py-1.5 font-sans text-[0.8rem] text-ink-soft transition-colors hover:border-kumkum/40 hover:bg-kumkum/5 hover:text-kumkum"
+                className="inline-flex items-baseline gap-1.5 rounded-full border border-marigold/30 bg-paper/60 px-3 py-1.5 font-sans text-[0.8rem] text-ink-soft transition-colors hover:border-kumkum/40 hover:bg-kumkum/5 hover:text-kumkum"
               >
                 <span className="font-display text-[0.65rem] text-marigold-deep">
                   {String(m.order).padStart(2, '0')}
@@ -116,7 +116,7 @@ export default function HastasPage() {
                     {mudra.viniyoga.map((use) => (
                       <li
                         key={use}
-                        className="rounded-full border border-marigold/25 bg-white/60 px-2.5 py-0.5 font-sans text-[0.74rem] text-ink-soft"
+                        className="rounded-full border border-marigold/25 bg-paper/60 px-2.5 py-0.5 font-sans text-[0.74rem] text-ink-soft"
                       >
                         {use}
                       </li>

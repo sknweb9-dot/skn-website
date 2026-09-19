@@ -59,7 +59,7 @@ export default function Testimonials() {
               {Array.from({ length: SLOTS }, (_, i) => (
                 <li
                   key={i}
-                  className="rounded-[1.5rem] border border-dashed border-marigold/40 bg-white/40 px-6 py-7"
+                  className="rounded-[1.5rem] border border-dashed border-marigold/40 bg-paper/60 px-6 py-7"
                 >
                   <div className="space-y-2.5">
                     <div className="h-2.5 w-full rounded-full bg-marigold/15" />

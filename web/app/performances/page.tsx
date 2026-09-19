@@ -90,7 +90,7 @@ export default function PerformancesPage() {
           {GALLERY.map((item, i) => (
             <li
               key={item.src}
-              className={`group overflow-hidden rounded-[1.25rem] border border-marigold/25 bg-white/40 ${SPAN[item.span] ?? ''}`}
+              className={`group overflow-hidden rounded-[1.25rem] border border-marigold/25 bg-paper/60 ${SPAN[item.span] ?? ''}`}
             >
               <figure className="h-full">
                 <div className="overflow-hidden">

@@ -190,7 +190,7 @@ function ResidentVenues({ citySlug }: { citySlug: string }) {
         {offline.map((venue) => (
           <li
             key={venue.id}
-            className="rounded-[1.5rem] border border-marigold/25 bg-white/55 px-6 py-6 sm:px-7"
+            className="rounded-[1.5rem] border border-marigold/25 bg-paper/60 px-6 py-6 sm:px-7"
           >
             <VenueHeading venue={venue} sub="Residents" />
             {/* No enrolment CTA and no "Admission open" flag: a reader who does

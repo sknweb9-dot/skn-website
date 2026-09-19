@@ -146,7 +146,7 @@ export default function CurriculumPage() {
                       {level.repertoire.map((item) => (
                         <span
                           key={item}
-                          className="rounded-full border border-marigold/30 bg-white/50 px-3 py-1 font-sans text-[0.78rem] text-ink-soft"
+                          className="rounded-full border border-marigold/30 bg-paper/60 px-3 py-1 font-sans text-[0.78rem] text-ink-soft"
                         >
                           {item}
                         </span>
@@ -263,7 +263,7 @@ export default function CurriculumPage() {
             {adults.map(({ venue, batch, programme }) => (
               <li
                 key={batch.code}
-                className="rounded-[1.25rem] border border-marigold/30 bg-white/55 px-5 py-5"
+                className="rounded-[1.25rem] border border-marigold/30 bg-paper/60 px-5 py-5"
               >
                 <p className="font-display text-[0.72rem] tracking-[0.14em] text-marigold-deep">
                   {batch.code}

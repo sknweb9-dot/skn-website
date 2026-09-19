@@ -187,7 +187,7 @@ export default async function LocationPage({ params }: { params: Promise<Params>
                     className={`rounded-full border px-3.5 py-1.5 font-sans text-[0.8rem] ${
                       areas.includes(area)
                         ? 'border-kumkum/30 bg-kumkum/5 font-medium text-kumkum'
-                        : 'border-marigold/30 bg-white/50 text-ink-soft'
+                        : 'border-marigold/30 bg-paper/60 text-ink-soft'
                     }`}
                   >
                     {area}
@@ -275,7 +275,7 @@ export default async function LocationPage({ params }: { params: Promise<Params>
               {TEACHING_PROGRAMMES.map((programme, i) => (
                 <li
                   key={programme.id}
-                  className="rounded-[1.25rem] border border-marigold/25 bg-white/55 p-5"
+                  className="rounded-[1.25rem] border border-marigold/25 bg-paper/60 p-5"
                 >
                   <p className="font-display text-[0.8rem] tracking-[0.12em] text-marigold-deep">
                     {String(i).padStart(2, '0')}

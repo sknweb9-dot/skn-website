@@ -12,6 +12,21 @@
   --color-silk: #f4ebd9;
   --color-silk-deep: #ebdfc6;
 
+  /* One step *above* the ground.
+     
+     Cream is the page, so a chip or card that needs to read as raised has to be
+     lighter than cream — which is why these surfaces were all `bg-white/40` to
+     `/70` before this token existed. White works, but it drifts the hue neutral
+     and, more to the point, it meant the same idea was spelled five different
+     ways across seven files with nothing tying them to the palette.
+
+     Two roles, and please keep it to two:
+       bg-paper/60  raised surfaces — chips, cards, gallery cells
+       bg-paper/75  form controls, which need to read as clearly editable
+     Some translucency is kept on purpose so a chip still picks up the tint of a
+     `bg-silk/40` section behind it rather than sitting on it as a flat plate. */
+  --color-paper: #fefdfa;
+
   /* Jewel tones */
   --color-teal: #0f4c5c;
   --color-teal-deep: #143642;

@@ -225,7 +225,7 @@ export default function BookingModal() {
                   id="message"
                   name="message"
                   rows={3}
-                  className="mt-2 w-full resize-y border border-ink/15 bg-white/70 px-4 py-3 font-sans text-[0.95rem] text-ink placeholder:text-ink-faint/70 focus:border-marigold/60 focus:outline-none"
+                  className="mt-2 w-full resize-y border border-ink/15 bg-paper/75 px-4 py-3 font-sans text-[0.95rem] text-ink placeholder:text-ink-faint/70 focus:border-marigold/60 focus:outline-none"
                   placeholder="Preferred days, previous training, questions…"
                 />
               </div>
@@ -300,7 +300,7 @@ function Field({
         name={name}
         type={type}
         required={required}
-        className="mt-2 w-full border border-ink/15 bg-white/70 px-4 py-3 font-sans text-[0.95rem] text-ink placeholder:text-ink-faint/70 focus:border-marigold/60 focus:outline-none"
+        className="mt-2 w-full border border-ink/15 bg-paper/75 px-4 py-3 font-sans text-[0.95rem] text-ink placeholder:text-ink-faint/70 focus:border-marigold/60 focus:outline-none"
         {...rest}
       />
     </div>
@@ -329,7 +329,7 @@ function Select({
         id={name}
         name={name}
         required={required}
-        className="mt-2 w-full appearance-none border border-ink/15 bg-white/70 px-4 py-3 font-sans text-[0.95rem] text-ink focus:border-marigold/60 focus:outline-none"
+        className="mt-2 w-full appearance-none border border-ink/15 bg-paper/75 px-4 py-3 font-sans text-[0.95rem] text-ink focus:border-marigold/60 focus:outline-none"
         {...rest}
       >
         {children}
