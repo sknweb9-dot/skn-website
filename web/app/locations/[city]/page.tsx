@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, Mail, MapPin, Navigation, Phone } from 'lucide-react';
 import BookingModal from '@/components/BookingModal';
+import FloatingCta from '@/components/FloatingCta';
 import Footer from '@/components/Footer';
 import JsonLd from '@/components/JsonLd';
 import Nav from '@/components/Nav';
@@ -369,6 +370,7 @@ export default async function LocationPage({ params }: { params: Promise<Params>
       </main>
 
       <Footer />
+      <FloatingCta />
       <BookingModal />
     </>
   );

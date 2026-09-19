@@ -52,8 +52,12 @@ const PRELOAD_CONCURRENCY = 8;
  */
 const COARSE_STEP = 4;
 
-/** Indices of the coarse pass, then everything else, in fetch order. */
-function loadOrder(): { coarse: number[]; refine: number[] } {
+/**
+ * Indices of the coarse pass, then everything else, in fetch order. Computed
+ * once at module scope: both FRAME_COUNT and COARSE_STEP are constants, so this
+ * is not per-instance work and the gating total is knowable before first render.
+ */
+const LOAD_ORDER = (() => {
   const coarse: number[] = [];
   const refine: number[] = [];
   for (let i = 1; i <= FRAME_COUNT; i += 1) {
@@ -61,7 +65,9 @@ function loadOrder(): { coarse: number[]; refine: number[] } {
     else refine.push(i);
   }
   return { coarse, refine };
-}
+})();
+
+const COARSE_TOTAL = LOAD_ORDER.coarse.length;
 
 /**
  * Honour Data Saver by stopping after the coarse pass. A reader who has asked
@@ -75,8 +81,23 @@ function prefersLessData(): boolean {
   return Boolean(connection.saveData) || connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g';
 }
 
-/** Scroll distance allotted to each act, in svh. Six acts => 960svh total. */
+/**
+ * Scroll distance allotted to each act, in svh.
+ *
+ * 160 on a pointer device gives the scrub room to breathe: 327 frames over six
+ * acts is about 27.5px of scroll per frame at 1440x900, just inside the ~30px
+ * steppiness threshold documented in lib/mudras.ts.
+ *
+ * Phones get 120. A thumb covers less ground than a wheel, and 960svh is a long
+ * way to flick — while the shorter span actually *improves* the scrub, because
+ * the same 327 frames are spread over less distance: about 18.6px per frame on a
+ * 390x844 screen. Less work, smoother result.
+ *
+ * Neither number touches the act windows, which are normalised to 0–1, so the
+ * pacing checker in _research/check_act_windows.py is unaffected.
+ */
 const ACT_SPAN_SVH = 160;
+const ACT_SPAN_SVH_PHONE = 120;
 
 /**
  * How far the arch slides away from an act's editorial column, as a fraction of
@@ -164,7 +185,8 @@ function ScrubStage() {
   const paintedRef = useRef(-1);
   const activeActRef = useRef(-1);
 
-  const [loadedCount, setLoadedCount] = useState(0);
+  /** Progress of the gating pass only — see COARSE_STEP. */
+  const [coarseLoaded, setCoarseLoaded] = useState(0);
   const [activeAct, setActiveAct] = useState(0);
 
   // -------------------------------------------------------------------------
@@ -242,10 +264,8 @@ function ScrubStage() {
     framesRef.current = new Array(FRAME_COUNT + 1).fill(null);
     loadedRef.current = new Array(FRAME_COUNT + 1).fill(false);
 
-    const { coarse, refine } = loadOrder();
+    const { coarse, refine } = LOAD_ORDER;
     const queue = prefersLessData() ? coarse : coarse.concat(refine);
-    const coarseCount = coarse.length;
-    setCoarseTotal(coarseCount);
 
     let cancelled = false;
     let coarseSettled = 0;
@@ -295,6 +315,8 @@ function ScrubStage() {
     gsap.registerPlugin(ScrollTrigger);
     const section = sectionRef.current;
     if (!section) return;
+
+    const root = document.documentElement;
 
     resizeCanvas();
 
@@ -361,6 +383,16 @@ function ScrubStage() {
         cue.style.opacity = String(1 - Math.min(1, progress / CUE_FADE));
       }
 
+      // Chapter progress for the phone indicator, published as a custom property
+      // on the root rather than written to an element here.
+      //
+      // StageProgress cannot live inside this stage: `position: sticky` creates a
+      // stacking context whatever its z-index, so anything nested under the
+      // sticky container is sealed below the masthead's own z-40 and no z-index
+      // on the bar itself can lift it out. A variable on the root lets the bar be
+      // rendered as a sibling of the masthead while still being driven from here.
+      root.style.setProperty('--stage-progress', progress.toFixed(4));
+
       // Caption whatever gesture is genuinely on screen.
       const live = mudraAtProgress(progress);
       if (live.order !== captionedRef.current) {
@@ -376,6 +408,9 @@ function ScrubStage() {
       end: 'bottom bottom',
       onUpdate: (self) => onUpdate(self.progress),
       onRefresh: (self) => onUpdate(self.progress),
+      // onUpdate does not fire outside the range, so the indicator would
+      // otherwise stay parked at full width over the testimonials and footer.
+      onToggle: (self) => root.style.setProperty('--stage-shown', self.isActive ? '1' : '0'),
     });
 
     const onResize = () => {
@@ -389,18 +424,25 @@ function ScrubStage() {
     return () => {
       window.removeEventListener('resize', onResize);
       trigger.kill();
+      root.style.removeProperty('--stage-progress');
+      root.style.removeProperty('--stage-shown');
     };
   }, []);
 
-  const ready = loadedCount >= FRAME_COUNT;
+  const ready = coarseLoaded >= COARSE_TOTAL;
 
   return (
     <div
       ref={sectionRef}
-      className="relative"
-      style={{ height: `${ACTS.length * ACT_SPAN_SVH}svh` }}
+      className="relative h-[var(--stage-span)] sm:h-[var(--stage-span-wide)]"
+      style={
+        {
+          '--stage-span': `${ACTS.length * ACT_SPAN_SVH_PHONE}svh`,
+          '--stage-span-wide': `${ACTS.length * ACT_SPAN_SVH}svh`,
+        } as React.CSSProperties
+      }
     >
-      <FramePreloader loaded={loadedCount} total={FRAME_COUNT} done={ready} />
+      <FramePreloader loaded={coarseLoaded} total={COARSE_TOTAL} done={ready} />
 
       <div className="sticky top-0 h-svh w-full overflow-hidden">
         {/* Warm jewel-tone wash behind the arch, so the frame's dark backdrop

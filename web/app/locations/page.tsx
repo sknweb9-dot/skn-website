@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { MapPin } from 'lucide-react';
 import BookingModal from '@/components/BookingModal';
+import FloatingCta from '@/components/FloatingCta';
 import Footer from '@/components/Footer';
 import JsonLd from '@/components/JsonLd';
 import Nav from '@/components/Nav';
@@ -171,6 +172,7 @@ export default function LocationsPage() {
       </main>
 
       <Footer />
+      <FloatingCta />
       <BookingModal />
     </>
   );

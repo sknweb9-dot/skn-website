@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import Link from 'next/link';
 import BookingModal from './BookingModal';
+import FloatingCta from './FloatingCta';
 import Footer from './Footer';
 import Nav from './Nav';
 import Reveal from './Reveal';
@@ -12,6 +13,13 @@ import Reveal from './Reveal';
  * needs its own layout. Everything else is an ordinary document, and repeating
  * the masthead / hero / footer arrangement five times invites them to drift
  * apart.
+ *
+ * FloatingCta lives here rather than in the shared layout. These are long
+ * documents whose hero CTA scrolls out of reach within one screen, which is
+ * exactly the gap it was written for. The home page does not get it: the acts
+ * carry their own calls to action, the masthead returns on any upward scroll
+ * with `Book trial` in it, and on a phone the bar would sit over the foot of the
+ * act cards.
  */
 export function PageShell({ children }: { children: ReactNode }) {
   return (
@@ -19,6 +27,7 @@ export function PageShell({ children }: { children: ReactNode }) {
       <Nav />
       <main id="main">{children}</main>
       <Footer />
+      <FloatingCta />
       <BookingModal />
     </>
   );
