@@ -43,3 +43,7 @@ next-env.d.ts
 
 # local dev server log
 dev.log
+
+
+# local production server log
+server.log

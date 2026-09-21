@@ -208,7 +208,7 @@ export default function LineagePage() {
         <div className="flex flex-wrap items-center gap-3">
           <TrialButton source="lineage-footer">Schedule a trial session</TrialButton>
           <QuietLink href="/curriculum">The six levels</QuietLink>
-          <QuietLink href="/hastas">The 28 hastas</QuietLink>
+          <QuietLink href="/events">Events & gallery</QuietLink>
         </div>
       </Section>
     </PageShell>

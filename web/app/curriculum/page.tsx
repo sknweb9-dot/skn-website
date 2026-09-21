@@ -288,7 +288,7 @@ export default function CurriculumPage() {
       <Section>
         <div className="flex flex-wrap items-center gap-3">
           <TrialButton source="curriculum-footer">Schedule a trial session</TrialButton>
-          <QuietLink href="/hastas">The 28 hastas</QuietLink>
+          <QuietLink href="/events">Events & gallery</QuietLink>
           <QuietLink href="/locations">Batches and timings</QuietLink>
         </div>
       </Section>

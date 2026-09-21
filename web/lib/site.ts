@@ -522,18 +522,29 @@ export const FAQS = [
 
 /**
  * The site's routes, in narrative order: who we are, where we came from, what
- * is taught, the vocabulary, the stage, the address.
+ * is taught, the stage, the address.
  *
  * Canonical for both the masthead and the footer. `label` is the editorial name
- * used where there is room; `short` is for the header bar, where six items plus
+ * used where there is room; `short` is for the header bar, where the items plus
  * a logo plus the booking control have to share one line.
+ *
+ * TWO ROUTES LEFT THIS LIST, and neither was deleted:
+ *
+ *   /hastas       still resolves and still carries all twenty-eight gestures,
+ *                 but is unlinked and noindexed at the academy's request. See
+ *                 the note at the top of app/hastas/page.tsx before reviving it.
+ *   /performances folded into /events, which now carries the Udaan copy, the
+ *                 Arangetrams and the gallery. next.config.ts 308s the old path
+ *                 so inbound links still land.
+ *
+ * The list is therefore five items rather than six, which the masthead is
+ * happier with.
  */
 export const NAV_ROUTES = [
   { href: '/about', label: 'The academy', short: 'Academy' },
   { href: '/lineage', label: 'Our lineage', short: 'Lineage' },
   { href: '/curriculum', label: 'Curriculum', short: 'Curriculum' },
-  { href: '/hastas', label: 'The 28 hastas', short: 'Hastas' },
-  { href: '/performances', label: 'Performances', short: 'Performances' },
+  { href: '/events', label: 'Events & gallery', short: 'Events' },
   { href: '/locations', label: 'Locations', short: 'Locations' },
 ] as const;
 

@@ -1,0 +1,6 @@
+{
+  "name": "Globefolio 3D Image Animation",
+  "description": "Interactive 3D globe portfolio with Fibonacci image sphere, smooth scroll-triggered animations, and inspection controls inspired by Junkerr Globefolio.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

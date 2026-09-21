@@ -2,6 +2,7 @@ import { BRANCHES, FACULTY, FAQS, FOUNDERS, METRICS, PRIMARY_BRANCH, SITE, type 
 import { TEACHING_PROGRAMMES } from './curriculum';
 import { allBatches, areasTaught, offlineVenuesForCity, venuesForCity } from './classes';
 import { MUDRAS } from './mudras';
+import { PUBLISHABLE_PHOTOS, VIDEOS, videoPoster, youtubeHref } from './events';
 
 /**
  * Schema.org JSON-LD, assembled as a single linked @graph.
@@ -354,6 +355,97 @@ export function hastasGraph() {
 }
 
 export type Faq = { q: string; a: string };
+
+/**
+ * The graph emitted on /events.
+ *
+ * WHAT IS DELIBERATELY NOT HERE
+ * -----------------------------
+ * `Event` nodes, and `VideoObject` nodes. Both want dates we do not have.
+ *
+ * Most of these performances are recorded only as a YouTube title, and eight of
+ * those titles came from og:title because the videos are unlisted and oEmbed
+ * refused them — so there is no reliable `startDate` for an Event and no
+ * `uploadDate` for a VideoObject. Emitting either with a guessed date is the same
+ * category of mistake as the fabricated star rating this file already refuses to
+ * carry, and it would be worse here, because a wrong Event date can put a
+ * performance in Google's event listings on a day nothing happens.
+ *
+ * So the page describes itself honestly: a CollectionPage holding an ItemList of
+ * the works it shows. Add VideoObject when the academy confirms upload dates and
+ * durations, and Event only for performances still to come.
+ *
+ * Placeholder photo records are excluded, the same way `openingHoursFor` excludes
+ * provisional batch timings — see the policy at the top of lib/events.ts.
+ */
+export function eventsGraph() {
+  const url = abs('/events');
+
+  const photos = PUBLISHABLE_PHOTOS.map((photo, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'ImageObject',
+      '@id': `${url}#${photo.id}`,
+      contentUrl: abs(photo.src),
+      name: photo.title,
+      description: photo.alt,
+      caption: photo.album,
+      width: photo.width,
+      height: photo.height,
+      creditText: SITE.name,
+      ...(photo.date ? { datePublished: photo.date } : {}),
+    },
+  }));
+
+  const recordings = VIDEOS.map((video, i) => ({
+    '@type': 'ListItem',
+    position: photos.length + i + 1,
+    item: {
+      '@type': 'CreativeWork',
+      '@id': `${url}#video-${video.id}`,
+      name: video.title,
+      url: youtubeHref(video),
+      thumbnailUrl: abs(videoPoster(video).src),
+      author: { '@id': ID.org },
+      inLanguage: 'en',
+    },
+  }));
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      organizationNode(),
+      websiteNode(),
+      {
+        '@type': ['CollectionPage', 'ImageGallery'],
+        '@id': `${url}#collection`,
+        url,
+        name: 'Events & Gallery',
+        description:
+          'Udaan, the academy\u2019s own showcase, with Arangetrams, temple festivals and performances \u2014 photographs and recordings from Shanti Kala Nikketan\u2019s own stages.',
+        isPartOf: { '@id': ID.website },
+        publisher: { '@id': ID.org },
+        about: { '@id': ID.org },
+        mainEntity: {
+          '@type': 'ItemList',
+          '@id': `${url}#items`,
+          numberOfItems: photos.length + recordings.length,
+          itemListOrder: 'https://schema.org/ItemListUnordered',
+          itemListElement: [...photos, ...recordings],
+        },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `${url}#breadcrumb`,
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+          { '@type': 'ListItem', position: 2, name: 'Events & gallery', item: url },
+        ],
+      },
+    ],
+  };
+}
 
 /** Location-specific questions, generated from the branch's own facts. */
 export function locationFaqs(branch: Branch): Faq[] {

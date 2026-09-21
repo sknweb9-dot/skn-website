@@ -152,7 +152,7 @@ export const ACTS: Act[] = [
       'After Level 6 comes a period of intensive rehearsal, stagecraft, and individual mentoring, culminating in the Arangetram — a formal debut as a Bharatanatyam performer.',
       'And before that, Udaan: our own showcase, created so that every dancer has a stage, irrespective of their stage of learning.',
     ],
-    link: { href: '/performances', label: 'Performances' },
+    link: { href: '/events', label: 'Udaan & the record' },
   },
   {
     index: 6,

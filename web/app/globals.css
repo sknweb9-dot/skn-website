@@ -299,6 +299,18 @@ html.lenis body {
   }
 }
 
+/* Hides the scrollbar on a deliberately-scrollable strip — the gallery's filter
+   pills, which are a horizontal row on a phone. The strip keeps its own
+   affordances (the pills visibly run off the edge, and the active one scrolls
+   into view), so the bar is redundant furniture rather than the only signal. */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 /* Masks the top and bottom of a scrolling column. */
 @utility mask-y {
   mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent);

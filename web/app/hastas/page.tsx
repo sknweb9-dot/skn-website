@@ -8,6 +8,30 @@ import { FRAME_HEIGHT, FRAME_WIDTH, MUDRAS, VERSE_MUDRAS, framePath, liveFrames 
 import { SITE } from '@/lib/site';
 import { hastasGraph, slugify } from '@/lib/schema';
 
+/**
+ * UNLINKED AND NOINDEXED — read this before reviving the page.
+ *
+ * The academy asked for this route to be taken off the site. It has not been
+ * deleted, because the content is real work with genuine reference value: all
+ * twenty-eight gestures in Abhinaya Darpana order, each with its literal
+ * meaning, documented viniyoga, and where published, its Sanskrit shloka and
+ * word-by-word gloss. Nothing else on the site would earn a link from outside
+ * the academy's own catchment.
+ *
+ * So the route still resolves and still renders. What changed:
+ *
+ *   - removed from NAV_ROUTES in lib/site.ts, which covers the masthead, the
+ *     mobile menu and the footer in one edit;
+ *   - removed from app/sitemap.ts;
+ *   - the two QuietLinks on /curriculum and /lineage now point at /events;
+ *   - `robots` below tells crawlers not to index or follow it.
+ *
+ * To bring it back: undo those four things. lib/mudras.ts was NOT touched and
+ * must not be — the home page's ScrollStage and StaticActs depend on
+ * framePath, liveFrames, mudraAtProgress and FRAME_COUNT, and lib/acts.ts on
+ * mudraByName. Only `MUDRAS` itself is used solely by this page and by
+ * hastasGraph() in lib/schema.ts.
+ */
 const TITLE = 'The 28 Asamyuta Hastas of Bharatanatyam';
 const DESCRIPTION =
   'A reference to the twenty-eight single-hand gestures of Bharatanatyam in the canonical Abhinaya Darpana order — each with its literal meaning, documented viniyoga, and where published, its Sanskrit shloka with a word-by-word gloss.';
@@ -16,6 +40,12 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   alternates: { canonical: '/hastas' },
+  /**
+   * Unlinked at the academy's request, so also unindexed. `follow: false`
+   * because the only outbound links here go to pages already in the sitemap —
+   * there is no crawl path that needs preserving through this page.
+   */
+  robots: { index: false, follow: false },
   keywords: [
     'asamyuta hastas',
     'Bharatanatyam mudras list',
