@@ -45,7 +45,8 @@ export default function Footer() {
         <div className="mt-12 grid gap-12 lg:grid-cols-[1.2fr_1fr_1fr]">
           <div>
             <div className="flex items-center gap-3">
-              <Image src="/img/logo-full.svg" alt="" width={900} height={900} className="size-12" />
+              {/* PNG at its rendered size rather than the SVG — see Nav.tsx. */}
+              <Image src="/img/logo-full.png" alt="" width={48} height={48} className="size-12" />
               <span className="leading-tight">
                 <span className="block font-display text-base font-semibold text-teal-deep">
                   {SITE.name}

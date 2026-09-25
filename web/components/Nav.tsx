@@ -120,11 +120,22 @@ export default function Nav() {
               className="pointer-events-auto flex items-center gap-3"
               aria-label={`${SITE.name} — home`}
             >
+              {/* The PNG, not logo-full.svg, deliberately.
+                  next/image treats an `.svg` src as `unoptimized` automatically,
+                  so the SVG ships all 338KB of its 4,436 auto-traced paths to
+                  render a 44px square in the masthead of every page. The PNG goes
+                  through the optimizer and arrives as a couple of KB of webp. The
+                  SVG stays on /about, where it is rendered large enough for vector
+                  crispness to be the point.
+
+                  width/height are the rendered size, not the source's 900x900:
+                  next/image builds the srcset from `width`, so declaring 900 had
+                  the browser fetch a 1080px-wide render for a 44px box. */}
               <Image
-                src="/img/logo-full.svg"
+                src="/img/logo-full.png"
                 alt=""
-                width={900}
-                height={900}
+                width={44}
+                height={44}
                 priority
                 className="size-9 sm:size-11"
               />

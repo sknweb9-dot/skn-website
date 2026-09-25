@@ -1,17 +1,53 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import EmblemMark from './EmblemMark';
+import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
+import { SITE } from '@/lib/site';
 
 /**
  * Frame preload indicator.
  *
- * Stays mounted through a fade-out so the cream ground does not snap away, then
- * unmounts entirely — it must not linger as an invisible layer over the stage.
+ * WHAT REPLACED WHAT
+ * ------------------
+ * This used to be a large foil percentage counting to 100 over a marigold hairline.
+ * It worked, but a number is a number — it told the visitor how the machine was
+ * getting on rather than saying anything about where they had arrived. The emblem
+ * now draws itself instead: the enclosing circle first, then the three interwoven
+ * circles, then the centre. Progress is the drawing, so the indicator and the
+ * brand are the same object.
+ *
+ * The number has not simply been deleted. It still exists where it is load-bearing
+ * — as `aria-valuenow` on a progressbar role, and in a visually-hidden live
+ * region — so a screen reader hears "40%" while everyone else watches a line
+ * travel. What is gone is the visual counter.
+ *
+ * WHY THE PROGRESS IS FLOORED IN TIME
+ * -----------------------------------
+ * On a second visit the 82 frames of the gating pass are already in the HTTP cache
+ * and `loaded` reaches `total` almost immediately. Drawn straight, the emblem would
+ * snap to complete in a frame or two and the screen would read as a flash of cream —
+ * worse than no animation at all. So the drawn fraction is also capped by elapsed
+ * time: it can never outrun MIN_DRAW_MS, which means a cached visit still gets the
+ * full gesture and a slow connection is still told the truth. It never runs *ahead*
+ * of real loading, only behind it.
+ *
+ * The two limits are kept apart rather than merged into one piece of state. `paced`
+ * is the clock alone, so it needs nothing from render and the rAF loop can retire
+ * the moment it reaches 1; the min() against real progress happens during render.
+ * Under reduced motion `paced` simply never starts and the real figure is used.
  *
  * The stage underneath is usable before this clears: ScrollStage's draw() falls
  * back to the nearest already-loaded frame, so an early scroll degrades to a
  * coarser scrub rather than an empty aperture.
  */
+
+/** Shortest time the mark is allowed to take to draw itself. */
+const MIN_DRAW_MS = 1500;
+
+/** Fade duration after the draw completes. Matches the CSS transition below. */
+const FADE_MS = 800;
+
 export default function FramePreloader({
   loaded,
   total,
@@ -21,46 +57,91 @@ export default function FramePreloader({
   total: number;
   done: boolean;
 }) {
+  const reducedMotion = usePrefersReducedMotion();
   const [gone, setGone] = useState(false);
+  /** The clock's ceiling on the draw, 0–1. Stays 0 under reduced motion. */
+  const [paced, setPaced] = useState(0);
+
+  const actual = total > 0 ? Math.min(1, loaded / total) : 0;
+
+  /**
+   * Whichever of real progress and the time budget is further behind. Truthful,
+   * and never instantaneous. Under reduced motion there is no draw to pace, so
+   * the real figure is used directly.
+   */
+  const shown = reducedMotion ? actual : Math.min(actual, paced);
 
   useEffect(() => {
-    if (!done) return;
-    const t = setTimeout(() => setGone(true), 900);
+    if (reducedMotion) return;
+
+    const start = performance.now();
+    let raf = 0;
+
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / MIN_DRAW_MS);
+      setPaced(t);
+      // Nothing left to pace once the budget is spent; real progress takes over.
+      if (t < 1) raf = requestAnimationFrame(tick);
+    };
+
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [reducedMotion]);
+
+  const drawn = shown >= 0.999;
+  /** Only leave once the frames are in AND the mark has finished drawing. */
+  const finished = done && drawn;
+
+  useEffect(() => {
+    if (!finished) return;
+    const t = setTimeout(() => setGone(true), FADE_MS + 200);
     return () => clearTimeout(t);
-  }, [done]);
+  }, [finished]);
 
   if (gone) return null;
 
-  const pct = total > 0 ? Math.round((loaded / total) * 100) : 0;
+  const pct = Math.round(shown * 100);
 
   return (
     <div
-      aria-hidden={done}
-      className={`fixed inset-0 z-50 flex flex-col items-center justify-center bg-cream transition-opacity duration-700 ${
-        done ? 'pointer-events-none opacity-0' : 'opacity-100'
+      role="progressbar"
+      aria-valuenow={pct}
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-label="Loading the gesture sequence"
+      aria-hidden={finished}
+      className={`fixed inset-0 z-50 flex flex-col items-center justify-center bg-cream transition-opacity ease-out ${
+        finished ? 'pointer-events-none opacity-0' : 'opacity-100'
       }`}
+      style={{ transitionDuration: `${FADE_MS}ms` }}
     >
-      <p className="eyebrow">Shanti Kala Nikketan</p>
-
-      <p
-        className="mt-5 font-display text-[clamp(2.5rem,9vw,4.5rem)] leading-none font-semibold foil"
-        aria-live="polite"
-        aria-atomic="true"
-      >
-        {pct}
-        <span className="text-[0.4em] align-super">%</span>
-      </p>
-
-      <div className="mt-6 h-px w-56 overflow-hidden bg-ink/10 sm:w-72">
-        <div
-          className="h-full bg-marigold transition-[width] duration-300 ease-out"
-          style={{ width: `${pct}%` }}
+      <div className="relative">
+        <EmblemMark
+          progress={shown}
+          spin={!reducedMotion}
+          className="w-[clamp(7rem,22vw,10.5rem)]"
         />
+
+        {/* The completion bloom: one expanding ring, once. Keyed on `drawn` so it
+            plays at the moment the last circle closes rather than on mount. */}
+        {drawn && !reducedMotion ? (
+          <span
+            aria-hidden
+            className="animate-emblem-bloom pointer-events-none absolute inset-0 rounded-full border border-marigold"
+          />
+        ) : null}
       </div>
 
-      <p className="mt-5 font-sans text-[0.7rem] tracking-[0.2em] text-ink-faint uppercase">
+      <p className="eyebrow mt-9">{SITE.name}</p>
+
+      <p className="mt-2.5 font-sans text-[0.7rem] tracking-[0.2em] text-ink-faint uppercase">
         Preparing the gestures
       </p>
+
+      {/* The figure, for anyone who cannot see the drawing. */}
+      <span className="sr-only" aria-live="polite" aria-atomic="true">
+        {pct}% loaded
+      </span>
     </div>
   );
 }

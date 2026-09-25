@@ -50,6 +50,11 @@
   --animate-breathe: breathe 6s ease-in-out infinite;
   --animate-cue-arrow: cue-arrow 2.4s var(--ease-temple) infinite;
 
+  /* The emblem mark's slow turn. Long enough that it reads as alive rather than
+     as a spinner — a loading indicator that races implies something is wrong. */
+  --animate-emblem-spin: emblem-spin 34s linear infinite;
+  --animate-emblem-bloom: emblem-bloom 1.1s var(--ease-temple) both;
+
   /* The arch aperture ratio. The source frames are 720x1280, but the bottom
      22% carries the video's burned-in gesture label and is cropped away at draw
      time — so the visible plate is 720x998. Keep this in step with
@@ -117,6 +122,50 @@
   }
 }
 
+/* The emblem mark. The trefoil turns about the mark's own centre — the transform
+   origin is set inline on the group, because an SVG group's default origin is the
+   viewport corner, not its own middle. */
+@keyframes emblem-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Fires once, when the mark finishes drawing: a ring expanding out of the
+   emblem and fading, so completion is felt rather than merely reached. */
+@keyframes emblem-bloom {
+  from {
+    opacity: 0.55;
+    transform: scale(0.82);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
+/* The Instagram rail's drift.
+   The track holds the posts twice over, so translating exactly -50% lands the
+   second copy where the first began and the loop is seamless. Duration is set
+   per-instance from the post count, so adding posts makes the rail longer rather
+   than faster.
+
+   Deliberately NOT wired through the prefers-reduced-motion block at the foot of
+   this file: that block clamps animation-duration to 0.01ms, which here would
+   snap the track straight to -50% rather than stopping it. InstagramRail checks
+   the preference in JS and simply does not apply the animation. */
+@keyframes rail-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
 /* Route transition. Opacity only, deliberately.
    A transform here would make the wrapper a containing block for `position:
    fixed`, which would break the fixed masthead on every page, and would also
@@ -127,8 +176,7 @@
     opacity: 0;
   }
   to {
-    opacity: 1;
-  }
+    opacity: 1;  }
 }
 
 /* ---------------------------------------------------------------------------
@@ -314,6 +362,12 @@ html.lenis body {
 /* Masks the top and bottom of a scrolling column. */
 @utility mask-y {
   mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent);
+}
+
+/* Masks the left and right of a scrolling row — the Instagram rail, whose cards
+   should fade at the edges rather than being guillotined by the container. */
+@utility mask-x {
+  mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
 }
 
 /* The scroll cue's hairline, with a lit segment falling down it.
