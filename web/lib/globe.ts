@@ -107,29 +107,51 @@ export function plateTransform(
 }
 
 /**
- * Plate edge length in world units.
+ * Plate dimensions in world units, for a plate of a given aspect ratio.
  *
- * Sized by target coverage rather than by tiling. Each plate on a sphere of
- * radius R owns 4πR²/N of surface; asking plates to actually fill that area
- * makes them collide, because a flat square inscribed on a curved shell pokes
+ * Every plate gets the same AREA rather than the same edge length, so a wide
+ * landscape photograph and a tall invitation card carry equal visual weight on
+ * the sphere. Sizing them by a shared edge instead would make the posters tower
+ * over the photographs.
+ *
+ * Area is set by target coverage rather than by tiling. Each plate on a sphere of
+ * radius R owns 4πR²/N of surface; asking plates to actually fill that area makes
+ * them collide, because a flat rectangle inscribed on a curved shell pokes
  * through its neighbours at the corners. COVERAGE is the fraction of the shell
  * the plates are allowed to occupy.
  *
  * Arrived at by looking at it. At 0.8 the plates clip through each other badly
  * enough to read as wreckage; at 0.16 they read as confetti with no sense of a
  * surface. Just under 0.4 is where they hold together as a mosaic with visible
- * mortar — the temple-wall look — while the gaps still let the far side of the
- * sphere show through, which is where the depth comes from.
+ * mortar, while the gaps still let the far side of the sphere show through, which
+ * is where the depth comes from.
  *
- * The cap matters at low counts: with the teaser's forty-odd plates the formula
- * alone asks for tiles a third of the radius across, which on a small window is
- * a handful of billboards rather than a globe.
+ * The cap on the long edge matters at low counts: with the teaser's forty-odd
+ * plates the area formula alone asks for tiles a third of the radius across,
+ * which on a small window is a handful of billboards rather than a globe.
  */
 const COVERAGE = 0.38;
+const LONG_EDGE_CAP = 0.34;
 
-export function plateSize(total: number, radius: number): number {
-  const area = (4 * Math.PI * radius * radius) / Math.max(1, total);
-  return Math.min(Math.sqrt(COVERAGE * area), radius * 0.34);
+export type PlateExtent = { width: number; height: number };
+
+export function plateExtent(total: number, radius: number, aspect: number): PlateExtent {
+  const area = ((4 * Math.PI * radius * radius) / Math.max(1, total)) * COVERAGE;
+  const safeAspect = aspect > 0 ? aspect : 1;
+
+  // width * height = area, width / height = aspect
+  let height = Math.sqrt(area / safeAspect);
+  let width = safeAspect * height;
+
+  const cap = radius * LONG_EDGE_CAP;
+  const longest = Math.max(width, height);
+  if (longest > cap) {
+    const k = cap / longest;
+    width *= k;
+    height *= k;
+  }
+
+  return { width, height };
 }
 
 /** Linear interpolation, clamped. Used for the reveal and the focus lerps. */

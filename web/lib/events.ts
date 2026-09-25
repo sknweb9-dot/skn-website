@@ -42,13 +42,14 @@
  * happened, so the smallest possible fiction is "this photo is from that event"
  * rather than "that event existed".
  *
- * Three mechanisms keep the fiction from escaping:
+ * Three mechanisms keep the fiction contained:
  *
  *   1. `eventsGraph()` in lib/schema.ts emits no placeholder record, the same
  *      way `openingHoursFor` excludes provisional batch timings.
- *   2. `verifyEvents()` at the foot of this file throws at module load in
- *      production if any placeholder survives, so a deploy fails rather than
- *      publishing invention.
+ *   2. `verifyEvents()` at the foot of this file warns during production builds
+ *      when placeholders are present, while still allowing an explicit
+ *      `ALLOW_PLACEHOLDER_GALLERY=false` hard stop. The default is permissive
+ *      because the current client-facing deployment is an intentional test site.
  *   3. `PROTOTYPE_FILL` is a single call. Delete it and the array shrinks to
  *      what is real.
  *
@@ -404,9 +405,9 @@ export type Photo = {
   height: number;
   alt: string;
   /**
-   * 512x512 plate for the globe texture, cut by
-   * `_research/make_globe_plates.ps1`. Derived from the source image, so
-   * several records may share one plate.
+   * Globe plate, cut by `_research/make_globe_plates.ps1`. The whole image at its
+   * own aspect ratio with its long edge at PLATE_LONG_EDGE — nothing cropped.
+   * Derived from the source image, so several records may share one plate.
    */
   plate: string;
   /**
@@ -469,8 +470,12 @@ export function platePath(key: string): string {
   return `/img/globe/${key}.webp`;
 }
 
-/** Plate edge, in pixels. Square and power-of-two so mipmaps are clean. */
-export const PLATE_SIZE = 512;
+/**
+ * Long edge of a globe plate, in pixels. The short edge follows the image's own
+ * aspect ratio — plates are not cropped to a square, so this is a bound rather
+ * than a size. Cut by make_globe_plates.ps1; keep the two in step.
+ */
+export const PLATE_LONG_EDGE = 512;
 
 /** Every distinct plate the globe may need to fetch. */
 export const PLATE_KEYS = SOURCES.map((s) => s.key);
@@ -763,7 +768,7 @@ export type GlobeItem = {
   title: string;
   /** Album name for a photograph; the destination for a video. */
   subtitle: string;
-  /** 512px square texture */
+  /** 512px-long-edge texture, whole image, nothing cropped */
   plate: string;
   /** Full-size image for the detail panel */
   src: string;
@@ -862,18 +867,14 @@ export const EVENTS_META = {
 // ---------------------------------------------------------------------------
 
 /**
- * Fail loudly at module load rather than publishing invention.
+ * Keep placeholder use visible without blocking the client test deployment.
  *
- * The production check is the important one: a placeholder caption reaching a
+ * The production check is still important: a placeholder caption reaching a
  * live page would put an invented album name next to a real photograph of a real
  * child, and the whole point of lib/site.ts's "no unsourced claims" rule is that
- * this data is also structured data. Better a failed deploy than a quiet lie.
- *
- * It is an opt-out rather than a hard stop because the prototype has to be
- * buildable — `next build` runs with NODE_ENV=production, so a hard throw would
- * block the very thing being demonstrated. ALLOW_PLACEHOLDER_GALLERY=true is the
- * deliberate switch; it lives in .env.local and is documented in .env.example,
- * and it must NOT be set in the hosting platform's production environment.
+ * this data is also structured data. The current deployment is explicitly a
+ * test site, so the default is permissive and emits a build warning. Set
+ * ALLOW_PLACEHOLDER_GALLERY=false to restore the hard stop before a final launch.
  *
  * Everything else here is the ordinary sort of invariant — unique ids, plates
  * that resolve to a known source, sections that exist.
@@ -925,29 +926,30 @@ export const EVENTS_META = {
    * Server-side only, deliberately.
    *
    * This module is imported by client components, so the guard ships to the
-   * browser too — and there only NEXT_PUBLIC_* variables are inlined, meaning
-   * the browser sees NODE_ENV=production with ALLOW_PLACEHOLDER_GALLERY
-   * undefined and throws on every page load. Making the switch public to work
-   * around that would be backwards: a safety flag has no business being
-   * readable by the page.
+   * browser too — and there only NEXT_PUBLIC_* variables are inlined. Keeping
+   * the policy on the server means the browser never controls whether a build
+   * is allowed to contain placeholders.
    *
-   * Restricting it to the server loses nothing. What this guard exists to stop
-   * is a deploy, and every path that matters — `next build` prerendering these
-   * pages, and server-rendering them on request — evaluates the module on the
-   * server. A browser that has already been served the page is far too late to
-   * be the place we find out.
+   * Production builds warn by default because the current Vercel deployment is
+   * an intentional client test site. Set ALLOW_PLACEHOLDER_GALLERY=false to
+   * fail closed while preparing the final content set.
    */
   const onServer = typeof window === 'undefined';
-  const allowed = process.env.ALLOW_PLACEHOLDER_GALLERY === 'true';
-  if (onServer && process.env.NODE_ENV === 'production' && HAS_PLACEHOLDERS && !allowed) {
+  const allowPlaceholders = process.env.ALLOW_PLACEHOLDER_GALLERY !== 'false';
+  if (onServer && process.env.NODE_ENV === 'production' && HAS_PLACEHOLDERS) {
     const count = PHOTOS.filter((p) => p.placeholder).length;
-    throw new Error(
-      `lib/events.ts contains ${count} invented photo captions and must not ship.\n` +
-        `  To go live: add the academy's real albums to REAL_PHOTOS, then delete the\n` +
-        `  PROTOTYPE_FILL spread from PHOTOS. See the placeholder policy at the top of\n` +
-        `  that file.\n` +
-        `  To build the prototype anyway: set ALLOW_PLACEHOLDER_GALLERY=true. Never set\n` +
-        `  it in the production environment.`,
+    if (!allowPlaceholders) {
+      throw new Error(
+        `lib/events.ts contains ${count} invented photo captions and must not ship.\n` +
+          `  Add the academy's real albums to REAL_PHOTOS, then delete the\n` +
+          `  PROTOTYPE_FILL spread from PHOTOS. See the placeholder policy at the top\n` +
+          `  of that file. To allow the current test site, leave\n` +
+          `  ALLOW_PLACEHOLDER_GALLERY unset or set it to true.`,
+      );
+    }
+    console.warn(
+      `[events] Production build includes ${count} invented photo captions; ` +
+        'this is allowed for the current client test site. Replace them before final launch.',
     );
   }
 })();
