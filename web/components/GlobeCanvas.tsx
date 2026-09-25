@@ -5,7 +5,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { gsap } from 'gsap';
 import type { EventSection, GlobeItem } from '@/lib/events';
-import { plateSize, plateTransform, type GlobeShape } from '@/lib/globe';
+import { plateExtent, plateTransform, type GlobeShape } from '@/lib/globe';
 
 /**
  * The gallery globe.
@@ -116,8 +116,8 @@ const FIT_MARGIN = 1.06;
  */
 const FOCUS_GAP = 2.6;
 
-/** Hover and focus pop. */
-const SCALE = { rest: 1, hover: 1.18, focus: 1.3 };
+/** Hover and focus growth, as a multiplier over a plate's resting size. */
+const POP = { rest: 1, hover: 1.18, focus: 1.34 };
 
 /**
  * Opacity of plates filtered out.
@@ -167,16 +167,8 @@ const EASE = { scale: 0.16, position: 0.08, opacity: 0.12, distance: 0.09 };
 /** How many plates are mid-fade at once during the reveal sweep. */
 const REVEAL_FEATHER = 14;
 
-/**
- * The temple arch, authored for a 720x1000 box — byte-identical to the path in
- * the `arch` utility and in ArchOutline. Stretched to a square plate here, which
- * is what `preserveAspectRatio="none"` does everywhere else on the site.
- */
-const ARCH_PATH_D = 'M0 1000V420C0 196 150 54 360 24c210 30 360 172 360 396v580Z';
-const ARCH_BOX = { w: 720, h: 1000 };
-
-/** Texture edge. Matches PLATE_SIZE in lib/events.ts and the prep script. */
-const TEX = 512;
+/** Texture long edge. Matches the prep script in _research. */
+const TEX_LONG = 512;
 
 const COLOR = {
   marigold: '#ec9a29',
@@ -191,42 +183,6 @@ const COLOR = {
 // ---------------------------------------------------------------------------
 
 /**
- * Cover-fit source rectangle for drawing `img` into a square of `size`.
- *
- * Biased upward by the same 0.35 the plate prep script uses: the bottom of a
- * dance photograph is floor, the top is faces and hands. The plates are already
- * square coming out of ffmpeg, so this only does work if a non-square image is
- * ever passed in — which is exactly why it is here rather than assumed away.
- */
-function coverRect(img: HTMLImageElement, size: number) {
-  const scale = Math.max(size / img.width, size / img.height);
-  const w = img.width * scale;
-  const h = img.height * scale;
-  return { x: (size - w) / 2, y: (size - h) * 0.35, w, h };
-}
-
-function archPath(): Path2D {
-  return new Path2D(ARCH_PATH_D);
-}
-
-/** Applies the arch as a clip, in plate pixel space. */
-function clipToArch(ctx: CanvasRenderingContext2D, size: number) {
-  ctx.setTransform(size / ARCH_BOX.w, 0, 0, size / ARCH_BOX.h, 0, 0);
-  ctx.clip(archPath());
-  ctx.setTransform(1, 0, 0, 1, 0, 0);
-}
-
-function strokeArch(ctx: CanvasRenderingContext2D, size: number, width: number, color: string) {
-  ctx.save();
-  ctx.setTransform(size / ARCH_BOX.w, 0, 0, size / ARCH_BOX.h, 0, 0);
-  ctx.strokeStyle = color;
-  // Divide out the transform so the drawn hairline is `width` device pixels.
-  ctx.lineWidth = width * (ARCH_BOX.w / size);
-  ctx.stroke(archPath());
-  ctx.restore();
-}
-
-/**
  * The play affordance drawn onto video plates.
  *
  * A plate that zooms in and a plate that leaves for YouTube must not look
@@ -234,19 +190,19 @@ function strokeArch(ctx: CanvasRenderingContext2D, size: number, width: number, 
  * doubly before the pointer ever arrives. A ring and triangle in marigold, low
  * on the plate so it does not sit over a face.
  */
-function drawPlayGlyph(ctx: CanvasRenderingContext2D, size: number) {
-  const cx = size / 2;
-  const cy = size * 0.76;
-  const r = size * 0.082;
+function drawPlayGlyph(ctx: CanvasRenderingContext2D, w: number, h: number) {
+  const r = Math.min(w, h) * 0.1;
+  const cx = w / 2;
+  const cy = h - r * 1.7;
 
   ctx.save();
-  ctx.fillStyle = 'rgba(251, 248, 241, 0.86)';
+  ctx.fillStyle = 'rgba(251, 248, 241, 0.88)';
   ctx.beginPath();
   ctx.arc(cx, cy, r, 0, Math.PI * 2);
   ctx.fill();
 
   ctx.strokeStyle = COLOR.marigold;
-  ctx.lineWidth = Math.max(2, size * 0.006);
+  ctx.lineWidth = Math.max(2, r * 0.1);
   ctx.stroke();
 
   ctx.fillStyle = COLOR.teal;
@@ -260,63 +216,71 @@ function drawPlayGlyph(ctx: CanvasRenderingContext2D, size: number) {
   ctx.restore();
 }
 
-/** Arch-clipped plate from a loaded image. */
+/**
+ * A plate is the whole photograph and nothing else.
+ *
+ * The canvas is the image's own size, so no crop, no letterbox, and no arch mask.
+ * The previous version clipped every plate to the temple arch, which was
+ * genuinely handsome and genuinely wrong: a third of these images are posters and
+ * invitation cards whose text runs to the margins, and the arch cut the top
+ * corners off — which on a poster is where the title sits. The sphere gives up
+ * some of its uniformity and gets back the ability to be read.
+ *
+ * What survives of the treatment is the marigold hairline, drawn on the inside
+ * edge so plates read as mounted rather than as floating cut-outs.
+ */
 function buildPlate(img: HTMLImageElement, isVideo: boolean): HTMLCanvasElement {
+  const w = img.naturalWidth || TEX_LONG;
+  const h = img.naturalHeight || TEX_LONG;
+
   const canvas = document.createElement('canvas');
-  canvas.width = TEX;
-  canvas.height = TEX;
+  canvas.width = w;
+  canvas.height = h;
   const ctx = canvas.getContext('2d');
   if (!ctx) return canvas;
 
-  ctx.save();
-  clipToArch(ctx, TEX);
-  const r = coverRect(img, TEX);
-  ctx.drawImage(img, r.x, r.y, r.w, r.h);
+  ctx.drawImage(img, 0, 0, w, h);
 
-  // Warm the photograph toward the page's palette so ninety-odd plates read as
+  // Warm the photograph toward the page's palette so a hundred-odd plates read as
   // one object rather than a contact sheet. Very light: 6% silk.
-  ctx.globalCompositeOperation = 'source-atop';
   ctx.fillStyle = 'rgba(244, 235, 217, 0.06)';
-  ctx.fillRect(0, 0, TEX, TEX);
-  ctx.globalCompositeOperation = 'source-over';
-  ctx.restore();
+  ctx.fillRect(0, 0, w, h);
 
-  if (isVideo) drawPlayGlyph(ctx, TEX);
-  strokeArch(ctx, TEX, isVideo ? 4 : 2.5, isVideo ? COLOR.marigold : 'rgba(236, 154, 41, 0.62)');
+  if (isVideo) drawPlayGlyph(ctx, w, h);
+
+  // Hairline inset by half its width so the whole stroke lands on the plate
+  // rather than half of it falling off the edge.
+  const line = isVideo ? 4 : 3;
+  ctx.strokeStyle = isVideo ? COLOR.marigold : 'rgba(236, 154, 41, 0.66)';
+  ctx.lineWidth = line;
+  ctx.strokeRect(line / 2, line / 2, w - line, h - line);
 
   return canvas;
 }
 
 /**
- * Shown until the real plate lands. Cream ground, arch hairline, a small
- * centred mark — deliberately quiet, because ninety of these appearing at once
- * would otherwise read as an error state.
+ * Shown until the real plate lands. A quiet cream wash — deliberately dull,
+ * because a hundred of these appearing at once would otherwise read as an error
+ * state. Square, and stretched to whatever plate shape needs it; a flat gradient
+ * does not care.
  */
 function buildFallbackPlate(): HTMLCanvasElement {
   const canvas = document.createElement('canvas');
-  canvas.width = TEX;
-  canvas.height = TEX;
+  canvas.width = 64;
+  canvas.height = 64;
   const ctx = canvas.getContext('2d');
   if (!ctx) return canvas;
 
-  ctx.save();
-  clipToArch(ctx, TEX);
-  const grad = ctx.createLinearGradient(0, 0, 0, TEX);
+  const grad = ctx.createLinearGradient(0, 0, 0, 64);
   grad.addColorStop(0, COLOR.cream);
   grad.addColorStop(1, COLOR.silk);
   ctx.fillStyle = grad;
-  ctx.fillRect(0, 0, TEX, TEX);
-  ctx.restore();
+  ctx.fillRect(0, 0, 64, 64);
 
-  ctx.save();
-  ctx.strokeStyle = 'rgba(236, 154, 41, 0.34)';
-  ctx.lineWidth = 3;
-  ctx.beginPath();
-  ctx.arc(TEX / 2, TEX / 2, TEX * 0.1, 0, Math.PI * 2);
-  ctx.stroke();
-  ctx.restore();
+  ctx.strokeStyle = 'rgba(236, 154, 41, 0.4)';
+  ctx.lineWidth = 2;
+  ctx.strokeRect(1, 1, 62, 62);
 
-  strokeArch(canvas.getContext('2d')!, TEX, 2.5, 'rgba(236, 154, 41, 0.45)');
   return canvas;
 }
 
@@ -330,8 +294,15 @@ type PlateMesh = THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial> & {
     index: number;
     targetPos: THREE.Vector3;
     targetQuat: THREE.Quaternion;
-    baseScale: number;
-    targetScale: number;
+    /**
+     * Resting size in world units. Non-uniform, because every plate now carries
+     * its image's own aspect ratio rather than being cropped to a square.
+     */
+    baseWidth: number;
+    baseHeight: number;
+    /** Multiplier over the base size: rest, hover or focus. */
+    targetPop: number;
+    pop: number;
     /** Beyond the teaser cut: present in the scene but not shown. */
     parked: boolean;
     /** Excluded by the current section filter. */
@@ -413,7 +384,6 @@ const GlobeCanvas = forwardRef<GlobeHandle, Props>(function GlobeCanvas(
 
     const isTeaser = modeRef.current === 'teaser';
     const shown = isTeaser ? Math.min(TEASER_COUNT, meshes.length) : meshes.length;
-    const size = plateSize(shown, RADIUS);
     const dummy = new THREE.Object3D();
 
     meshes.forEach((mesh, i) => {
@@ -428,10 +398,16 @@ const GlobeCanvas = forwardRef<GlobeHandle, Props>(function GlobeCanvas(
       dummy.lookAt(t.lookAt[0], t.lookAt[1], t.lookAt[2]);
       mesh.userData.targetQuat.setFromEuler(dummy.rotation);
 
-      const withinTeaser = i < shown;
-      mesh.userData.baseScale = size;
-      mesh.userData.parked = isTeaser && !withinTeaser;
-      mesh.userData.targetScale = mesh.userData.parked ? 0 : SCALE.rest;
+      // Equal area per plate, shaped to the image's own ratio. The item carries
+      // its real pixel dimensions, so a landscape photograph comes out wide and
+      // an invitation card comes out tall, both occupying the same footprint.
+      const aspect = mesh.userData.item.width / Math.max(1, mesh.userData.item.height);
+      const extent = plateExtent(Math.max(total, 1), RADIUS, aspect);
+      mesh.userData.baseWidth = extent.width;
+      mesh.userData.baseHeight = extent.height;
+
+      mesh.userData.parked = isTeaser && i >= shown;
+      mesh.userData.targetPop = mesh.userData.parked ? 0 : POP.rest;
     });
   }
 
@@ -496,12 +472,12 @@ const GlobeCanvas = forwardRef<GlobeHandle, Props>(function GlobeCanvas(
      * position normalised *is* the direction to stand in.
      */
     const outward = world.clone().normalize();
-    const gap = mesh.userData.baseScale * FOCUS_GAP;
+    const gap = Math.max(mesh.userData.baseWidth, mesh.userData.baseHeight) * FOCUS_GAP;
     camGoalRef.current = world.clone().addScaledVector(outward, gap);
     targetGoalRef.current = world.clone();
 
     meshesRef.current.forEach((m) => {
-      m.userData.targetScale = m.userData.parked ? 0 : m === mesh ? SCALE.focus : SCALE.rest;
+      m.userData.targetPop = m.userData.parked ? 0 : m === mesh ? POP.focus : POP.rest;
     });
 
     if (notify) onSelectRef.current?.(mesh.userData.item);
@@ -520,7 +496,7 @@ const GlobeCanvas = forwardRef<GlobeHandle, Props>(function GlobeCanvas(
     targetDistRef.current = restingDistance();
 
     meshesRef.current.forEach((m) => {
-      m.userData.targetScale = m.userData.parked ? 0 : SCALE.rest;
+      m.userData.targetPop = m.userData.parked ? 0 : POP.rest;
     });
 
     if (notify) onSelectRef.current?.(null);
@@ -617,13 +593,15 @@ const GlobeCanvas = forwardRef<GlobeHandle, Props>(function GlobeCanvas(
         index,
         targetPos: new THREE.Vector3(),
         targetQuat: new THREE.Quaternion(),
-        baseScale: 0.2,
-        targetScale: SCALE.rest,
+        baseWidth: 0.2,
+        baseHeight: 0.2,
+        targetPop: POP.rest,
+        pop: 0,
         parked: false,
         filtered: false,
         revealOpacity: 0,
       };
-      mesh.scale.setScalar(0.001);
+      mesh.scale.set(0.001, 0.001, 1);
       scene.add(mesh);
       return mesh;
     });
@@ -739,7 +717,7 @@ const GlobeCanvas = forwardRef<GlobeHandle, Props>(function GlobeCanvas(
       // cannot see.
       const hit = hits.find((h) => {
         const plate = h.object as PlateMesh;
-        return plate.scale.x > 0.01 && plate.material.opacity > 0.35;
+        return !plate.userData.parked && plate.material.opacity > 0.35;
       });
       return (hit?.object as PlateMesh) ?? null;
     }
@@ -757,7 +735,7 @@ const GlobeCanvas = forwardRef<GlobeHandle, Props>(function GlobeCanvas(
       hoveredRef.current = mesh;
       meshesRef.current.forEach((m) => {
         if (m.userData.parked) return;
-        m.userData.targetScale = m === mesh ? SCALE.hover : SCALE.rest;
+        m.userData.targetPop = m === mesh ? POP.hover : POP.rest;
       });
 
       canvas.style.cursor = mesh ? 'pointer' : 'grab';
@@ -792,7 +770,7 @@ const GlobeCanvas = forwardRef<GlobeHandle, Props>(function GlobeCanvas(
       hoveredRef.current = null;
       meshesRef.current.forEach((m) => {
         if (m.userData.parked) return;
-        m.userData.targetScale = SCALE.rest;
+        m.userData.targetPop = POP.rest;
       });
       onHoverRef.current?.(null);
     }
@@ -897,9 +875,12 @@ const GlobeCanvas = forwardRef<GlobeHandle, Props>(function GlobeCanvas(
           1,
         );
 
-        const wantScale = data.baseScale * data.targetScale;
-        const scale = THREE.MathUtils.lerp(mesh.scale.x, wantScale, EASE.scale);
-        mesh.scale.setScalar(scale);
+        // Pop is tracked separately from the mesh scale because the scale is now
+        // non-uniform: lerping mesh.scale.x toward a width would silently squash
+        // every plate to its own aspect twice over.
+        data.pop = THREE.MathUtils.lerp(data.pop, data.targetPop, EASE.scale);
+        const scale = data.pop;
+        mesh.scale.set(data.baseWidth * scale, data.baseHeight * scale, 1);
 
         if (mesh.position.distanceToSquared(data.targetPos) > 1e-6) {
           mesh.position.lerp(data.targetPos, EASE.position);

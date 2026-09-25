@@ -480,14 +480,19 @@ export function GalleryDetail({
         </IconButton>
       </div>
 
-      <div className="arch relative aspect-[0.72] w-full overflow-hidden bg-teal-deep">
+      {/* Whole image, its own shape. Nothing is cropped in the detail view — this
+          is the one place someone has explicitly asked to see the thing. */}
+      <div
+        className="relative w-full overflow-hidden rounded-[0.9rem] border border-marigold/25 bg-silk"
+        style={{ aspectRatio: `${item.width} / ${item.height}` }}
+      >
         <Image
           src={item.src}
           alt={item.alt}
           width={item.width}
           height={item.height}
           sizes="(max-width: 640px) 90vw, 24rem"
-          className="h-full w-full object-cover"
+          className="h-full w-full object-contain"
         />
       </div>
 

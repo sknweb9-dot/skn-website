@@ -6,22 +6,21 @@ import { Search } from 'lucide-react';
 import { GLOBE_FILTERS, type GlobeItem } from '@/lib/events';
 
 /**
- * The gallery as ordinary markup.
+ * The gallery index.
  *
- * This is the load-bearing half of the gallery, not a consolation prize. It is
- * what Googlebot indexes, what a screen reader reads, what appears with
- * JavaScript disabled, and what a visitor on a machine without WebGL gets. The
- * globe is a spectacle layered over it — if the canvas never initialises,
- * nothing here is lost.
+ * Lives inside the full-screen overlay, behind the Globe/Index switch — not on
+ * the page, where a hundred-odd thumbnails buried everything below it. It is the
+ * globe's flat twin rather than a fallback: clicking a thumbnail flies the globe
+ * to that plate instead of opening a lightbox, so the two views stay one gallery.
  *
- * It is also the index view inside the full-screen gallery: clicking a thumbnail
- * there flies the globe to that plate rather than opening a lightbox, so the two
- * views stay one gallery instead of two.
+ * It is also what a visitor gets when WebGL is unavailable, and it is where the
+ * search lives — lifted from the reference project's directory section, which was
+ * the one genuinely useful thing in it. At a hundred plates search is marginal; at
+ * the several hundred the academy is about to send, it is the only way to find a
+ * particular year.
  *
- * The search box is lifted from the reference project's StoryScroll directory,
- * which was the one genuinely useful thing in it. At ninety-odd plates it is
- * marginal; at the several hundred the academy is about to send, it is the only
- * way to find a particular year.
+ * Nothing here is cropped. Cells take their image's own aspect ratio, which is
+ * why the layout is columns rather than a grid.
  */
 export default function GalleryGrid({
   items,
@@ -90,19 +89,26 @@ export default function GalleryGrid({
         {filtered.length} of {items.length}
       </p>
 
+      {/*
+        Columns rather than a grid. Now that every cell keeps its image's own
+        aspect ratio, a grid leaves ragged gaps under the short cells in each row;
+        columns pack them. The cost is that reading order runs down each column
+        instead of across each row, which for a photograph index is an acceptable
+        trade — nobody reads a contact sheet in sequence.
+      */}
       <ul
-        className={`mt-5 grid gap-3 ${
+        className={`mt-5 gap-3 [column-fill:_balance] ${
           compact
-            ? 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-5'
-            : 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4'
+            ? 'columns-2 sm:columns-3 lg:columns-5'
+            : 'columns-2 sm:columns-3 lg:columns-4'
         }`}
       >
         {filtered.map((item, index) => (
-          <li key={item.id}>
+          <li key={item.id} className="mb-3 break-inside-avoid">
             <Cell
               item={item}
               onSelect={onSelect}
-              // The first row is above the fold on most viewports; the rest can
+              // The first few are above the fold on most viewports; the rest can
               // wait until scrolled toward.
               priority={index < 4}
             />
@@ -132,7 +138,17 @@ function Cell({
 
   const media = (
     <>
-      <div className="arch relative aspect-[0.78] overflow-hidden bg-teal-deep">
+      {/*
+        The cell takes the image's own aspect ratio rather than forcing a shape.
+        A fixed box plus object-cover was cutting the edges off invitation cards
+        and posters, which is where their titles are. The grid comes out as ragged
+        rows of differing heights, which is what a wall of real photographs looks
+        like.
+      */}
+      <div
+        className="relative overflow-hidden rounded-[0.75rem] border border-marigold/25 bg-silk"
+        style={{ aspectRatio: `${item.width} / ${item.height}` }}
+      >
         <Image
           src={item.src}
           alt={item.alt}
@@ -140,12 +156,12 @@ function Cell({
           height={item.height}
           sizes="(max-width: 640px) 46vw, (max-width: 1024px) 30vw, 22vw"
           loading={priority ? 'eager' : 'lazy'}
-          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+          className="h-full w-full object-contain transition-transform duration-700 group-hover:scale-[1.03]"
         />
         {isVideo ? (
           <span
             aria-hidden
-            className="absolute inset-x-0 bottom-3 mx-auto grid h-8 w-8 place-items-center rounded-full bg-cream/85 text-teal ring-1 ring-marigold/60"
+            className="absolute inset-x-0 bottom-2.5 mx-auto grid h-8 w-8 place-items-center rounded-full bg-cream/90 text-teal ring-1 ring-marigold/60"
           >
             <span className="ml-0.5 block h-0 w-0 border-y-[5px] border-l-[8px] border-y-transparent border-l-current" />
           </span>

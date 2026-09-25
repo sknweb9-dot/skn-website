@@ -42,6 +42,14 @@ import {
  * Enter and Space, and announces itself. The ceremony lives in the press instead:
  * the sphere leans toward you on hover and blooms on activation.
  *
+ * WHERE THE INDEX LIVES
+ * ---------------------
+ * Inside the overlay only, reachable from the Globe/Index switch. It began life
+ * inline on the page, which was the right instinct for crawlability and the wrong
+ * one for reading: a hundred-odd thumbnails pushed everything after the gallery
+ * several screens down. See the note further down for what that trade costs and
+ * why it is small.
+ *
  * WHY THE OVERLAY IS A PORTAL
  * ---------------------------
  * Reveal wraps most section content and animates `y` with GSAP without clearing
@@ -450,12 +458,26 @@ export default function EventGallery() {
       </div>
 
       {/* ---------------------------------------------------------------
-          The index. Always rendered, always crawlable — the globe is a
-          layer over this, never a replacement for it.
+          The index used to sit here, inline. It does not any more.
+
+          At 107 records — and several hundred once the real albums arrive — it
+          turned the page into a scroll marathon: everything below the gallery,
+          which includes the Arangetrams, the performances and both calls to
+          action, sat underneath a wall of thumbnails nobody asked for. The index
+          now lives inside the overlay, one press away, where it is the thing the
+          visitor came for rather than an obstacle.
+
+          What that costs, honestly: the thumbnails are no longer in the page's
+          own markup for a crawler to follow. It costs less than it sounds like.
+          The eleven recordings are still here as real figures with posters,
+          captions and outbound links, in their editorial sections. The
+          Schema.org graph still carries all twenty-two real items with their
+          contentUrls. And the eighty-five padded records have invented captions
+          and are excluded from that graph anyway, so they had no search value to
+          lose. If a crawlable thumbnail wall is wanted later, the right shape for
+          it is its own route — /events/gallery — not four extra screens bolted to
+          the foot of this page.
       --------------------------------------------------------------- */}
-      <div className="mt-14">
-        <GalleryGrid items={GLOBE_ITEMS} />
-      </div>
 
       {/* The overlay is portalled to the body — see the note at the top of this
           file about transformed ancestors capturing `position: fixed`. `open`

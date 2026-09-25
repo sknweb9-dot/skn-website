@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import JsonLd from '@/components/JsonLd';
 import EventGallery from '@/components/EventGallery';
-import { PageHero, PageShell, QuietLink, Section } from '@/components/PageShell';
+import InstagramRail from '@/components/InstagramRail';
+import { PageShell, PageHero, QuietLink, Section } from '@/components/PageShell';
 import TrialButton from '@/components/TrialButton';
 import VideoFacade from '@/components/VideoFacade';
 import {
@@ -16,6 +17,7 @@ import {
   videosBySection,
 } from '@/lib/events';
 import { ARANGETRAM } from '@/lib/curriculum';
+import { fetchInstagramPosts } from '@/lib/instagram';
 import { METRICS, SITE } from '@/lib/site';
 import { eventsGraph } from '@/lib/schema';
 
@@ -64,7 +66,16 @@ export const metadata: Metadata = {
   },
 };
 
-export default function EventsPage() {
+export default async function EventsPage() {
+  /**
+   * Fetched on the server so the access token never reaches the browser, and
+   * cached for an hour by lib/instagram.ts — see REVALIDATE_SECONDS there. Returns
+   * an empty list when unconfigured or when the token has lapsed, which the rail
+   * renders as a follow prompt rather than a broken row, so this never fails the
+   * page.
+   */
+  const instagramPosts = await fetchInstagramPosts();
+
   return (
     <PageShell>
       <JsonLd data={eventsGraph()} />
@@ -256,6 +267,16 @@ export default function EventsPage() {
             </div>
           </div>
         </div>
+      </Section>
+
+      {/* --- Instagram ---------------------------------------------------- */}
+      <Section
+        id="instagram"
+        eyebrow="As it happens"
+        heading="From the academy’s Instagram"
+        lede="The gallery above is the record. This is the week — rehearsals, costume days, and whatever happened last night."
+      >
+        <InstagramRail posts={instagramPosts} />
       </Section>
 
       {/* --- Studio ------------------------------------------------------- */}
