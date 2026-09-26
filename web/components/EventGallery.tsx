@@ -438,8 +438,8 @@ export default function EventGallery() {
             onClick={openGallery}
             className="group absolute inset-0 grid place-items-end justify-items-center pb-7 focus-visible:outline-2 focus-visible:outline-teal focus-visible:outline-offset-4"
           >
-            <span className="glass grain flex items-center gap-2.5 rounded-full px-5 py-3 transition-transform duration-500 ease-temple group-hover:-translate-y-1">
-              <Orbit aria-hidden className="h-4 w-4 text-marigold-deep" />
+            <span className="glass glass-lifted grain flex items-center gap-2.5 rounded-full px-5 py-3 transition-transform duration-200 ease-temple group-hover:-translate-y-0.5">
+              <Orbit aria-hidden className="h-4 w-4 text-nila-700" />
               <span className="font-sans text-[0.82rem] font-medium text-ink">
                 Enter the gallery
               </span>

@@ -93,9 +93,8 @@ export default async function EventsPage() {
       </PageHero>
 
       {/* Prototype notice. Rendered wherever lib/events.ts is still padded with
-          invented captions — including production builds of the prototype, which
-          is the case that actually needs the warning. It disappears on its own
-          the moment PROTOTYPE_FILL is deleted. */}
+          invented captions, including the current client test deployment. It
+          disappears on its own the moment PROTOTYPE_FILL is deleted. */}
       {HAS_PLACEHOLDERS ? (
         <div className="border-b border-kumkum/25 bg-kumkum/5">
           <div className="mx-auto max-w-6xl px-5 py-3 sm:px-8">
@@ -104,8 +103,9 @@ export default async function EventsPage() {
               photographs are all the academy&rsquo;s own, but {PHOTO_COUNT - 11} of
               the {PHOTO_COUNT} captions — album, title, date — are placeholders so
               the globe has enough plates to judge. They are excluded from the
-              structured data and cannot reach production. See the placeholder
-              policy at the top of <code>lib/events.ts</code>.
+              structured data and are visible only in this test deployment. Replace
+              them before final launch. See the placeholder policy at the top of{' '}
+              <code>lib/events.ts</code>.
             </p>
           </div>
         </div>
@@ -127,10 +127,10 @@ export default async function EventsPage() {
             <div key={stat.label} className="border-t border-marigold/30 pt-4">
               <dt className="sr-only">{stat.label}</dt>
               <dd>
-                <span className="foil block font-display text-[clamp(1.3rem,3vw,2rem)] leading-tight font-semibold">
+                <span className="block font-display text-teal-deep text-[clamp(1.3rem,3vw,2rem)] leading-tight font-semibold">
                   {stat.value}
                 </span>
-                <span className="mt-1.5 block font-sans text-[0.68rem] tracking-[0.14em] text-ink-faint uppercase">
+                <span className="mt-1.5 block font-sans text-micro tracking-[0.14em] text-ink-faint uppercase">
                   {stat.label}
                 </span>
               </dd>
@@ -204,7 +204,7 @@ export default async function EventsPage() {
           <p className="mt-4 font-display text-[1.05rem] leading-relaxed text-teal-deep">
             {ARANGETRAM.lead}
           </p>
-          <p className="mt-4 text-[1rem] leading-relaxed text-ink-soft">
+          <p className="max-w-measure mt-4 text-[1rem] leading-relaxed text-ink-soft">
             {ARANGETRAM.description}
           </p>
           <div className="mt-7">
@@ -256,7 +256,7 @@ export default async function EventsPage() {
           </div>
 
           <div className="max-w-xl">
-            <p className="text-[1rem] leading-relaxed text-ink-soft">
+            <p className="max-w-measure text-[1rem] leading-relaxed text-ink-soft">
               Our Scarborough branch teaches at Morningside and Finch, and its
               students perform on the Toronto temple circuit. Chennai and
               Scarborough are one academy, one syllabus, and — allowing for the
@@ -287,7 +287,7 @@ export default async function EventsPage() {
         lede={sectionMeta('studio').lede}
       >
         <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
-          <figure className="arch relative aspect-[0.9] overflow-hidden bg-teal-deep">
+          <figure className="curtain arch relative aspect-[0.9] overflow-hidden bg-teal-deep">
             <Image
               src="/img/hero-gurukulam.jpg"
               alt="A Bharatanatyam class in progress at Shanti Kala Nikketan"
@@ -299,7 +299,7 @@ export default async function EventsPage() {
           </figure>
 
           <div className="max-w-xl">
-            <p className="text-[1rem] leading-relaxed text-ink-soft">
+            <p className="max-w-measure text-[1rem] leading-relaxed text-ink-soft">
               Long before a stage, there is a room with a wooden floor and a
               teacher counting aloud. That is the part worth seeing, and it is the
               part a trial session shows you.
@@ -318,7 +318,7 @@ export default async function EventsPage() {
           <h2 className="font-display text-[clamp(1.5rem,3.4vw,2.2rem)] leading-[1.12] font-semibold text-teal-deep">
             {VIDEOS.length} recordings, and the room they came from
           </h2>
-          <p className="mt-4 text-[0.98rem] leading-relaxed text-ink-soft">
+          <p className="max-w-measure mt-4 text-[0.98rem] leading-relaxed text-ink-soft">
             Everything on this page happened on a stage our students stood on.
             Come and watch the class that gets them there.
           </p>

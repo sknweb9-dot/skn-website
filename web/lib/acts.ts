@@ -3,27 +3,37 @@
  *
  * PACING
  * ------
- * The gesture sequence in mudra.mp4 runs in fixed Abhinaya Darpana order, so we
+ * The gesture sequence in Hastas.mp4 runs in fixed Abhinaya Darpana order, so we
  * cannot place an arbitrary gesture at an arbitrary point in the scroll. The act
  * windows below are therefore NOT equal sixths — they are tuned so that each
  * act's anchor gesture is on screen while that act's card is at full opacity.
  *
  * A card fades in over the first 22% of its window and out over the last 22%,
- * so an anchor has to sit inside [0.22, 0.78] of its own window. Act 1 never
+ * so an anchor has to sit inside [0.20, 0.80] of its own window. Act 1 never
  * fades in and act 6 never fades out, so those two may sit outside on the open
  * side. Verified by _research/check_act_windows.py — rerun it after touching any
  * window or anchor:
  *
- *   act 1  [0.000, 0.110]  Patāka       t 0.125  (act 1 has no fade-in)
- *   act 2  [0.110, 0.290]  Ardhacandra  t 0.459
- *   act 3  [0.290, 0.485]  Sūcī         t 0.771
- *   act 4  [0.485, 0.630]  Padmakōśa    t 0.262
- *   act 5  [0.630, 0.800]  Alapadma     t 0.504
- *   act 6  [0.800, 1.000]  Tāmracūḍa    t 0.817  (act 6 has no fade-out)
+ *   act 1  [0.000, 0.109]  Patāka       t 0.085  (act 1 has no fade-in)
+ *   act 2  [0.109, 0.338]  Ardhacandra  t 0.252
+ *   act 3  [0.338, 0.492]  Sūcī         t 0.750
+ *   act 4  [0.492, 0.596]  Padmakōśa    t 0.252
+ *   act 5  [0.596, 0.798]  Alapadma     t 0.440
+ *   act 6  [0.798, 1.000]  Tāmracūḍa    t 0.541  (act 6 has no fade-out)
  *
  * An earlier revision used equal sixths and looked fine in the abstract, but at
  * the centre of act 4 the hand was actually showing Mṛgaśīrṣa while the card
  * said Padmakōśa. Hence the tuning, and hence the checker.
+ *
+ * These windows were re-solved for Hastas.mp4 by
+ * _research/solve_act_windows.py. The previous set was tuned against mudra.mp4,
+ * whose per-gesture durations differ, and act 3 failed outright under the new
+ * timings (Sūcī landed at t=0.840). The binding constraint is that Sūcī (second
+ * 24) and Padmakōśa (seconds 27-28) are only 0.065 of the sequence apart, so
+ * acts 3 and 4 must both be narrow and packed around the midpoint; the solver
+ * maximises the worst anchor margin subject to that, then picks the most
+ * balanced spans, which is why acts 2 and 6 carry the slack. Worst margin is now
+ * 0.050, against 0.029 for the old set.
  *
  * The other twenty-two gestures are deliberately unassigned. They flow past as
  * transitions, which is what gives the scroll rhythm instead of turning every
@@ -85,7 +95,7 @@ export const ACTS: Act[] = [
     index: 1,
     id: 'invocation',
     rail: 'Invocation',
-    window: { start: 0.000, end: 0.110 },
+    window: { start: 0.000, end: 0.109 },
     mudra: mudraByName('Patāka'),
     side: 'center',
     eyebrow: 'Chennai · Scarborough',
@@ -98,7 +108,7 @@ export const ACTS: Act[] = [
     index: 2,
     id: 'philosophy',
     rail: 'Philosophy',
-    window: { start: 0.110, end: 0.290 },
+    window: { start: 0.109, end: 0.338 },
     mudra: mudraByName('Ardhacandra'),
     side: 'left',
     eyebrow: 'About',
@@ -113,7 +123,7 @@ export const ACTS: Act[] = [
     index: 3,
     id: 'vision',
     rail: 'Lineage',
-    window: { start: 0.290, end: 0.485 },
+    window: { start: 0.338, end: 0.492 },
     mudra: mudraByName('Sūcī'),
     side: 'right',
     eyebrow: 'Our Founder — Om – Guru – Om',
@@ -128,7 +138,7 @@ export const ACTS: Act[] = [
     index: 4,
     id: 'path',
     rail: 'Curriculum',
-    window: { start: 0.485, end: 0.630 },
+    window: { start: 0.492, end: 0.596 },
     mudra: mudraByName('Padmakōśa'),
     side: 'left',
     eyebrow: 'Our Gurukulam Approach',
@@ -143,7 +153,7 @@ export const ACTS: Act[] = [
     index: 5,
     id: 'bloom',
     rail: 'Arangetram',
-    window: { start: 0.630, end: 0.800 },
+    window: { start: 0.596, end: 0.798 },
     mudra: mudraByName('Alapadma'),
     side: 'right',
     eyebrow: 'Performance & Arangetram',
@@ -158,7 +168,7 @@ export const ACTS: Act[] = [
     index: 6,
     id: 'invitation',
     rail: 'Visit',
-    window: { start: 0.800, end: 1.000 },
+    window: { start: 0.798, end: 1.000 },
     mudra: mudraByName('Tāmracūḍa'),
     side: 'center',
     eyebrow: 'Begin',

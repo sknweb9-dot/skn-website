@@ -50,18 +50,18 @@ export default function VideoFacade({ video }: { video: EventVideo }) {
               width={poster.width}
               height={poster.height}
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+              className="h-full w-full object-cover"
             />
             <span
               aria-hidden
-              className="absolute inset-0 grid place-items-center bg-teal-deep/10 transition-colors group-hover:bg-teal-deep/20"
+              className="absolute inset-0 grid place-items-center bg-teal-deep/10 transition-colors duration-200 group-hover:bg-teal-deep/20"
             >
-              <span className="grid h-14 w-14 place-items-center rounded-full bg-cream/90 text-teal ring-1 ring-marigold/60 transition-transform duration-500 ease-temple group-hover:scale-110">
+              <span className="grid h-14 w-14 place-items-center rounded-full bg-cream/90 text-teal ring-1 ring-marigold/60 transition-transform duration-200 ease-temple group-hover:scale-110">
                 <Play className="ml-0.5 h-5 w-5 fill-current" />
               </span>
             </span>
             {video.kind === 'playlist' ? (
-              <span className="absolute top-3 left-3 rounded-full bg-cream/90 px-2.5 py-1 font-sans text-[0.62rem] font-semibold tracking-[0.12em] text-teal uppercase">
+              <span className="absolute top-3 left-3 rounded-full bg-cream/90 px-2.5 py-1 font-sans text-micro font-semibold tracking-[0.12em] text-teal uppercase">
                 Playlist
               </span>
             ) : null}
@@ -73,11 +73,11 @@ export default function VideoFacade({ video }: { video: EventVideo }) {
             {video.title}
           </h3>
           {video.note ? (
-            <p className="mt-1.5 font-sans text-[0.8rem] leading-relaxed text-ink-soft">
+            <p className="max-w-measure mt-1.5 font-sans text-[0.8rem] leading-relaxed text-ink-soft">
               {video.note}
             </p>
           ) : null}
-          <p className="mt-2 flex flex-wrap items-center gap-x-2.5 gap-y-1 font-sans text-[0.68rem] text-ink-faint">
+          <p className="mt-2 flex flex-wrap items-center gap-x-2.5 gap-y-1 font-sans text-micro text-ink-faint">
             <a
               href={href}
               target="_blank"

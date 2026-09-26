@@ -49,7 +49,7 @@ export default function ScrollCue({ ref }: { ref?: React.Ref<HTMLDivElement> }) 
       aria-hidden
       className="pointer-events-none absolute top-[7%] right-full mr-7 hidden flex-col items-center gap-3 sm:flex lg:mr-10"
     >
-      <span className="flex flex-col items-center font-sans text-[0.6rem] leading-[1.9] font-semibold tracking-[0.14em] text-ink uppercase">
+      <span className="flex flex-col items-center font-sans text-micro leading-[1.9] font-semibold tracking-[0.14em] text-ink uppercase">
         {'Scroll'.split('').map((letter, i) => (
           <span key={`${letter}-${i}`}>{letter}</span>
         ))}

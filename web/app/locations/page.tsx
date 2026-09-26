@@ -49,9 +49,9 @@ export default function LocationsPage() {
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <p className="eyebrow">Locations</p>
             <h1 className="mt-5 max-w-3xl font-display text-[clamp(2rem,5.5vw,4rem)] leading-[1.02] font-semibold tracking-[-0.02em] text-teal-deep">
-              Many rooms. <span className="foil">One syllabus.</span>
+              Many rooms. One syllabus.
             </h1>
-            <p className="mt-6 max-w-2xl text-[1.02rem] leading-relaxed text-ink-soft">
+            <p className="mt-6 max-w-measure text-[1.02rem] leading-relaxed text-ink-soft">
               The {SITE.style} is taught identically wherever we teach, in the {SITE.method}{' '}
               manner — {batchCount()} weekly batches across {chennaiAreas.length} Chennai
               neighbourhoods, an online batch, and our Canadian branch.
@@ -76,31 +76,31 @@ export default function LocationsPage() {
                   <li key={branch.slug}>
                     <Link
                       href={`/locations/${branch.slug}`}
-                      className="glass grain group block overflow-hidden rounded-[1.75rem]"
+                      className="glass grain group block overflow-clip rounded-[1.75rem]"
                     >
-                      <div className="relative aspect-[16/9] overflow-hidden">
+                      <div className="curtain relative aspect-[16/9] overflow-hidden">
                         <Image
                           src={branch.image}
                           alt={`Shanti Kala Nikketan in ${branch.city}`}
                           fill
                           sizes="(max-width: 1024px) 100vw, 50vw"
-                          className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                          className="object-cover"
                         />
                       </div>
                       <div className="px-6 py-6 sm:px-7">
-                        <p className="flex items-center gap-1.5 font-sans text-[0.68rem] tracking-[0.16em] text-marigold-deep uppercase">
+                        <p className="flex items-center gap-1.5 font-sans text-micro tracking-[0.16em] text-nila-700 uppercase">
                           <MapPin className="size-3.5" aria-hidden />
                           {branch.region}, {branch.country}
                         </p>
-                        <h2 className="mt-2.5 font-display text-[1.5rem] font-semibold text-teal-deep">
+                        <h2 className="mt-2.5 font-display text-[1.5rem] font-semibold text-teal-deep transition-colors duration-200 group-hover:text-kumkum">
                           {branch.city}
                           {branch.isPrimary ? (
-                            <span className="ml-2.5 align-middle font-sans text-[0.6rem] tracking-[0.14em] text-kumkum uppercase">
+                            <span className="ml-2.5 align-middle font-sans text-micro tracking-[0.14em] text-kumkum uppercase">
                               Founding school
                             </span>
                           ) : null}
                         </h2>
-                        <p className="mt-3 text-[0.93rem] leading-relaxed text-ink-soft">
+                        <p className="max-w-measure mt-3 text-[0.93rem] leading-relaxed text-ink-soft">
                           {branch.intro}
                         </p>
                         <p className="mt-4 font-sans text-xs text-ink-faint">
@@ -126,7 +126,7 @@ export default function LocationsPage() {
             <h2 className="mt-3 max-w-2xl font-display text-[clamp(1.6rem,3.6vw,2.4rem)] leading-[1.12] font-semibold text-teal-deep">
               {individualStudentCount()} students taught individually
             </h2>
-            <p className="mt-4 max-w-2xl text-[0.95rem] leading-relaxed text-ink-soft">
+            <p className="mt-4 max-w-measure text-[0.95rem] leading-relaxed text-ink-soft">
               Alongside the group batches, the Gurukulam runs one to one — in person in
               Chennai, and online wherever a student happens to be.
             </p>

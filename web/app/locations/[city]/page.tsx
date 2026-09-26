@@ -128,10 +128,10 @@ export default async function LocationPage({ params }: { params: Promise<Params>
             </p>
 
             <h1 className="mt-4 max-w-3xl font-display text-[clamp(2rem,5.5vw,4rem)] leading-[1.02] font-semibold tracking-[-0.02em] text-teal-deep">
-              Bharatanatyam in <span className="foil">{branch.city}</span>
+              Bharatanatyam in {branch.city}
             </h1>
 
-            <p className="mt-6 max-w-2xl text-[1.02rem] leading-relaxed text-ink-soft">
+            <p className="mt-6 max-w-measure text-[1.02rem] leading-relaxed text-ink-soft">
               {branch.intro}
             </p>
 
@@ -175,7 +175,7 @@ export default async function LocationPage({ params }: { params: Promise<Params>
                 Families from across {branch.city}
               </h2>
               {areas.length > 0 ? (
-                <p className="mt-4 max-w-2xl text-[0.95rem] leading-relaxed text-ink-soft">
+                <p className="mt-4 max-w-measure text-[0.95rem] leading-relaxed text-ink-soft">
                   We hold classes in {areas.join(', ')}. Students also travel from the
                   neighbourhoods below — these are catchment areas, not separate venues.
                 </p>
@@ -192,7 +192,7 @@ export default async function LocationPage({ params }: { params: Promise<Params>
                   >
                     {area}
                     {areas.includes(area) ? (
-                      <span className="ml-1.5 text-[0.65rem] tracking-[0.1em] uppercase">
+                      <span className="ml-1.5 text-micro tracking-[0.1em] uppercase">
                         venue
                       </span>
                     ) : null}
@@ -238,11 +238,11 @@ export default async function LocationPage({ params }: { params: Promise<Params>
                           {person.name}
                         </h3>
                         {person.role ? (
-                          <p className="mt-0.5 font-sans text-[0.7rem] tracking-[0.14em] text-marigold-deep uppercase">
+                          <p className="mt-0.5 font-sans text-[0.7rem] tracking-[0.14em] text-nila-700 uppercase">
                             {person.role}
                           </p>
                         ) : null}
-                        <p className="mt-3 text-[0.9rem] leading-relaxed text-ink-soft">
+                        <p className="max-w-measure mt-3 text-[0.9rem] leading-relaxed text-ink-soft">
                           {person.bio}
                         </p>
                       </div>
@@ -277,7 +277,7 @@ export default async function LocationPage({ params }: { params: Promise<Params>
                   key={programme.id}
                   className="rounded-[1.25rem] border border-marigold/25 bg-paper/60 p-5"
                 >
-                  <p className="font-display text-[0.8rem] tracking-[0.12em] text-marigold-deep">
+                  <p className="font-display text-[0.8rem] tracking-[0.12em] text-nila-700">
                     {String(i).padStart(2, '0')}
                   </p>
                   <h3 className="mt-2.5 font-display text-[1.02rem] leading-snug font-semibold text-teal-deep">
@@ -289,7 +289,7 @@ export default async function LocationPage({ params }: { params: Promise<Params>
                   {programme.ages ? (
                     <p className="mt-2 font-sans text-[0.72rem] text-kumkum">{programme.ages}</p>
                   ) : null}
-                  <p className="mt-3 text-[0.85rem] leading-relaxed text-ink-soft">
+                  <p className="max-w-measure mt-3 text-[0.85rem] leading-relaxed text-ink-soft">
                     {programme.description}
                   </p>
                 </li>
@@ -317,7 +317,7 @@ export default async function LocationPage({ params }: { params: Promise<Params>
                     <dt className="font-display text-[1.08rem] leading-snug font-semibold text-teal-deep">
                       {faq.q}
                     </dt>
-                    <dd className="mt-2.5 max-w-3xl text-[0.93rem] leading-relaxed text-ink-soft">
+                    <dd className="mt-2.5 max-w-measure text-[0.93rem] leading-relaxed text-ink-soft">
                       {faq.a}
                     </dd>
                   </div>

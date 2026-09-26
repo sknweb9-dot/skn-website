@@ -104,7 +104,7 @@ export default function MobileMenu({ onClose }: { onClose: () => void }) {
             <span className="block font-display text-[0.95rem] font-semibold tracking-wide text-teal-deep">
               {SITE.name}
             </span>
-            <span className="block font-sans text-[0.6rem] tracking-[0.2em] text-ink-faint uppercase">
+            <span className="block font-sans text-micro tracking-[0.2em] text-ink-faint uppercase">
               {SITE.tagline}
             </span>
           </span>
@@ -135,7 +135,7 @@ export default function MobileMenu({ onClose }: { onClose: () => void }) {
               >
                 <span
                   aria-hidden
-                  className="w-5 shrink-0 font-sans text-[0.65rem] tracking-[0.1em] text-marigold-deep tabular-nums"
+                  className="w-5 shrink-0 font-sans text-micro tracking-[0.1em] text-nila-700 tabular-nums"
                 >
                   {String(i + 1).padStart(2, '0')}
                 </span>

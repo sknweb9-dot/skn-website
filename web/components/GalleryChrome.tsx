@@ -78,11 +78,11 @@ export function HoverLabel({
       className="pointer-events-none fixed z-[70] -translate-x-1/2 -translate-y-[140%]"
       style={{ left: screen.x, top: screen.y }}
     >
-      <div className="glass grain flex items-center gap-2.5 rounded-full px-4 py-2 shadow-lg">
+      <div className="glass glass-lifted grain flex items-center gap-2.5 rounded-full px-4 py-2 shadow-lg">
         <span
           className={`h-1.5 w-1.5 shrink-0 rounded-full ${isVideo ? 'bg-kumkum' : 'bg-marigold'}`}
         />
-        <span className="font-sans text-[0.62rem] font-semibold tracking-[0.16em] text-marigold-deep uppercase">
+        <span className="font-sans text-micro font-semibold tracking-[0.16em] text-nila-700 uppercase">
           {isVideo ? 'Watch' : 'View'}
         </span>
         <span aria-hidden className="text-ink-faint/50">
@@ -106,9 +106,9 @@ export function FocusCaption({ item }: { item: GlobeItem | null }) {
 
   return (
     <div className="pointer-events-none fixed inset-x-0 bottom-28 z-[60] flex justify-center px-5 sm:hidden">
-      <div className="glass max-w-full rounded-full px-4 py-2">
+      <div className="glass glass-lifted max-w-full rounded-full px-4 py-2">
         <p className="truncate font-sans text-[0.78rem] text-ink">
-          <span className="text-marigold-deep">
+          <span className="text-nila-700">
             {item.kind === 'video' ? 'Video' : 'Photograph'}
           </span>
           {' — '}
@@ -204,7 +204,7 @@ export function GalleryHeader({
             in the index view, which is where someone on a phone will read them. */}
         <div className="hidden min-w-0 sm:block">
           <p className="eyebrow leading-none">The record</p>
-          <p className="mt-1 truncate font-sans text-[0.68rem] text-ink-faint">
+          <p className="mt-1 truncate font-sans text-micro text-ink-faint">
             {count} plates · {videoCount} to watch
             {times ? (
               <span>
@@ -217,7 +217,7 @@ export function GalleryHeader({
       </div>
 
       {/* Globe / grid */}
-      <div className="glass pointer-events-auto flex items-center gap-1 rounded-full p-1">
+      <div className="glass glass-lifted pointer-events-auto flex items-center gap-1 rounded-full p-1">
         <ViewTab active={view === 'globe'} onClick={() => onView('globe')} icon={<Orbit className="h-3.5 w-3.5" />}>
           Globe
         </ViewTab>
@@ -285,7 +285,7 @@ function IconButton({
       onClick={onClick}
       title={label}
       aria-label={label}
-      className={`glass grid h-9 w-9 place-items-center rounded-full text-ink-soft transition-colors hover:text-ink ${className}`}
+      className={`glass glass-lifted grid h-9 w-9 place-items-center rounded-full text-ink-soft transition-colors hover:text-ink ${className}`}
     >
       {children}
     </button>
@@ -322,13 +322,13 @@ export function GalleryDock({
           interaction. Fades out once the visitor has done it. The wheel half is
           dropped on touch, where there is no wheel. */}
       {showHint ? (
-        <p className="glass pointer-events-auto rounded-full px-4 py-1.5 text-center font-sans text-[0.62rem] tracking-[0.12em] text-ink-faint uppercase">
+        <p className="glass glass-lifted pointer-events-auto rounded-full px-4 py-1.5 text-center font-sans text-micro tracking-[0.12em] text-ink-faint uppercase">
           Drag to turn<span className="hidden sm:inline"> · scroll to draw closer</span> · tap a
           plate
         </p>
       ) : null}
 
-      <div className="glass grain pointer-events-auto flex w-full max-w-3xl flex-wrap items-center justify-between gap-2 rounded-[1.4rem] p-2 sm:flex-nowrap sm:gap-4 sm:rounded-full sm:p-2.5">
+      <div className="glass glass-lifted grain pointer-events-auto flex w-full max-w-3xl flex-wrap items-center justify-between gap-2 rounded-[1.4rem] p-2 sm:flex-nowrap sm:gap-4 sm:rounded-full sm:p-2.5">
         {/* Sections. These are the old site's own headings, not invented tags. */}
         <div className="no-scrollbar flex max-w-full items-center gap-1 overflow-x-auto py-0.5">
           <Pill active={activeFilter === null} onClick={() => onFilter(null)}>
@@ -411,7 +411,7 @@ function Segment({
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={`rounded-full px-2.5 py-1 font-sans text-[0.68rem] font-medium transition-colors ${
+      className={`rounded-full px-2.5 py-1 font-sans text-micro font-medium transition-colors ${
         active ? 'bg-marigold/25 text-ink' : 'text-ink-faint hover:text-ink-soft'
       }`}
     >
@@ -468,7 +468,7 @@ export function GalleryDetail({
     <aside
       ref={panelRef}
       aria-label="Selected item"
-      className="glass grain animate-rise fixed top-[4.75rem] right-3 z-[68] flex max-h-[calc(100dvh-6.5rem)] w-[min(24rem,calc(100vw-1.5rem))] flex-col gap-4 overflow-y-auto rounded-[1.4rem] p-5 sm:right-6"
+      className="glass glass-lifted grain animate-rise fixed top-[4.75rem] right-3 z-[68] flex max-h-[calc(100dvh-6.5rem)] w-[min(24rem,calc(100vw-1.5rem))] flex-col gap-4 overflow-y-auto rounded-[1.4rem] p-5 sm:right-6"
     >
       <div className="flex items-start justify-between gap-3 border-b border-marigold/20 pb-3">
         <div>

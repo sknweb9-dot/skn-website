@@ -70,14 +70,14 @@ function BatchRow({
       {venue.batches.map((batch) => (
         <li key={batch.code} className="py-3">
           <div className="flex items-baseline gap-2.5">
-            <span className="w-11 shrink-0 font-display text-[0.68rem] tracking-[0.1em] text-marigold-deep">
+            <span className="w-11 shrink-0 font-display text-micro tracking-[0.1em] text-nila-700">
               {batch.code}
             </span>
             <span className="min-w-0 text-[0.92rem] font-medium text-teal-deep">
               {programmeLabel(batch.programmeId)}
             </span>
             {batch.audience === 'adults' ? (
-              <span className="shrink-0 rounded-full bg-teal/10 px-2 py-0.5 font-sans text-[0.58rem] tracking-[0.12em] text-teal uppercase">
+              <span className="shrink-0 rounded-full bg-teal/10 px-2 py-0.5 font-sans text-micro tracking-[0.12em] text-teal uppercase">
                 Adults
               </span>
             ) : null}
@@ -87,10 +87,10 @@ function BatchRow({
               {formatBatchTime(batch)}
             </span>
             {batch.provisionalTiming ? (
-              <span className="font-sans text-[0.65rem] text-ink-faint">(provisional)</span>
+              <span className="font-sans text-micro text-ink-faint">(provisional)</span>
             ) : null}
             {showAdmission && batch.admissionOpen ? (
-              <span className="rounded-full bg-kumkum/10 px-2 py-0.5 font-sans text-[0.6rem] font-semibold tracking-[0.08em] text-kumkum uppercase">
+              <span className="rounded-full bg-kumkum/10 px-2 py-0.5 font-sans text-micro font-semibold tracking-[0.08em] text-kumkum uppercase">
                 Admission open
               </span>
             ) : null}
@@ -109,7 +109,7 @@ function VenueHeading({ venue, sub }: { venue: Venue; sub?: string }) {
         {venue.area ? <span className="font-normal text-ink-faint"> · {venue.area}</span> : null}
       </h3>
       {sub ? (
-        <p className="font-sans text-[0.68rem] tracking-[0.14em] text-marigold-deep uppercase">
+        <p className="font-sans text-micro tracking-[0.14em] text-nila-700 uppercase">
           {sub}
         </p>
       ) : null}
@@ -127,7 +127,7 @@ function PublicVenues({ citySlug }: { citySlug: string }) {
 
   return (
     <>
-      <p className="max-w-2xl text-[0.95rem] leading-relaxed text-ink-soft">
+      <p className="max-w-measure text-[0.95rem] leading-relaxed text-ink-soft">
         Classes run in weekly batches, grouped by level rather than by age.
         {totalOpen > 0 ? (
           <>
@@ -177,7 +177,7 @@ function ResidentVenues({ citySlug }: { citySlug: string }) {
 
   return (
     <>
-      <p className="max-w-2xl text-[0.95rem] leading-relaxed text-ink-soft">
+      <p className="max-w-measure text-[0.95rem] leading-relaxed text-ink-soft">
         We teach inside residential communities, bringing the Gurukulam to where
         children already live. Batches at the {offline.length} communities below are
         run for their residents.

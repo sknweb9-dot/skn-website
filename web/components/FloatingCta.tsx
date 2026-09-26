@@ -36,12 +36,16 @@ export default function FloatingCta() {
           the other edge of the screen, and it carries the same plate: cream/85
           over a blur. It was `bg-white/85` for as long as the component went
           unrendered, and the moment it was mounted it read as a white patch stuck
-          to the foot of a cream page. */}
-      <div className="flex items-stretch gap-px border-t border-marigold/20 bg-cream/85 backdrop-blur-xl sm:gap-3 sm:border sm:border-marigold/20 sm:p-2">
+          to the foot of a cream page.
+
+          95% rather than the masthead's 85%: this bar also passes over the
+          teal-deep footer band, where 85% let enough teal through to turn the
+          plate a muddy grey. At 95% it stays cream over both grounds. */}
+      <div className="flex items-stretch gap-px border-t border-marigold/20 bg-cream/95 backdrop-blur-xl sm:gap-3 sm:border sm:border-marigold/20 sm:p-2">
         <a
           href={`tel:${SITE.phoneE164}`}
           tabIndex={shown ? 0 : -1}
-          className="flex shrink-0 items-center gap-2 px-5 py-4 font-sans text-sm text-ink-soft transition-colors hover:text-marigold-deep sm:py-2"
+          className="flex shrink-0 items-center gap-2 px-5 py-4 font-sans text-sm text-ink-soft transition-colors hover:text-kumkum sm:py-2"
         >
           <Phone className="size-4" aria-hidden="true" />
           <span className="hidden sm:inline">Call</span>

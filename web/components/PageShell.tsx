@@ -46,7 +46,14 @@ export function PageHero({
 }: {
   eyebrow: string;
   title: string;
-  /** Rendered in the gold-to-kumkum foil treatment, after the title */
+  /**
+   * The second half of the headline, set in the same colour as the first.
+   *
+   * This used to be picked out in a marigold-to-kumkum gradient. That measured
+   * 1.5-3.1:1 on cream, under the 3:1 large-text floor, and colouring one phrase
+   * of every headline was template chrome rather than emphasis. It is kept as a
+   * separate prop only so the page copy does not have to be re-joined.
+   */
   accent?: string;
   lede?: string;
   children?: ReactNode;
@@ -54,21 +61,16 @@ export function PageHero({
   return (
     <section className="border-b border-marigold/20 pt-[140px] pb-14 sm:pb-16">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        {/* Staggered so the eyebrow, headline and lede arrive in reading order
-            rather than as one block. */}
-        <Reveal stagger y={22}>
+        {/* The one entrance on an inner route: eyebrow, headline, lede and
+            actions arrive in reading order. Short travel and a sub-second
+            duration, because it plays on every navigation. */}
+        <Reveal stagger y={14}>
           <p className="eyebrow">{eyebrow}</p>
           <h1 className="mt-4 max-w-3xl font-display text-[clamp(2rem,5.5vw,4rem)] leading-[1.02] font-semibold tracking-[-0.02em] text-teal-deep">
-            {title}
-            {accent ? (
-              <>
-                {' '}
-                <span className="foil">{accent}</span>
-              </>
-            ) : null}
+            {accent ? `${title} ${accent}` : title}
           </h1>
           {lede ? (
-            <p className="mt-6 max-w-2xl text-[1.02rem] leading-relaxed text-ink-soft">{lede}</p>
+            <p className="mt-6 max-w-measure text-[1.02rem] leading-relaxed text-ink-soft">{lede}</p>
           ) : null}
           {children ? <div className="mt-8">{children}</div> : null}
         </Reveal>
@@ -103,7 +105,7 @@ export function Section({
     >
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         {hasHeader ? (
-          <Reveal stagger y={20}>
+          <div>
             {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
             {heading ? (
               <h2 className="mt-3 max-w-2xl font-display text-[clamp(1.6rem,3.8vw,2.5rem)] leading-[1.1] font-semibold text-teal-deep">
@@ -111,16 +113,20 @@ export function Section({
               </h2>
             ) : null}
             {lede ? (
-              <p className="mt-4 max-w-2xl text-[0.98rem] leading-relaxed text-ink-soft">{lede}</p>
+              <p className="mt-4 max-w-measure text-[0.98rem] leading-relaxed text-ink-soft">{lede}</p>
             ) : null}
-          </Reveal>
+          </div>
         ) : null}
-        {/* The body is revealed as one block. Staggering an unknown number of
-            children — twenty-eight hasta cards, twelve gallery images — reads as
-            a slow cascade rather than an entrance. */}
-        <Reveal className={hasHeader ? 'mt-10' : ''} delay={hasHeader ? 0.08 : 0}>
-          {children}
-        </Reveal>
+        {/* No scroll entrance here, on purpose.
+
+            Every section used to fade and rise 20-28px over a second as it
+            entered view. Repeated on every section of every route, that is the
+            generic entrance rather than an authored one, and it held content at
+            opacity 0 until a ScrollTrigger fired — so find-in-page, anchor jumps
+            and fast scrolls landed on blank space. The site's authored motion is
+            the scrubbed hand in the arch on the home page; each inner route gets
+            exactly one entrance, the hero, in PageHero above. */}
+        <div className={hasHeader ? 'mt-10' : ''}>{children}</div>
       </div>
     </section>
   );

@@ -49,7 +49,7 @@ const ActPanel = forwardRef<HTMLDivElement, { act: Act }>(function ActPanel({ ac
     <div ref={ref} className="absolute inset-0" style={{ opacity: 0 }}>
       <div className={`absolute ${position}`}>
         <article
-          className={`glass grain rounded-[1.75rem] px-5 py-5 sm:px-7 sm:py-7 ${
+          className={`glass glass-lifted grain rounded-[1.75rem] px-5 py-5 sm:px-7 sm:py-7 ${
             isCenter ? 'text-center' : ''
           }`}
         >

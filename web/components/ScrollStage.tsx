@@ -11,8 +11,6 @@ import {
 } from '@/lib/acts';
 import {
   FRAME_COUNT,
-  FRAME_HEIGHT,
-  VISIBLE_FRAME_HEIGHT,
   framePath,
   mudraAtProgress,
 } from '@/lib/mudras';
@@ -210,20 +208,18 @@ function ScrubStage() {
     const img = framesRef.current[source];
     if (!img) return;
 
-    // Crop the burned-in label off the bottom of the plate, then cover-fit what
-    // remains. Scaling the crop height by the image's own natural height keeps
-    // this correct even if the frames are ever re-exported at another size.
-    const cropH = img.naturalHeight * (VISIBLE_FRAME_HEIGHT / FRAME_HEIGHT);
-    const scale = Math.max(canvas.width / img.naturalWidth, canvas.height / cropH);
+    // Cover-fit the whole plate. Hastas.mp4 carries no burned-in labels, so
+    // unlike the previous source there is nothing to crop off the bottom.
+    const scale = Math.max(canvas.width / img.naturalWidth, canvas.height / img.naturalHeight);
     const w = img.naturalWidth * scale;
-    const h = cropH * scale;
+    const h = img.naturalHeight * scale;
 
     ctx.drawImage(
       img,
       0,
       0,
       img.naturalWidth,
-      cropH,
+      img.naturalHeight,
       (canvas.width - w) / 2,
       // Biased rather than centred, so a broader-than-source aperture loses the
       // forearm at the bottom instead of the fingertips at the top.
@@ -241,8 +237,9 @@ function ScrubStage() {
     const rect = box.getBoundingClientRect();
     if (rect.width === 0 || rect.height === 0) return;
 
-    // Cap DPR at 2 — beyond that the memory cost buys nothing visible, and the
-    // source is only 720px wide regardless.
+    // Cap DPR at 2 — beyond that the memory cost buys nothing visible. The
+    // source plate is 864px wide, which covers a 1440-logical retina aperture
+    // outright and upscales about 12% at 1920-logical.
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const width = Math.round(rect.width * dpr);
     const height = Math.round(rect.height * dpr);
@@ -605,7 +602,7 @@ function ScrubStage() {
                   />
                   <span
                     ref={mudraLiteralRef}
-                    className="mt-0.5 block font-sans text-[0.6rem] tracking-[0.06em] text-ink-faint sm:text-[0.65rem]"
+                    className="mt-0.5 block font-sans text-micro tracking-[0.06em] text-ink-faint sm:text-micro"
                   />
                 </span>
                 <span aria-hidden className="rule-fade w-5 shrink-0 sm:w-8" />

@@ -89,7 +89,7 @@ export default function HastasPage() {
                 href={`#${slugify(m.name)}`}
                 className="inline-flex items-baseline gap-1.5 rounded-full border border-marigold/30 bg-paper/60 px-3 py-1.5 font-sans text-[0.8rem] text-ink-soft transition-colors hover:border-kumkum/40 hover:bg-kumkum/5 hover:text-kumkum"
               >
-                <span className="font-display text-[0.65rem] text-marigold-deep">
+                <span className="font-display text-micro text-nila-700">
                   {String(m.order).padStart(2, '0')}
                 </span>
                 {m.name}
@@ -98,7 +98,7 @@ export default function HastasPage() {
           ))}
         </ul>
 
-        <p className="mt-8 max-w-2xl text-[0.95rem] leading-relaxed text-ink-soft">
+        <p className="mt-8 max-w-measure text-[0.95rem] leading-relaxed text-ink-soft">
           The stills below are taken from our own teaching footage, which carries the
           gesture name in frame — {VERSE_MUDRAS.length} of the twenty-eight also have
           their Sanskrit verse transcribed from the academy&rsquo;s Theory Class lessons.
@@ -131,7 +131,7 @@ export default function HastasPage() {
                 />
 
                 <div className="px-5 py-5 sm:px-6">
-                  <p className="font-display text-[0.7rem] tracking-[0.16em] text-marigold-deep">
+                  <p className="font-display text-[0.7rem] tracking-[0.16em] text-nila-700">
                     {String(mudra.order).padStart(2, '0')}
                   </p>
                   <h3 className="mt-1.5 font-display text-[1.3rem] leading-snug font-semibold text-teal-deep">
@@ -146,7 +146,7 @@ export default function HastasPage() {
                     {mudra.viniyoga.map((use) => (
                       <li
                         key={use}
-                        className="rounded-full border border-marigold/25 bg-paper/60 px-2.5 py-0.5 font-sans text-[0.74rem] text-ink-soft"
+                        className="rounded-full border border-marigold/25 bg-paper/60 px-2.5 py-0.5 font-sans text-[0.75rem] text-ink-soft"
                       >
                         {use}
                       </li>
@@ -154,14 +154,14 @@ export default function HastasPage() {
                   </ul>
 
                   {mudra.reflection ? (
-                    <p className="mt-5 border-l-2 border-marigold/45 pl-3.5 text-[0.88rem] leading-relaxed text-ink-soft italic">
+                    <p className="max-w-measure mt-5 border-l-2 border-marigold/45 pl-3.5 text-[0.88rem] leading-relaxed text-ink-soft italic">
                       {mudra.reflection}
                     </p>
                   ) : null}
 
                   {mudra.verse ? (
                     <details className="mt-5 border-t border-marigold/25 pt-4">
-                      <summary className="cursor-pointer font-sans text-[0.8rem] font-medium text-teal marker:text-marigold-deep">
+                      <summary className="cursor-pointer font-sans text-[0.8rem] font-medium text-teal marker:text-nila-700">
                         Shloka and gloss
                       </summary>
 
@@ -211,7 +211,7 @@ export default function HastasPage() {
           <h2 className="font-display text-[clamp(1.5rem,3.4vw,2.2rem)] leading-[1.12] font-semibold text-teal-deep">
             Learning them is not memorising them
           </h2>
-          <p className="mt-4 text-[0.98rem] leading-relaxed text-ink-soft">
+          <p className="max-w-measure mt-4 text-[0.98rem] leading-relaxed text-ink-soft">
             A gesture is only useful when the eyes, the neck and the rhythm arrive with
             it. That is what the six levels are for — and why the same hand can mean
             anxiety or devotion depending on nothing but the gaze.

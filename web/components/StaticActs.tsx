@@ -57,7 +57,7 @@ export default function StaticActs() {
 
               <div className="mt-4 space-y-3">
                 {act.body.map((para) => (
-                  <p key={para.slice(0, 32)} className="leading-relaxed text-ink-soft">
+                  <p key={para.slice(0, 32)} className="max-w-measure leading-relaxed text-ink-soft">
                     {para}
                   </p>
                 ))}

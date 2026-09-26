@@ -48,10 +48,13 @@ export default function Reveal({
         {
           opacity: 1,
           y: 0,
-          duration: 1,
+          // 0.7s with a 0.07s step: four children land inside ~0.9s. The old
+          // 1s + 0.09 put the hero's buttons past 1.2s, which on a page that
+          // replays this on every navigation reads as waiting.
+          duration: 0.7,
           delay,
           ease: 'power3.out',
-          stagger: stagger ? 0.09 : 0,
+          stagger: stagger ? 0.07 : 0,
           scrollTrigger: {
             trigger: el,
             start: 'top 88%',

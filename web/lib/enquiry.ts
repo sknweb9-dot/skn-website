@@ -41,7 +41,10 @@ const C = {
   marigold: '#EC9A29',
   ink: '#2B1E16',
   inkSoft: '#5C4A3D',
-  inkFaint: '#8A7565',
+  // Mirrors --color-ink-faint. Was #8A7565 (4.11:1 on cream, failing AA) and
+  // was left behind when the site token moved; these labels sit on white and
+  // on silk, where #6F5B4D measures 6.3:1 and 5.4:1.
+  inkFaint: '#6F5B4D',
 } as const;
 
 // --- helpers ---------------------------------------------------------------

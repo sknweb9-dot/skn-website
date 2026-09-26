@@ -156,7 +156,7 @@ function Card({
       rel="noopener noreferrer"
       aria-hidden={clone || undefined}
       tabIndex={clone ? -1 : undefined}
-      className="group relative block w-[13.5rem] shrink-0 overflow-hidden rounded-[1rem] border border-marigold/25 bg-paper/60 focus-visible:outline-2 focus-visible:outline-teal focus-visible:outline-offset-4 sm:w-[15rem]"
+      className="group relative block w-[13.5rem] shrink-0 overflow-hidden rounded-[1rem] border border-marigold/25 bg-paper/60 transition-colors duration-200 hover:border-teal/50 focus-visible:outline-2 focus-visible:outline-teal focus-visible:outline-offset-4 sm:w-[15rem]"
     >
       <div className="relative aspect-square overflow-hidden bg-silk">
         {/* eslint-disable-next-line @next/next/no-img-element -- Instagram CDN
@@ -167,15 +167,15 @@ function Card({
           loading="lazy"
           decoding="async"
           referrerPolicy="no-referrer"
-          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+          className="h-full w-full object-cover"
         />
         {newest ? (
-          <span className="absolute top-2.5 left-2.5 rounded-full bg-cream/90 px-2.5 py-1 font-sans text-[0.58rem] font-semibold tracking-[0.14em] text-marigold-deep uppercase">
+          <span className="absolute top-2.5 left-2.5 rounded-full bg-cream/90 px-2.5 py-1 font-sans text-micro font-semibold tracking-[0.14em] text-nila-700 uppercase">
             Latest
           </span>
         ) : null}
         {post.kind !== 'image' ? (
-          <span className="absolute top-2.5 right-2.5 rounded-full bg-cream/90 px-2 py-0.5 font-sans text-[0.58rem] font-semibold tracking-[0.1em] text-teal uppercase">
+          <span className="absolute top-2.5 right-2.5 rounded-full bg-cream/90 px-2 py-0.5 font-sans text-micro font-semibold tracking-[0.1em] text-teal uppercase">
             {post.kind === 'video' ? 'Reel' : 'Album'}
           </span>
         ) : null}
@@ -188,7 +188,7 @@ function Card({
         {post.postedAt ? (
           <time
             dateTime={post.postedAt}
-            className="mt-1 block font-sans text-[0.66rem] text-ink-faint"
+            className="mt-1 block font-sans text-micro text-ink-faint"
           >
             {new Date(post.postedAt).toLocaleDateString('en-GB', {
               day: 'numeric',
@@ -213,7 +213,7 @@ function Card({
 function Unconfigured() {
   return (
     <div className="rounded-[1.4rem] border border-marigold/25 bg-paper/60 px-6 py-8 text-center">
-      <InstagramIcon className="mx-auto h-6 w-6 text-marigold-deep" />
+      <InstagramIcon className="mx-auto h-6 w-6 text-nila-700" />
       <p className="mt-4 font-display text-[1.05rem] font-semibold text-teal-deep">
         Follow the academy on Instagram
       </p>

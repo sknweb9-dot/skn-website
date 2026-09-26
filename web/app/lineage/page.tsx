@@ -38,7 +38,7 @@ export default function LineagePage() {
       {/* Founder */}
       <Section eyebrow={FOUNDER.eyebrow} heading={FOUNDER.name}>
         <div className="grid gap-10 lg:grid-cols-[18rem_minmax(0,1fr)] lg:gap-14">
-          <figure className="mx-auto w-48 shrink-0 sm:w-56 lg:mx-0 lg:w-full">
+          <figure className="curtain mx-auto w-48 shrink-0 sm:w-56 lg:mx-0 lg:w-full">
             <Image
               src={FOUNDER.image}
               alt={FOUNDER.name}
@@ -51,7 +51,7 @@ export default function LineagePage() {
 
           <div className="max-w-2xl space-y-5">
             {FOUNDER.body.map((para) => (
-              <p key={para.slice(0, 40)} className="text-[1rem] leading-relaxed text-ink-soft">
+              <p key={para.slice(0, 40)} className="max-w-measure text-[1rem] leading-relaxed text-ink-soft">
                 {para}
               </p>
             ))}
@@ -76,7 +76,7 @@ export default function LineagePage() {
       {/* Director */}
       <Section eyebrow={DIRECTOR.eyebrow} heading={DIRECTOR.name} tinted>
         <div className="grid gap-10 lg:grid-cols-[18rem_minmax(0,1fr)] lg:gap-14">
-          <figure className="mx-auto w-48 shrink-0 sm:w-56 lg:mx-0 lg:w-full">
+          <figure className="curtain mx-auto w-48 shrink-0 sm:w-56 lg:mx-0 lg:w-full">
             <Image
               src={DIRECTOR.image}
               alt={DIRECTOR.name}
@@ -90,7 +90,7 @@ export default function LineagePage() {
                 an unverified portrait is ever added, the page says so rather than
                 silently asserting a name. */}
             {!DIRECTOR.portraitConfirmed ? (
-              <figcaption className="mt-2 font-sans text-[0.65rem] leading-relaxed text-ink-faint">
+              <figcaption className="mt-2 font-sans text-micro leading-relaxed text-ink-faint">
                 Portrait pending confirmation by the academy.
               </figcaption>
             ) : null}
@@ -98,7 +98,7 @@ export default function LineagePage() {
 
           <div className="max-w-2xl space-y-5">
             {DIRECTOR.body.map((para) => (
-              <p key={para.slice(0, 40)} className="text-[1rem] leading-relaxed text-ink-soft">
+              <p key={para.slice(0, 40)} className="max-w-measure text-[1rem] leading-relaxed text-ink-soft">
                 {para}
               </p>
             ))}
@@ -140,13 +140,13 @@ export default function LineagePage() {
                 aria-hidden
                 className="absolute top-2 -left-[1.9rem] size-2 rounded-full bg-kumkum sm:-left-[2.4rem]"
               />
-              <p className="font-display text-[0.8rem] tracking-[0.14em] text-marigold-deep">
+              <p className="font-display text-[0.8rem] tracking-[0.14em] text-nila-700">
                 {milestone.year}
               </p>
               <h3 className="mt-1.5 font-display text-[1.2rem] font-semibold text-teal-deep">
                 {milestone.title}
               </h3>
-              <p className="mt-2 max-w-2xl text-[0.95rem] leading-relaxed text-ink-soft">
+              <p className="mt-2 max-w-measure text-[0.95rem] leading-relaxed text-ink-soft">
                 {milestone.body}
               </p>
               <p className="mt-2 font-sans text-[0.7rem] tracking-[0.12em] text-ink-faint uppercase">
@@ -181,14 +181,14 @@ export default function LineagePage() {
                     {person.name}
                   </h3>
                   {person.role ? (
-                    <p className="mt-0.5 font-sans text-[0.68rem] tracking-[0.14em] text-marigold-deep uppercase">
+                    <p className="mt-0.5 font-sans text-micro tracking-[0.14em] text-nila-700 uppercase">
                       {person.role}
                     </p>
                   ) : null}
                 </div>
               </div>
 
-              <p className="mt-4 text-[0.9rem] leading-relaxed text-ink-soft">{person.bio}</p>
+              <p className="max-w-measure mt-4 text-[0.9rem] leading-relaxed text-ink-soft">{person.bio}</p>
 
               {person.credentials?.length ? (
                 <ul className="mt-4 space-y-1.5 border-t border-marigold/20 pt-4">

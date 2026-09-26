@@ -152,7 +152,7 @@ export default function BookingModal() {
         {status === 'success' ? (
           <div className="px-7 py-16 text-center sm:px-12">
             <div className="mx-auto grid size-16 place-items-center rounded-full border border-marigold/40 bg-marigold/10">
-              <Check className="size-8 text-marigold-deep" aria-hidden="true" />
+              <Check className="size-8 text-teal" aria-hidden="true" />
             </div>
             <h2 id="booking-title" className="mt-7 font-display text-3xl text-ink">
               Your request has reached us
@@ -164,7 +164,7 @@ export default function BookingModal() {
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a
                 href={`tel:${SITE.phoneE164}`}
-                className="inline-flex items-center gap-2 border border-marigold/40 px-6 py-3 font-sans text-sm font-medium text-marigold-deep transition hover:bg-marigold/10"
+                className="inline-flex items-center gap-2 border border-marigold/40 px-6 py-3 font-sans text-sm font-medium text-nila-700 transition hover:bg-marigold/10"
               >
                 <Phone className="size-4" aria-hidden="true" />
                 {SITE.phoneDisplay}
@@ -225,7 +225,7 @@ export default function BookingModal() {
                   id="message"
                   name="message"
                   rows={3}
-                  className="mt-2 w-full resize-y border border-ink/15 bg-paper/75 px-4 py-3 font-sans text-[0.95rem] text-ink placeholder:text-ink-faint/70 focus:border-marigold/60 focus:outline-none"
+                  className="mt-2 w-full resize-y border border-ink/15 bg-paper/75 px-4 py-3 font-sans text-[0.95rem] text-ink placeholder:text-ink-faint/70 focus:border-teal focus:outline-none"
                   placeholder="Preferred days, previous training, questions…"
                 />
               </div>
@@ -249,7 +249,7 @@ export default function BookingModal() {
               <button
                 type="submit"
                 disabled={status === 'submitting'}
-                className="group inline-flex shrink-0 items-center justify-center gap-2.5 rounded-full bg-kumkum px-8 py-4 font-sans text-sm font-semibold tracking-wide whitespace-nowrap text-cream transition hover:bg-kumkum-lit disabled:cursor-wait disabled:opacity-70"
+                className="group inline-flex shrink-0 items-center justify-center gap-2.5 rounded-full bg-kumkum px-8 py-4 font-sans text-sm font-semibold tracking-wide whitespace-nowrap text-cream transition hover:bg-kumkum-hover active:bg-kumkum-active disabled:cursor-wait disabled:opacity-70"
               >
                 {status === 'submitting' ? (
                   <>
@@ -260,7 +260,7 @@ export default function BookingModal() {
                   'Request my trial slot'
                 )}
               </button>
-              <p className="text-xs leading-relaxed text-ink-soft">
+              <p className="max-w-measure text-xs leading-relaxed text-ink-soft">
                 We use your details only to arrange the trial.
                 {GOOGLE_FORM_URL ? null : ' No payment is taken online.'}
               </p>
@@ -300,7 +300,7 @@ function Field({
         name={name}
         type={type}
         required={required}
-        className="mt-2 w-full border border-ink/15 bg-paper/75 px-4 py-3 font-sans text-[0.95rem] text-ink placeholder:text-ink-faint/70 focus:border-marigold/60 focus:outline-none"
+        className="mt-2 w-full border border-ink/15 bg-paper/75 px-4 py-3 font-sans text-[0.95rem] text-ink placeholder:text-ink-faint/70 focus:border-teal focus:outline-none"
         {...rest}
       />
     </div>
@@ -329,7 +329,7 @@ function Select({
         id={name}
         name={name}
         required={required}
-        className="mt-2 w-full appearance-none border border-ink/15 bg-paper/75 px-4 py-3 font-sans text-[0.95rem] text-ink focus:border-marigold/60 focus:outline-none"
+        className="mt-2 w-full appearance-none border border-ink/15 bg-paper/75 px-4 py-3 font-sans text-[0.95rem] text-ink focus:border-teal focus:outline-none"
         {...rest}
       >
         {children}

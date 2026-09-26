@@ -11,9 +11,15 @@ type Variant = 'solid' | 'outline' | 'ghost';
  * contrast the palette offers, and it reads as ceremonial rather than as a
  * generic "buy" button — which marigold, being closer to the background in
  * luminance, would not.
+ *
+ * Hover and active go DARKER, not lighter. The earlier `hover:bg-kumkum-lit`
+ * took cream-on-red from 6.86:1 to 5.02:1 — it still passed, but contrast must
+ * never drop when someone interacts with a control. These reach 8.83:1 and
+ * 9.83:1 instead.
  */
 const VARIANTS: Record<Variant, string> = {
-  solid: 'bg-kumkum text-cream hover:bg-kumkum-lit shadow-[0_10px_30px_-12px_rgba(168,32,26,0.55)]',
+  solid:
+    'bg-kumkum text-cream hover:bg-kumkum-hover active:bg-kumkum-active shadow-[0_10px_30px_-12px_rgba(168,32,26,0.55)]',
   outline: 'border border-teal/30 text-teal hover:border-teal/60 hover:bg-teal/5',
   ghost: 'text-teal hover:text-kumkum',
 };

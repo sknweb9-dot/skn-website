@@ -52,7 +52,7 @@ export default function ChapterRail({
             className="group flex items-center gap-2.5 rounded-full py-1 pr-1 pl-2"
           >
             <span
-              className={`font-sans text-[0.65rem] tracking-[0.18em] uppercase transition-all duration-500 ${
+              className={`font-sans text-micro tracking-[0.18em] uppercase transition-all duration-500 ${
                 active
                   ? 'text-teal opacity-100'
                   : 'text-ink-faint opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100'

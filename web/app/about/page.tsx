@@ -48,7 +48,7 @@ export default function AboutPage() {
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_20rem]">
           <div className="max-w-2xl space-y-5">
             {ABOUT.body.slice(1).map((para) => (
-              <p key={para.slice(0, 40)} className="text-[1rem] leading-relaxed text-ink-soft">
+              <p key={para.slice(0, 40)} className="max-w-measure text-[1rem] leading-relaxed text-ink-soft">
                 {para}
               </p>
             ))}
@@ -66,10 +66,10 @@ export default function AboutPage() {
               <div key={stat.label}>
                 <dt className="sr-only">{stat.label}</dt>
                 <dd>
-                  <span className="block font-display text-[2rem] leading-none font-semibold foil">
+                  <span className="block font-display text-[2rem] leading-none font-semibold text-teal-deep">
                     {stat.value}
                   </span>
-                  <span className="mt-1.5 block font-sans text-[0.68rem] tracking-[0.16em] text-ink-faint uppercase">
+                  <span className="mt-1.5 block font-sans text-micro tracking-[0.16em] text-ink-faint uppercase">
                     {stat.label}
                   </span>
                 </dd>
@@ -95,13 +95,13 @@ export default function AboutPage() {
           <ol className="space-y-8">
             {EMBLEM.elements.map((element, i) => (
               <li key={element.name} className="border-t border-marigold/25 pt-5">
-                <p className="font-display text-[0.75rem] tracking-[0.14em] text-marigold-deep">
+                <p className="font-display text-[0.75rem] tracking-[0.14em] text-nila-700">
                   {String(i + 1).padStart(2, '0')}
                 </p>
                 <h3 className="mt-2 font-display text-[1.2rem] font-semibold text-teal-deep">
                   {element.name}
                 </h3>
-                <p className="mt-2.5 max-w-2xl text-[0.95rem] leading-relaxed text-ink-soft">
+                <p className="mt-2.5 max-w-measure text-[0.95rem] leading-relaxed text-ink-soft">
                   {element.body}
                 </p>
               </li>
@@ -109,7 +109,7 @@ export default function AboutPage() {
           </ol>
         </div>
 
-        <p className="mt-12 max-w-3xl border-l-2 border-marigold/50 pl-5 font-display text-[1.05rem] leading-relaxed text-teal-deep italic">
+        <p className="mt-12 max-w-measure border-l-2 border-marigold/50 pl-5 font-display text-[1.05rem] leading-relaxed text-teal-deep italic">
           {EMBLEM.close}
         </p>
       </Section>

@@ -52,7 +52,7 @@ export default function CurriculumPage() {
       <Section>
         <div className="max-w-3xl space-y-5">
           {CURRICULUM_INTRO.body.slice(1).map((para) => (
-            <p key={para.slice(0, 40)} className="text-[1rem] leading-relaxed text-ink-soft">
+            <p key={para.slice(0, 40)} className="max-w-measure text-[1rem] leading-relaxed text-ink-soft">
               {para}
             </p>
           ))}
@@ -69,10 +69,10 @@ export default function CurriculumPage() {
       >
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-14">
           <div className="max-w-2xl">
-            <p className="text-[1rem] leading-relaxed text-ink-soft">
+            <p className="max-w-measure text-[1rem] leading-relaxed text-ink-soft">
               {INTRODUCTORY.description}
             </p>
-            <p className="mt-5 border-l-2 border-marigold/50 pl-4 font-display text-[0.98rem] leading-relaxed text-teal-deep">
+            <p className="max-w-measure mt-5 border-l-2 border-marigold/50 pl-4 font-display text-[0.98rem] leading-relaxed text-teal-deep">
               Formal Bharatanatyam training begins from Level 1.
             </p>
 
@@ -100,7 +100,7 @@ export default function CurriculumPage() {
             </div>
           </div>
 
-          <figure className="overflow-hidden rounded-[1.5rem]">
+          <figure className="curtain overflow-hidden rounded-[1.5rem]">
             <Image
               src={INTRODUCTORY.image}
               alt="Young children in an introductory Bharatanatyam class"
@@ -131,14 +131,14 @@ export default function CurriculumPage() {
                 <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_16rem] lg:gap-10">
                   <div>
                     <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                      <span className="font-display text-[0.78rem] tracking-[0.16em] text-marigold-deep">
+                      <span className="font-display text-[0.78rem] tracking-[0.16em] text-nila-700">
                         {level.label}
                       </span>
                       <h3 className="font-display text-[1.35rem] leading-snug font-semibold text-teal-deep">
                         {level.name}
                       </h3>
                     </div>
-                    <p className="mt-3 max-w-2xl text-[0.96rem] leading-relaxed text-ink-soft">
+                    <p className="mt-3 max-w-measure text-[0.96rem] leading-relaxed text-ink-soft">
                       {level.description}
                     </p>
 
@@ -223,7 +223,7 @@ export default function CurriculumPage() {
             <p className="font-display text-[1.1rem] leading-relaxed text-teal-deep">
               {ARANGETRAM.lead}
             </p>
-            <p className="mt-4 text-[1rem] leading-relaxed text-ink-soft">
+            <p className="max-w-measure mt-4 text-[1rem] leading-relaxed text-ink-soft">
               {ARANGETRAM.description}
             </p>
 
@@ -239,7 +239,7 @@ export default function CurriculumPage() {
             </div>
           </div>
 
-          <figure className="overflow-hidden rounded-[1.5rem]">
+          <figure className="curtain overflow-hidden rounded-[1.5rem]">
             <Image
               src={ARANGETRAM.image}
               alt="A student's Arangetram — her formal debut as a Bharatanatyam performer"
@@ -265,7 +265,7 @@ export default function CurriculumPage() {
                 key={batch.code}
                 className="rounded-[1.25rem] border border-marigold/30 bg-paper/60 px-5 py-5"
               >
-                <p className="font-display text-[0.72rem] tracking-[0.14em] text-marigold-deep">
+                <p className="font-display text-[0.72rem] tracking-[0.14em] text-nila-700">
                   {batch.code}
                 </p>
                 <h3 className="mt-2 font-display text-[1.05rem] leading-snug font-semibold text-teal-deep">

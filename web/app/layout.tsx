@@ -1,24 +1,68 @@
 import type { Metadata, Viewport } from 'next';
-import { Cinzel, Plus_Jakarta_Sans } from 'next/font/google';
+import { Cinzel, Mukta } from 'next/font/google';
 import './globals.css';
 import { SITE } from '@/lib/site';
 import SmoothScroll from '@/components/SmoothScroll';
 import HashScroll from '@/components/HashScroll';
+import CurtainObserver from '@/components/CurtainObserver';
 import { BookingProvider } from '@/components/BookingProvider';
 import { AmbientProvider } from '@/components/AmbientProvider';
 
 const cinzel = Cinzel({
   variable: '--font-cinzel',
-  subsets: ['latin'],
+  /**
+   * `latin-ext` is not optional here.
+   *
+   * lib/mudras.ts carries 1,123 characters outside the basic latin range — the
+   * IAST diacritics on the gesture names, their shlokas and their word-by-word
+   * glosses: ā ī ō ū ś Ś ḍ ṃ ṅ ṇ ṛ ṣ ṭ. Every one of those codepoints sits in
+   * U+0100–02AF or U+1E00–1E9F, which is exactly what `latin-ext` covers.
+   *
+   * With `latin` alone the browser resolves them through the fallback stack
+   * MID-WORD, so `Mṛgaśīrṣa` renders in two different faces. That lands hardest
+   * on /hastas, which is the most distinctive content on the site.
+   */
+  subsets: ['latin', 'latin-ext'],
   display: 'swap',
   weight: ['400', '500', '600', '700', '800'],
 });
 
-const jakarta = Plus_Jakarta_Sans({
-  variable: '--font-jakarta',
-  subsets: ['latin'],
+/**
+ * Body face: Mukta, by Ek Type (Mumbai).
+ *
+ * Replaced Plus Jakarta Sans, which is among the dozen most-used faces on
+ * Google Fonts and the one the impeccable detector names as a generated-UI
+ * default. Jakarta is a geometric sans; nothing about it belonged to this
+ * academy.
+ *
+ * Mukta was chosen over the other finalist, Alegreya Sans, after both were set
+ * on the real pages:
+ *   - It comes from an Indian type foundry and was drawn alongside Devanagari,
+ *     so its Latin was designed for exactly this job: transliterated Sanskrit
+ *     next to English. Every IAST diacritic the site uses is present (checked
+ *     against the font's cmap; Hind, a similar candidate, lacks all eight
+ *     dot-below letters and was dropped).
+ *   - It reads at small sizes on a phone. Alegreya Sans has more calligraphic
+ *     voice but a markedly smaller x-height, and every hard-coded size on the
+ *     site would have needed bumping to match.
+ *   - Humanist rather than geometric, so it sits naturally under Cinzel's
+ *     inscriptional capitals instead of fighting them.
+ *
+ * Static, not variable, so the weights must be listed. These four are the ones
+ * the markup uses (400, 500, 600, plus 700 for <strong>); 300 was loaded for
+ * Jakarta and never used.
+ *
+ * `devanagari` is available in this family and deliberately NOT requested yet:
+ * nothing on the site sets Devanagari today, and a preloaded subset nobody
+ * reads is dead weight. Add it here the day the shlokas are shown in script.
+ */
+const body = Mukta({
+  variable: '--font-body',
+  // Same reason as Cinzel above: the gesture names and glosses are set in the
+  // body face throughout /hastas and in the live caption under the arch.
+  subsets: ['latin', 'latin-ext'],
   display: 'swap',
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['400', '500', '600', '700'],
 });
 
 const TITLE = 'Bharatanatyam Dance Academy in Chennai | Shanti Kala Nikketan';
@@ -116,7 +160,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${cinzel.variable} ${jakarta.variable}`}>
+    <html lang="en" className={`${cinzel.variable} ${body.variable}`}>
       <body className="bg-cream text-ink antialiased">
         <a
           href="#main"
@@ -128,6 +172,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <AmbientProvider>
             <SmoothScroll>
               <HashScroll />
+              <CurtainObserver />
               {children}
             </SmoothScroll>
           </AmbientProvider>

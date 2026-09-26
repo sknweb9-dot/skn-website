@@ -47,3 +47,4 @@ dev.log
 
 # local production server log
 server.log
+prod.log

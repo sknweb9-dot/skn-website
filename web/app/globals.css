@@ -31,18 +31,116 @@
   --color-teal: #0f4c5c;
   --color-teal-deep: #143642;
   --color-teal-lit: #1a6d82;
+
+  /* The emblem blue, as a text-safe step.
+  
+     The academy emblem is a blue system: weighted by occurrence across the
+     traced logo SVG, 95% of its chromatic area sits in the azure band, and its
+     single most-repeated colour is a cyan at OKLch H 222. --color-teal above is
+     H 220 — the same hue, two shades darker — so the brand hue was already here,
+     just demoted to a support role while marigold was promoted past it.
+  
+     This token is the first step of that correction and exists for one concrete
+     reason: .eyebrow below needed a colour that clears WCAG AA at 11px, and
+     marigold-deep does not (3.08:1). At H 222 the sRGB chroma ceiling is only
+     ~78% of what is available at H 242, at every lightness, so this reads as
+     petrol rather than vivid blue. That is a property of the gamut, not a
+     compromise — a brighter blue at this lightness is not renderable.
+  
+     6.51:1 on cream, 5.83:1 on silk. Both grounds matter: silk is roughly 10%
+     harsher and carries the alternating sections. */
+  --color-nila-700: #00627d;
+
+  /* The emblem's own cyan, taken straight from the traced logo — its single
+     most-repeated colour (#10b5de, OKLch H 222).
+
+     DEEP GROUND ONLY. It measures 5.31:1 on teal-deep, which is where it is
+     used (labels on the .ground-deep band), and 2.28:1 on cream, which fails
+     both text and non-text floors. This is the one place the site's colour is
+     the emblem's colour rather than a desaturated cousin of it, which is what
+     stops the logo reading as the only vivid cool thing on the page. */
+  --color-nila-300: #10b5de;
+
   --color-kumkum: #a8201a;
   --color-kumkum-lit: #c8322a;
+
+  /* Interaction states for the primary action.
+  
+     Both are DARKER than the base, which is the whole point. The button
+     previously went to kumkum-lit on hover, taking cream-on-red from 6.86:1 down
+     to 5.02:1 — still passing, but contrast must never fall when someone
+     interacts with a control. These move the other way: 8.83:1 and 9.83:1.
+  
+     kumkum-lit is kept because it is still the right colour for a lighter accent
+     on a dark ground; it is simply wrong as a hover target. */
+  --color-kumkum-hover: #930002;
+  --color-kumkum-active: #860000;
+
   --color-marigold: #ec9a29;
+  /* Marigold is ornament: hairlines, dots, fills, the arch stroke, the band
+     edge. It is 2.15:1 on cream, so it is never a text or focus colour on a
+     light ground. On teal-deep it measures 5.64:1, and that is the only
+     ground where it may carry meaning on its own. */
+
+  /* Ornament only — never a foreground colour.
+     Measured against every ground this codebase actually composites,
+     marigold-deep peaks at 3.21:1 (.glass) and bottoms out at 2.47:1 on
+     silk-deep. So it fails AA text (4.5:1) everywhere, and on three real
+     grounds — silk, silk/40-on-cream, and the marigold/10 disc in
+     BookingModal — it also fails the 3:1 non-text floor. It is correct as a
+     hairline border, a dot, a low-alpha fill, or a gradient stop, which is
+     where it is still used. Labels that used to be this colour are now
+     nila-700. Verify with _research/contrast_candidates.py before reviving it
+     as a text or icon colour. */
   --color-marigold-deep: #c97d16;
 
   /* Ink */
   --color-ink: #2b1e16;
   --color-ink-soft: #5c4a3d;
-  --color-ink-faint: #8a7565;
+
+  /* Faint ink, for meta strings and the masthead tagline.
+
+     Was #8a7565, which measured 4.11:1 on cream and 3.68:1 on silk — failing AA
+     for body text on both.
+
+     Then #7a6556, which cleared cream (5.18:1) and silk (4.64:1) but was chosen
+     without checking silk-deep, the darkest stop of the home page's radial wash.
+     It measured 4.16:1 there, so the meaning captions on the act cards still
+     failed. Browser-measured, not inferred — see the rendered-contrast sweep.
+
+     This value clears all four ground tokens with headroom:
+       paper 6.30  cream 6.04  silk 5.41  silk-deep 4.85
+     #746052 also passes but lands on exactly 4.50 on silk-deep, i.e. by nothing,
+     so it was rejected for the same reason #7e695a was.
+
+     Still clearly lighter than ink-soft (4.85 vs 6.36 on silk-deep), so the
+     faint/soft distinction survives. Any new ground darker than silk-deep
+     invalidates this — re-run _research/solve_ink_faint.py. */
+  --color-ink-faint: #6f5b4d;
 
   --font-display: var(--font-cinzel), 'Times New Roman', serif;
-  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+
+  /* The smallest text size on the site: 11px, used for tracked labels, the
+     chapter rail, the live gesture caption, timecodes and meta rows.
+
+     It replaced six ad-hoc sizes between 0.58rem and 0.68rem (9.3-10.9px).
+     Those were all functional text — the chapter rail is navigation, the
+     caption names the gesture on screen — and under 11px they fail on
+     high-DPI phones. Nothing on the site goes below this. If a label does
+     not fit at 11px, shorten the label. */
+  --text-micro: 0.6875rem;
+  --text-micro--line-height: 1.35;
+
+  /* Reading measure, for body paragraphs: max-w-measure.
+
+     Deliberately in em, not ch. `ch` is the width of the "0" glyph, which
+     varies wildly between faces — under the previous body face, Plus Jakarta
+     Sans, Tailwind's max-w-prose (65ch) came out at 761px, about 100 real
+     characters a line. At 34em, Mukta sets 63-81 characters a line on the
+     real pages (browser-measured), which is inside the 65-80 target. Re-measure
+     if the body face changes again. */
+  --container-measure: 34em;
 
   --ease-temple: cubic-bezier(0.16, 1, 0.3, 1);
 
@@ -55,11 +153,21 @@
   --animate-emblem-spin: emblem-spin 34s linear infinite;
   --animate-emblem-bloom: emblem-bloom 1.1s var(--ease-temple) both;
 
-  /* The arch aperture ratio. The source frames are 720x1280, but the bottom
-     22% carries the video's burned-in gesture label and is cropped away at draw
-     time — so the visible plate is 720x998. Keep this in step with
-     VISIBLE_FRAME_HEIGHT in lib/mudras.ts. */
-  --arch-ratio: 0.7215; /* 720 / 998 */
+  /* The arch aperture ratio.
+
+     Unchanged at 0.7215 across the move from mudra.mp4 to Hastas.mp4, on
+     purpose. It used to be 720/998 — the old portrait plate minus the burned-in
+     label cropped off the bottom. Hastas.mp4 has no burned-in labels, so that
+     crop is gone; instead the landscape 3840x2160 source is cropped to
+     1558x2160, which is this same ratio, and exported at 864x1198.
+
+     Holding the ratio means the arch mask path below, ArchOutline's identical
+     stroke, CROP_BIAS in ScrollStage and the hero's height-budget maths all
+     carry over untouched. The mask is also authored for a 720x1000 box, so 0.72
+     is the arch's drawn proportion rather than an artifact of the old footage.
+
+     Keep this in step with FRAME_WIDTH / FRAME_HEIGHT in lib/mudras.ts. */
+  --arch-ratio: 0.7215; /* 1558 / 2160, exported 864 / 1198 */
 
   /* The phone aperture is deliberately broader than the footage.
      
@@ -273,7 +381,39 @@ html.lenis body {
   font-weight: 600;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--color-marigold-deep);
+  /* Was marigold-deep, at 3.08:1 on cream. At 11px the WCAG large-text 3:1
+     allowance does not apply, so the requirement is 4.5:1 — and this is the
+     single most repeated element in the design, so it failed everywhere it
+     appeared. nila-700 gives 6.51:1 on cream and 5.83:1 on silk with no change
+     to size, weight, tracking or case. */
+  color: var(--eyebrow-color, var(--color-nila-700));
+}
+
+/* The deep-teal band. The one structural use of colour on the site.
+
+   Everything else is cream with jewel accents, which made the palette read as
+   the generic warm-cream default: four grounds 1.04-1.12:1 apart and no colour
+   anywhere except in small marks. This band — teal-deep with a marigold edge,
+   like the border of a silk saree — is where the jewel tones are finally a
+   surface. It carries the footer on every route.
+
+   Contrast on teal-deep, all measured:
+     cream 12.10   cream/80 8.32   cream/70 6.77   cream/60 5.39
+     marigold 5.64   nila-300 (emblem cyan) 5.31
+   Kumkum measures 1.76 here, so no kumkum text or hover inside the band. The
+   global focus ring is teal and would vanish, so it is re-pointed too.
+   .eyebrow reads --eyebrow-color, which is why labels follow automatically. */
+@utility ground-deep {
+  background-color: var(--color-teal-deep);
+  color: var(--color-cream);
+  --eyebrow-color: var(--color-nila-300);
+}
+
+/* Unlayered on purpose, like the global :focus-visible it overrides. Nested
+   inside @utility it landed in the utilities layer and lost to the unlayered
+   base rule whatever its specificity, leaving a teal ring on teal. */
+.ground-deep :focus-visible {
+  outline-color: var(--color-marigold);
 }
 
 /* Frosted warm glass. The editorial card treatment used across every act.
@@ -287,6 +427,19 @@ html.lenis body {
   -webkit-backdrop-filter: blur(14px) saturate(1.1);
   border: 1px solid color-mix(in oklab, var(--color-marigold) 34%, transparent);
   color: var(--color-ink);
+  box-shadow: 0 1px 0 0 color-mix(in oklab, white 70%, transparent) inset;
+}
+
+/* Elevation, for glass that floats OVER moving imagery: the act cards above the
+   scrubbed arch, and the gallery chrome over the globe. There the diffuse
+   shadow is doing a job — separating a panel from a picture that keeps
+   changing under it.
+
+   Cards sitting in the document on flat cream used to carry the same 60px
+   shadow. On a still ground it separated nothing; it was the "hairline plus
+   wide soft shadow" pairing that reads as a UI kit, so those cards now keep
+   the edge and lose the shadow. Do not add this to in-flow cards. */
+@utility glass-lifted {
   box-shadow:
     0 1px 0 0 color-mix(in oklab, white 70%, transparent) inset,
     0 24px 60px -30px color-mix(in oklab, var(--color-teal-deep) 45%, transparent);
@@ -304,22 +457,12 @@ html.lenis body {
   );
 }
 
-/* Gold-to-kumkum treatment for display numerals and accents. Tuned for a light
-   ground — a pale foil gradient would vanish on cream. */
-@utility foil {
-  background-image: linear-gradient(
-    100deg,
-    var(--color-marigold-deep) 0%,
-    var(--color-marigold) 34%,
-    #f7c46b 50%,
-    var(--color-marigold) 66%,
-    var(--color-kumkum) 100%
-  );
-  background-size: 220% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
+/* There was a `foil` utility here: a marigold-to-kumkum gradient clipped to
+   text, used on the second half of every page headline and on the display
+   numerals. It measured 1.5-3.1:1 on cream — under the 3:1 floor even for large
+   text — and was removed rather than retuned. Display numerals are teal-deep
+   on light grounds and cream on the .ground-deep band. Do not revive gradient
+   text on a light ground; no stop of marigold passes there. */
 
 /* The temple arch aperture. Applied as a mask so it scales with the element,
    which clip-path: path() would not. Path is drawn for a 720x1000 box to match
@@ -399,8 +542,60 @@ html.lenis body {
 }
 
 /* ---------------------------------------------------------------------------
+   The curtain.
+
+   Photographs of the academy's stage, classes and teachers rise into view the
+   way a proscenium curtain lifts: the picture is uncovered from the floor
+   upward, once, when it arrives. It is the inner-page counterpart to the home
+   page's arch — performance vocabulary, not a generic fade — and it replaced
+   the fade-and-rise that used to run on every section.
+
+   Driven by components/CurtainObserver.tsx. The contract that keeps it safe:
+     - Nothing is hidden by CSS alone. An image is lowered only by JS, only
+       when it is still BELOW the fold at the moment the page settles, and it
+       is raised by an IntersectionObserver — which fires on wheel, touch,
+       anchor jumps and find-in-page alike. With no JS, or reduced motion, the
+       photograph is simply there.
+     - It plays in time, not scrubbed against scroll. A scroll-linked version
+       was tried first and rejected: a bottom-up wipe tied to scroll leaves a
+       picture that is already mostly on screen almost entirely covered, which
+       reads as a hole in the page rather than a curtain.
+
+   Text is never curtained. Only photographs, and only the large editorial ones
+   — not gallery grids, thumbnails or avatars, where it would become a cascade.
+--------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  /* The clip goes on the picture INSIDE the frame, never on the frame.
+     The frame is what CurtainObserver watches, and Chrome's
+     IntersectionObserver measures the observed element after its own
+     clip-path: a frame clipped to inset(100%) reports no intersection, so it
+     was never raised — an on-screen photograph stayed lowered for good. */
+  .curtain > * {
+    transition:
+      clip-path 0.95s var(--ease-temple),
+      transform 1.2s var(--ease-temple);
+    transform-origin: 50% 100%;
+  }
+  .curtain[data-curtain='down'] > * {
+    clip-path: inset(100% 0 0 0);
+    transform: scale(1.035);
+  }
+}
+
+/* ---------------------------------------------------------------------------
    Motion preferences. GSAP timelines additionally check this in JS so pinned
    sections collapse into a plain document rather than merely stop animating.
+
+   Reduced motion means no MOVEMENT, not no feedback. The previous rule clamped
+   every transition to 0.01ms, which also killed hover colour changes, focus
+   and border feedback, and the fade on the floating booking bar — state
+   changes that carry meaning and do not trigger vestibular symptoms.
+
+   So transitions keep their authored durations but are restricted to
+   non-spatial properties: anything that was going to slide or scale now snaps,
+   while colour and opacity still ease. Keyframe animations — the emblem's
+   turn, the scroll cue, the rise — are still clamped, except the two
+   entrances below, which are swapped for a plain fade.
 --------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -408,6 +603,16 @@ html.lenis body {
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    transition-property:
+      color, background-color, border-color, outline-color, text-decoration-color, fill, stroke,
+      opacity !important;
+  }
+
+  /* The booking modal and gallery panel (animate-rise) and the route
+     transition keep their arrival, as opacity only. A class selector
+     outranks the universal rule above, so this wins over the clamp. */
+  .animate-rise,
+  .page-enter {
+    animation: page-in 0.24s var(--ease-temple) both !important;
   }
 }

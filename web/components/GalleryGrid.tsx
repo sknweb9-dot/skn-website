@@ -65,7 +65,7 @@ export default function GalleryGrid({
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Search by event or year"
-            className="w-full rounded-full border border-ink/15 bg-paper/75 py-2.5 pr-4 pl-9 font-sans text-[0.85rem] text-ink placeholder:text-ink-faint/70 focus:border-marigold/60 focus:outline-none"
+            className="w-full rounded-full border border-ink/15 bg-paper/75 py-2.5 pr-4 pl-9 font-sans text-[0.85rem] text-ink placeholder:text-ink-faint/70 focus:border-teal focus:outline-none"
           />
         </label>
 
@@ -146,7 +146,7 @@ function Cell({
         like.
       */}
       <div
-        className="relative overflow-hidden rounded-[0.75rem] border border-marigold/25 bg-silk"
+        className="relative overflow-hidden rounded-[0.75rem] border border-marigold/25 bg-silk transition-colors duration-200 group-hover:border-teal/50"
         style={{ aspectRatio: `${item.width} / ${item.height}` }}
       >
         <Image
@@ -156,7 +156,7 @@ function Cell({
           height={item.height}
           sizes="(max-width: 640px) 46vw, (max-width: 1024px) 30vw, 22vw"
           loading={priority ? 'eager' : 'lazy'}
-          className="h-full w-full object-contain transition-transform duration-700 group-hover:scale-[1.03]"
+          className="h-full w-full object-contain"
         />
         {isVideo ? (
           <span
@@ -171,7 +171,7 @@ function Cell({
         <p className="line-clamp-2 font-sans text-[0.78rem] leading-snug font-medium text-ink">
           {item.title}
         </p>
-        <p className="mt-0.5 font-sans text-[0.68rem] text-ink-faint">
+        <p className="mt-0.5 font-sans text-micro text-ink-faint">
           {isVideo ? (item.subtitle.includes('Playlist') ? 'Playlist' : 'Video') : item.subtitle}
         </p>
       </div>

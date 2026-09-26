@@ -143,7 +143,7 @@ export default function Nav() {
                 <span className="block font-display text-[0.95rem] font-semibold tracking-wide text-teal-deep">
                   {SITE.name}
                 </span>
-                <span className="block font-sans text-[0.6rem] tracking-[0.2em] text-ink-faint uppercase">
+                <span className="block font-sans text-micro tracking-[0.2em] text-ink-faint uppercase">
                   {SITE.tagline}
                 </span>
               </span>

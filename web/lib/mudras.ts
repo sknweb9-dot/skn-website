@@ -1,67 +1,65 @@
 /**
- * The asamyuta hastas (single-hand gestures) shown in mudra.mp4.
+ * The asamyuta hastas (single-hand gestures) shown in Hastas.mp4.
  *
  * FRAME PROVENANCE
  * ----------------
- * Source: mudra.mp4 — 720x1280, 24fps, 45.375s, 1089 frames.
+ * Source: Hastas.mp4 — 3840x2160, 30fps, 54.000s, 1620 decodable frames.
  * Extracted with (see _research/extract_frames.ps1):
- *   ffmpeg -i mudra.mp4 \
- *     -vf "fps=24/3.3333,scale=720:-2:flags=lanczos" \
- *     -an -c:v libwebp -lossless 0 -quality 72 -compression_level 6 \
+ *   ffmpeg -i Hastas.mp4 \
+ *     -vf "crop=1558:2160:1546:0,fps=6,scale=864:-2:flags=lanczos" \
+ *     -an -c:v libwebp -lossless 0 -quality 74 -compression_level 6 \
  *     public/frames/frame_%04d.webp
  *
- * The source is 720px wide, so scaling to 1080 would upscale it — more bytes,
- * no more detail. Sampling at 24/3.3333 fps yields 327 frames (4.36 MB total,
- * 13.7 KB average). Density is dictated by scroll distance, not canvas size:
- * six acts is roughly 9,000px of desktop scroll, and below ~30px per frame the
- * scrub reads as steppy.
+ * This replaces mudra.mp4, which was 720x1280 portrait. Three consequences:
  *
- * The video carries its own burned-in gesture labels. The ranges below were
- * read directly off those labels via a 36-sample contact sheet taken against a
- * 218-frame extraction, so they are expressed on that grid (LABEL_GRID) and
- * converted to the live sequence on read. Keeping the transcribed numbers
- * untouched means a future re-extraction only changes FRAME_COUNT — the
- * hand-verified gesture boundaries never need to be recomputed.
+ * 1. The arm is horizontal in this footage, not vertical, so the plate is a
+ *    measured crop rather than a straight scale. x=1546 puts 150px of margin
+ *    left of the leftmost fingertip across all 1620 frames and keeps the green
+ *    sleeve out of frame; _research/hand_extent.py is the measurement and
+ *    _research/crop_candidates.py shows the rejected alternatives. The crop
+ *    holds ratio 0.7215, so --arch-ratio, the arch mask, ArchOutline and
+ *    CROP_BIAS are all unchanged.
+ *
+ * 2. 6fps over 54s is exactly 324 frames, and every gesture boundary in
+ *    _research/../asamyuta_hastas_reference_guide.md falls on a whole second.
+ *    So a gesture spanning seconds [a,b] occupies frames [6a+1, 6(b+1)] with no
+ *    rounding, and frameStart/frameEnd below are real frame numbers. The old
+ *    LABEL_GRID indirection — which existed because the previous ranges were
+ *    transcribed off burned-in labels at a different density — is gone.
+ *
+ * 3. Hastas.mp4 carries no burned-in gesture labels, so there is nothing to crop
+ *    off the bottom of the plate at draw time. VISIBLE_FRAME_HEIGHT is gone too;
+ *    the whole plate is visible and VISIBLE_RATIO is simply the frame ratio.
+ *
+ * 864px wide rather than 720: measured aperture widths are 294-644 CSS px, so a
+ * 1920-logical retina desktop needs ~966 device px and 720 under-resolved it.
  *
  * The order is the canonical Abhinaya Darpana sequence of 28 asamyuta hastas.
+ * Spellings here are canonical for the codebase — lib/acts.ts resolves anchors
+ * by exact name, and three differ from the reference guide (Padmakōśa,
+ * Kāṅgūla, Sandaṃśa).
  */
 
 /** Total frames currently exported to public/frames. */
-export const FRAME_COUNT = 327;
+export const FRAME_COUNT = 324;
 
-/**
- * The extraction density the frameStart/frameEnd values below were read
- * against. Do not change: it is a property of the transcription, not of the
- * current asset.
- */
-const LABEL_GRID = 218;
-
-/** Map a label-grid frame number onto the live sequence. */
-function toLiveFrame(labelFrame: number): number {
-  const ratio = (labelFrame - 1) / (LABEL_GRID - 1);
-  return Math.round(ratio * (FRAME_COUNT - 1)) + 1;
-}
+/** Frames per second of the extraction. Each gesture boundary is a multiple. */
+export const FRAMES_PER_SECOND = 6;
 
 /** Zero-padded width used in frame filenames. */
 export const FRAME_PAD = 4;
 
-export const FRAME_WIDTH = 720;
-export const FRAME_HEIGHT = 1280;
+export const FRAME_WIDTH = 864;
+export const FRAME_HEIGHT = 1198;
 
 /**
- * The video burns its own gesture label into the bottom of every frame — see
- * any frame around 1030–1140px. That is useful on the /hastas reference page,
- * where the labels are the point, but on the homepage it fights our own
- * typography and cannot be restyled.
+ * Aspect ratio of the plate.
  *
- * So the bottom of the plate is cropped away at draw time. 998px keeps the
- * whole hand and most of the forearm while clearing the tallest glyph ascender
- * with room to spare. Keep --arch-ratio in globals.css in step with this.
+ * The whole plate is visible now, so this is just the frame ratio. It is kept as
+ * a named export because StaticActs and the /hastas page size their stills by
+ * it, and because --arch-ratio in globals.css must stay in step with it.
  */
-export const VISIBLE_FRAME_HEIGHT = 998;
-
-/** Aspect ratio of the cropped, visible plate. */
-export const VISIBLE_RATIO = FRAME_WIDTH / VISIBLE_FRAME_HEIGHT;
+export const VISIBLE_RATIO = FRAME_WIDTH / FRAME_HEIGHT;
 
 export function framePath(index: number): string {
   const clamped = Math.min(Math.max(index, 1), FRAME_COUNT);
@@ -75,8 +73,9 @@ export type Mudra = {
   /** Literal translation of the gesture's name */
   literal: string;
   /**
-   * First and last frame where this gesture is on screen, expressed on the
-   * LABEL_GRID (218-frame) transcription. Use `liveFrames()` to convert.
+   * First and last frame where this gesture is on screen, on the live 324-frame
+   * sequence, 1-indexed and inclusive. Derived from the reference guide's
+   * whole-second ranges at 6fps: seconds [a,b] -> frames [6a+1, 6(b+1)].
    */
   frameStart: number;
   frameEnd: number;
@@ -119,7 +118,7 @@ export const MUDRAS: Mudra[] = [
     name: 'Ardhapatāka',
     literal: 'half a flag',
     frameStart: 13,
-    frameEnd: 24,
+    frameEnd: 18,
     viniyoga: ['tender shoots', 'a writing tablet', 'a knife', 'a banner', 'a tower', 'a horn', 'a riverbank'],
     featured: false,
   },
@@ -127,8 +126,8 @@ export const MUDRAS: Mudra[] = [
     order: 4,
     name: 'Kartarīmukha',
     literal: "the scissors' blades",
-    frameStart: 25,
-    frameEnd: 30,
+    frameStart: 19,
+    frameEnd: 36,
     viniyoga: ['separation of man and woman', 'opposition', 'the corner of the eye', 'lightning', 'a creeper', 'falling'],
     featured: false,
   },
@@ -136,8 +135,8 @@ export const MUDRAS: Mudra[] = [
     order: 5,
     name: 'Mayūra',
     literal: 'the peacock',
-    frameStart: 31,
-    frameEnd: 36,
+    frameStart: 37,
+    frameEnd: 48,
     viniyoga: ["a peacock's beak", 'a creeper', 'a bird', 'wiping away tears', 'the forehead mark', 'parting the hair'],
     featured: false,
   },
@@ -145,8 +144,8 @@ export const MUDRAS: Mudra[] = [
     order: 6,
     name: 'Ardhacandra',
     literal: 'the half moon',
-    frameStart: 37,
-    frameEnd: 48,
+    frameStart: 49,
+    frameEnd: 60,
     viniyoga: [
       'the moon on the eighth night',
       'a spear',
@@ -166,8 +165,8 @@ export const MUDRAS: Mudra[] = [
     order: 7,
     name: 'Arāla',
     literal: 'bent',
-    frameStart: 49,
-    frameEnd: 54,
+    frameStart: 61,
+    frameEnd: 66,
     viniyoga: ['drinking poison', 'drinking nectar', 'a violent wind'],
     featured: false,
   },
@@ -175,8 +174,8 @@ export const MUDRAS: Mudra[] = [
     order: 8,
     name: 'Śukatuṇḍa',
     literal: "the parrot's beak",
-    frameStart: 55,
-    frameEnd: 60,
+    frameStart: 67,
+    frameEnd: 78,
     viniyoga: ['shooting an arrow', 'a spear', 'mystery', 'recollection', 'ferocity', 'harsh speech'],
     featured: false,
   },
@@ -184,8 +183,8 @@ export const MUDRAS: Mudra[] = [
     order: 9,
     name: 'Muṣṭi',
     literal: 'the closed fist',
-    frameStart: 61,
-    frameEnd: 72,
+    frameStart: 79,
+    frameEnd: 90,
     viniyoga: ['steadiness', 'grasping hair', 'holding things', 'wrestling', 'running'],
     reflection:
       'Steadiness, made visible. Before a dancer can express anything, the hand must first learn to hold — and to hold nothing at all without trembling.',
@@ -195,8 +194,8 @@ export const MUDRAS: Mudra[] = [
     order: 10,
     name: 'Śikhara',
     literal: 'the spire',
-    frameStart: 73,
-    frameEnd: 78,
+    frameStart: 91,
+    frameEnd: 96,
     viniyoga: ['the god of love', 'a bow', 'a pillar', 'silence', 'a tooth', 'questioning', 'saying no', 'an embrace', 'firmness'],
     featured: false,
   },
@@ -204,8 +203,8 @@ export const MUDRAS: Mudra[] = [
     order: 11,
     name: 'Kapittha',
     literal: 'the wood apple',
-    frameStart: 79,
-    frameEnd: 84,
+    frameStart: 97,
+    frameEnd: 108,
     viniyoga: ['Lakshmi', 'Saraswati', 'holding cymbals', 'milking a cow', 'holding the end of a garment', 'holding a flower'],
     featured: false,
   },
@@ -213,8 +212,8 @@ export const MUDRAS: Mudra[] = [
     order: 12,
     name: 'Kaṭakāmukha',
     literal: 'the opening of a bracelet',
-    frameStart: 85,
-    frameEnd: 90,
+    frameStart: 109,
+    frameEnd: 144,
     viniyoga: ['plucking flowers', 'a pearl necklace', 'drawing an arrow', 'speech', 'glances', 'camphor', 'betel'],
     featured: false,
   },
@@ -222,8 +221,8 @@ export const MUDRAS: Mudra[] = [
     order: 13,
     name: 'Sūcī',
     literal: 'the needle',
-    frameStart: 91,
-    frameEnd: 102,
+    frameStart: 145,
+    frameEnd: 150,
     viniyoga: [
       'the number one',
       'Parabrahman',
@@ -245,8 +244,8 @@ export const MUDRAS: Mudra[] = [
     order: 14,
     name: 'Candrakalā',
     literal: 'the digit of the moon',
-    frameStart: 103,
-    frameEnd: 108,
+    frameStart: 151,
+    frameEnd: 162,
     viniyoga: ['the moon on the first night', 'the face', "the crescent in Shiva's hair", 'measuring a cubit', 'the Ganga'],
     featured: false,
   },
@@ -254,8 +253,8 @@ export const MUDRAS: Mudra[] = [
     order: 15,
     name: 'Padmakōśa',
     literal: 'the lotus bud',
-    frameStart: 109,
-    frameEnd: 120,
+    frameStart: 163,
+    frameEnd: 174,
     viniyoga: ['fruit', 'a bell', 'an egg', 'a water lily', 'a cluster of flowers', 'an offering of food'],
     reflection:
       'The hand becomes a vessel — not yet open, not yet given. In the Gurukulam this is the shape of what a student is: holding something that has not bloomed, and learning the patience to let it.',
@@ -265,8 +264,8 @@ export const MUDRAS: Mudra[] = [
     order: 16,
     name: 'Sarpaśīrṣa',
     literal: "the serpent's head",
-    frameStart: 121,
-    frameEnd: 126,
+    frameStart: 175,
+    frameEnd: 186,
     viniyoga: ['sandal paste', 'a snake', 'slow movement', 'offering water to the gods', 'nourishing', "an elephant's ears"],
     featured: false,
   },
@@ -274,8 +273,8 @@ export const MUDRAS: Mudra[] = [
     order: 17,
     name: 'Mṛgaśīrṣa',
     literal: "the deer's head",
-    frameStart: 127,
-    frameEnd: 132,
+    frameStart: 187,
+    frameEnd: 192,
     viniyoga: ['women', 'the cheek', 'a mirror', 'practising steps', 'discussion', 'the number three', 'calling the beloved', 'fear'],
     featured: false,
   },
@@ -283,8 +282,8 @@ export const MUDRAS: Mudra[] = [
     order: 18,
     name: 'Siṃhamukha',
     literal: "the lion's face",
-    frameStart: 133,
-    frameEnd: 144,
+    frameStart: 193,
+    frameEnd: 204,
     viniyoga: ['the sacred fire offering', 'coral', 'a pearl', 'a lotus garland', 'an elephant', 'sacred grass', 'medicine', 'a tortoise'],
     reflection:
       'Named for the lion, used for the offering into fire. The tradition rarely lets a gesture stay literal for long — the fierce and the devotional share a single hand.',
@@ -294,8 +293,8 @@ export const MUDRAS: Mudra[] = [
     order: 19,
     name: 'Kāṅgūla',
     literal: 'the tail-shaped hand',
-    frameStart: 145,
-    frameEnd: 150,
+    frameStart: 205,
+    frameEnd: 216,
     viniyoga: ['the lakuca fruit', 'small bells', 'a great bell', 'the cakora bird', 'a betel nut tree', 'a white water lily', 'a coconut'],
     verse: {
       shloka: [
@@ -322,8 +321,8 @@ export const MUDRAS: Mudra[] = [
     order: 20,
     name: 'Alapadma',
     literal: 'the fully bloomed lotus',
-    frameStart: 151,
-    frameEnd: 162,
+    frameStart: 217,
+    frameEnd: 228,
     viniyoga: [
       'a lotus in full bloom',
       'circular movement',
@@ -365,8 +364,8 @@ export const MUDRAS: Mudra[] = [
     order: 21,
     name: 'Catura',
     literal: 'the clever one',
-    frameStart: 163,
-    frameEnd: 168,
+    frameStart: 229,
+    frameEnd: 240,
     viniyoga: ['musk', 'a little', 'gold', 'sorrow', 'taste', 'the eyes', 'a promise', 'sweetness', 'a slow walk', 'the face'],
     verse: {
       shloka: [
@@ -394,8 +393,8 @@ export const MUDRAS: Mudra[] = [
     order: 22,
     name: 'Bhramara',
     literal: 'the bee',
-    frameStart: 169,
-    frameEnd: 174,
+    frameStart: 241,
+    frameEnd: 246,
     viniyoga: ['a bee', 'a parrot', 'wings', 'a crane', 'the cuckoo'],
     verse: {
       shloka: [
@@ -418,8 +417,8 @@ export const MUDRAS: Mudra[] = [
     order: 23,
     name: 'Haṃsāsya',
     literal: "the swan's face",
-    frameStart: 175,
-    frameEnd: 180,
+    frameStart: 247,
+    frameEnd: 258,
     viniyoga: ['tying the mangalsutra', 'giving instruction', 'certainty', 'a pearl necklace', 'jasmine', 'painting', 'a bite'],
     verse: {
       shloka: [
@@ -447,8 +446,8 @@ export const MUDRAS: Mudra[] = [
     order: 24,
     name: 'Haṃsapakṣa',
     literal: "the swan's wing",
-    frameStart: 181,
-    frameEnd: 192,
+    frameStart: 259,
+    frameEnd: 264,
     viniyoga: ['the number six', 'the building of a bridge', 'writing with the nails', 'covering'],
     verse: {
       shloka: [
@@ -472,8 +471,8 @@ export const MUDRAS: Mudra[] = [
     order: 25,
     name: 'Sandaṃśa',
     literal: 'the pincers',
-    frameStart: 193,
-    frameEnd: 198,
+    frameStart: 265,
+    frameEnd: 276,
     viniyoga: ['the belly', 'an offering to God', 'a wound', 'a worm', 'great fear', 'worship', 'the number five'],
     verse: {
       shloka: [
@@ -498,8 +497,8 @@ export const MUDRAS: Mudra[] = [
     order: 26,
     name: 'Mukula',
     literal: 'the bud',
-    frameStart: 199,
-    frameEnd: 204,
+    frameStart: 277,
+    frameEnd: 288,
     viniyoga: ['a water lily', 'eating', 'the five arrows of Manmatha', 'placing religious marks', 'the navel', 'a plantain flower'],
     verse: {
       shloka: [
@@ -523,8 +522,8 @@ export const MUDRAS: Mudra[] = [
     order: 27,
     name: 'Tāmracūḍa',
     literal: "the cock's comb",
-    frameStart: 205,
-    frameEnd: 216,
+    frameStart: 289,
+    frameEnd: 300,
     viniyoga: ['writing', 'the number twelve', 'the crowing of a cock', 'a calf'],
     reflection:
       'Twenty-eight gestures, learned one at a time, over years. No shortcut exists — which is exactly the lesson. A child who can do this can do anything that asks for patience.',
@@ -534,8 +533,8 @@ export const MUDRAS: Mudra[] = [
     order: 28,
     name: 'Triśūla',
     literal: 'the trident',
-    frameStart: 217,
-    frameEnd: 218,
+    frameStart: 301,
+    frameEnd: 324,
     viniyoga: ['a bilva leaf', 'the number three', 'a wood apple leaf'],
     featured: false,
   },
@@ -543,30 +542,75 @@ export const MUDRAS: Mudra[] = [
 
 export const FEATURED_MUDRAS = MUDRAS.filter((m) => m.featured);
 
+/**
+ * Fail loudly at module load if the gesture schedule and the exported sequence
+ * have drifted apart.
+ *
+ * The frame numbers above are real indices into public/frames, derived from the
+ * reference guide at 6fps. That is only true while the extraction is 6fps over
+ * 54s. A re-extraction at another density would leave every range silently
+ * pointing at the wrong gesture — the homepage would caption the hand
+ * incorrectly and the act anchors in lib/acts.ts would drift with it, which is
+ * exactly the class of bug the checker there exists to catch.
+ *
+ * So assert the invariant directly: the 28 ranges must tile 1..FRAME_COUNT with
+ * no gap and no overlap. If this throws, rerun _research/extract_frames.ps1 and
+ * _research/retime_mudras.py rather than editing the numbers by hand.
+ */
+(function verifyFrameSchedule() {
+  let expected = 1;
+  for (const m of MUDRAS) {
+    if (m.frameStart !== expected) {
+      throw new Error(
+        `Mudra ${m.order} (${m.name}) starts at frame ${m.frameStart}, expected ${expected}. ` +
+          `The gesture schedule no longer tiles the exported sequence.`,
+      );
+    }
+    if (m.frameEnd < m.frameStart) {
+      throw new Error(`Mudra ${m.order} (${m.name}) ends before it starts`);
+    }
+    expected = m.frameEnd + 1;
+  }
+  if (expected - 1 !== FRAME_COUNT) {
+    throw new Error(
+      `Gesture schedule covers ${expected - 1} frames but FRAME_COUNT is ${FRAME_COUNT}. ` +
+        `Re-extract at ${FRAMES_PER_SECOND}fps or recompute the ranges.`,
+    );
+  }
+})();
+
 /** Gestures whose Sanskrit verse the academy has published as a Theory Class. */
 export const VERSE_MUDRAS = MUDRAS.filter((m) => m.verse);
 
-/** The gesture's frame range on the live sequence, 1-indexed and inclusive. */
+/**
+ * The gesture's frame range on the live sequence, 1-indexed and inclusive.
+ *
+ * frameStart/frameEnd are already live frame numbers, so this is now a plain
+ * accessor. It is kept because ScrollStage, StaticActs and the /hastas page all
+ * call it, and because it is the right place to put any future remap if the
+ * extraction density ever stops being 6fps.
+ */
 export function liveFrames(m: Mudra): { start: number; end: number } {
-  return { start: toLiveFrame(m.frameStart), end: toLiveFrame(m.frameEnd) };
+  return { start: m.frameStart, end: m.frameEnd };
 }
 
 /**
- * Normalised scroll progress (0–1) spanned by a gesture. Derived from the
- * label grid, which is proportionally identical to the live sequence, so this
- * is unaffected by re-extraction density.
+ * Normalised scroll progress (0–1) spanned by a gesture.
+ *
+ * Frame n covers progress [(n-1)/FRAME_COUNT, n/FRAME_COUNT], so an inclusive
+ * range [start, end] spans from (start-1)/FRAME_COUNT to end/FRAME_COUNT.
  */
 export function mudraProgress(m: Mudra): { start: number; end: number; mid: number } {
-  const start = (m.frameStart - 1) / LABEL_GRID;
-  const end = m.frameEnd / LABEL_GRID;
+  const start = (m.frameStart - 1) / FRAME_COUNT;
+  const end = m.frameEnd / FRAME_COUNT;
   return { start, end, mid: (start + end) / 2 };
 }
 
 /** Which gesture is on screen at a given normalised scroll progress. */
 export function mudraAtProgress(progress: number): Mudra {
   const clamped = Math.min(1, Math.max(0, progress));
-  const labelFrame = Math.min(LABEL_GRID, Math.floor(clamped * LABEL_GRID) + 1);
-  return MUDRAS.find((m) => labelFrame >= m.frameStart && labelFrame <= m.frameEnd) ?? MUDRAS[0];
+  const frame = Math.min(FRAME_COUNT, Math.floor(clamped * FRAME_COUNT) + 1);
+  return MUDRAS.find((m) => frame >= m.frameStart && frame <= m.frameEnd) ?? MUDRAS[0];
 }
 
 /** Look up a gesture by IAST name. Throws at module load if the name is wrong. */
