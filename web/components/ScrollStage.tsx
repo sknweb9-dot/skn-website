@@ -32,21 +32,21 @@ const PRELOAD_CONCURRENCY = 8;
 /**
  * Frame loading is two passes, and only the first one gates the page.
  *
- * All 327 frames are 4.4 MB. Waiting for every one of them behind a full-screen
- * preloader is a long stare at a percentage on mobile data, for a scrub that
+ * All 324 frames are about 6.8 MB. Waiting for every one of them behind a
+ * full-screen preloader is a long stare on mobile data, for a scrub that
  * degrades gracefully anyway: draw() already falls back to the nearest loaded
  * frame at or before the one requested.
  *
- * So every fourth frame is fetched first — 82 files, about 1.1 MB — and the
+ * So every fourth frame is fetched first — 81 files, about 1.7 MB — and the
  * preloader clears on that. The remaining three quarters stream in behind it and
  * the scrub sharpens as they land, which on any reasonable connection happens
  * before the reader has finished the first act.
  *
  * Dropping the other three quarters altogether was the obvious alternative and
- * the wrong one: at 327 frames the desktop scrub is already at ~27.5px of scroll
- * per frame, against a documented steppiness threshold of ~30 (see lib/mudras.ts).
- * A quarter of the frames would put it at 110 and the gesture would stutter. The
- * bytes are not the problem; blocking on them was.
+ * the wrong one: at 324 frames the desktop scrub is about 17px of scroll per
+ * frame (see ACT_SPAN_SVH); a quarter of the frames would put it near 70, well
+ * past the ~30px steppiness threshold in lib/mudras.ts, and the gesture would
+ * stutter. The bytes are not the problem; blocking on them was.
  */
 const COARSE_STEP = 4;
 
@@ -69,7 +69,7 @@ const COARSE_TOTAL = LOAD_ORDER.coarse.length;
 
 /**
  * Honour Data Saver by stopping after the coarse pass. A reader who has asked
- * their browser to spend less deserves a steppier scrub, not a silent 4.4 MB.
+ * their browser to spend less deserves a steppier scrub, not a silent 6.8 MB.
  */
 function prefersLessData(): boolean {
   const connection = (
@@ -82,20 +82,25 @@ function prefersLessData(): boolean {
 /**
  * Scroll distance allotted to each act, in svh.
  *
- * 160 on a pointer device gives the scrub room to breathe: 327 frames over six
- * acts is about 27.5px of scroll per frame at 1440x900, just inside the ~30px
- * steppiness threshold documented in lib/mudras.ts.
+ * WHY 120, NOT 160
+ * ----------------
+ * 160 was set for mudra.mp4 (45s of footage, sampled at 7.2fps). Hastas.mp4 is
+ * 54s and holds each gesture longer, so at the same scroll length the hand sat
+ * still for longer stretches and the scrub read as slower — reported as "it
+ * takes more scrolling to change what's shown". The frame count barely moved
+ * (327 -> 324); the pacing of the footage did.
  *
- * Phones get 120. A thumb covers less ground than a wheel, and 960svh is a long
- * way to flick — while the shorter span actually *improves* the scrub, because
- * the same 327 frames are spread over less distance: about 18.6px per frame on a
- * 390x844 screen. Less work, smoother result.
+ * 120 on a pointer device is 25% less scroll for the same 28 gestures, and as a
+ * side effect a smoother scrub: 324 frames over 720svh is about 17px of scroll
+ * per frame at 1440x900, well inside the ~30px steppiness threshold documented
+ * in lib/mudras.ts. Phones drop in the same proportion, 120 -> 90.
  *
- * Neither number touches the act windows, which are normalised to 0–1, so the
- * pacing checker in _research/check_act_windows.py is unaffected.
+ * Neither number touches the act windows, which are normalised to 0-1. Keep
+ * TOTAL_SVH in _research/check_act_windows.py equal to 6 x ACT_SPAN_SVH, or the
+ * travel gaps it reports in svh will be wrong.
  */
-const ACT_SPAN_SVH = 160;
-const ACT_SPAN_SVH_PHONE = 120;
+const ACT_SPAN_SVH = 120;
+const ACT_SPAN_SVH_PHONE = 90;
 
 /**
  * How far the arch slides away from an act's editorial column, as a fraction of
@@ -107,6 +112,42 @@ const ACT_SPAN_SVH_PHONE = 120;
  */
 const ARCH_SHIFT = 0.13;
 const SHIFT_BREAKPOINT = 640;
+
+/**
+ * Vertical placement.
+ *
+ * The arch's CSS top was a fixed 5svh, which left the composition pinned to the
+ * top of the screen — under the masthead, in fact — with 180-350px of empty
+ * wash beneath it. Side acts were worst: their card docks inside the arch's
+ * height, so everything below the arch's foot was empty.
+ *
+ * So each act now has a resting vertical offset that centres whatever that act
+ * shows: the arch alone for side acts, the arch plus its card for centre acts.
+ * It is computed from measured heights (card height is content-driven, and the
+ * arch height is clamped by the viewport), cached, and interpolated across the
+ * same travel as the horizontal move, so the arch glides between the two.
+ *
+ * Two limits, in priority order: never clip the bottom of a centre act's card
+ * (the stage is overflow-hidden, and a cut-off call to action is the worst
+ * outcome), and otherwise keep the top clear of the masthead.
+ *
+ * Phones use the same centring, with every act treated as stacked (arch over
+ * card), which is how they lay out. The arch's height budget on phones is still
+ * the hand-tuned one in the wrapper's classes; this only moves the block, and
+ * the bottom limit above means a short phone can never be pushed into clipping.
+ */
+const EDGE_GAP = 16;
+
+type StageLayout = {
+  /** The arch wrapper's CSS top, in px. Unaffected by the transform. */
+  archTop: number;
+  archHeight: number;
+  /** Height of each act's card, by act index. */
+  cardHeights: number[];
+  /** Lowest the arch's top may sit, to clear the masthead. */
+  minTop: number;
+  viewport: number;
+};
 
 /**
  * Where the crop sits when the aperture is broader than the footage.
@@ -182,6 +223,8 @@ function ScrubStage() {
   /** Last frame actually painted. Guards against redundant draws. */
   const paintedRef = useRef(-1);
   const activeActRef = useRef(-1);
+  /** Cached measurements for the vertical centring. See StageLayout. */
+  const layoutRef = useRef<StageLayout | null>(null);
 
   /** Progress of the gating pass only — see COARSE_STEP. */
   const [coarseLoaded, setCoarseLoaded] = useState(0);
@@ -254,6 +297,42 @@ function ScrubStage() {
     paintedRef.current = painted;
   }
 
+  /**
+   * Measure once, not per tick: reading offsetHeight inside the scroll handler,
+   * right after writing styles, would force a layout on every frame.
+   */
+  function measureLayout() {
+    const arch = archRef.current;
+    if (!arch) return;
+    const header = document.querySelector('header');
+    layoutRef.current = {
+      archTop: arch.offsetTop,
+      archHeight: arch.offsetHeight,
+      cardHeights: panelsRef.current.map((el) => el?.querySelector('article')?.offsetHeight ?? 0),
+      minTop: (header?.getBoundingClientRect().height ?? 0) + 8,
+      viewport: window.innerHeight,
+    };
+  }
+
+  /** Vertical offset, in px, that centres act `index` on screen. */
+  function restingOffset(index: number): number {
+    const layout = layoutRef.current;
+    if (!layout) return 0;
+    const act = ACTS[index];
+    const card = layout.cardHeights[index];
+    // Below sm every act docks its card under the arch, whatever its side.
+    const stacked = act.side === 'center' || window.innerWidth < SHIFT_BREAKPOINT;
+    // A side card docks with its foot at 92% of the arch's height (ActPanel's
+    // bottom-[8%]). On a short viewport the arch is clamped small and the card
+    // can be taller than that, standing proud of the arch's top; count it.
+    const overhang = stacked ? 0 : Math.max(0, card - 0.92 * layout.archHeight);
+    const block = stacked ? layout.archHeight + card : layout.archHeight + overhang;
+    const centred = (layout.viewport - block) / 2;
+    const clearOfMasthead = Math.max(centred, layout.minTop);
+    const blockTop = Math.max(EDGE_GAP, Math.min(clearOfMasthead, layout.viewport - block - EDGE_GAP));
+    return blockTop + overhang - layout.archTop;
+  }
+
   // -------------------------------------------------------------------------
   // Preload
   // -------------------------------------------------------------------------
@@ -316,6 +395,7 @@ function ScrubStage() {
     const root = document.documentElement;
 
     resizeCanvas();
+    measureLayout();
 
     const onUpdate = (progress: number) => {
       // Frame scrub. Only touch the canvas when the integer frame changes.
@@ -325,7 +405,7 @@ function ScrubStage() {
         draw(frame);
       }
 
-      // Copy layers. Written directly — re-rendering React 327 times per pass
+      // Copy layers. Written directly — re-rendering React 324 times per pass
       // would drop frames.
       let leader = 0;
       let leaderAlpha = -1;
@@ -354,7 +434,7 @@ function ScrubStage() {
       // gone and arrives before the next act's text appears.
       const arch = archRef.current;
       if (arch) {
-        const { fromSide, toSide, lerp, travel } = archState(progress);
+        const { fromSide, toSide, fromIndex, toIndex, lerp, travel } = archState(progress);
         const wide = window.innerWidth >= SHIFT_BREAKPOINT;
         const from = wide ? archOffsetFor(fromSide) : 0;
         const to = wide ? archOffsetFor(toSide) : 0;
@@ -364,7 +444,8 @@ function ScrubStage() {
         // move rather than sliding flatly across the page. Opacity is left alone
         // — fading it would wash the video out against the cream ground.
         const scale = 1 - 0.045 * travel;
-        const lift = -10 * travel;
+        const fromY = restingOffset(fromIndex);
+        const lift = fromY + (restingOffset(toIndex) - fromY) * lerp - 10 * travel;
         arch.style.transform = `translate3d(calc(-50% + ${shift.toFixed(1)}px), ${lift.toFixed(1)}px, 0) scale(${scale.toFixed(4)})`;
       }
 
@@ -412,13 +493,23 @@ function ScrubStage() {
 
     const onResize = () => {
       resizeCanvas();
+      measureLayout();
       onUpdate(trigger.progress);
     };
     window.addEventListener('resize', onResize);
 
+    // Card heights change when the web fonts arrive, so measure again then.
+    let disposed = false;
+    document.fonts?.ready.then(() => {
+      if (disposed) return;
+      measureLayout();
+      onUpdate(trigger.progress);
+    });
+
     onUpdate(0);
 
     return () => {
+      disposed = true;
       window.removeEventListener('resize', onResize);
       trigger.kill();
       root.style.removeProperty('--stage-progress');
@@ -540,45 +631,55 @@ function ScrubStage() {
 
               <div
                 ref={apertureRef}
-                className="arch relative h-full aspect-[var(--arch-ratio-phone)] overflow-hidden bg-teal-deep shadow-[0_40px_120px_-50px_rgba(20,54,66,0.75)] sm:aspect-[var(--arch-ratio)]"
+                className="arch-fade relative h-full aspect-[var(--arch-ratio-phone)] overflow-hidden bg-teal-deep sm:aspect-[var(--arch-ratio)]"
               >
-                <canvas
-                  ref={canvasRef}
-                  className="block h-full w-full"
-                  role="img"
-                  aria-label="A dancer's hand forming the asamyuta hastas of Bharatanatyam, one gesture flowing into the next"
-                />
+                {/*
+                  The picture and its tints. The fade at the foot is part of the
+                  aperture's own mask (arch-fade in globals.css), so the arch
+                  dissolves into whatever the page is behind it.
 
-                {/* The footage was shot on a neutral grey backdrop. Tinting the
-                    hue toward peacock teal without touching luminance makes the
-                    aperture read as a lit cinematic window rather than a grey
-                    hole punched in a cream page.
+                  It used to fade to flat cream with an overlay. That only
+                  matched while the arch sat high on the stage; once it was
+                  centred vertically its foot landed on the darker lower half of
+                  the radial wash, and a cream fade there read as a pale
+                  rectangle stuck under the arch.
+                */}
+                <div className="absolute inset-0">
+                  <canvas
+                    ref={canvasRef}
+                    className="block h-full w-full"
+                    role="img"
+                    aria-label="A dancer's hand forming the asamyuta hastas of Bharatanatyam, one gesture flowing into the next"
+                  />
 
-                    Both layers are kept light on purpose: the dancer's fingers
-                    are alta-stained a deep red, and at heavier settings they
-                    went muddy against the teal. */}
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0 bg-teal opacity-25 mix-blend-color"
-                />
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0 bg-[radial-gradient(85%_60%_at_50%_30%,transparent_0%,rgba(20,54,66,0.28)_100%)]"
-                />
-                {/* Dissolve the foot of the arch into the page. Without this the
-                    mask ends on a hard horizontal cut, which reads as clipping
-                    rather than as a window. */}
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-x-0 bottom-0 h-[22%] bg-gradient-to-b from-transparent to-cream"
-                />
+                  {/* The footage was shot on a neutral grey backdrop. Tinting the
+                      hue toward peacock teal without touching luminance makes the
+                      aperture read as a lit cinematic window rather than a grey
+                      hole punched in a cream page.
+
+                      Both layers are kept light on purpose: the dancer's fingers
+                      are alta-stained a deep red, and at heavier settings they
+                      went muddy against the teal. */}
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 bg-teal opacity-25 mix-blend-color"
+                  />
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 bg-[radial-gradient(85%_60%_at_50%_30%,transparent_0%,rgba(20,54,66,0.28)_100%)]"
+                  />
+                </div>
               </div>
 
-              <ArchOutline />
+              {/* The stroke fades with the picture, so the foot dissolves instead of
+                  ending on two hairlines that stop in mid-air. */}
+              <ArchOutline className="[mask-image:linear-gradient(to_bottom,black_68%,transparent_92%)]" />
 
               {/*
                 Live gesture caption — dark kumkum on the arch's own bottom fade,
-                which has resolved to cream by this height. No plate behind it: a
+                which is transparent by this height, so the caption sits on the
+                page's wash (kumkum 5.5:1 and ink-faint 4.85:1 even on silk-deep,
+                the wash's darkest stop). No plate behind it: a
                 frosted pill was tried and it read as a UI chip stuck on the
                 artwork rather than as part of the composition.
 

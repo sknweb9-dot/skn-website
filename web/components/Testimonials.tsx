@@ -43,7 +43,7 @@ export default function Testimonials() {
           <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {PLACEHOLDERS.map((t) => (
               <li key={t.parent} className="glass grain rounded-[1.5rem] px-6 py-7">
-                <blockquote className="font-display text-[1.05rem] leading-relaxed text-ink">
+                <blockquote className="text-[1.05rem] leading-relaxed text-ink">
                   &ldquo;{t.quote}&rdquo;
                 </blockquote>
                 <footer className="mt-5">

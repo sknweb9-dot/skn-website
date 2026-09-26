@@ -17,7 +17,7 @@ Run this after changing any window, anchor, or fade constant.
 import math
 
 FRAME_COUNT = 324
-TOTAL_SVH = 960  # 6 acts x ACT_SPAN_SVH in components/ScrollStage.tsx
+TOTAL_SVH = 720  # 6 acts x ACT_SPAN_SVH (120) in components/ScrollStage.tsx
 
 # name: (frameStart, frameEnd) on the live 324-frame sequence, from lib/mudras.ts.
 # These are real frame numbers now — the old 218-frame LABEL_GRID indirection was

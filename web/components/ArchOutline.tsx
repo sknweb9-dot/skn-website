@@ -9,9 +9,10 @@
  * `vectorEffect="non-scaling-stroke"` keeps the hairline a true hairline once
  * the viewBox has been squashed to the element's box.
  *
- * The path is deliberately left open — no closing `Z`. The aperture fades to
- * cream at its foot rather than ending on a hard edge, so a stroked bottom line
- * would draw a rule across nothing.
+ * The path is deliberately left open — no closing `Z`. The aperture fades out
+ * at its foot rather than ending on a hard edge, so a stroked bottom line would
+ * draw a rule across nothing. The home stage also masks this SVG, so the side
+ * strokes fade with the picture.
  */
 export default function ArchOutline({ className = '' }: { className?: string }) {
   return (

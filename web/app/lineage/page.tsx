@@ -115,7 +115,7 @@ export default function LineagePage() {
 
             <blockquote className="glass mt-8 rounded-[1.5rem] px-6 py-7 sm:px-8">
               <p className="eyebrow">{DIRECTOR.vision.label}</p>
-              <p className="mt-3 font-display text-[1.05rem] leading-relaxed text-teal-deep italic">
+              <p className="mt-3 max-w-measure text-[1.05rem] leading-relaxed font-medium text-teal-deep">
                 &ldquo;{DIRECTOR.vision.quote}&rdquo;
               </p>
               <footer className="mt-4 font-sans text-xs text-ink-faint">

@@ -220,7 +220,7 @@ export default function CurriculumPage() {
       <Section eyebrow={ARANGETRAM.label} heading={ARANGETRAM.name} tinted id={ARANGETRAM.id}>
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-14">
           <div className="max-w-2xl">
-            <p className="font-display text-[1.1rem] leading-relaxed text-teal-deep">
+            <p className="max-w-measure text-[1.1rem] leading-relaxed font-medium text-teal-deep">
               {ARANGETRAM.lead}
             </p>
             <p className="max-w-measure mt-4 text-[1rem] leading-relaxed text-ink-soft">

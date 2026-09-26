@@ -453,6 +453,24 @@ html.lenis body {
   -webkit-mask-repeat: no-repeat;
 }
 
+/* The arch aperture, faded out at its foot. The home stage's version.
+
+   One element, two masks intersected: the arch shape, and a vertical fade that
+   reaches full transparency at 94% so the foot dissolves into whatever wash is
+   behind it. It has to be one element. Fading a child inside an `arch`-masked
+   parent left a one-pixel seam around the child's edge, visible as a faint
+   rectangle under the arch. */
+@utility arch-fade {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 720 1000' preserveAspectRatio='none'%3E%3Cpath d='M0 1000V420C0 196 150 54 360 24c210 30 360 172 360 396v580Z' fill='%23fff'/%3E%3C/svg%3E"), linear-gradient(to bottom, #000 72%, transparent 94%);
+  mask-size: 100% 100%, 100% 100%;
+  mask-repeat: no-repeat;
+  mask-composite: intersect;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 720 1000' preserveAspectRatio='none'%3E%3Cpath d='M0 1000V420C0 196 150 54 360 24c210 30 360 172 360 396v580Z' fill='%23fff'/%3E%3C/svg%3E"), linear-gradient(to bottom, #000 72%, transparent 94%);
+  -webkit-mask-size: 100% 100%, 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-composite: source-in;
+}
+
 /* Fine film grain over a light ground. Pure CSS, no image request. */
 @utility grain {
   position: relative;

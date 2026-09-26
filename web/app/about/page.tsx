@@ -103,7 +103,7 @@ export default function AboutPage() {
           </ol>
         </div>
 
-        <p className="mt-12 max-w-measure border-l-2 border-marigold/50 pl-5 font-display text-[1.05rem] leading-relaxed text-teal-deep italic">
+        <p className="mt-12 max-w-measure border-l-2 border-marigold/50 pl-5 text-[1.05rem] leading-relaxed font-medium text-teal-deep">
           {EMBLEM.close}
         </p>
       </Section>

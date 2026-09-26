@@ -234,6 +234,9 @@ const TRAVELS = ACTS.slice(0, -1).map((act, i) => {
 export function archState(progress: number): {
   fromSide: ActSide;
   toSide: ActSide;
+  /** Indices into ACTS of the act being left and the act being approached. */
+  fromIndex: number;
+  toIndex: number;
   lerp: number;
   travel: number;
 } {
@@ -243,6 +246,8 @@ export function archState(progress: number): {
       return {
         fromSide: ACTS[t.from].side,
         toSide: ACTS[t.to].side,
+        fromIndex: t.from,
+        toIndex: t.to,
         lerp: smoothstep(raw),
         // Bell curve: 0 at both ends of the move, 1 at its midpoint.
         travel: Math.sin(Math.PI * (raw < 0 ? 0 : raw > 1 ? 1 : raw)),
@@ -250,7 +255,8 @@ export function archState(progress: number): {
     }
   }
   const act = actAtProgress(progress);
-  return { fromSide: act.side, toSide: act.side, lerp: 0, travel: 0 };
+  const index = act.index - 1;
+  return { fromSide: act.side, toSide: act.side, fromIndex: index, toIndex: index, lerp: 0, travel: 0 };
 }
 
 if (ACTS.length !== ACT_COUNT) {

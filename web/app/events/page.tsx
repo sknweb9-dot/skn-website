@@ -159,7 +159,7 @@ export default async function EventsPage() {
           <h3 className="mt-3 font-display text-[clamp(1.35rem,3vw,1.9rem)] leading-tight font-semibold text-teal-deep">
             The debut that everything points towards
           </h3>
-          <p className="mt-4 font-display text-[1.05rem] leading-relaxed text-teal-deep">
+          <p className="mt-4 max-w-measure text-[1.05rem] leading-relaxed font-medium text-teal-deep">
             {ARANGETRAM.lead}
           </p>
           <p className="max-w-measure mt-4 text-[1rem] leading-relaxed text-ink-soft">
