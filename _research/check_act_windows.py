@@ -16,27 +16,30 @@ Run this after changing any window, anchor, or fade constant.
 
 import math
 
-LABEL_GRID = 218
+FRAME_COUNT = 324
 TOTAL_SVH = 960  # 6 acts x ACT_SPAN_SVH in components/ScrollStage.tsx
 
-# name: (frameStart, frameEnd) on the 218-frame label grid, from lib/mudras.ts
+# name: (frameStart, frameEnd) on the live 324-frame sequence, from lib/mudras.ts.
+# These are real frame numbers now — the old 218-frame LABEL_GRID indirection was
+# removed when the source became Hastas.mp4, whose gesture boundaries all fall on
+# whole seconds and therefore on exact multiples of 6 at the 6fps extraction.
 ANCHORS = {
     "Pataka": (1, 6),
-    "Ardhacandra": (37, 48),
-    "Suci": (91, 102),
-    "Padmakosa": (109, 120),
-    "Alapadma": (151, 162),
-    "Tamracuda": (205, 216),
+    "Ardhacandra": (49, 60),
+    "Suci": (145, 150),
+    "Padmakosa": (163, 174),
+    "Alapadma": (217, 228),
+    "Tamracuda": (289, 300),
 }
 
 # (window_start, window_end, anchor name)
 WINDOWS = [
-    (0.000, 0.110, "Pataka"),
-    (0.110, 0.290, "Ardhacandra"),
-    (0.290, 0.485, "Suci"),
-    (0.485, 0.630, "Padmakosa"),
-    (0.630, 0.800, "Alapadma"),
-    (0.800, 1.000, "Tamracuda"),
+    (0.000, 0.109, "Pataka"),
+    (0.109, 0.338, "Ardhacandra"),
+    (0.338, 0.492, "Suci"),
+    (0.492, 0.596, "Padmakosa"),
+    (0.596, 0.798, "Alapadma"),
+    (0.798, 1.000, "Tamracuda"),
 ]
 
 TEXT_IN_START, TEXT_IN_END = 0.10, 0.20
@@ -55,7 +58,7 @@ print("ANCHOR VISIBILITY")
 for i, (start, end, anchor) in enumerate(WINDOWS):
     first, last = i == 0, i == len(WINDOWS) - 1
     fs, fe = ANCHORS[anchor]
-    mid = ((fs - 1) / LABEL_GRID + fe / LABEL_GRID) / 2
+    mid = ((fs - 1) / FRAME_COUNT + fe / FRAME_COUNT) / 2
     span = end - start
     total += span
     t = (mid - start) / span

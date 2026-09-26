@@ -1,0 +1,100 @@
+{
+  "name": "skn-design",
+  "description": "Design and build the Shanti Kala Nikketan website in web/. Loads the vendored design skills (impeccable, frontend-design, ui-ux-pro-max, design-system, brand) plus browser verification and live framework docs.",
+  "prompt": "You work on the Next.js site in web/. Read web/app/globals.css tokens and web/AGENTS.md before writing UI code. This Next.js is 16.3.4 and differs from training data: consult web/node_modules/next/dist/docs/ for routing, metadata, caching and server/client boundary questions rather than relying on recall. Verify visual work in the browser and inspect screenshots rather than asserting a result. Prefer querying the ui-ux-pro-max database over guessing at fonts, palettes or motion values, and say so explicitly when it returns no match.",
+  "tools": [
+    "@context7",
+    "@memory",
+    "@open-design",
+    "@playwright",
+    "@sequentialthinking",
+    "code",
+    "glob",
+    "grep",
+    "read",
+    "shell",
+    "write"
+  ],
+  "allowedTools": [
+    "read",
+    "write",
+    "code",
+    "grep",
+    "glob",
+    "@builtin",
+    "@open-design",
+    "@playwright",
+    "@context7",
+    "@memory",
+    "@sequentialthinking"
+  ],
+  "resources": [
+    "skill://.kiro/skills/*/SKILL.md",
+    "file://.kiro/steering/**/*.md",
+    "file://web/AGENTS.md"
+  ],
+  "mcpServers": {
+    "open-design": {
+      "command": "C:\\Users\\Sayon\\AppData\\Local\\Programs\\Open Design\\Open Design.exe",
+      "args": [
+        "C:\\Users\\Sayon\\AppData\\Local\\Programs\\Open Design\\resources\\app\\prebundled\\daemon\\daemon-cli.mjs",
+        "mcp"
+      ],
+      "env": {
+        "OD_DATA_DIR": "C:\\Users\\Sayon\\AppData\\Roaming\\Open Design\\namespaces\\release-stable-win\\data",
+        "OD_SIDECAR_CLIENT_ENDPOINT": "\\\\.\\pipe\\open-design-sidecar-76a09a7fe929982edd495150849bb3f0",
+        "OD_MCP_BOOTSTRAP_COMMAND": "C:\\Users\\Sayon\\AppData\\Local\\Programs\\Open Design\\Open Design.exe",
+        "OD_MCP_BOOTSTRAP_ARGS": "[\"--headless\"]",
+        "ELECTRON_RUN_AS_NODE": "1"
+      }
+    },
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp"
+      ]
+    },
+    "context7": {
+      "url": "https://mcp.context7.com/mcp"
+    },
+    "memory": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ]
+    },
+    "sequentialthinking": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
+    }
+  },
+  "permissions": {
+    "rules": [
+      {
+        "capability": "fs_read",
+        "effect": "allow"
+      },
+      {
+        "capability": "fs_write",
+        "effect": "allow"
+      },
+      {
+        "capability": "mcp",
+        "match": [
+          "builtin/*",
+          "context7/*",
+          "memory/*",
+          "open-design/*",
+          "playwright/*",
+          "sequentialthinking/*"
+        ],
+        "effect": "allow"
+      }
+    ]
+  }
+}

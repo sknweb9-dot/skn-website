@@ -2,17 +2,17 @@
   "name": "SKN-dev",
   "description": "Shantikalanikettan project development agent with browser automation and documentation tools",
   "tools": [
+    "@chrome-devtools",
+    "@context7",
+    "@memory",
+    "@playwright",
+    "@sequentialthinking",
     "code",
     "glob",
     "grep",
     "read",
     "shell",
-    "write",
-    "@playwright",
-    "@chrome-devtools",
-    "@memory",
-    "@sequentialthinking",
-    "@context7"
+    "write"
   ],
   "allowedTools": [
     "read",
@@ -74,11 +74,11 @@
         "capability": "mcp",
         "match": [
           "builtin/*",
-          "playwright/*",
           "chrome-devtools/*",
+          "context7/*",
           "memory/*",
-          "sequentialthinking/*",
-          "context7/*"
+          "playwright/*",
+          "sequentialthinking/*"
         ],
         "effect": "allow"
       }

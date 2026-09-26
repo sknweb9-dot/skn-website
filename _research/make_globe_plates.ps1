@@ -1,4 +1,4 @@
-# Cut the 512x512 globe plates used as three.js textures on /events.
+# Cut the globe plate textures used on /events.
 #
 # WHY A PREP STEP AND NOT next/image
 # ----------------------------------
@@ -9,22 +9,22 @@
 # no quality dial there either. Pre-cut files are served straight from /public,
 # cached immutably, and cost the optimizer nothing.
 #
-# WHY SQUARE AND WHY 512
-# ----------------------
-# Square because the source photographs run from 0.67 to 1.78 aspect, and a
-# sphere of identically-shaped plaques reads as a temple wall while a sphere of
-# mixed rectangles reads as debris. 512 because it is power-of-two, so three.js
-# can mipmap it without resampling — plates are seen at anything from 40px on the
-# far side of the sphere to ~260px at the front, and without mipmaps the far side
-# shimmers as it turns.
+# NOTHING IS CROPPED
+# ------------------
+# Each plate is the whole photograph, scaled so its LONG edge reaches 512 and its
+# own aspect ratio is preserved. No square crop, no letterbox padding.
 #
-# The arch silhouette is NOT baked in here. It is applied at runtime in
-# components/GlobeCanvas.tsx by clipping each loaded plate to the same arch path
-# the rest of the site uses, so the shape stays authored in exactly one place.
+# The first version centre-cropped everything to 512x512 so the sphere could be
+# built from one square geometry. That is cheaper to render and it looked tidier,
+# but it quietly threw away the edges of every frame — and roughly a third of
+# these images are posters and invitation cards whose whole content is
+# typography running to the margins. A cropped poster is not a smaller poster,
+# it is an unreadable one. The globe now sizes each plate to its own aspect
+# instead, which costs one extra number per record and nothing at draw time.
 #
-# Crop is biased upward (0.35 rather than 0.5) for the same reason CROP_BIAS
-# exists in ScrollStage: the bottom of a dance photograph is floor and the top is
-# faces and hands.
+# The arch silhouette that used to be applied at runtime is gone for the same
+# reason: masking a rectangle into an arch cuts the top corners off, and on a
+# poster those corners are where the title lives.
 #
 # Keep the source list in step with SOURCES in web/lib/events.ts. The build will
 # tell you if you do not — verifyEvents() throws when a record names a plate no
@@ -69,8 +69,10 @@ $plates = [ordered]@{
   'hero-videos'       = 'hero-videos.jpg'
 }
 
-$size = 512
-$bias = 0.35
+# Long edge, in pixels. A plate is drawn at anything from ~40px on the far side
+# of the sphere to ~280px at the front, so this leaves headroom for mipmapping
+# without paying for detail nobody sees.
+$long = 512
 
 if (-not (Test-Path $out)) { New-Item -ItemType Directory -Path $out | Out-Null }
 
@@ -83,14 +85,11 @@ foreach ($key in $plates.Keys) {
 
   $dst = Join-Path $out ("{0}.webp" -f $key)
 
-  # scale so the short edge reaches $size, then crop to square with the window
-  # held above centre.
-  $vf = "scale=${size}:${size}:force_original_aspect_ratio=increase," +
-        "crop=${size}:${size}:(iw-ow)/2:(ih-oh)*${bias}"
-
+  # decrease = fit inside a $long x $long box while preserving aspect, so the
+  # long edge lands on $long and nothing is added or removed.
   & ffmpeg -y -hide_banner -loglevel error -i $src `
-    -vf $vf `
-    -frames:v 1 -c:v libwebp -lossless 0 -quality 78 -compression_level 6 `
+    -vf "scale=w=${long}:h=${long}:force_original_aspect_ratio=decrease" `
+    -frames:v 1 -c:v libwebp -lossless 0 -quality 80 -compression_level 6 `
     $dst
 
   if (-not (Test-Path $dst)) { throw "ffmpeg produced nothing for $key" }

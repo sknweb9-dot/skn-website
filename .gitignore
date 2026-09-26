@@ -1,0 +1,57 @@
+# ---------------------------------------------------------------------------
+# Repository-root ignore rules.
+#
+# The site is the Next.js app in web/, which has its own .gitignore covering
+# node_modules, .next, env files, tsbuildinfo and its dev/server logs. Those
+# rules are NOT duplicated here — one owner per concern. This file covers only
+# what sits at the repository root or in the sibling folders.
+# ---------------------------------------------------------------------------
+
+# --- Large local media -----------------------------------------------------
+# ~290 MB of source footage. Kept on disk, never committed.
+# mudra.mp4 (2.9 MB) is already tracked from earlier work and stays tracked.
+/Hastas.mp4
+
+# --- Vite prototype in globefolio-3d-image-animation/ ----------------------
+/globefolio-3d-image-animation/node_modules/
+/globefolio-3d-image-animation/dist/
+/globefolio-3d-image-animation/.env
+/globefolio-3d-image-animation/.env.local
+
+# --- Python tooling in _research/ and _build/ ------------------------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# --- Browser automation scratch --------------------------------------------
+# NOTE: .playwright-mcp/ is already TRACKED, so this rule does not remove the
+# existing files from the index — it only stops new ones being added. To drop
+# the history too, run: git rm -r --cached .playwright-mcp
+/.playwright-mcp/
+
+# --- Vendored skills -------------------------------------------------------
+# .kiro/skills/ IS committed (~6 MB). It is the project's design toolchain, all
+# three upstreams are permissively licensed, and the skills cannot function
+# without their bundled data — ui-ux-pro-max is a searchable database, not prose.
+# See .kiro/skills/NOTICES.md for attribution.
+#
+# Only runtime scratch is excluded. impeccable's launcher caches its engine
+# binary outside the repo, so nothing is needed for that.
+/.kiro/skills/**/__pycache__/
+/.kiro/skills/**/*.pyc
+/.kiro/skills/impeccable/scripts/bin/
+
+# --- Editor and OS noise ---------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+*.bak
+
+# --- Agent tooling scratch -------------------------------------------------
+# Session-continuation state written by a local agent runner. Machine-specific
+# and meaningless to anyone else.
+/.omo/
