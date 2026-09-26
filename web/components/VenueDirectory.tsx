@@ -70,7 +70,7 @@ function BatchRow({
       {venue.batches.map((batch) => (
         <li key={batch.code} className="py-3">
           <div className="flex items-baseline gap-2.5">
-            <span className="w-11 shrink-0 font-display text-micro tracking-[0.1em] text-nila-700">
+            <span className="w-11 shrink-0 font-sans text-xs font-semibold tracking-[0.04em] text-teal-deep">
               {batch.code}
             </span>
             <span className="min-w-0 text-[0.92rem] font-medium text-teal-deep">
@@ -154,7 +154,12 @@ function PublicVenues({ citySlug }: { citySlug: string }) {
             <BatchRow venue={venue} showAdmission />
             {openCount(venue) > 0 ? (
               <div className="mt-5">
-                <TrialButton source={`venue-${venue.id}`} variant="outline">
+                <TrialButton
+                  source={`venue-${venue.id}`}
+                  variant="outline"
+                  branch={venue.mode === 'online' ? 'online' : venue.citySlug}
+                  venue={venue.mode === 'online' ? undefined : venue.id}
+                >
                   Enquire about {venue.name}
                 </TrialButton>
               </div>
@@ -209,7 +214,7 @@ function ResidentVenues({ citySlug }: { citySlug: string }) {
                 <VenueHeading venue={venue} sub="Online" />
                 <BatchRow venue={venue} showAdmission />
                 <div className="mt-5">
-                  <TrialButton source={`venue-${venue.id}`} variant="outline">
+                  <TrialButton source={`venue-${venue.id}`} variant="outline" branch="online">
                     Join the online batch
                   </TrialButton>
                 </div>

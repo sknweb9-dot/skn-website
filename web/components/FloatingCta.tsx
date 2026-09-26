@@ -12,6 +12,12 @@ import { useBooking } from './BookingProvider';
  */
 export default function FloatingCta() {
   const [visible, setVisible] = useState(false);
+  /**
+   * True while an in-page booking button is on screen. The bar steps aside then,
+   * so a reader never sees two "Book trial" controls at once — the duplication
+   * the academy asked to be rid of. See `inline` on TrialButton.
+   */
+  const [inlineShowing, setInlineShowing] = useState(false);
   const { isOpen } = useBooking();
 
   useEffect(() => {
@@ -23,7 +29,20 @@ export default function FloatingCta() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const shown = visible && !isOpen;
+  useEffect(() => {
+    const onScreen = new Set<Element>();
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) onScreen.add(entry.target);
+        else onScreen.delete(entry.target);
+      }
+      setInlineShowing(onScreen.size > 0);
+    });
+    document.querySelectorAll('[data-trial-inline]').forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  const shown = visible && !isOpen && !inlineShowing;
 
   return (
     <div
@@ -51,7 +70,7 @@ export default function FloatingCta() {
           <span className="hidden sm:inline">Call</span>
           <span className="sm:hidden">{SITE.phoneDisplay}</span>
         </a>
-        <TrialButton source="floating" className="flex-1 !py-4 sm:!py-3" showArrow={false} />
+        <TrialButton source="floating" className="flex-1 !py-4 sm:!py-3" showArrow={false} inline={false} />
       </div>
     </div>
   );

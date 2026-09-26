@@ -13,6 +13,7 @@
  */
 
 import { branchBySlug, SITE } from './site';
+import { VENUES } from './classes';
 
 export type Enquiry = {
   parentName: string;
@@ -20,6 +21,8 @@ export type Enquiry = {
   age: number;
   /** Branch slug, or 'online' */
   branch: string;
+  /** Venue id from lib/classes.ts, or '' when the parent left it to us */
+  venue: string;
   /** Programme label chosen in the form. Empty when the parent asked us to advise. */
   stage: string;
   phone: string;
@@ -76,6 +79,13 @@ export function branchLabel(slug: string): string {
   return branch.locality ? `${branch.label} — ${branch.locality}` : branch.label;
 }
 
+/** Venue name for the mail, or the fallback when none was chosen. */
+export function venueLabel(id: string): string {
+  const venue = VENUES.find((v) => v.id === id);
+  if (!venue) return 'Any — suggest the nearest';
+  return venue.area ? `${venue.name}, ${venue.area}` : venue.name;
+}
+
 /** The academy runs on IST, so the timestamp is stated in IST and labelled. */
 export function formatReceived(date: Date): string {
   const formatted = new Intl.DateTimeFormat('en-IN', {
@@ -128,6 +138,7 @@ export function enquiryHtml(enquiry: Enquiry): string {
   const parent = esc(enquiry.parentName);
   const student = esc(enquiry.studentName);
   const branch = esc(branchLabel(enquiry.branch));
+  const venue = esc(venueLabel(enquiry.venue));
   const stage = enquiry.stage ? esc(enquiry.stage) : 'Not sure — asked us to advise';
   const phone = esc(enquiry.phone);
   const phoneUri = esc(telHref(enquiry.phone));
@@ -180,6 +191,7 @@ export function enquiryHtml(enquiry: Enquiry): string {
                 ${row('Email', link(`mailto:${email}`, email))}
                 ${row('Student', `${student} · age ${enquiry.age}`)}
                 ${row('Nearest branch', branch)}
+                ${row('Venue', venue)}
                 ${row('Would start at', stage)}
               </table>
             </td>
@@ -226,6 +238,7 @@ export function enquiryText(enquiry: Enquiry): string {
     '',
     `Student        ${enquiry.studentName}, age ${enquiry.age}`,
     `Branch         ${branchLabel(enquiry.branch)}`,
+    `Venue          ${venueLabel(enquiry.venue)}`,
     `Would start at ${enquiry.stage || 'Not sure — asked us to advise'}`,
     '',
     `Parent         ${enquiry.parentName}`,

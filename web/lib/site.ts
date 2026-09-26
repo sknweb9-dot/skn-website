@@ -11,6 +11,12 @@ export const SITE = {
   name: 'Shanti Kala Nikketan',
   legalName: 'Shanti Kala Nikketan Academy of Fine Arts',
   tagline: 'Academy of Fine Arts',
+  /**
+   * The academy's own one-line description, supplied by the director. Used as
+   * the home page subtext and the footer line on every page, so it is defined
+   * once and cannot drift between them.
+   */
+  signature: 'Bharatanatyam, Kalakshetra Bani since 2009',
   url: 'https://www.shantikalanikketan.com',
   founded: '2009-04-18',
   email: 'shantikalanikketan@gmail.com',
@@ -18,7 +24,7 @@ export const SITE = {
   phoneE164: '+919884022306',
   style: 'Kalakshetra style of Bharatanatyam',
   method: 'Gurukulam',
-  logo: '/img/logo-mark.png',
+  logo: '/img/logo-emblem.png',
   ogImage: '/img/hero-home.jpg',
   socials: {
     instagram: 'https://www.instagram.com/shantikalanikketan',
@@ -38,18 +44,22 @@ export function yearsOfLineage(now: Date = new Date()): number {
   return years;
 }
 
-/** Owner-supplied figures. Update here when the academy reports new numbers. */
+/**
+ * Owner-supplied figures. Update here when the academy reports new numbers.
+ *
+ * There is deliberately no student headcount. The site used to show "324
+ * students taught"; the academy asked for it to be removed because exact
+ * headcounts are not formally tracked, so it has also been taken out of the
+ * Schema.org graph rather than left there as an unsupported claim.
+ */
 export const METRICS = {
-  students: 324,
   stages: 20,
   /**
-   * Countries with a teaching presence: India and Canada.
-   *
-   * Note this counts branches, not students. The class list in
-   * `Website Contents.docx` also records individually-taught students in the
-   * USA, so a student-reach figure would be 3.
+   * Countries where the academy has students: India, Canada, and the USA
+   * (online). This is student reach, as the academy counts it — not branches,
+   * of which there are two.
    */
-  countries: 2,
+  countries: 3,
 } as const;
 
 // ---------------------------------------------------------------------------
@@ -78,6 +88,11 @@ export type Branch = {
   geo?: { lat: number; lng: number; precision: 'street' | 'locality' };
   /** Head of branch, where named on the academy's own site */
   head?: string;
+  /**
+   * The branch's own contact line, where it has one. Absent means the academy's
+   * main number and email in SITE apply.
+   */
+  contact?: { phoneDisplay: string; phoneE164: string; email: string };
   isPrimary: boolean;
   /** One-line positioning used in hero copy on the branch page */
   intro: string;
@@ -107,8 +122,11 @@ export const BRANCHES: Branch[] = [
     country: 'India',
     countryCode: 'IN',
     postalCode: '600119',
-    streetAddress:
-      '11018, Ground Floor, Tower 11, Prestige Courtyard, Model School Extension Road, Sholinganallur',
+    // No street address, on purpose. Every Chennai venue is a residential
+    // complex, and the academy asked for the exact building address to come off
+    // the public site to avoid trouble with the property. Locality + postcode is
+    // what the schema carries now, and it is what a parent needs to judge
+    // distance; the venue itself is shared once a trial is booked.
     geo: { lat: 12.901, lng: 80.2279, precision: 'locality' },
     head: 'Smt. Sunitta Menghanaani',
     isPrimary: true,
@@ -126,15 +144,10 @@ export const BRANCHES: Branch[] = [
       'Velachery',
       'Adyar',
       'Pallikaranai',
-      'Kelambakkam',
-      'Egattur',
     ],
-    landmarks: [
-      'Prestige Courtyards, Tower 11',
-      'Off Rajiv Gandhi Salai (OMR)',
-      'Sholinganallur Junction',
-      'Model School Extension Road',
-    ],
+    // Kelambakkam and Egattur were removed from this list at the academy's
+    // request. The venue-level landmarks were removed with the street address.
+    landmarks: ['Off Rajiv Gandhi Salai (OMR)', 'Sholinganallur Junction'],
     formats: ['Group classes', 'Individual classes', 'Online classes', 'Theory and Sanskrit viniyoga'],
     image: '/img/hero-gurukulam.jpg',
   },
@@ -151,6 +164,8 @@ export const BRANCHES: Branch[] = [
     // invent one; schema carries locality + region only.
     geo: { lat: 43.801, lng: -79.2166, precision: 'locality' },
     head: 'S. Kirusanthini',
+    // From the academy's International brochure, 2026-27.
+    contact: { phoneDisplay: '+1 416 892 4427', phoneE164: '+14168924427', email: 'intlskn@gmail.com' },
     isPrimary: false,
     intro:
       'Our Canadian branch, running individual and group classes at Morningside and Finch under Kalakshetra-trained faculty.',
@@ -164,7 +179,7 @@ export const BRANCHES: Branch[] = [
       'North York',
       'Greater Toronto Area',
     ],
-    landmarks: ['Morningside Avenue & Finch Avenue East', 'Malvern Town Centre', 'Toronto temple circuit'],
+    landmarks: ['Morningside Avenue & Finch Avenue East', 'Malvern Town Centre'],
     formats: ['Group classes', 'Individual classes'],
     image: '/img/event-canada.jpg',
   },
@@ -219,13 +234,15 @@ export const FOUNDERS: Person[] = [
   {
     name: 'Sunitta Menghanaani',
     role: 'Co-founder & Director',
-    bio: 'Sunitta Menghanaani, a profound Bharatanatyam artiste and teacher, hails from Pune, but has made her karmabhumi — Chennai. She began her journey into dance at the tender age of 3 under Smt Geeta Nair. The urge to follow her passion brought her down South and she graduated in Bharatanatyam from Kalakshetra Foundation, Rukmini Devi College of Fine Arts, Chennai. Sunitta started dissemination of her artistic knowledge with the firm belief that everyone can learn dance, and the only talent required is a talent to work hard.',
+    bio: 'Sunitta Menghanaani, a profound Bharatanatyam artiste and teacher, hails from Pune, but has made her karmabhumi — Chennai. She began her journey into dance at the tender age of 3 under Smt Geeta Nair. The urge to follow her passion brought her down South, where she trained in Bharatanatyam at Kalakshetra Foundation, Rukmini Devi College of Fine Arts, Chennai. Sunitta started dissemination of her artistic knowledge with the firm belief that everyone can learn dance, and the only talent required is a talent to work hard.',
     // Identity confirmed by the academy. The file was originally crawled as
     // "founder-second.jpg"; renamed so the asset says who it is.
     image: '/img/founder-sunitta.jpg',
     portraitConfirmed: true,
     credentials: [
-      'Graduate, Rukmini Devi College of Fine Arts, Kalakshetra Foundation',
+      // Kalakshetra awards its own diplomas, not university degrees, so
+      // "Graduate" was wrong. Wording confirmed by the director herself.
+      'First Class Diploma, Rukmini Devi College of Fine Arts, Kalakshetra Foundation',
       'M.F.A., Kalai Kaveri College of Fine Arts, Trichy',
       'Best Performer Award, Sri Parthasarathy Swamy Sabha',
       'Exemplar Award, Dorai Foundation, Chennai',
@@ -237,33 +254,27 @@ export const FACULTY: Person[] = [
   {
     name: 'S. Kirusanthini',
     role: 'Head, Canada Branch',
-    bio: 'A Bharatanatyam dancer, choreographer, and teacher with strong artistic roots in Sri Lanka. She began her training in the Vazhuvoor style under Smt. Sangeetha Karthikeyan and later studied the Kalakshetra style for over seven years under Sunitta Menghanaani.',
+    bio: 'A Bharatanatyam dancer, choreographer, and teacher with strong artistic roots in Sri Lanka. She began her training in the Vazhuvoor style under Smt. Sangeetha Karthikeyan and later studied the Kalakshetra style for over nine years under Sunitta Menghanaani, whom she joined in 2017. Her dance and teaching work extends to AIMA in Chennai and the SEED NGO in Sri Lanka.',
     image: '/img/team-kirusanthini.jpg',
     portraitConfirmed: true,
     credentials: [
+      // Wording to be verified by the academy before it is standardised.
       'First-Class Grade Levels in Bharatanatyam, Annamalai University',
       'Best Dancer Award, UNIPUN Sri Lanka',
+      'BCA and MCA (Computer Applications)',
     ],
-  },
-  {
-    name: 'Aparna Manu',
-    // The Delhi branch is closed, so the branch-head role is gone. She is kept
-    // here because being the academy's first Arangetram graduate is a fact about
-    // the lineage, not about Delhi.
-    bio: 'Aparna has been learning the art form for 15 years under Smt. Sunitta Menghanaani, and was the first student of Shanti Kala Nikketan to complete her Arangetram. She is enthusiastic not only in learning the art of Bharatanatyam, but in carrying over the teachings she has received from her Guru to the next generation.',
-    // Identity confirmed by the academy: the file crawled as "sunitta.jpg" is in
-    // fact Aparna Manu, from the /director page. Renamed to match.
-    image: '/img/team-aparna.jpg',
-    portraitConfirmed: true,
   },
   {
     name: 'Tejaswi J',
     role: 'Senior Associate',
     bio: 'A Bharatanatyam dancer, performer, and teacher based in Chennai. She began her Bharatanatyam journey in her late teens and, through dedication and perseverance, has built a strong foundation in the art form — proof that a serious start is possible at any age.',
-    image: '/img/team-tejaswi.jpg',
+    // IMG_8826.jpeg from the academy, cropped square to her face. A new file
+    // name rather than overwriting team-tejaswi.jpg, because next/image caches
+    // optimised images by path and would keep serving the old portrait.
+    image: '/img/team-tejaswi-2026.jpg',
     portraitConfirmed: true,
     credentials: [
-      'First Class Diploma, Rukmini Devi College of Fine Arts, Kalakshetra Foundation',
+      'Diploma, Rukmini Devi College of Fine Arts, Kalakshetra Foundation',
       'M.A. Bharatanatyam, Tamil Nadu Dr. J. Jayalalithaa Music and Fine Arts University',
     ],
   },
@@ -273,20 +284,8 @@ export const FACULTY: Person[] = [
     image: '/img/team-nandhini.jpg',
     portraitConfirmed: true,
     credentials: [
-      'First Class Diploma, Rukmini Devi College of Fine Arts',
+      'Diploma, Rukmini Devi College of Fine Arts, Kalakshetra Foundation',
       'M.A. Bharatanatyam, University of Madras',
-    ],
-  },
-  {
-    name: 'Nanditha S R',
-    // Delhi stays in her performance history. The closed branch is not named
-    // anywhere as a location, but her own career record is hers.
-    bio: 'A dedicated Bharatanatyam dancer and teacher from Palakkad, Kerala, who began her training in childhood under Smt. Saritha of Kalakshetra. An experienced performer, she has presented Bharatanatyam across Singapore, Delhi, Chennai, and Kerala.',
-    image: '/img/team-nanditha.jpg',
-    portraitConfirmed: true,
-    credentials: [
-      'First Class Diploma in Bharatanatyam, Rukmini Devi College of Fine Arts, Kalakshetra Foundation',
-      'M.A. Bharatanatyam, Tamil Nadu Dr. J. Jayalalithaa Music and Fine Arts University',
     ],
   },
   {
@@ -295,9 +294,9 @@ export const FACULTY: Person[] = [
     image: '/img/team-anju.jpg',
     portraitConfirmed: true,
     credentials: [
-      'First Class, Rukmini Devi College of Fine Arts, Kalakshetra Foundation',
+      'Diploma, Rukmini Devi College of Fine Arts, Kalakshetra Foundation',
       'M.A. Bharatanatyam, Tamil Nadu Dr. J. Jayalalithaa Music and Fine Arts University',
-      'Graded artist, Doordarshan',
+      'Graded Artist, Doordarshan',
     ],
   },
   {
@@ -306,7 +305,7 @@ export const FACULTY: Person[] = [
     image: '/img/team-pavithra.jpg',
     portraitConfirmed: true,
     credentials: [
-      'First Class Diploma, Rukmini Devi College of Fine Arts, Kalakshetra Foundation',
+      'Diploma, Rukmini Devi College of Fine Arts, Kalakshetra Foundation',
       "Master's Degree, Tamil Nadu Dr. J. Jayalalithaa Music and Fine Arts University",
     ],
   },
@@ -316,9 +315,9 @@ export const FACULTY: Person[] = [
     image: '/img/team-sreelakshmi.jpg',
     portraitConfirmed: true,
     credentials: [
-      'Diploma in Bharatanatyam, Kalakshetra Foundation',
+      'Diploma, Rukmini Devi College of Fine Arts, Kalakshetra Foundation',
       'M.A. Dance, Tamil Nadu Dr. J. Jayalalithaa Music and Fine Arts University',
-      'B Grade Artist, Doordarshan',
+      'Graded Artist, Doordarshan',
     ],
   },
 ];
@@ -443,8 +442,17 @@ export const GALLERY: GalleryItem[] = [
 export const MILESTONES = [
   {
     year: '2009',
-    title: 'The school takes birth',
-    body: "Shanti Kala Nikketan is founded on 18 April 2009, drawing on Om Guru Om's vision for a cultural renaissance. The Kalakshetra style of Bharatanatyam becomes the adopted method.",
+    title: 'One room, one student',
+    // Corrected by the academy: teaching began in Besant Nagar, under the name
+    // Samarpan, with a single student. The move to Sholinganallur and the name
+    // Shanti Kala Nikketan came later - see the 2018 entry.
+    body: 'Teaching begins in Besant Nagar under the name Samarpan, with a single student — Aparna. The Kalakshetra style of Bharatanatyam is the method from the first class.',
+    place: 'Besant Nagar, Chennai',
+  },
+  {
+    year: '2018',
+    title: 'Shanti Kala Nikketan',
+    body: "Having moved to Sholinganallur, the school formally takes the name Shanti Kala Nikketan under Om Guru Om, drawing on his vision for a cultural renaissance.",
     place: 'Sholinganallur, Chennai',
   },
   {
@@ -468,7 +476,7 @@ export const MILESTONES = [
   {
     year: 'Today',
     title: 'The tradition travels',
-    body: 'Five venues across Thiruvanmiyur, Sholinganallur and Medavakkam, an online batch, and a second branch in Scarborough, Canada at Morningside & Finch — where the temple circuit in Toronto welcomes our dancers.',
+    body: 'Five venues across Thiruvanmiyur, Sholinganallur and Medavakkam, an online batch, and a second branch in Scarborough, Canada at Morningside & Finch.',
     place: 'Chennai · Scarborough',
   },
 ] as const;
@@ -496,7 +504,7 @@ export const FAQS = [
   },
   {
     q: 'Where exactly in Chennai do you teach?',
-    a: 'We run classes at five venues: Appswamy Springs in Thiruvanmiyur, Adroit and Prestige Courtyards in Sholinganallur, and Casagrand Riviera and Casagrand Tranquil in Medavakkam. Our registered address is 11018, Ground Floor, Tower 11, Prestige Courtyard, Model School Extension Road, Sholinganallur, Chennai 600119 — just off Rajiv Gandhi Salai (OMR).',
+    a: 'We run classes at five venues: Appswamy Springs in Thiruvanmiyur, Adroit and Prestige Courtyards in Sholinganallur, and Casagrand Riviera and Casagrand Tranquil in Medavakkam. The exact venue is shared when your trial is booked.',
   },
   {
     q: 'Do you teach adults, or only children?',
@@ -512,7 +520,7 @@ export const FAQS = [
   },
   {
     q: 'What should my child bring to a trial session?',
-    a: 'Nothing but comfortable clothing they can move and sit on the floor in, and hair tied back. No costume, no ghungroo and no prior experience is needed for a trial.',
+    a: 'Nothing but comfortable clothing they can move and sit on the floor in. No costume, no ghungroo and no prior experience is needed for a trial.',
   },
 ] as const;
 
@@ -544,8 +552,10 @@ export const NAV_ROUTES = [
   { href: '/about', label: 'The academy', short: 'Academy' },
   { href: '/lineage', label: 'Our lineage', short: 'Lineage' },
   { href: '/curriculum', label: 'Curriculum', short: 'Curriculum' },
-  { href: '/events', label: 'Events & gallery', short: 'Events' },
+  // Locations before Events, at the academy's request: a parent reading the
+  // levels on /curriculum is looking for a batch next, not a gallery.
   { href: '/locations', label: 'Locations', short: 'Locations' },
+  { href: '/events', label: 'Events & gallery', short: 'Events' },
 ] as const;
 
 // ---------------------------------------------------------------------------

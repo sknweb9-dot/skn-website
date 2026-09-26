@@ -47,6 +47,7 @@
  */
 
 import { mudraByName, mudraProgress, type Mudra } from './mudras';
+import { SITE } from './site';
 
 /** Where the act's editorial column sits, on desktop. */
 export type ActSide = 'left' | 'right' | 'center';
@@ -63,7 +64,8 @@ export type Act = {
   /** The gesture held during this act */
   mudra: Mudra;
   side: ActSide;
-  eyebrow: string;
+  /** Optional: act 1 has none, at the academy's request. */
+  eyebrow?: string;
   heading: string;
   /** Body paragraphs. Kept short — depth lives on the sibling routes. */
   body: string[];
@@ -98,11 +100,10 @@ export const ACTS: Act[] = [
     window: { start: 0.000, end: 0.109 },
     mudra: mudraByName('Patāka'),
     side: 'center',
-    eyebrow: 'Chennai · Scarborough',
+    // No city tags and a one-line subtext, at the academy's request. The
+    // slogan is the whole message of the first screen.
     heading: 'Not just an artform. A way of life.',
-    body: [
-      'Classical Kalakshetra Bharatanatyam, taught in the Gurukulam tradition since 2009. Cultivating discipline, grace, and spiritual poise.',
-    ],
+    body: [SITE.signature],
   },
   {
     index: 2,
@@ -117,7 +118,7 @@ export const ACTS: Act[] = [
       'At SKN, students are encouraged to develop a deeper appreciation of Bharatanatyam by exploring its connection with literature, mythology, music, and philosophy.',
       'The foundation of our teaching lies in the sacred bond between Guru and Shishya — a relationship built on trust, dedication, mutual respect, and lifelong learning.',
     ],
-    link: { href: '/about', label: 'The academy' },
+    link: { href: '/about', label: 'Academy' },
   },
   {
     index: 3,
@@ -132,7 +133,7 @@ export const ACTS: Act[] = [
       'It is the Divine expressing itself through the artist. The formless finds form and reveals itself to the world.',
       'Inspired by that vision, Co-Founder & Director Sunitta Menghanaani has nurtured SKN into an institution where learning extends far beyond mastering dance.',
     ],
-    link: { href: '/lineage', label: 'Our lineage' },
+    link: { href: '/lineage', label: 'Lineage' },
   },
   {
     index: 4,
@@ -147,7 +148,7 @@ export const ACTS: Act[] = [
       'A gentle introduction from age three and a half, then six graded levels — Foundation to Mastery — each building naturally upon the last.',
       'Students develop a strong foundation before progressing towards advanced repertoire, and ultimately, the Arangetram.',
     ],
-    link: { href: '/curriculum', label: 'The six levels' },
+    link: { href: '/curriculum', label: 'Curriculum' },
   },
   {
     index: 5,
@@ -162,7 +163,7 @@ export const ACTS: Act[] = [
       'After Level 6 comes a period of intensive rehearsal, stagecraft, and individual mentoring, culminating in the Arangetram — a formal debut as a Bharatanatyam performer.',
       'And before that, Udaan: our own showcase, created so that every dancer has a stage, irrespective of their stage of learning.',
     ],
-    link: { href: '/events', label: 'Udaan & the record' },
+    link: { href: '/events', label: 'Events' },
   },
   {
     index: 6,
@@ -176,7 +177,7 @@ export const ACTS: Act[] = [
     body: [
       'Experience one trial session to witness how classical art transforms posture, confidence, and culture.',
     ],
-    link: { href: '/locations', label: 'Our schools' },
+    link: { href: '/locations', label: 'Locations' },
   },
 ];
 

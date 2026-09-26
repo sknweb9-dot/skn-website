@@ -159,13 +159,7 @@ export default function LocationsPage() {
               nearest batch at the right level.
             </p>
             <div className="mt-7 flex flex-wrap justify-center gap-3">
-              <TrialButton source="locations-index">Schedule a trial session</TrialButton>
-              <Link
-                href="/curriculum"
-                className="inline-flex items-center gap-1.5 rounded-full border border-teal/25 px-5 py-3.5 text-sm font-medium text-teal transition-colors hover:border-teal/50 hover:bg-teal/5"
-              >
-                The six levels <span aria-hidden>→</span>
-              </Link>
+              <TrialButton source="locations-index" />
             </div>
           </div>
         </section>

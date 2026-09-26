@@ -18,7 +18,7 @@ import {
 } from '@/lib/events';
 import { ARANGETRAM } from '@/lib/curriculum';
 import { fetchInstagramPosts } from '@/lib/instagram';
-import { METRICS, SITE } from '@/lib/site';
+import { SITE } from '@/lib/site';
 import { eventsGraph } from '@/lib/schema';
 
 /**
@@ -84,13 +84,8 @@ export default async function EventsPage() {
         eyebrow="Events & gallery"
         title="Every dancer gets a"
         accent="stage"
-        lede="Udaan — flying high to reach our goals — is our own showcase, created so that every dancer has a platform irrespective of their stage of learning. Alongside it: Arangetrams, temple festivals, Nada Sudha, and the Toronto temple circuit."
-      >
-        <div className="flex flex-wrap gap-3">
-          <TrialButton source="events-hero">Schedule a trial session</TrialButton>
-          <QuietLink href="/curriculum">The six levels</QuietLink>
-        </div>
-      </PageHero>
+        lede="Udaan — flying high to reach our goals — is our own showcase, created so that every dancer has a platform irrespective of their stage of learning. Alongside it: Arangetrams, temple festivals, and outreach programmes."
+      />
 
       {/* Prototype notice. Rendered wherever lib/events.ts is still padded with
           invented captions, including the current client test deployment. It
@@ -111,34 +106,6 @@ export default async function EventsPage() {
         </div>
       ) : null}
 
-      {/* --- Where students have danced ---------------------------------- */}
-      <Section
-        eyebrow="Where our students have danced"
-        heading="Beyond the classroom"
-        lede="Students perform at Arangetrams, temple festivals and invited events — in Chennai, and on the Toronto temple circuit."
-      >
-        <dl className="grid grid-cols-2 gap-8 sm:grid-cols-4">
-          {[
-            { value: `${METRICS.stages}`, label: 'Stages performed' },
-            { value: 'Udaan', label: 'Our own showcase' },
-            { value: 'Nada Sudha', label: '27th annual festival' },
-            { value: 'Mylapore', label: 'Bharatiya Vidya Bhavan' },
-          ].map((stat) => (
-            <div key={stat.label} className="border-t border-marigold/30 pt-4">
-              <dt className="sr-only">{stat.label}</dt>
-              <dd>
-                <span className="block font-display text-teal-deep text-[clamp(1.3rem,3vw,2rem)] leading-tight font-semibold">
-                  {stat.value}
-                </span>
-                <span className="mt-1.5 block font-sans text-micro tracking-[0.14em] text-ink-faint uppercase">
-                  {stat.label}
-                </span>
-              </dd>
-            </div>
-          ))}
-        </dl>
-      </Section>
-
       {/* --- Udaan, in the academy's own words ---------------------------- */}
       <Section id="udaan" eyebrow={UDAAN.eyebrow} heading={UDAAN.heading} tinted>
         <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr]">
@@ -158,7 +125,7 @@ export default async function EventsPage() {
             {UDAAN.theme.body.map((paragraph) => (
               <p
                 key={paragraph.slice(0, 32)}
-                className="mt-3.5 font-display text-[0.98rem] leading-relaxed text-teal-deep"
+                className="mt-3.5 text-[1rem] leading-relaxed text-teal-deep"
               >
                 {paragraph}
               </p>
@@ -171,15 +138,6 @@ export default async function EventsPage() {
             <VideoFacade key={video.id} video={video} />
           ))}
         </div>
-      </Section>
-
-      {/* --- The gallery -------------------------------------------------- */}
-      <Section
-        eyebrow="The gallery"
-        heading="Turn the sphere"
-        lede={`${GLOBE_ITEMS.length} plates — photographs and recordings, every one the academy's own. Open it to turn the globe, or read the index below.`}
-      >
-        <EventGallery />
       </Section>
 
       {/* --- Arangetrams -------------------------------------------------- */}
@@ -257,8 +215,7 @@ export default async function EventsPage() {
 
           <div className="max-w-xl">
             <p className="max-w-measure text-[1rem] leading-relaxed text-ink-soft">
-              Our Scarborough branch teaches at Morningside and Finch, and its
-              students perform on the Toronto temple circuit. Chennai and
+              Our Scarborough branch teaches at Morningside and Finch. Chennai and
               Scarborough are one academy, one syllabus, and — allowing for the
               nine and a half hours between them — one set of standards.
             </p>
@@ -267,6 +224,15 @@ export default async function EventsPage() {
             </div>
           </div>
         </div>
+      </Section>
+
+      {/* --- The gallery -------------------------------------------------- */}
+      <Section
+        eyebrow="The gallery"
+        heading="Turn the sphere"
+        lede={`${GLOBE_ITEMS.length} plates — photographs and recordings, every one the academy's own. Open it to turn the globe, or read the index below.`}
+      >
+        <EventGallery />
       </Section>
 
       {/* --- Instagram ---------------------------------------------------- */}
@@ -279,7 +245,7 @@ export default async function EventsPage() {
         <InstagramRail posts={instagramPosts} />
       </Section>
 
-      {/* --- Studio ------------------------------------------------------- */}
+      {/* --- Classes ------------------------------------------------------ */}
       <Section
         id="studio"
         eyebrow={sectionMeta('studio').eyebrow}
@@ -305,8 +271,7 @@ export default async function EventsPage() {
               part a trial session shows you.
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-3">
-              <TrialButton source="events-studio">Schedule a trial session</TrialButton>
-              <QuietLink href="/locations">Batches and timings</QuietLink>
+              <TrialButton source="events-studio" />
             </div>
           </div>
         </div>
@@ -323,8 +288,7 @@ export default async function EventsPage() {
             Come and watch the class that gets them there.
           </p>
           <div className="mt-7 flex flex-wrap items-center gap-3">
-            <TrialButton source="events-footer">Schedule a trial session</TrialButton>
-            <QuietLink href="/lineage">Our lineage</QuietLink>
+            <TrialButton source="events-footer" />
           </div>
         </div>
       </Section>

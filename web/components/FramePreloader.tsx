@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import EmblemMark from './EmblemMark';
+import Image from 'next/image';
 import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
 import { SITE } from '@/lib/site';
 
@@ -10,12 +10,14 @@ import { SITE } from '@/lib/site';
  *
  * WHAT REPLACED WHAT
  * ------------------
- * This used to be a large foil percentage counting to 100 over a marigold hairline.
- * It worked, but a number is a number — it told the visitor how the machine was
- * getting on rather than saying anything about where they had arrived. The emblem
- * now draws itself instead: the enclosing circle first, then the three interwoven
- * circles, then the centre. Progress is the drawing, so the indicator and the
- * brand are the same object.
+ * First a foil percentage counting to 100, then a hand-authored trefoil that drew
+ * itself. The academy read the trefoil as a placeholder rather than their mark,
+ * which is fair: it was a geometric abstraction of the emblem, not the emblem.
+ * Now the real emblem sits at the centre and a single ring draws around it —
+ * progress is the ring, and the mark is theirs.
+ *
+ * The file is /img/logo-emblem.png, the academy's approved emblem and the same
+ * file the masthead uses, so the loader costs no extra request.
  *
  * The number has not simply been deleted. It still exists where it is load-bearing
  * — as `aria-valuenow` on a progressbar role, and in a visually-hidden live
@@ -42,7 +44,10 @@ import { SITE } from '@/lib/site';
  * coarser scrub rather than an empty aperture.
  */
 
-/** Shortest time the mark is allowed to take to draw itself. */
+/** The emblem at the centre of the loader. */
+const LOGO_SRC = '/img/logo-emblem.png';
+
+/** Shortest time the ring is allowed to take to draw itself. */
 const MIN_DRAW_MS = 1500;
 
 /** Fade duration after the draw completes. Matches the CSS transition below. */
@@ -116,11 +121,33 @@ export default function FramePreloader({
       style={{ transitionDuration: `${FADE_MS}ms` }}
     >
       <div className="relative">
-        <EmblemMark
-          progress={shown}
-          spin={!reducedMotion}
-          className="w-[clamp(7rem,22vw,10.5rem)]"
-        />
+        <div className="relative size-[clamp(7rem,22vw,10.5rem)]">
+          {/* The ring: a faint track, and the drawn arc over it. pathLength=1
+              lets the dash offset be the progress fraction directly. */}
+          <svg viewBox="0 0 120 120" aria-hidden className="absolute inset-0 -rotate-90">
+            <circle cx="60" cy="60" r="57" fill="none" stroke="var(--color-marigold)" strokeOpacity={0.22} strokeWidth={1.5} />
+            <circle
+              cx="60"
+              cy="60"
+              r="57"
+              fill="none"
+              stroke="var(--color-marigold)"
+              strokeWidth={2}
+              strokeLinecap="round"
+              pathLength={1}
+              strokeDasharray={1}
+              strokeDashoffset={1 - shown}
+            />
+          </svg>
+          <Image
+            src={LOGO_SRC}
+            alt=""
+            width={168}
+            height={168}
+            priority
+            className="absolute inset-[15%] size-[70%] object-contain"
+          />
+        </div>
 
         {/* The completion bloom: one expanding ring, once. Keyed on `drawn` so it
             plays at the moment the last circle closes rather than on mount. */}

@@ -1,4 +1,4 @@
-import { BRANCHES, FACULTY, FAQS, FOUNDERS, METRICS, PRIMARY_BRANCH, SITE, type Branch } from './site';
+import { BRANCHES, FACULTY, FAQS, FOUNDERS, PRIMARY_BRANCH, SITE, type Branch } from './site';
 import { TEACHING_PROGRAMMES } from './curriculum';
 import { allBatches, areasTaught, offlineVenuesForCity, venuesForCity } from './classes';
 import { MUDRAS } from './mudras';
@@ -133,10 +133,8 @@ function branchNode(branch: Branch) {
           },
         }
       : {}),
-    ...(branch.isPrimary
-      ? { telephone: SITE.phoneE164 }
-      : {}),
-    email: SITE.email,
+    telephone: branch.contact?.phoneE164 ?? SITE.phoneE164,
+    email: branch.contact?.email ?? SITE.email,
     areaServed: branch.areaServed.map((name) => ({ '@type': 'Place', name })),
     ...(branch.head
       ? { employee: { '@type': 'Person', name: branch.head } }
@@ -179,7 +177,6 @@ function organizationNode() {
       : {}),
     founder: founderIds,
     employee: FACULTY.map((f) => ({ '@id': ID.person(f.name) })),
-    numberOfStudents: METRICS.students,
     location: BRANCHES.map((b) => ({ '@id': ID.branch(b.slug) })),
     areaServed: BRANCHES.flatMap((b) => b.areaServed).map((name) => ({ '@type': 'Place', name })),
     sameAs: [SITE.socials.instagram, SITE.socials.facebook, SITE.socials.youtube],
@@ -460,7 +457,7 @@ export function locationFaqs(branch: Branch): Faq[] {
         venues.length > 1
           ? `We teach at ${venues.length} venues across ${branch.city}: ${venues
               .map((v) => `${v.name}${v.area ? ` (${v.area})` : ''}`)
-              .join(', ')}. Our registered address is ${branch.streetAddress}, ${branch.city} ${branch.postalCode ?? ''}.`.trim()
+              .join(', ')}. The exact venue is shared when your trial is booked.`
           : branch.streetAddress
             ? `Our ${branch.city} school is at ${branch.streetAddress}, ${branch.city} ${branch.postalCode ?? ''}. ${branch.landmarks.length ? `Look for ${branch.landmarks[0]}.` : ''}`.trim()
             : `We teach in ${branch.city}${branch.locality ? ` at ${branch.locality}` : ''}. Write to ${SITE.email} for the current venue and batch timings.`,

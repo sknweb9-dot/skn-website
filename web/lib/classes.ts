@@ -126,10 +126,8 @@ export const VENUES: Venue[] = [
     area: 'Sholinganallur',
     citySlug: 'chennai',
     mode: 'offline',
-    // The one venue with a published street address — it is the academy's
-    // registered address in site.ts.
-    streetAddress:
-      '11018, Ground Floor, Tower 11, Prestige Courtyard, Model School Extension Road, Sholinganallur',
+    // No street address: removed from the public site at the academy's request
+    // (residential complex). See the note on the Chennai branch in site.ts.
     batches: [
       { code: 'PC1', programmeId: 'level-2', days: ['Tuesday', 'Thursday'], opens: '18:15', closes: '19:15', admissionOpen: false, audience: 'children' },
       { code: 'PC2', programmeId: 'level-1', days: ['Tuesday', 'Thursday'], opens: '19:15', closes: '20:15', admissionOpen: true, audience: 'children' },

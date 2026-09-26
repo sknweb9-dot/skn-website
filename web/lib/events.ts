@@ -117,13 +117,16 @@ export const SECTIONS: SectionMeta[] = [
     eyebrow: 'Beyond Chennai',
     heading: 'Outreach',
     filter: 'Outreach',
-    lede: 'Offerings and appearances on the Toronto temple circuit, where our Scarborough branch teaches.',
+    lede: 'Temple festival offerings and community programmes, in Chennai and wherever our Scarborough branch teaches.',
   },
   {
     id: 'studio',
     eyebrow: 'In the room',
-    heading: 'The studio',
-    filter: 'Studio',
+    // Renamed from "The studio" at the academy's request: the point of this
+    // group is the class itself. The id stays `studio` so anchors and plate
+    // records do not churn.
+    heading: 'Classes',
+    filter: 'Classes',
     lede: 'Long before a stage, there is a wooden floor and a teacher counting aloud.',
   },
 ];
@@ -146,7 +149,7 @@ export const GLOBE_FILTERS: { label: string; sections: EventSection[] }[] = [
   { label: 'Arangetrams', sections: ['arangetram'] },
   { label: 'Performances', sections: ['group', 'solo'] },
   { label: 'Outreach', sections: ['outreach'] },
-  { label: 'Studio', sections: ['studio'] },
+  { label: 'Classes', sections: ['studio'] },
 ];
 
 // ---------------------------------------------------------------------------
@@ -211,6 +214,14 @@ export type EventVideo = {
   pairingUnconfirmed?: boolean;
   /** Shown under the title where there is something worth saying */
   note?: string;
+  /**
+   * False where the uploader has disabled embedding on YouTube. Checked against
+   * each watch page's `playableInEmbed` flag. The inline player would only show
+   * "Video unavailable" for these, so VideoFacade opens them on YouTube instead.
+   * To restore inline playback: YouTube Studio -> the video -> Show more ->
+   * "Allow embedding", then delete the flag here.
+   */
+  embeddable?: false;
 };
 
 export const VIDEOS: EventVideo[] = [
@@ -253,6 +264,7 @@ export const VIDEOS: EventVideo[] = [
   },
   {
     id: 'arangetram-kirusanthini',
+    embeddable: false,
     section: 'arangetram',
     title: 'Smt Kirusanthini | Bharatanatyam Arangetram',
     titleSource: 'og-title',
@@ -265,6 +277,7 @@ export const VIDEOS: EventVideo[] = [
   },
   {
     id: 'arangetram-jahnavi',
+    embeddable: false,
     section: 'arangetram',
     title: 'Kum Jahnavi | Arangetram | A Journey of Grace, Rhythm & Devotion',
     titleSource: 'og-title',
@@ -288,6 +301,7 @@ export const VIDEOS: EventVideo[] = [
   },
   {
     id: 'maha-shivaratri',
+    embeddable: false,
     section: 'group',
     title: 'Offering to Lord Shiva on Maha Shivaratri',
     titleSource: 'og-title',
@@ -301,6 +315,7 @@ export const VIDEOS: EventVideo[] = [
   },
   {
     id: 'samarpanam-navratri-2025',
+    embeddable: false,
     section: 'group',
     title: 'Samarpanam Festival, Navratri 2025',
     titleSource: 'og-title',
@@ -314,6 +329,7 @@ export const VIDEOS: EventVideo[] = [
   },
   {
     id: 'nada-sudha-27',
+    embeddable: false,
     section: 'group',
     title: 'Nada Sudha - 27th Annual Music & Dance Festival 2025 - 2026',
     titleSource: 'og-title',
@@ -327,6 +343,7 @@ export const VIDEOS: EventVideo[] = [
   // --- Performances / Solo ----------------------------------------------
   {
     id: 'aparna-solo',
+    embeddable: false,
     section: 'solo',
     title: "Aparna Manu's Solo Performance",
     titleSource: 'og-title',
@@ -340,6 +357,7 @@ export const VIDEOS: EventVideo[] = [
   // --- Outreach ----------------------------------------------------------
   {
     id: 'toronto-vinayaka-2025',
+    embeddable: false,
     section: 'outreach',
     title: 'Bharatanatyam Offering to Lord Vinayaka | Kirusanthini | Toronto Temple Festival 2025',
     titleSource: 'og-title',
@@ -857,7 +875,7 @@ export const GLOBE_PLATES = [...new Set(GLOBE_ITEMS.map((i) => i.plate))];
 export const EVENTS_META = {
   title: 'Events & Gallery — Udaan, Arangetrams & Performances',
   description:
-    'Udaan, our own showcase created so that every dancer has a stage — with Arangetrams, temple festivals, Nada Sudha, and the Toronto temple circuit. Photographs and recordings from the academy’s own stages.',
+    'Udaan, our own showcase created so that every dancer has a stage — with Arangetrams, temple festivals, and outreach programmes. Photographs and recordings from the academy’s own stages.',
   url: `${SITE.url}/events`,
   image: '/img/event-udaan-2025.jpg',
 } as const;

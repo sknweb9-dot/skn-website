@@ -1,6 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { BRANCHES, METRICS, NAV_ROUTES, SITE, yearsOfLineage } from '@/lib/site';
+import { BRANCHES, NAV_ROUTES, SITE } from '@/lib/site';
+import { FacebookIcon, InstagramIcon, YoutubeIcon } from './SocialIcons';
+
+const SOCIALS = [
+  { name: 'Instagram', href: SITE.socials.instagram, Icon: InstagramIcon },
+  { name: 'Facebook', href: SITE.socials.facebook, Icon: FacebookIcon },
+  { name: 'YouTube', href: SITE.socials.youtube, Icon: YoutubeIcon },
+];
 
 const ROUTES = NAV_ROUTES;
 
@@ -9,52 +16,25 @@ const ROUTES = NAV_ROUTES;
  * contrast of every colour used here. Two rules that follow from those numbers:
  * nothing inside is kumkum (1.76:1 on teal-deep), and every hover moves toward
  * full cream rather than toward an accent.
+ *
+ * The figures row that used to open the footer (years, students, stages) was
+ * removed at the academy's request: it repeated on every page, and the student
+ * count is not something they track. The street address went with it, for
+ * privacy - every Chennai venue is a residential complex.
  */
 export default function Footer() {
-  const years = yearsOfLineage();
-
   return (
     <footer className="ground-deep border-t-[3px] border-marigold">
       <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
-        {/* Provenance figures. Derived where possible rather than hardcoded.
-            `isText` matters: numerals fit the display size comfortably, but a
-            word like "Kalakshetra" is ~200px at that scale and overflowed its
-            grid cell on a 375px viewport, which pushed the whole document into
-            horizontal scroll. Text values get a smaller size and may wrap. */}
-        <dl className="grid grid-cols-2 gap-8 border-b border-cream/15 pb-12 sm:grid-cols-4">
-          {[
-            { value: `${years}`, label: 'Years of lineage' },
-            { value: `${METRICS.students}`, label: 'Students taught' },
-            { value: `${METRICS.stages}`, label: 'Stages performed' },
-            { value: 'Kalakshetra', label: 'Bani and pedagogy', isText: true },
-          ].map((stat) => (
-            <div key={stat.label}>
-              <dt className="sr-only">{stat.label}</dt>
-              <dd>
-                <span
-                  className={`block font-semibold text-cream ${
-                    stat.isText
-                      ? 'font-display text-[clamp(1.1rem,3.4vw,1.6rem)] leading-tight break-words hyphens-auto'
-                      : 'font-display text-[clamp(1.8rem,5vw,2.6rem)] leading-none'
-                  }`}
-                >
-                  {stat.value}
-                </span>
-                <span className="mt-2 block font-sans text-micro tracking-[0.16em] text-cream/70 uppercase">
-                  {stat.label}
-                </span>
-              </dd>
-            </div>
-          ))}
-        </dl>
-
-        <div className="mt-12 grid gap-12 lg:grid-cols-[1.2fr_1fr_1fr]">
+        <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr_1fr]">
           <div>
             <div className="flex items-center gap-3">
-              {/* PNG at its rendered size rather than the SVG — see Nav.tsx.
-                  Transparent, so the emblem's cyan sits directly on the deep
-                  teal of its own hue. */}
-              <Image src="/img/logo-full.png" alt="" width={48} height={48} className="size-12" />
+              {/* On a cream disc, not straight on the band. The approved emblem's
+                  navy Ganesha and cobalt rings are close in lightness to teal-deep
+                  and disappear on it; the cream behind them keeps the mark whole. */}
+              <span className="grid size-14 shrink-0 place-items-center rounded-full bg-cream">
+                <Image src="/img/logo-emblem.png" alt="" width={44} height={44} className="size-11" />
+              </span>
               <span className="leading-tight">
                 <span className="block font-display text-base font-semibold text-cream">
                   {SITE.name}
@@ -64,9 +44,7 @@ export default function Footer() {
                 </span>
               </span>
             </div>
-            <p className="mt-5 max-w-sm text-sm leading-relaxed text-cream/80">
-              {SITE.style}, taught in the {SITE.method} tradition since 18 April 2009.
-            </p>
+            <p className="mt-5 max-w-sm text-sm leading-relaxed text-cream/80">{SITE.signature}</p>
             <div className="mt-5 space-y-1.5 text-sm">
               <p>
                 <a
@@ -83,7 +61,19 @@ export default function Footer() {
                 >
                   {SITE.phoneDisplay}
                 </a>
+                <span className="text-cream/70"> · India</span>
               </p>
+              {BRANCHES.filter((b) => b.contact).map((b) => (
+                <p key={b.slug}>
+                  <a
+                    href={`tel:${b.contact!.phoneE164}`}
+                    className="text-cream underline decoration-marigold/60 underline-offset-4 hover:decoration-marigold"
+                  >
+                    {b.contact!.phoneDisplay}
+                  </a>
+                  <span className="text-cream/70"> · {b.country}</span>
+                </p>
+              ))}
             </div>
           </div>
 
@@ -126,16 +116,19 @@ export default function Footer() {
               ))}
             </ul>
 
-            <ul className="mt-6 flex gap-4">
-              {Object.entries(SITE.socials).map(([name, href]) => (
+            {/* Brand marks rather than words, with a 44px target each. The name is
+                the accessible label, so screen readers hear "Instagram" etc. */}
+            <ul className="-ml-2.5 mt-6 flex gap-1">
+              {SOCIALS.map(({ name, href, Icon }) => (
                 <li key={name}>
                   <a
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-sans text-xs tracking-[0.14em] text-cream/70 uppercase transition-colors hover:text-cream"
+                    aria-label={`${SITE.name} on ${name}`}
+                    className="grid size-11 place-items-center rounded-full text-cream/80 transition-colors hover:bg-cream/10 hover:text-cream"
                   >
-                    {name}
+                    <Icon className="size-5" />
                   </a>
                 </li>
               ))}
@@ -147,7 +140,6 @@ export default function Footer() {
           <p>
             &copy; {new Date().getFullYear()} {SITE.legalName}
           </p>
-          <p>{BRANCHES[0].streetAddress}</p>
         </div>
       </div>
     </footer>

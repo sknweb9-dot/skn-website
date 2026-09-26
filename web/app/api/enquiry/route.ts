@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { enquiryHtml, enquirySubject, enquiryText, type Enquiry } from '@/lib/enquiry';
 import { enquiryRecipient, mailConfigured, sendMail } from '@/lib/mail';
 import { SITE } from '@/lib/site';
+import { VENUES } from '@/lib/classes';
 
 /**
  * Trial-session enquiry endpoint.
@@ -33,6 +34,7 @@ const MAX = {
   parentName: 120,
   studentName: 120,
   branch: 40,
+  venue: 60,
   stage: 80,
   phone: 32,
   email: 200,
@@ -108,6 +110,9 @@ export async function POST(request: Request) {
     studentName: str(body.studentName, MAX.studentName),
     age: Number.parseInt(str(body.age, 4), 10),
     branch: str(body.branch, MAX.branch),
+    // Only a known venue id survives; anything else is dropped rather than
+    // echoed into the academy's inbox.
+    venue: VENUES.some((v) => v.id === str(body.venue, MAX.venue)) ? str(body.venue, MAX.venue) : '',
     stage: str(body.stage, MAX.stage),
     phone: str(body.phone, MAX.phone),
     email: str(body.email, MAX.email),
@@ -168,6 +173,7 @@ function summary(enquiry: Enquiry) {
   return {
     receivedAt: enquiry.receivedAt.toISOString(),
     branch: enquiry.branch,
+    venue: enquiry.venue || 'any',
     stage: enquiry.stage || 'unspecified',
     age: enquiry.age,
     source: enquiry.source,
@@ -196,6 +202,7 @@ function recoveryLine(enquiry: Enquiry): string {
     studentName: enquiry.studentName,
     age: enquiry.age,
     branch: enquiry.branch,
+    venue: enquiry.venue,
     stage: enquiry.stage,
     phone: enquiry.phone,
     email: enquiry.email,

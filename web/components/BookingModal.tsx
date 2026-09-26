@@ -5,7 +5,8 @@ import { Check, Loader2, Phone, X } from 'lucide-react';
 import { useBooking } from './BookingProvider';
 import { useSmoothScroll } from './SmoothScroll';
 import { BRANCHES, GOOGLE_FORM_URL, SITE } from '@/lib/site';
-import { TEACHING_PROGRAMMES } from '@/lib/curriculum';
+import { ARANGETRAM, INTRODUCTORY, TEACHING_PROGRAMMES } from '@/lib/curriculum';
+import { venuesForCity } from '@/lib/classes';
 
 type Status = 'idle' | 'submitting' | 'success' | 'error';
 
@@ -13,7 +14,23 @@ const FOCUSABLE =
   'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 export default function BookingModal() {
-  const { isOpen, close, source } = useBooking();
+  const { isOpen, close, source, prefill } = useBooking();
+
+  /**
+   * Branch and venue are controlled so the button that opened the form can
+   * pre-select them. "Enquire about Appswamy Springs" used to open on the
+   * generic Chennai default and drop the venue the parent had just chosen.
+   * Re-seeded every time the form opens, from whatever that button passed.
+   */
+  const [branch, setBranch] = useState<string>(BRANCHES[0].slug);
+  const [venue, setVenue] = useState<string>('');
+  const [seededFor, setSeededFor] = useState<typeof prefill | null>(null);
+  if (isOpen && seededFor !== prefill) {
+    setSeededFor(prefill);
+    setBranch(prefill.branch ?? BRANCHES[0].slug);
+    setVenue(prefill.venue ?? '');
+  }
+  const branchVenues = branch === 'online' ? [] : venuesForCity(branch);
   const scroll = useSmoothScroll();
 
   const dialogRef = useRef<HTMLDivElement>(null);
@@ -94,6 +111,7 @@ export default function BookingModal() {
           studentName: data.get('studentName'),
           age: data.get('age'),
           branch: data.get('branch'),
+          venue: data.get('venue'),
           stage: data.get('stage'),
           phone: data.get('phone'),
           email: data.get('email'),
@@ -188,15 +206,24 @@ export default function BookingModal() {
               Come and watch a class
             </h2>
             <p id="booking-blurb" className="mt-3 max-w-lg text-[0.95rem] leading-relaxed text-ink-soft">
-              No costume, no ghungroo, no prior experience. Comfortable clothes and hair tied back is
-              all your child needs.
+              No costume, no ghungroo, no prior experience. Comfortable clothes are all your child
+              needs.
             </p>
 
             <div className="mt-8 grid gap-5 sm:grid-cols-2">
               <Field label="Your name" name="parentName" required inputRef={firstFieldRef} autoComplete="name" />
               <Field label="Student's name" name="studentName" required autoComplete="off" />
               <Field label="Student's age" name="age" type="number" min={3} max={99} required />
-              <Select label="Nearest branch" name="branch" required defaultValue={BRANCHES[0].slug}>
+              <Select
+                label="Nearest branch"
+                name="branch"
+                required
+                value={branch}
+                onChange={(event) => {
+                  setBranch(event.target.value);
+                  setVenue('');
+                }}
+              >
                 {BRANCHES.map((b) => (
                   <option key={b.slug} value={b.slug}>
                     {b.label}
@@ -204,17 +231,53 @@ export default function BookingModal() {
                 ))}
                 <option value="online">Online / elsewhere</option>
               </Select>
+              {branchVenues.length > 1 ? (
+                <div className="sm:col-span-2">
+                <Select
+                  label="Venue"
+                  name="venue"
+                  value={venue}
+                  onChange={(event) => setVenue(event.target.value)}
+                >
+                  <option value="">Any — suggest the nearest</option>
+                  {branchVenues.map((v) => (
+                    <option key={v.id} value={v.id}>
+                      {v.name}
+                      {v.area ? ` · ${v.area}` : ''}
+                    </option>
+                  ))}
+                </Select>
+                </div>
+              ) : (
+                <input type="hidden" name="venue" value={branchVenues[0]?.id ?? ''} />
+              )}
               <Field label="Phone" name="phone" type="tel" required autoComplete="tel" inputMode="tel" />
               <Field label="Email" name="email" type="email" required autoComplete="email" />
               <div className="sm:col-span-2">
                 <Select label="Where would they start?" name="stage" defaultValue="">
                   <option value="">Not sure — please advise</option>
-                  {TEACHING_PROGRAMMES.map((p) => (
-                    <option key={p.id} value={`${p.label} — ${p.name}`}>
-                      {p.label} · {p.name}
-                      {p.ages ? ` · ${p.ages}` : ''}
-                    </option>
-                  ))}
+                  {TEACHING_PROGRAMMES.map((p) =>
+                    // The introductory option used to read "Introductory
+                    // Programme · Introduction to the Arts · Ages 3.5 – 6 years":
+                    // the same idea twice. Levels keep both halves because
+                    // the name is what distinguishes them.
+                    p.id === INTRODUCTORY.id ? (
+                      <option key={p.id} value={p.label}>
+                        {p.label}
+                        {p.ages ? ` · ${p.ages}` : ''}
+                      </option>
+                    ) : (
+                      <option key={p.id} value={`${p.label} — ${p.name}`}>
+                        {p.label} · {p.name}
+                      </option>
+                    ),
+                  )}
+                  {/* After Level 6, for students who have already completed the
+                      levels elsewhere. Named as a programme, not "Level 7": the
+                      curriculum is explicit that it is not a teaching level, and
+                      a seventh level would contradict "Six levels" on /curriculum.
+                      The 2026-27 brochure says "Level 7"; this was kept on purpose. */}
+                  <option value={ARANGETRAM.label}>{ARANGETRAM.label} · after Level 6</option>
                 </Select>
               </div>
               <div className="sm:col-span-2">

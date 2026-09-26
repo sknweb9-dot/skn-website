@@ -56,13 +56,15 @@ export const DIRECTOR = {
   portraitConfirmed: true,
   body: [
     'Sunitta Menghanaani is a Bharatanatyam artiste, educator, and choreographer whose journey reflects a lifelong dedication to the preservation and dissemination of Indian classical arts.',
-    'Originally from Pune, she chose Chennai as her karmabhumi to pursue advanced training in Bharatanatyam. She began learning dance at the age of three under Smt. Geeta Nair and later graduated in Bharatanatyam from the prestigious Kalakshetra Foundation, Rukmini Devi College of Fine Arts, Chennai.',
-    'Following her graduation, she further refined her artistic and teaching experience through her training and association with Sahrdaya Foundation, Chennai, enriching her journey as a performer, teacher, and choreographer.',
+    'Originally from Pune, she chose Chennai as her karmabhumi to pursue advanced training in Bharatanatyam. She began learning dance at the age of three under Smt. Geeta Nair and later trained in Bharatanatyam at the prestigious Kalakshetra Foundation, Rukmini Devi College of Fine Arts, Chennai.',
+    'Following her training at Kalakshetra, she further refined her artistic and teaching experience through her training and association with Sahrdaya Foundation, Chennai, enriching her journey as a performer, teacher, and choreographer.',
     'For over a decade and a half, she has dedicated herself to training students of all ages, mentoring aspiring dancers, choreographing original productions, and nurturing Shanti Kala Nikketan into a vibrant institution committed to excellence in Bharatanatyam education.',
     'Guided by the belief that every individual has the potential to learn Bharatanatyam, Sunitta believes that true progress is achieved not through innate talent alone, but through sincerity, discipline, perseverance, and consistent practice. Through the Gurukulam tradition, she strives to nurture not only skilled dancers but also individuals grounded in culture, values, and lifelong learning.',
   ],
   credentials: [
-    'Graduate in Bharatanatyam, Rukmini Devi College of Fine Arts, Kalakshetra Foundation',
+    // Kalakshetra awards its own diplomas, not degrees, so "Graduate" was wrong.
+    // Wording confirmed by the director herself.
+    'First Class Diploma, Rukmini Devi College of Fine Arts, Kalakshetra Foundation',
     'M.F.A., Kalai Kaveri College of Fine Arts, Tiruchirappalli',
     'B.Com., University of Pune',
     'Best Performer Award, Sri Parthasarathy Swami Sabha',
@@ -77,7 +79,7 @@ export const DIRECTOR = {
 } as const;
 
 /**
- * The emblem, element by element. The SVG at /img/logo-full.svg is the source
+ * The emblem, element by element. /img/logo-emblem.png is the approved artwork
  * artwork; these are the meanings the academy assigns to each part.
  */
 export const EMBLEM = {

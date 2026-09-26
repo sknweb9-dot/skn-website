@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import JsonLd from '@/components/JsonLd';
-import { PageHero, PageShell, QuietLink, Section } from '@/components/PageShell';
-import TrialButton from '@/components/TrialButton';
+import { PageHero, PageShell, Section } from '@/components/PageShell';
 import { ABOUT, EMBLEM } from '@/lib/lineage';
 import { METRICS, SITE, yearsOfLineage } from '@/lib/site';
 import { batchCount, individualStudentCount } from '@/lib/classes';
@@ -36,12 +35,7 @@ export default function AboutPage() {
         title={ABOUT.heading}
         accent={ABOUT.subheading}
         lede={ABOUT.body[0]}
-      >
-        <div className="flex flex-wrap gap-3">
-          <TrialButton source="about-hero">Schedule a trial session</TrialButton>
-          <QuietLink href="/lineage">Our lineage</QuietLink>
-        </div>
-      </PageHero>
+      />
 
       {/* The institution, in its own words */}
       <Section>
@@ -57,11 +51,10 @@ export default function AboutPage() {
           <dl className="space-y-6 lg:border-l lg:border-marigold/25 lg:pl-8">
             {[
               { value: `${years}`, label: 'Years of unbroken teaching' },
-              { value: `${METRICS.students}`, label: 'Students taught' },
               { value: `${batchCount()}`, label: 'Weekly batches' },
               { value: `${individualStudentCount()}`, label: 'Taught one to one' },
               { value: `${METRICS.stages}`, label: 'Stages performed' },
-              { value: `${METRICS.countries}`, label: 'Countries' },
+              { value: `${METRICS.countries}`, label: 'Countries with students' },
             ].map((stat) => (
               <div key={stat.label}>
                 <dt className="sr-only">{stat.label}</dt>
@@ -84,10 +77,11 @@ export default function AboutPage() {
         <div className="grid gap-12 lg:grid-cols-[18rem_minmax(0,1fr)] lg:gap-16">
           <div className="mx-auto w-56 shrink-0 sm:w-64 lg:mx-0 lg:w-full">
             <Image
-              src="/img/logo-full.svg"
+              src="/img/logo-emblem.png"
               alt="The emblem of Shanti Kala Nikketan — Lord Ganesha within three interwoven circles and a pair of open palms"
-              width={900}
-              height={900}
+              width={905}
+              height={905}
+              sizes="(max-width: 1024px) 16rem, 18rem"
               className="h-auto w-full"
             />
           </div>
@@ -114,13 +108,6 @@ export default function AboutPage() {
         </p>
       </Section>
 
-      <Section>
-        <div className="flex flex-wrap items-center gap-3">
-          <TrialButton source="about-footer">Schedule a trial session</TrialButton>
-          <QuietLink href="/curriculum">The six levels</QuietLink>
-          <QuietLink href="/locations">Where we teach</QuietLink>
-        </div>
-      </Section>
     </PageShell>
   );
 }

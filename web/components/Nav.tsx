@@ -120,19 +120,14 @@ export default function Nav() {
               className="pointer-events-auto flex items-center gap-3"
               aria-label={`${SITE.name} — home`}
             >
-              {/* The PNG, not logo-full.svg, deliberately.
-                  next/image treats an `.svg` src as `unoptimized` automatically,
-                  so the SVG ships all 338KB of its 4,436 auto-traced paths to
-                  render a 44px square in the masthead of every page. The PNG goes
-                  through the optimizer and arrives as a couple of KB of webp. The
-                  SVG stays on /about, where it is rendered large enough for vector
-                  crispness to be the point.
+              {/* The academy's approved emblem, as a transparent PNG. next/image
+                  optimises it to a couple of KB of webp at this size.
 
-                  width/height are the rendered size, not the source's 900x900:
-                  next/image builds the srcset from `width`, so declaring 900 had
-                  the browser fetch a 1080px-wide render for a 44px box. */}
+                  width/height are the rendered size, not the source's 905x905:
+                  next/image builds the srcset from `width`, so declaring the
+                  source size would fetch a 1080px render for a 44px box. */}
               <Image
-                src="/img/logo-full.png"
+                src="/img/logo-emblem.png"
                 alt=""
                 width={44}
                 height={44}
@@ -184,6 +179,7 @@ export default function Nav() {
             <div className="flex items-center gap-2 sm:gap-3">
               <TrialButton
                 source="nav"
+            inline={false}
                 className="pointer-events-auto !px-5 !py-2.5"
                 showArrow={false}
               >

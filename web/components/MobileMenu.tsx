@@ -99,7 +99,7 @@ export default function MobileMenu({ onClose }: { onClose: () => void }) {
       <div className="relative flex items-center justify-between px-4 py-4 sm:px-7 sm:py-5">
         <Link href="/" onClick={onClose} className="flex items-center gap-3" aria-label={`${SITE.name} — home`}>
           {/* PNG at its rendered size rather than the SVG — see Nav.tsx. */}
-          <Image src="/img/logo-full.png" alt="" width={44} height={44} className="size-9 sm:size-11" />
+          <Image src="/img/logo-emblem.png" alt="" width={44} height={44} className="size-9 sm:size-11" />
           <span className="leading-tight">
             <span className="block font-display text-[0.95rem] font-semibold tracking-wide text-teal-deep">
               {SITE.name}
@@ -155,9 +155,7 @@ export default function MobileMenu({ onClose }: { onClose: () => void }) {
             the button's own handler opens the booking dialog, then the click
             bubbles to here. */}
         <div onClick={onClose}>
-          <TrialButton source="menu" className="w-full !py-4">
-            Book a trial session
-          </TrialButton>
+          <TrialButton source="menu" className="w-full !py-4" inline={false} />
         </div>
 
         <div className="mt-7 flex flex-col gap-2 font-sans text-sm text-ink-soft">

@@ -53,7 +53,7 @@ const ActPanel = forwardRef<HTMLDivElement, { act: Act }>(function ActPanel({ ac
             isCenter ? 'text-center' : ''
           }`}
         >
-          <p className="eyebrow">{act.eyebrow}</p>
+          {act.eyebrow ? <p className="eyebrow">{act.eyebrow}</p> : null}
 
           {/*
             Act 1 carries the page's only h1. The home page is a single pinned
@@ -62,7 +62,7 @@ const ActPanel = forwardRef<HTMLDivElement, { act: Act }>(function ActPanel({ ac
           */}
           <Heading
             level={act.index === 1 ? 1 : 2}
-            className={`mt-2.5 font-display font-semibold text-balance-tight text-teal-deep ${
+            className={`${act.eyebrow ? 'mt-2.5' : ''} font-display font-semibold text-balance-tight text-teal-deep ${
               act.index === 1
                 ? 'text-[clamp(1.45rem,3.4vw,2.3rem)] leading-[1.08]'
                 : 'text-[clamp(1.3rem,2.9vw,1.95rem)] leading-[1.14]'
@@ -95,16 +95,17 @@ const ActPanel = forwardRef<HTMLDivElement, { act: Act }>(function ActPanel({ ac
             ))}
           </div>
 
+          {/* Only when there is something to show: act 1 has neither a link nor a
+              button now, and an empty row still carried its top margin. */}
+          {act.link || act.index === 6 ? (
           <div
             className={`pointer-events-auto mt-4 flex flex-wrap items-center gap-2.5 sm:mt-5 ${
               isCenter ? 'justify-center' : ''
             }`}
           >
-            {act.index === 1 || act.index === 6 ? (
-              <TrialButton source={`act-${act.index}-${act.id}`}>
-                Schedule a trial session
-              </TrialButton>
-            ) : null}
+            {/* Act 1 no longer carries one: the masthead's "Book trial" is on the same
+                screen. Act 6 keeps it, because the masthead has retired by then. */}
+            {act.index === 6 ? <TrialButton source={`act-${act.index}-${act.id}`} /> : null}
             {act.link ? (
               <Link
                 href={act.link.href}
@@ -115,6 +116,7 @@ const ActPanel = forwardRef<HTMLDivElement, { act: Act }>(function ActPanel({ ac
               </Link>
             ) : null}
           </div>
+          ) : null}
         </article>
       </div>
     </div>

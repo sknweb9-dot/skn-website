@@ -146,11 +146,8 @@
 
   --animate-rise: rise 0.9s var(--ease-temple) both;
   --animate-breathe: breathe 6s ease-in-out infinite;
-  --animate-cue-arrow: cue-arrow 2.4s var(--ease-temple) infinite;
 
-  /* The emblem mark's slow turn. Long enough that it reads as alive rather than
-     as a spinner — a loading indicator that races implies something is wrong. */
-  --animate-emblem-spin: emblem-spin 34s linear infinite;
+  /* The loader's completion bloom: one ring expanding out of the emblem. */
   --animate-emblem-bloom: emblem-bloom 1.1s var(--ease-temple) both;
 
   /* The arch aperture ratio.
@@ -206,39 +203,19 @@
   }
 }
 
-/* The scroll cue. Two halves of one gesture: a lit segment falling down the
-   hairline, and the arrow beneath easing after it. Both run on the same 2.4s
-   cycle so they read as a single downward drift rather than two loops. */
-@keyframes cue-arrow {
-  0%,
-  100% {
+/* The scroll cue's bead: travels down the capsule and fades, then returns. */
+@keyframes cue-bead {
+  0% {
     transform: translateY(0);
-    opacity: 0.45;
-  }
-  45% {
-    transform: translateY(4px);
     opacity: 1;
   }
-}
-
-@keyframes cue-fall {
-  from {
-    background-position: 0 -120%;
+  70% {
+    transform: translateY(1.35rem);
+    opacity: 0;
   }
-  to {
-    background-position: 0 220%;
-  }
-}
-
-/* The emblem mark. The trefoil turns about the mark's own centre — the transform
-   origin is set inline on the group, because an SVG group's default origin is the
-   viewport corner, not its own middle. */
-@keyframes emblem-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+  100% {
+    transform: translateY(0);
+    opacity: 0;
   }
 }
 
@@ -513,31 +490,33 @@ html.lenis body {
   mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
 }
 
-/* The scroll cue's hairline, with a lit segment falling down it.
-
-   A component rather than a utility because it is one specific ornament used
-   once, and because the animation and the track have to agree about size. The
-   track is faint ink so it holds as a line even at the point in the cycle when
-   the marigold segment has travelled off the end. */
-.cue-rule {
+/* The scroll cue: a capsule with a bead travelling down it. See ScrollCue.tsx
+   for why it is this plain. The teal edge, at 80%, clears the 3:1 non-text
+   floor on every ground the arch sits on; the bead is marigold, which here is ornament on a shape that
+   already carries the meaning. */
+.cue-capsule {
+  position: relative;
   display: block;
-  width: 1px;
-  height: 4.5rem;
-  background-color: color-mix(in oklab, var(--color-ink) 22%, transparent);
-  background-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    var(--color-marigold) 45%,
-    var(--color-marigold) 55%,
-    transparent 100%
-  );
-  background-repeat: no-repeat;
-  background-size: 100% 60%;
+  width: 1.75rem;
+  height: 3rem;
+  border: 2px solid color-mix(in oklab, var(--color-teal) 80%, transparent);
+  border-radius: 9999px;
+}
+
+.cue-bead {
+  position: absolute;
+  top: 0.45rem;
+  left: 50%;
+  width: 0.4rem;
+  height: 0.4rem;
+  margin-left: -0.2rem;
+  border-radius: 9999px;
+  background-color: var(--color-marigold);
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .cue-rule {
-    animation: cue-fall 2.4s var(--ease-temple) infinite;
+  .cue-bead {
+    animation: cue-bead 1.9s var(--ease-temple) infinite;
   }
 }
 

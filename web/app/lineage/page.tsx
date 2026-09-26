@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import JsonLd from '@/components/JsonLd';
-import { PageHero, PageShell, QuietLink, Section } from '@/components/PageShell';
-import TrialButton from '@/components/TrialButton';
+import { PageHero, PageShell, Section } from '@/components/PageShell';
 import { DIRECTOR, FOUNDER } from '@/lib/lineage';
 import { FACULTY, MILESTONES, SITE } from '@/lib/site';
 import { homeGraph } from '@/lib/schema';
@@ -161,7 +160,7 @@ export default function LineagePage() {
       <Section
         eyebrow="Who teaches"
         heading="The faculty"
-        lede="Kalakshetra-trained teachers, most of them graduates of the Rukmini Devi College of Fine Arts."
+        lede="The teachers who carry the syllabus. Each card lists that teacher’s own training."
         tinted
       >
         <ul className="grid items-start gap-5 md:grid-cols-2">
@@ -204,13 +203,6 @@ export default function LineagePage() {
         </ul>
       </Section>
 
-      <Section>
-        <div className="flex flex-wrap items-center gap-3">
-          <TrialButton source="lineage-footer">Schedule a trial session</TrialButton>
-          <QuietLink href="/curriculum">The six levels</QuietLink>
-          <QuietLink href="/events">Events & gallery</QuietLink>
-        </div>
-      </Section>
     </PageShell>
   );
 }

@@ -11,7 +11,7 @@ import Nav from '@/components/Nav';
 import TrialButton from '@/components/TrialButton';
 import VenueDirectory from '@/components/VenueDirectory';
 import { locationFaqs, locationGraph } from '@/lib/schema';
-import { BRANCHES, FACULTY, FOUNDERS, SITE, branchBySlug, yearsOfLineage } from '@/lib/site';
+import { BRANCHES, FACULTY, FOUNDERS, SITE, branchBySlug } from '@/lib/site';
 import { TEACHING_PROGRAMMES } from '@/lib/curriculum';
 import { areasTaught, offlineVenuesForCity, venuesForCity } from '@/lib/classes';
 
@@ -136,9 +136,6 @@ export default async function LocationPage({ params }: { params: Promise<Params>
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <TrialButton source={`location-${branch.slug}`}>
-                Schedule a trial session
-              </TrialButton>
               <a
                 href={`https://www.google.com/maps/search/?api=1&query=${mapsQuery}`}
                 target="_blank"
@@ -200,24 +197,15 @@ export default async function LocationPage({ params }: { params: Promise<Params>
                 ))}
               </ul>
 
-              {branch.landmarks.length > 0 ? (
-                <div className="mt-10">
-                  <h3 className="eyebrow">Orient by</h3>
-                  <ul className="mt-3 space-y-1.5">
-                    {branch.landmarks.map((landmark) => (
-                      <li key={landmark} className="text-[0.92rem] text-ink-soft">
-                        {landmark}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ) : null}
             </div>
           </section>
         ) : null}
 
         {/* Who teaches here */}
-        {localFaculty.length > 0 ? (
+        {/* Not shown for the founding school, at the academy's request: several
+            teachers share the Chennai venues, and one card implied otherwise.
+            Scarborough keeps it - the branch head is the teacher there. */}
+        {localFaculty.length > 0 && !branch.isPrimary ? (
           <section className="py-16 sm:py-20">
             <div className="mx-auto max-w-6xl px-5 sm:px-8">
               <p className="eyebrow">Who teaches here</p>
@@ -295,14 +283,6 @@ export default async function LocationPage({ params }: { params: Promise<Params>
                 </li>
               ))}
             </ol>
-            <div className="mt-8">
-              <Link
-                href="/curriculum"
-                className="inline-flex items-center gap-1.5 rounded-full border border-teal/25 px-5 py-3 text-sm font-medium text-teal transition-colors hover:border-teal/50 hover:bg-teal/5"
-              >
-                The full curriculum <span aria-hidden>→</span>
-              </Link>
-            </div>
           </div>
         </section>
 
@@ -342,27 +322,25 @@ export default async function LocationPage({ params }: { params: Promise<Params>
               ) : null}
 
               <div className="mt-7 flex flex-wrap justify-center gap-3">
-                <TrialButton source={`location-${branch.slug}-footer`}>
-                  Schedule a trial session
-                </TrialButton>
+                <TrialButton source={`location-${branch.slug}-footer`} branch={branch.slug} />
                 <a
-                  href={`mailto:${SITE.email}`}
+                  href={`mailto:${branch.contact?.email ?? SITE.email}`}
                   className="inline-flex items-center gap-2 rounded-full border border-teal/25 px-5 py-3.5 font-sans text-sm font-medium text-teal transition-colors hover:border-teal/50 hover:bg-teal/5"
                 >
-                  <Mail className="size-4" aria-hidden /> {SITE.email}
+                  <Mail className="size-4" aria-hidden /> {branch.contact?.email ?? SITE.email}
                 </a>
-                {branch.isPrimary ? (
+                {branch.isPrimary || branch.contact ? (
                   <a
-                    href={`tel:${SITE.phoneE164}`}
+                    href={`tel:${branch.contact?.phoneE164 ?? SITE.phoneE164}`}
                     className="inline-flex items-center gap-2 rounded-full border border-teal/25 px-5 py-3.5 font-sans text-sm font-medium text-teal transition-colors hover:border-teal/50 hover:bg-teal/5"
                   >
-                    <Phone className="size-4" aria-hidden /> {SITE.phoneDisplay}
+                    <Phone className="size-4" aria-hidden /> {branch.contact?.phoneDisplay ?? SITE.phoneDisplay}
                   </a>
                 ) : null}
               </div>
 
               <p className="mt-6 font-sans text-xs text-ink-faint">
-                {yearsOfLineage()} years of unbroken teaching · {SITE.style}
+                {SITE.signature}
               </p>
             </div>
           </div>

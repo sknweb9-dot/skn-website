@@ -217,7 +217,7 @@ export default function HastasPage() {
             anxiety or devotion depending on nothing but the gaze.
           </p>
           <div className="mt-7 flex flex-wrap items-center gap-3">
-            <TrialButton source="hastas-footer">Schedule a trial session</TrialButton>
+            <TrialButton source="hastas-footer" />
             <QuietLink href="/curriculum">The six levels</QuietLink>
           </div>
         </div>

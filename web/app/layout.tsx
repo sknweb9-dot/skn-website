@@ -140,8 +140,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: [{ url: '/img/logo-full.svg', type: 'image/svg+xml' }],
-    apple: [{ url: '/img/logo-mark.png' }],
+    icon: [{ url: '/img/logo-emblem.png', type: 'image/png' }],
+    // Apple icons render transparency as black, so this one sits on cream.
+    apple: [{ url: '/img/logo-emblem-apple.png' }],
   },
   other: {
     'geo.region': 'IN-TN',

@@ -45,7 +45,7 @@ export default function StaticActs() {
             </div>
 
             <div className="max-w-2xl">
-              <p className="eyebrow">{act.eyebrow}</p>
+              {act.eyebrow ? <p className="eyebrow">{act.eyebrow}</p> : null}
               {/* Act 1 carries the h1 here too, so the reduced-motion document
                   has the same heading structure as the scrubbed one. */}
               <Heading
@@ -74,11 +74,7 @@ export default function StaticActs() {
               </div>
 
               <div className="mt-6 flex flex-wrap items-center gap-3">
-                {act.index === 1 || act.index === 6 ? (
-                  <TrialButton source={`static-act-${act.index}`}>
-                    Schedule a trial session
-                  </TrialButton>
-                ) : null}
+                {act.index === 6 ? <TrialButton source={`static-act-${act.index}`} /> : null}
                 {act.link ? (
                   <Link
                     href={act.link.href}

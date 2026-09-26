@@ -33,40 +33,65 @@ export default function VideoFacade({ video }: { video: EventVideo }) {
   const [playing, setPlaying] = useState(false);
   const poster = videoPoster(video);
   const href = youtubeHref(video);
+  /**
+   * Embedding is switched off on YouTube for most of these uploads, and an
+   * iframe for them shows only "Video unavailable". Those cards go straight to
+   * YouTube in a new tab instead of opening a lightbox that cannot play.
+   */
+  const inline = video.embeddable !== false;
+
+  const posterBody = (
+    <div className="relative aspect-[4/3] overflow-hidden bg-teal-deep">
+      <Image
+        src={poster.src}
+        alt={poster.alt}
+        width={poster.width}
+        height={poster.height}
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        className="h-full w-full object-cover"
+      />
+      <span
+        aria-hidden
+        className="absolute inset-0 grid place-items-center bg-teal-deep/10 transition-colors duration-200 group-hover:bg-teal-deep/20"
+      >
+        <span className="grid h-14 w-14 place-items-center rounded-full bg-cream/90 text-teal ring-1 ring-marigold/60 transition-transform duration-200 ease-temple group-hover:scale-110">
+          <Play className="ml-0.5 h-5 w-5 fill-current" />
+        </span>
+      </span>
+      {video.kind === 'playlist' ? (
+        <span className="absolute top-3 left-3 rounded-full bg-cream/90 px-2.5 py-1 font-sans text-micro font-semibold tracking-[0.12em] text-teal uppercase">
+          Playlist
+        </span>
+      ) : null}
+    </div>
+  );
+
+  const frame =
+    'group relative block w-full overflow-hidden rounded-[1.25rem] border border-marigold/25 bg-paper/60 focus-visible:outline-2 focus-visible:outline-teal focus-visible:outline-offset-4';
 
   return (
     <>
       <figure id={`video-${video.id}`} className="scroll-mt-28">
-        <button
-          type="button"
-          onClick={() => setPlaying(true)}
-          aria-label={`Play: ${video.title}`}
-          className="group relative block w-full overflow-hidden rounded-[1.25rem] border border-marigold/25 bg-paper/60 focus-visible:outline-2 focus-visible:outline-teal focus-visible:outline-offset-4"
-        >
-          <div className="relative aspect-[4/3] overflow-hidden bg-teal-deep">
-            <Image
-              src={poster.src}
-              alt={poster.alt}
-              width={poster.width}
-              height={poster.height}
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              className="h-full w-full object-cover"
-            />
-            <span
-              aria-hidden
-              className="absolute inset-0 grid place-items-center bg-teal-deep/10 transition-colors duration-200 group-hover:bg-teal-deep/20"
-            >
-              <span className="grid h-14 w-14 place-items-center rounded-full bg-cream/90 text-teal ring-1 ring-marigold/60 transition-transform duration-200 ease-temple group-hover:scale-110">
-                <Play className="ml-0.5 h-5 w-5 fill-current" />
-              </span>
-            </span>
-            {video.kind === 'playlist' ? (
-              <span className="absolute top-3 left-3 rounded-full bg-cream/90 px-2.5 py-1 font-sans text-micro font-semibold tracking-[0.12em] text-teal uppercase">
-                Playlist
-              </span>
-            ) : null}
-          </div>
-        </button>
+        {inline ? (
+          <button
+            type="button"
+            onClick={() => setPlaying(true)}
+            aria-label={`Play: ${video.title}`}
+            className={frame}
+          >
+            {posterBody}
+          </button>
+        ) : (
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Watch on YouTube (opens in a new tab): ${video.title}`}
+            className={frame}
+          >
+            {posterBody}
+          </a>
+        )}
 
         <figcaption className="px-1 pt-3.5">
           <h3 className="font-display text-[1rem] leading-snug font-semibold text-teal-deep">

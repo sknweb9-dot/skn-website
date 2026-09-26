@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
-import { PageHero, PageShell, QuietLink, Section } from '@/components/PageShell';
+import { PageHero, PageShell, Section } from '@/components/PageShell';
 import TrialButton from '@/components/TrialButton';
 import { ARANGETRAM, CURRICULUM_INTRO, INTRODUCTORY, LEVELS } from '@/lib/curriculum';
 import { SITE } from '@/lib/site';
@@ -42,12 +42,7 @@ export default function CurriculumPage() {
         title="Six levels, not"
         accent="six terms"
         lede={CURRICULUM_INTRO.body[0]}
-      >
-        <div className="flex flex-wrap gap-3">
-          <TrialButton source="curriculum-hero">Schedule a trial session</TrialButton>
-          <QuietLink href="/locations">Batches and timings</QuietLink>
-        </div>
-      </PageHero>
+      />
 
       <Section>
         <div className="max-w-3xl space-y-5">
@@ -72,9 +67,6 @@ export default function CurriculumPage() {
             <p className="max-w-measure text-[1rem] leading-relaxed text-ink-soft">
               {INTRODUCTORY.description}
             </p>
-            <p className="max-w-measure mt-5 border-l-2 border-marigold/50 pl-4 font-display text-[0.98rem] leading-relaxed text-teal-deep">
-              Formal Bharatanatyam training begins from Level 1.
-            </p>
 
             <div className="mt-8 grid gap-6 sm:grid-cols-2">
               <div>
@@ -98,6 +90,14 @@ export default function CurriculumPage() {
                 </ul>
               </div>
             </div>
+
+            {/* At the foot of the column rather than between the description
+                and the lists, where it interrupted the reading. Body face, not
+                Cinzel: Cinzel has no lowercase, so a sentence set in it reads
+                as shouting. */}
+            <p className="max-w-measure mt-8 border-l-2 border-marigold/50 pl-4 text-[0.98rem] leading-relaxed font-medium text-teal-deep">
+              Formal Bharatanatyam training begins from Level 1.
+            </p>
           </div>
 
           <figure className="curtain overflow-hidden rounded-[1.5rem]">
@@ -285,13 +285,6 @@ export default function CurriculumPage() {
         </Section>
       ) : null}
 
-      <Section>
-        <div className="flex flex-wrap items-center gap-3">
-          <TrialButton source="curriculum-footer">Schedule a trial session</TrialButton>
-          <QuietLink href="/events">Events & gallery</QuietLink>
-          <QuietLink href="/locations">Batches and timings</QuietLink>
-        </div>
-      </Section>
     </PageShell>
   );
 }
