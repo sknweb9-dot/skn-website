@@ -40,6 +40,13 @@ export default function HashScroll() {
       const target = document.getElementById(id);
       if (!target) return false;
 
+      // On the home stage the sections are layers, not places in the page, so
+      // scrolling to one means asking the stage to go to it.
+      const section = target.closest<HTMLElement>('[data-home-section]');
+      if (section && document.documentElement.dataset.stage === 'on') {
+        window.dispatchEvent(new CustomEvent('stage:goto', { detail: { id: section.dataset.homeSection } }));
+        return true;
+      }
       lenis.scrollTo(target, { offset: -HEADER_OFFSET, immediate });
 
       // Move focus so keyboard and screen-reader users land where sighted users

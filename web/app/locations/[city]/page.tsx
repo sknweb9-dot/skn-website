@@ -3,14 +3,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, Mail, MapPin, Navigation, Phone } from 'lucide-react';
-import BookingModal from '@/components/BookingModal';
 import FloatingCta from '@/components/FloatingCta';
 import Footer from '@/components/Footer';
 import JsonLd from '@/components/JsonLd';
 import Nav from '@/components/Nav';
-import TrialButton from '@/components/TrialButton';
+import BookButton from '@/components/BookButton';
 import VenueDirectory from '@/components/VenueDirectory';
 import { locationFaqs, locationGraph } from '@/lib/schema';
+import { isRegion } from '@/lib/booking';
 import { BRANCHES, FACULTY, FOUNDERS, SITE, branchBySlug } from '@/lib/site';
 import { TEACHING_PROGRAMMES } from '@/lib/curriculum';
 import { areasTaught, offlineVenuesForCity, venuesForCity } from '@/lib/classes';
@@ -40,10 +40,10 @@ export async function generateMetadata({
   const title = `Bharatanatyam Dance Academy in ${branch.city}`;
   const description =
     areas.length > 1
-      ? `Kalakshetra-style Bharatanatyam classes at ${venueCount} venues across ${branch.city} — ${areas.join(', ')}. An introductory programme from age 3.5, six graded levels to Arangetram, and adults batches. Book a trial session.`
+      ? `Kalakshetra-style Bharatanatyam classes at ${venueCount} venues across ${branch.city} — ${areas.join(', ')}. An introductory programme from age 3.5, six graded levels to Arangetram, and adults batches. Book a session.`
       : `Kalakshetra-style Bharatanatyam classes in ${branch.city}${
           branch.head ? `, led by ${branch.head}` : ''
-        }. Group, individual and adults batches from age 3.5 to Arangetram. Book a trial session.`;
+        }. Group, individual and adults batches from age 3.5 to Arangetram. Book a session.`;
 
   return {
     title,
@@ -117,7 +117,7 @@ export default async function LocationPage({ params }: { params: Promise<Params>
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <Link
               href="/locations"
-              className="inline-flex items-center gap-1.5 font-sans text-xs tracking-[0.14em] text-ink-faint uppercase transition-colors hover:text-kumkum"
+              className="inline-flex min-h-11 items-center gap-1.5 font-sans text-sm text-ink-faint transition-colors hover:text-kumkum"
             >
               <ArrowLeft className="size-3.5" aria-hidden /> All locations
             </Link>
@@ -322,7 +322,7 @@ export default async function LocationPage({ params }: { params: Promise<Params>
               ) : null}
 
               <div className="mt-7 flex flex-wrap justify-center gap-3">
-                <TrialButton source={`location-${branch.slug}-footer`} branch={branch.slug} />
+                <BookButton source={`location-${branch.slug}-footer`} region={isRegion(branch.slug) ? branch.slug : undefined} />
                 <a
                   href={`mailto:${branch.contact?.email ?? SITE.email}`}
                   className="inline-flex items-center gap-2 rounded-full border border-teal/25 px-5 py-3.5 font-sans text-sm font-medium text-teal transition-colors hover:border-teal/50 hover:bg-teal/5"
@@ -349,7 +349,6 @@ export default async function LocationPage({ params }: { params: Promise<Params>
 
       <Footer />
       <FloatingCta />
-      <BookingModal />
     </>
   );
 }

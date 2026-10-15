@@ -126,7 +126,7 @@ export default function VideoFacade({ video }: { video: EventVideo }) {
 }
 
 /**
- * Follows the dialog pattern already established by BookingModal and MobileMenu:
+ * Follows the dialog pattern already established by MobileMenu:
  * stop Lenis, move focus in, restore it on close, Escape to dismiss.
  */
 function Lightbox({ video, onClose }: { video: EventVideo; onClose: () => void }) {

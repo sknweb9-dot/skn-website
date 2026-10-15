@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { CirclePlay } from 'lucide-react';
 import JsonLd from '@/components/JsonLd';
 import { PageHero, PageShell, QuietLink, Section } from '@/components/PageShell';
-import TrialButton from '@/components/TrialButton';
+import BookButton from '@/components/BookButton';
 import { FRAME_HEIGHT, FRAME_WIDTH, MUDRAS, VERSE_MUDRAS, framePath, liveFrames } from '@/lib/mudras';
 import { SITE } from '@/lib/site';
 import { hastasGraph, slugify } from '@/lib/schema';
@@ -27,10 +27,8 @@ import { hastasGraph, slugify } from '@/lib/schema';
  *   - `robots` below tells crawlers not to index or follow it.
  *
  * To bring it back: undo those four things. lib/mudras.ts was NOT touched and
- * must not be — the home page's ScrollStage and StaticActs depend on
- * framePath, liveFrames, mudraAtProgress and FRAME_COUNT, and lib/acts.ts on
- * mudraByName. Only `MUDRAS` itself is used solely by this page and by
- * hastasGraph() in lib/schema.ts.
+ * must not be — the home page's arch (components/home) depends on
+ * framePath, MUDRAS and FRAME_COUNT, and lib/home.ts on mudraByName.
  */
 const TITLE = 'The 28 Asamyuta Hastas of Bharatanatyam';
 const DESCRIPTION =
@@ -75,7 +73,7 @@ export default function HastasPage() {
         lede="The asamyuta hastas — single-hand gestures — in the sequence the Abhinaya Darpana sets down, and the sequence our students learn them in. Each carries a literal meaning and a documented set of uses, and one gesture may serve a dozen unrelated ideas."
       >
         <div className="flex flex-wrap gap-3">
-          <TrialButton source="hastas-hero">Learn them properly</TrialButton>
+          <BookButton source="hastas-hero">Learn them properly</BookButton>
           <QuietLink href="/curriculum">The six levels</QuietLink>
         </div>
       </PageHero>
@@ -217,7 +215,7 @@ export default function HastasPage() {
             anxiety or devotion depending on nothing but the gaze.
           </p>
           <div className="mt-7 flex flex-wrap items-center gap-3">
-            <TrialButton source="hastas-footer" />
+            <BookButton source="hastas-footer" />
             <QuietLink href="/curriculum">The six levels</QuietLink>
           </div>
         </div>

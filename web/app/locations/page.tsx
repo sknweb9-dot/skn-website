@@ -2,12 +2,11 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { MapPin } from 'lucide-react';
-import BookingModal from '@/components/BookingModal';
 import FloatingCta from '@/components/FloatingCta';
 import Footer from '@/components/Footer';
 import JsonLd from '@/components/JsonLd';
 import Nav from '@/components/Nav';
-import TrialButton from '@/components/TrialButton';
+import BookButton from '@/components/BookButton';
 import { BRANCHES, SITE } from '@/lib/site';
 import {
   INDIVIDUAL_TEACHING,
@@ -159,7 +158,7 @@ export default function LocationsPage() {
               nearest batch at the right level.
             </p>
             <div className="mt-7 flex flex-wrap justify-center gap-3">
-              <TrialButton source="locations-index" />
+              <BookButton source="locations-index" />
             </div>
           </div>
         </section>
@@ -167,7 +166,6 @@ export default function LocationsPage() {
 
       <Footer />
       <FloatingCta />
-      <BookingModal />
     </>
   );
 }

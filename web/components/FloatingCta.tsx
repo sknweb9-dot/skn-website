@@ -3,22 +3,19 @@
 import { useEffect, useState } from 'react';
 import { Phone } from 'lucide-react';
 import { SITE } from '@/lib/site';
-import TrialButton from './TrialButton';
-import { useBooking } from './BookingProvider';
+import BookButton from './BookButton';
 
 /**
- * Persistent conversion rail. Appears once the hero CTA has scrolled away and
- * hides itself while the booking modal is open so it cannot sit above the scrim.
+ * Persistent conversion rail. Appears once the hero CTA has scrolled away.
  */
 export default function FloatingCta() {
   const [visible, setVisible] = useState(false);
   /**
    * True while an in-page booking button is on screen. The bar steps aside then,
-   * so a reader never sees two "Book trial" controls at once — the duplication
-   * the academy asked to be rid of. See `inline` on TrialButton.
+   * so a reader never sees two "Book a session" controls at once — the
+   * duplication the academy asked to be rid of. See `inline` on BookButton.
    */
   const [inlineShowing, setInlineShowing] = useState(false);
-  const { isOpen } = useBooking();
 
   useEffect(() => {
     function onScroll() {
@@ -38,15 +35,18 @@ export default function FloatingCta() {
       }
       setInlineShowing(onScreen.size > 0);
     });
-    document.querySelectorAll('[data-trial-inline]').forEach((el) => observer.observe(el));
+    document.querySelectorAll('[data-book-inline]').forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
 
-  const shown = visible && !isOpen && !inlineShowing;
+  const shown = visible && !inlineShowing;
 
   return (
     <div
       aria-hidden={!shown}
+      // `inert` as well as aria-hidden: aria-hidden alone left the booking
+      // link in the Tab order while the bar was off screen.
+      inert={!shown}
       className={`fixed inset-x-0 bottom-0 z-40 transition-[transform,opacity] duration-500 ${
         shown ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-full opacity-0'
       } sm:inset-x-auto sm:bottom-7 sm:right-7`}
@@ -63,14 +63,13 @@ export default function FloatingCta() {
       <div className="flex items-stretch gap-px border-t border-marigold/20 bg-cream/95 backdrop-blur-xl sm:gap-3 sm:border sm:border-marigold/20 sm:p-2">
         <a
           href={`tel:${SITE.phoneE164}`}
-          tabIndex={shown ? 0 : -1}
           className="flex shrink-0 items-center gap-2 px-5 py-4 font-sans text-sm text-ink-soft transition-colors hover:text-kumkum sm:py-2"
         >
           <Phone className="size-4" aria-hidden="true" />
           <span className="hidden sm:inline">Call</span>
           <span className="sm:hidden">{SITE.phoneDisplay}</span>
         </a>
-        <TrialButton source="floating" className="flex-1 !py-4 sm:!py-3" showArrow={false} inline={false} />
+        <BookButton source="floating" className="flex-1 !py-4 sm:!py-3" showArrow={false} inline={false} />
       </div>
     </div>
   );

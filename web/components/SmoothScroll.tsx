@@ -3,6 +3,7 @@
 import Lenis from 'lenis';
 import { createContext, useContext, useEffect, useMemo, useRef } from 'react';
 import { gsap } from 'gsap';
+import { usePathname } from 'next/navigation';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
 
@@ -51,6 +52,11 @@ const nativeFallback: LenisApi = {
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
   const reduced = usePrefersReducedMotion();
+  // The home page is a stage driven by the native scroll position, and its hand
+  // already eases toward that position; Lenis on top would smooth it twice and
+  // make the hand trail the wheel. So the home page scrolls natively.
+  const pathname = usePathname();
+  const native = reduced || pathname === '/';
 
   // The API object is stable and reads the instance through a ref, so creating
   // Lenis never has to push new state from inside the effect.
@@ -81,7 +87,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    if (reduced) {
+    if (native) {
       // Native scrolling only. ScrollTrigger still works; nothing to sync.
       ScrollTrigger.refresh();
       return;
@@ -118,7 +124,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       lenis.destroy();
       lenisRef.current = null;
     };
-  }, [reduced]);
+  }, [native]);
 
   return <LenisContext.Provider value={api}>{children}</LenisContext.Provider>;
 }

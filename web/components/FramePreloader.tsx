@@ -26,7 +26,7 @@ import { SITE } from '@/lib/site';
  *
  * WHY THE PROGRESS IS FLOORED IN TIME
  * -----------------------------------
- * On a second visit the 82 frames of the gating pass are already in the HTTP cache
+ * On a second visit the footage is already in the HTTP cache
  * and `loaded` reaches `total` almost immediately. Drawn straight, the emblem would
  * snap to complete in a frame or two and the screen would read as a flash of cream —
  * worse than no animation at all. So the drawn fraction is also capped by elapsed
@@ -39,9 +39,9 @@ import { SITE } from '@/lib/site';
  * the moment it reaches 1; the min() against real progress happens during render.
  * Under reduced motion `paced` simply never starts and the real figure is used.
  *
- * The stage underneath is usable before this clears: ScrollStage's draw() falls
- * back to the nearest already-loaded frame, so an early scroll degrades to a
- * coarser scrub rather than an empty aperture.
+ * The stage underneath is usable before this clears: it is mounted and scrolls,
+ * and the arch shows its first frame as soon as the footage can play.
+ * The home stage drives `loaded` from how much of the video has buffered.
  */
 
 /** The emblem at the centre of the loader. */
@@ -57,10 +57,13 @@ export default function FramePreloader({
   loaded,
   total,
   done,
+  line,
 }: {
   loaded: number;
   total: number;
   done: boolean;
+  /** One of the academy's loading-screen lines, shown under the emblem. */
+  line?: string;
 }) {
   const reducedMotion = usePrefersReducedMotion();
   const [gone, setGone] = useState(false);
@@ -115,6 +118,7 @@ export default function FramePreloader({
       aria-valuemax={100}
       aria-label="Loading the gesture sequence"
       aria-hidden={finished}
+      data-preloader=""
       className={`fixed inset-0 z-50 flex flex-col items-center justify-center bg-cream transition-opacity ease-out ${
         finished ? 'pointer-events-none opacity-0' : 'opacity-100'
       }`}
@@ -161,8 +165,13 @@ export default function FramePreloader({
 
       <p className="eyebrow mt-9">{SITE.name}</p>
 
-      <p className="mt-2.5 font-sans text-[0.7rem] tracking-[0.2em] text-ink-faint uppercase">
-        Preparing the gestures
+      {/* suppressHydrationWarning: the line is chosen at random on the client,
+          so the server's pick and the browser's may differ for a moment. */}
+      <p
+        suppressHydrationWarning
+        className="mt-3 max-w-[22rem] px-6 text-center font-display text-[0.95rem] leading-snug text-teal-deep"
+      >
+        {line ?? 'Preparing the gestures'}
       </p>
 
       {/* The figure, for anyone who cannot see the drawing. */}

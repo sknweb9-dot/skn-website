@@ -18,6 +18,7 @@ import { BRANCHES, SITE } from '@/lib/site';
 const ROUTES: { path: string; changeFrequency: MetadataRoute.Sitemap[number]['changeFrequency']; priority: number }[] = [
   { path: '/locations', changeFrequency: 'monthly', priority: 0.8 },
   { path: '/curriculum', changeFrequency: 'monthly', priority: 0.8 },
+  { path: '/book', changeFrequency: 'monthly', priority: 0.7 },
   { path: '/events', changeFrequency: 'monthly', priority: 0.7 },
   { path: '/about', changeFrequency: 'yearly', priority: 0.6 },
   { path: '/lineage', changeFrequency: 'yearly', priority: 0.6 },

@@ -7,7 +7,7 @@ import {
   type Venue,
 } from '@/lib/classes';
 import { INTRODUCTORY, LEVELS } from '@/lib/curriculum';
-import TrialButton from './TrialButton';
+import BookButton from './BookButton';
 
 /**
  * The venue directory, in two mutually exclusive presentations.
@@ -154,14 +154,11 @@ function PublicVenues({ citySlug }: { citySlug: string }) {
             <BatchRow venue={venue} showAdmission />
             {openCount(venue) > 0 ? (
               <div className="mt-5">
-                <TrialButton
-                  source={`venue-${venue.id}`}
-                  variant="outline"
-                  branch={venue.mode === 'online' ? 'online' : venue.citySlug}
-                  venue={venue.mode === 'online' ? undefined : venue.id}
-                >
+                {/* The venue alone is enough: /book derives the region from it,
+                    online included, and lists this venue's batches first. */}
+                <BookButton source={`venue-${venue.id}`} variant="outline" venue={venue.id}>
                   Enquire about {venue.name}
-                </TrialButton>
+                </BookButton>
               </div>
             ) : null}
           </li>
@@ -214,9 +211,9 @@ function ResidentVenues({ citySlug }: { citySlug: string }) {
                 <VenueHeading venue={venue} sub="Online" />
                 <BatchRow venue={venue} showAdmission />
                 <div className="mt-5">
-                  <TrialButton source={`venue-${venue.id}`} variant="outline" branch="online">
+                  <BookButton source={`venue-${venue.id}`} variant="outline" region="online">
                     Join the online batch
-                  </TrialButton>
+                  </BookButton>
                 </div>
               </li>
             ))}
@@ -233,7 +230,7 @@ function ResidentVenues({ citySlug }: { citySlug: string }) {
           where you live and how many children might join.
         </p>
         <div className="mt-5 flex flex-wrap gap-3">
-          <TrialButton source="residents-request-batch">Request a batch</TrialButton>
+          <BookButton source="residents-request-batch" audience="community">Request a batch</BookButton>
           <Link
             href="/curriculum"
             className="inline-flex items-center gap-1.5 rounded-full border border-teal/25 px-4 py-2 text-sm font-medium text-teal transition-colors hover:border-teal/50 hover:bg-teal/5"

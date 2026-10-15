@@ -7,7 +7,7 @@ import { X } from 'lucide-react';
 import { NAV_ROUTES, SITE } from '@/lib/site';
 import { FacebookIcon, InstagramIcon, YoutubeIcon } from './SocialIcons';
 import { useSmoothScroll } from './SmoothScroll';
-import TrialButton from './TrialButton';
+import BookButton from './BookButton';
 
 /**
  * Full-screen navigation for phones and small tablets.
@@ -36,8 +36,7 @@ export default function MobileMenu({ onClose }: { onClose: () => void }) {
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
   const returnFocusRef = useRef<HTMLElement | null>(null);
 
-  // Hold the page still behind the overlay and hand focus back on close, the
-  // same contract BookingModal keeps.
+  // Hold the page still behind the overlay and hand focus back on close.
   useEffect(() => {
     returnFocusRef.current = document.activeElement as HTMLElement | null;
     scroll.stop();
@@ -85,8 +84,7 @@ export default function MobileMenu({ onClose }: { onClose: () => void }) {
       aria-modal="true"
       aria-label="Site navigation"
       onKeyDown={onKeyDown}
-      // Sits above the masthead (z-40) and below the booking modal (z-90), so
-      // choosing "Book a trial" from here layers correctly.
+      // Sits above the masthead (z-40).
       className="fixed inset-0 z-50 flex flex-col overflow-y-auto bg-cream lg:hidden"
     >
       {/* Same warm wash as the home stage, so the menu belongs to the site
@@ -151,12 +149,9 @@ export default function MobileMenu({ onClose }: { onClose: () => void }) {
       {/* mt-auto pins this block to the foot on tall screens and lets it flow
           naturally on short ones, so nothing is ever unreachable. */}
       <div className="relative mt-auto px-4 pt-10 pb-8 sm:px-7">
-        {/* Wrapping the control means the menu closes on the way to the modal:
-            the button's own handler opens the booking dialog, then the click
-            bubbles to here. */}
-        <div onClick={onClose}>
-          <TrialButton source="menu" className="w-full !py-4" inline={false} />
-        </div>
+        {/* Closes explicitly as well as by navigation: from /book itself the
+            path does not change, so Nav's derived close would not fire. */}
+        <BookButton source="menu" className="w-full !py-4" inline={false} onClick={onClose} />
 
         <div className="mt-7 flex flex-col gap-2 font-sans text-sm text-ink-soft">
           <a href={`tel:${SITE.phoneE164}`} className="transition-colors hover:text-kumkum">

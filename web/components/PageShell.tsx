@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react';
 import Link from 'next/link';
-import BookingModal from './BookingModal';
 import FloatingCta from './FloatingCta';
 import Footer from './Footer';
 import Nav from './Nav';
@@ -18,7 +17,7 @@ import Reveal from './Reveal';
  * documents whose hero CTA scrolls out of reach within one screen, which is
  * exactly the gap it was written for. The home page does not get it: the acts
  * carry their own calls to action, the masthead returns on any upward scroll
- * with `Book trial` in it, and on a phone the bar would sit over the foot of the
+ * with `Book a session` in it, and on a phone the bar would sit over the foot of the
  * act cards.
  */
 export function PageShell({ children }: { children: ReactNode }) {
@@ -28,7 +27,6 @@ export function PageShell({ children }: { children: ReactNode }) {
       <main id="main">{children}</main>
       <Footer />
       <FloatingCta />
-      <BookingModal />
     </>
   );
 }

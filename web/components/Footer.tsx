@@ -79,12 +79,14 @@ export default function Footer() {
 
           <nav aria-label="Sections">
             <h2 className="eyebrow">Explore</h2>
-            <ul className="mt-4 space-y-2.5">
+            <ul className="mt-3 space-y-0.5">
               {ROUTES.map((route) => (
                 <li key={route.href}>
+                  {/* py-1.5 makes the target 33px tall; it was 23px, under the
+                      24px WCAG 2.2 floor. */}
                   <Link
                     href={route.href}
-                    className="text-sm text-cream/80 transition-colors hover:text-cream"
+                    className="inline-block py-1.5 text-sm text-cream/80 transition-colors hover:text-cream"
                   >
                     {route.label}
                   </Link>

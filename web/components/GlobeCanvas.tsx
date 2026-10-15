@@ -31,7 +31,7 @@ import { plateExtent, plateTransform, type GlobeShape } from '@/lib/globe';
  *     back through the plates. The renderer is never torn down and rebuilt, so
  *     there is no reload and no flash between the two.
  *   - Textures load in two passes, teaser set first — the same coarse/refine
- *     idea as the frame loading in ScrollStage, for the same reason.
+ *     idea as the home arch's frame loading, for the same reason.
  *   - Everything is disposed on unmount, including textures. The original leaks
  *     one texture per plate.
  *   - Rendering stops when the tab is hidden or the canvas has scrolled out of

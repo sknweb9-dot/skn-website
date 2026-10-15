@@ -8,7 +8,8 @@ import { Menu } from 'lucide-react';
 import { NAV_ROUTES, SITE } from '@/lib/site';
 import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
 import MobileMenu from './MobileMenu';
-import TrialButton from './TrialButton';
+import BookButton from './BookButton';
+import { BOOK_PATH } from '@/lib/booking';
 
 /**
  * Masthead.
@@ -100,6 +101,16 @@ export default function Nav() {
   // asked for reduced motion — for them the bar would teleport rather than slide.
   const retired = hidden && !menuOpen && !reduced;
 
+  // The home page's pinned arch strip (the phone layout) slides with the
+  // masthead, so it needs to know whether the masthead is away.
+  useEffect(() => {
+    const root = document.documentElement;
+    root.dataset.navHidden = String(retired);
+    return () => {
+      delete root.dataset.navHidden;
+    };
+  }, [retired]);
+
   return (
     <>
       <header
@@ -160,7 +171,7 @@ export default function Nav() {
                           active ? 'text-kumkum' : 'text-ink-soft hover:text-kumkum'
                         }`}
                       >
-                        {route.short}
+                        {route.label}
                         {/* Marigold underscore for the current route. A filled
                             pill would read as a button among five links. */}
                         <span
@@ -177,14 +188,16 @@ export default function Nav() {
             </nav>
 
             <div className="flex items-center gap-2 sm:gap-3">
-              <TrialButton
-                source="nav"
-            inline={false}
-                className="pointer-events-auto !px-5 !py-2.5"
-                showArrow={false}
-              >
-                Book trial
-              </TrialButton>
+              {/* Hidden on /book itself: a button to the page you are on, which
+                  would also wipe the draft in progress. */}
+              {pathname === BOOK_PATH ? null : (
+                <BookButton
+                  source="nav"
+                  inline={false}
+                  className="pointer-events-auto !px-5 !py-2.5"
+                  showArrow={false}
+                />
+              )}
 
               <button
                 type="button"

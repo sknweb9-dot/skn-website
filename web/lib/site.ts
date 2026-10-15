@@ -47,12 +47,15 @@ export function yearsOfLineage(now: Date = new Date()): number {
 /**
  * Owner-supplied figures. Update here when the academy reports new numbers.
  *
- * There is deliberately no student headcount. The site used to show "324
- * students taught"; the academy asked for it to be removed because exact
- * headcounts are not formally tracked, so it has also been taken out of the
- * Schema.org graph rather than left there as an unsupported claim.
+ * The site once showed "324 students taught", which the academy asked to have
+ * removed because that exact count was not tracked. The figure below is the
+ * academy's own confirmed total across all years, and is shown as "1500+".
+ * Neither figure is in the Schema.org graph.
  */
 export const METRICS = {
+  /** Shown as "1,500+". Confirmed by the academy, October 2026. */
+  studentsTaught: 1500,
+  /** Shown as "20+". */
   stages: 20,
   /**
    * Countries where the academy has students: India, Canada, and the USA
@@ -126,7 +129,7 @@ export const BRANCHES: Branch[] = [
     // complex, and the academy asked for the exact building address to come off
     // the public site to avoid trouble with the property. Locality + postcode is
     // what the schema carries now, and it is what a parent needs to judge
-    // distance; the venue itself is shared once a trial is booked.
+    // distance; the venue itself is shared once a family gets in touch.
     geo: { lat: 12.901, lng: 80.2279, precision: 'locality' },
     head: 'Smt. Sunitta Menghanaani',
     isPrimary: true,
@@ -482,45 +485,93 @@ export const MILESTONES = [
 ] as const;
 
 // ---------------------------------------------------------------------------
-// FAQ — targets the questions parents actually search
+// FAQ
 // ---------------------------------------------------------------------------
+
+/**
+ * Ten of the twenty questions in the FAQ of `Website Contents.docx`, chosen for
+ * what moves a parent who is deciding, and transcribed verbatim. Answers keep
+ * the docx's paragraph breaks as blank lines. Shown on /book, where a parent
+ * pauses before enquiring, and emitted as FAQPage markup only there: FAQ
+ * structured data must match questions visible on the same page.
+ *
+ * Left out, on purpose: progression through the levels, the Kalakshetra bani,
+ * Gurukulam, literature and theory, "is it extracurricular", practice at home,
+ * classes outside Chennai, Arangetram being optional, what makes SKN
+ * different, and how to join. Each is covered by /curriculum, /about,
+ * /locations or the booking flow itself; the docx is the place to restore any.
+ *
+ * This replaced an earlier set of nine written for search. Those answers named
+ * a residential complex the academy asked to keep off the site, called the
+ * director a "graduate" where Kalakshetra awards diplomas, and promised a trial
+ * class that does not exist.
+ */
+const p = (...paragraphs: string[]) => paragraphs.join('\n\n');
 
 export const FAQS = [
   {
-    q: 'At what age can my child begin Bharatanatyam?',
-    a: 'Our Introductory Programme takes children from ages 3.5 to 6, where rhythm, coordination, concentration and cultural values are developed through Sanskrit shlokas, storytelling, creative movement and rhythm exercises. Formal Bharatanatyam training begins at Level 1. There is no upper limit — our Senior Associate Tejaswi J began her own training in her late teens.',
+    q: 'At what age can students begin Bharatanatyam at SKN? Do they need prior experience?',
+    a: p(
+      'Students can begin at different ages and do not need prior dance experience. Our students range from 3.5 years to 60+ years, including adults who have started their journey after the age of 35.',
+      'Young children may begin with our Introductory Programme, while formal Bharatanatyam training begins at Level 1. What matters most is the willingness to learn, practise, and grow.',
+    ),
   },
   {
-    q: 'Do you offer online classes for international students?',
-    a: 'Yes. Alongside our Chennai venues and our Canadian branch in Scarborough, we run an online group batch and teach individual students online — currently in Bangalore, Odisha and the USA. Write to shantikalanikketan@gmail.com with your time zone and we will match you to a batch.',
+    q: 'Does a student need natural talent to learn Bharatanatyam?',
+    a: 'No. We believe that anyone willing to work sincerely, practise consistently, and persevere can learn Bharatanatyam. Talent may differ, but dedication and commitment make the real difference.',
   },
   {
-    q: 'What is the Kalakshetra style of Bharatanatyam?',
-    a: 'The Kalakshetra style was codified at the Kalakshetra Foundation in Chennai, founded by Rukmini Devi Arundale. It is known for geometric clarity of line, restrained and dignified abhinaya, and a strong grounding in Sanskrit theory. Our Director Sunitta Menghanaani is a graduate of the Rukmini Devi College of Fine Arts, Kalakshetra Foundation, and it is the method the school teaches.',
+    q: 'Can adults learn Bharatanatyam at SKN?',
+    a: 'Absolutely. SKN welcomes adult learners, whether they are beginning for the first time or returning to dance after many years. Our students include adults who have started their journey well into their 30s, 40s, and beyond.',
   },
   {
-    q: 'What is the Gurukulam method, and how is it different from a regular dance class?',
-    a: 'In the Gurukulam manner, students learn the classical art form alongside literature and mythology, so that technique arrives together with meaning. The relationship is a long one — we insist on a synergy of commitment and perseverance where both Guru and Shishya flourish together, rather than a fixed-term course.',
+    q: 'Does SKN conduct programmes within residential communities?',
+    a: p(
+      "Yes. Taking Bharatanatyam closer to where families live is an important part of SKN's outreach.",
+      'We conduct classes within residential communities and apartment complexes, making it easier for children to learn without parents having to travel long distances after increasingly demanding school schedules and working hours.',
+      'SKN brings the same structured curriculum, discipline, teaching standards, and artistic values to community-based classes.',
+      'Communities interested in starting a group can contact SKN. A minimum of 5 participants is required.',
+    ),
   },
   {
-    q: 'Where exactly in Chennai do you teach?',
-    a: 'We run classes at five venues: Appswamy Springs in Thiruvanmiyur, Adroit and Prestige Courtyards in Sholinganallur, and Casagrand Riviera and Casagrand Tranquil in Medavakkam. The exact venue is shared when your trial is booked.',
+    q: "Can parents watch their child's classes?",
+    a: p(
+      'At SKN, parents, students, and teachers work as a team.',
+      "To help parents understand their child's progress and learning journey, parents are permitted to observe classes once every two months. This allows them to see their child's development while also maintaining the focused learning environment of the class.",
+    ),
   },
   {
-    q: 'Do you teach adults, or only children?',
-    a: 'Both. Alongside the children\u2019s batches we run a dedicated adults batch in Chennai and an adults batch at our Scarborough branch, working through the same graded syllabus. Our Senior Associate Tejaswi J began her own training in her late teens — a serious start is possible at any age.',
+    q: 'How are students assessed at SKN?',
+    a: p(
+      "Assessment at SKN is not about marks or competition. We look at the student's understanding, presentation, effort, consistency, hard work, ability to overcome fear, and overall growth.",
+      'Examinations are also conducted at appropriate stages as part of the structured learning journey.',
+    ),
   },
   {
-    q: 'How long does it take to reach Arangetram?',
-    a: 'Arangetram follows the successful completion of six graded levels — Foundation, Technique Development, Margam Preparation, Repertoire & Expression, Advanced Artistry, and Mastery — and it is reached by progression rather than by a calendar. After Level 6, students enter a dedicated Performance & Arangetram Programme of intensive rehearsals, stagecraft, orchestra rehearsals and individual mentoring. It is a years-long Sadhana, and every level is celebrated on its own terms at our Udaan showcase.',
+    q: 'What does SKN do for the overall development of students?',
+    a: p(
+      'At SKN, we believe education should nurture the individual, not just the skill.',
+      "Alongside Bharatanatyam, we create opportunities for students to understand themselves, build emotional awareness, and develop mindful ways of living. Our Soulful Sunday series, specially designed by a counsellor who is also a Bharatanatyam dancer and SKN's first student, explores emotional growth and mindful living.",
+      'We also conduct sessions and activities that encourage students to reflect, understand themselves better, and grow with confidence.',
+    ),
   },
   {
-    q: 'Do you hold performances for students?',
-    a: 'Yes. Udaan is our own showcase, created so that every dancer has a platform irrespective of their stage of learning, with editions in 2023 and 2025. Students also perform at Arangetrams, temple festivals, and events such as Nada Sudha and the Samarpanam Festival.',
+    q: 'What performance opportunities are available for students?',
+    a: p(
+      'Students may participate in SKN productions, Udaan, Udaan Rising Artist, ensembles, workshops, and other institutional performances, depending on their level and readiness.',
+      'Our Outreach Programmes also take Bharatanatyam into the community, including special performances and interactions for children with special needs.',
+    ),
   },
   {
-    q: 'What should my child bring to a trial session?',
-    a: 'Nothing but comfortable clothing they can move and sit on the floor in. No costume, no ghungroo and no prior experience is needed for a trial.',
+    q: 'How does SKN prepare students for an Arangetram?',
+    a: p(
+      "Arangetram preparation at SKN looks beyond performance alone. Along with artistic and technical preparation, we consider the student's physical wellbeing, stamina, confidence, and overall readiness.",
+      "A consultation with a physiotherapist is compulsory as part of the process, helping us understand the student's physical requirements and take appropriate measures to prevent injury.",
+    ),
+  },
+  {
+    q: 'Are there additional costs apart from regular class fees?',
+    a: 'The regular programme fee covers the applicable teaching programme. Certain activities such as examinations, costumes, performances, workshops, or special programmes may involve additional costs when applicable. These will always be communicated in advance.',
   },
 ] as const;
 
@@ -532,9 +583,13 @@ export const FAQS = [
  * The site's routes, in narrative order: who we are, where we came from, what
  * is taught, the stage, the address.
  *
- * Canonical for both the masthead and the footer. `label` is the editorial name
- * used where there is room; `short` is for the header bar, where the items plus
- * a logo plus the booking control have to share one line.
+ * Canonical for the masthead, the mobile menu and the footer, and each page has
+ * exactly ONE name in all three. There used to be a long `label` ("The academy",
+ * "Our lineage", "Events & gallery") for the footer and menu and a `short` one
+ * for the masthead, so the same link read differently depending on where you
+ * met it. The short names are the ones the academy chose in its revision plan
+ * (Academy, Lineage, Curriculum, Locations, Events), and they fit the masthead,
+ * so they are the only names.
  *
  * TWO ROUTES LEFT THIS LIST, and neither was deleted:
  *
@@ -549,21 +604,14 @@ export const FAQS = [
  * happier with.
  */
 export const NAV_ROUTES = [
-  { href: '/about', label: 'The academy', short: 'Academy' },
-  { href: '/lineage', label: 'Our lineage', short: 'Lineage' },
-  { href: '/curriculum', label: 'Curriculum', short: 'Curriculum' },
+  { href: '/about', label: 'Academy' },
+  { href: '/lineage', label: 'Lineage' },
+  { href: '/curriculum', label: 'Curriculum' },
   // Locations before Events, at the academy's request: a parent reading the
   // levels on /curriculum is looking for a batch next, not a gallery.
-  { href: '/locations', label: 'Locations', short: 'Locations' },
-  { href: '/events', label: 'Events & gallery', short: 'Events' },
+  { href: '/locations', label: 'Locations' },
+  { href: '/events', label: 'Events' },
 ] as const;
 
-// ---------------------------------------------------------------------------
-// Booking
-// ---------------------------------------------------------------------------
-
-/**
- * Replace with the academy's Google Form URL to hand submissions straight to
- * Sheets. While unset, the modal posts to /api/enquiry.
- */
-export const GOOGLE_FORM_URL: string | null = null;
+// Booking lives in ./booking.ts: the enquiry flow's rules, the /book URL and
+// the label every booking button uses.

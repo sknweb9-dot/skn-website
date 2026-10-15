@@ -50,10 +50,11 @@ export default function AboutPage() {
 
           <dl className="space-y-6 lg:border-l lg:border-marigold/25 lg:pl-8">
             {[
+              { value: `${METRICS.studentsTaught.toLocaleString('en-IN')}+`, label: 'Students taught' },
               { value: `${years}`, label: 'Years of unbroken teaching' },
               { value: `${batchCount()}`, label: 'Weekly batches' },
               { value: `${individualStudentCount()}`, label: 'Taught one to one' },
-              { value: `${METRICS.stages}`, label: 'Stages performed' },
+              { value: `${METRICS.stages}+`, label: 'Stages performed' },
               { value: `${METRICS.countries}`, label: 'Countries with students' },
             ].map((stat) => (
               <div key={stat.label}>

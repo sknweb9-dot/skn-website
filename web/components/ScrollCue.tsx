@@ -28,7 +28,7 @@
  * which costs nothing — it has faded out by 1.2% of scroll progress, and the arch
  * first moves at 10%.
  *
- * Opacity is written by ScrollStage on every tick. Nothing here should set it.
+ * Opacity is written by the home arch on every tick. Nothing here should set it.
  */
 export default function ScrollCue({ ref }: { ref?: React.Ref<HTMLDivElement> }) {
   return (

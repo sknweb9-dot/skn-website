@@ -1,10 +1,11 @@
 'use client';
 
 import { useRef } from 'react';
+import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
-import { useBooking } from './BookingProvider';
+import { BOOK_LABEL, bookHref, type BookPrefill } from '@/lib/booking';
 
-type Variant = 'solid' | 'outline' | 'ghost';
+type Variant = 'solid' | 'outline' | 'ghost' | 'cream';
 
 /**
  * Kumkum red carries the primary action. On a cream ground it is the highest
@@ -12,61 +13,64 @@ type Variant = 'solid' | 'outline' | 'ghost';
  * generic "buy" button — which marigold, being closer to the background in
  * luminance, would not.
  *
- * Hover and active go DARKER, not lighter. The earlier `hover:bg-kumkum-lit`
- * took cream-on-red from 6.86:1 to 5.02:1 — it still passed, but contrast must
- * never drop when someone interacts with a control. These reach 8.83:1 and
- * 9.83:1 instead.
+ * Hover and active go DARKER, not lighter, so contrast never drops when someone
+ * interacts with the control: 6.86:1 at rest, 8.83:1 and 9.83:1 after.
  */
 const VARIANTS: Record<Variant, string> = {
   solid:
     'bg-kumkum text-cream hover:bg-kumkum-hover active:bg-kumkum-active shadow-[0_10px_30px_-12px_rgba(168,32,26,0.55)]',
   outline: 'border border-teal/30 text-teal hover:border-teal/60 hover:bg-teal/5',
   ghost: 'text-teal hover:text-kumkum',
+  // For the deep home grounds, where a kumkum button would sink into
+  // kumkum-deep and fight the others. Teal-deep on cream is 12.1:1.
+  cream: 'bg-cream text-teal-deep hover:bg-silk active:bg-silk-deep',
 };
 
 /**
- * The single conversion control. Every instance opens the same modal and tags
- * itself with a source so we can see which act earns the click.
+ * The single conversion control. Every instance links to /book and tags itself
+ * with a source, so the academy can see which button earned the enquiry.
+ *
+ * It is a link, not a button that opens a modal. The enquiry is now a page of
+ * its own (app/book), which means it can be shared, bookmarked, opened in a new
+ * tab, and reached with JavaScript off. Whatever this button already knows —
+ * "Enquire about Adroit" knows the venue — travels in the query string and is
+ * pre-filled there.
  *
  * ONE NAME FOR ONE ACTION
  * -----------------------
- * The same action used to be called "Book trial", "Book a trial session" and
- * "Schedule a trial session" depending on where you met it. The academy asked
- * for one; the masthead's "Book trial" is it, and it is the default here so a
- * new instance cannot drift. Contextual labels ("Enquire about Adroit") are
- * still passed as children where the button carries extra intent.
+ * The label lives in lib/booking.ts as BOOK_LABEL and is the default here, so a
+ * new instance cannot drift. Contextual labels are still passed as children
+ * where the button carries extra intent.
  *
  * `inline` marks a button that sits in page content. FloatingCta hides while
  * any inline button is on screen, so two booking controls are never shown side
  * by side. The masthead, menu and floating bar pass `inline={false}`.
  */
-export default function TrialButton({
+export default function BookButton({
   source = 'site',
   variant = 'solid',
   className = '',
-  children = 'Book trial',
+  children = BOOK_LABEL,
   showArrow = true,
-  branch,
+  audience,
+  region,
   venue,
   inline = true,
+  onClick,
 }: {
   source?: string;
   variant?: Variant;
   className?: string;
   children?: React.ReactNode;
   showArrow?: boolean;
-  /** Pre-select this branch slug in the form. */
-  branch?: string;
-  /** Pre-select this venue id in the form. */
-  venue?: string;
   inline?: boolean;
-}) {
-  const { open } = useBooking();
-  const ref = useRef<HTMLButtonElement>(null);
+  onClick?: () => void;
+} & Omit<BookPrefill, 'source'>) {
+  const ref = useRef<HTMLAnchorElement>(null);
 
   // Subtle magnetic pull toward the cursor. Skipped for touch and for anyone
   // who has asked for reduced motion.
-  function handleMove(event: React.MouseEvent<HTMLButtonElement>) {
+  function handleMove(event: React.MouseEvent<HTMLAnchorElement>) {
     const el = ref.current;
     if (!el) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce), (pointer: coarse)').matches) return;
@@ -82,11 +86,11 @@ export default function TrialButton({
   }
 
   return (
-    <button
+    <Link
       ref={ref}
-      type="button"
-      onClick={() => open(source, { branch, venue })}
-      data-trial-inline={inline ? '' : undefined}
+      href={bookHref({ source, audience, region, venue })}
+      onClick={onClick}
+      data-book-inline={inline ? '' : undefined}
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
       className={`group inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 font-sans text-sm font-semibold tracking-wide transition-[background-color,color,border-color,transform,box-shadow] duration-300 ${VARIANTS[variant]} ${className}`}
@@ -98,6 +102,6 @@ export default function TrialButton({
           aria-hidden="true"
         />
       ) : null}
-    </button>
+    </Link>
   );
 }

@@ -2,6 +2,20 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   /**
+   * The footage the home arch plays. Not content-hashed, so a day rather than a
+   * year: long enough that a returning visitor does not re-fetch two megabytes,
+   * short enough that a re-cut shows up the next day. Range requests (which the
+   * browser needs to seek) are served by Next's static handler as it is.
+   */
+  headers() {
+    return [
+      {
+        source: '/video/:path*',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=86400, stale-while-revalidate=604800' }],
+      },
+    ];
+  },
+  /**
    * /performances folded into /events.
    *
    * The two pages had come to say the same things — the Udaan hero copy, the

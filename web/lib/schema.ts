@@ -3,6 +3,7 @@ import { TEACHING_PROGRAMMES } from './curriculum';
 import { allBatches, areasTaught, offlineVenuesForCity, venuesForCity } from './classes';
 import { MUDRAS } from './mudras';
 import { PUBLISHABLE_PHOTOS, VIDEOS, videoPoster, youtubeHref } from './events';
+import { BOOK_PATH } from './booking';
 
 /**
  * Schema.org JSON-LD, assembled as a single linked @graph.
@@ -15,7 +16,7 @@ import { PUBLISHABLE_PHOTOS, VIDEOS, videoPoster, youtubeHref } from './events';
  *
  * Emitting a fabricated star rating is structured-data misrepresentation and
  * risks a manual action. Fill it in only from genuine, attributable reviews —
- * see components/Testimonials.tsx.
+ * see VOICES in lib/home.ts.
  *
  * openingHoursSpecification is now derived from real batch timings; see
  * `openingHoursFor`.
@@ -41,7 +42,7 @@ const ID = {
   branch: (slug: string) => `${SITE.url}/locations/${slug}#branch`,
   person: (name: string) => `${SITE.url}/#person-${slugify(name)}`,
   course: (id: string) => `${SITE.url}/#course-${id}`,
-  faq: `${SITE.url}/#faq`,
+  faq: `${SITE.url}${BOOK_PATH}#faq`,
 };
 
 export function slugify(value: string): string {
@@ -257,12 +258,12 @@ function courseNodes() {
      * No `price` here on purpose. The previous build asserted a free trial at
      * price 0, which the academy has never published. An unverified price in
      * Offer markup is exactly the kind of claim that earns a manual action.
+     * No `category` either: it said "Trial session", and there is no trial.
      */
     offers: {
       '@type': 'Offer',
-      category: 'Trial session',
       availability: 'https://schema.org/InStock',
-      url: abs('/#book'),
+      url: abs(BOOK_PATH),
     },
   }));
 }
@@ -300,7 +301,34 @@ export function homeGraph() {
       ...BRANCHES.map(branchNode),
       ...personNodes(),
       ...courseNodes(),
+    ],
+  };
+}
+
+/**
+ * The graph emitted on /book.
+ *
+ * The only page that carries the FAQPage node, because it is the only page
+ * that shows those questions. It used to ride along in homeGraph() on five
+ * routes where no FAQ was visible, which is the mismatch Google's FAQ markup
+ * guidelines rule out.
+ */
+export function bookGraph() {
+  const url = abs(BOOK_PATH);
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      organizationNode(),
+      websiteNode(),
       faqNode(),
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `${url}#breadcrumb`,
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+          { '@type': 'ListItem', position: 2, name: 'Book a session', item: url },
+        ],
+      },
     ],
   };
 }
@@ -457,7 +485,7 @@ export function locationFaqs(branch: Branch): Faq[] {
         venues.length > 1
           ? `We teach at ${venues.length} venues across ${branch.city}: ${venues
               .map((v) => `${v.name}${v.area ? ` (${v.area})` : ''}`)
-              .join(', ')}. The exact venue is shared when your trial is booked.`
+              .join(', ')}. The exact venue is shared once you get in touch.`
           : branch.streetAddress
             ? `Our ${branch.city} school is at ${branch.streetAddress}, ${branch.city} ${branch.postalCode ?? ''}. ${branch.landmarks.length ? `Look for ${branch.landmarks[0]}.` : ''}`.trim()
             : `We teach in ${branch.city}${branch.locality ? ` at ${branch.locality}` : ''}. Write to ${SITE.email} for the current venue and batch timings.`,
@@ -475,7 +503,7 @@ export function locationFaqs(branch: Branch): Faq[] {
     },
     {
       q: `Can my child start Bharatanatyam in ${branch.city} with no experience?`,
-      a: `Yes. Our Introductory Programme assumes nothing at all and takes children from age 3.5, and adults are welcome as beginners too. Bring comfortable clothes to a trial — no costume and no ghungroo needed.`,
+      a: `Yes. Our Introductory Programme assumes nothing at all and takes children from age 3.5, and adults are welcome as beginners too. No costume, no ghungroo and no prior experience are needed to start, and you are welcome to sit in on a class first.`,
     },
   ];
 }

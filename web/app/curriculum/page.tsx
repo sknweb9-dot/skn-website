@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import { PageHero, PageShell, Section } from '@/components/PageShell';
-import TrialButton from '@/components/TrialButton';
+import BookButton from '@/components/BookButton';
 import { ARANGETRAM, CURRICULUM_INTRO, INTRODUCTORY, LEVELS } from '@/lib/curriculum';
 import { SITE } from '@/lib/site';
 import { adultBatches, allBatches, formatBatchTime } from '@/lib/classes';
@@ -196,7 +196,7 @@ export default function CurriculumPage() {
                         {batches.length > 3 ? (
                           <Link
                             href="/locations"
-                            className="mt-3 inline-block font-sans text-[0.78rem] font-medium text-teal hover:underline"
+                            className="mt-1 inline-flex min-h-9 items-center font-sans text-[0.78rem] font-medium text-teal hover:underline"
                           >
                             + {batches.length - 3} more{' '}
                             {batches.length - 3 === 1 ? 'batch' : 'batches'} elsewhere
@@ -280,7 +280,7 @@ export default function CurriculumPage() {
             ))}
           </ul>
           <div className="mt-8">
-            <TrialButton source="curriculum-adults">Enquire about adult batches</TrialButton>
+            <BookButton source="curriculum-adults" audience="adult">Enquire about adult batches</BookButton>
           </div>
         </Section>
       ) : null}

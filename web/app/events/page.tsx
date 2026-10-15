@@ -4,7 +4,7 @@ import JsonLd from '@/components/JsonLd';
 import EventGallery from '@/components/EventGallery';
 import InstagramRail from '@/components/InstagramRail';
 import { PageShell, PageHero, QuietLink, Section } from '@/components/PageShell';
-import TrialButton from '@/components/TrialButton';
+import BookButton from '@/components/BookButton';
 import VideoFacade from '@/components/VideoFacade';
 import {
   EVENTS_META,
@@ -267,11 +267,11 @@ export default async function EventsPage() {
           <div className="max-w-xl">
             <p className="max-w-measure text-[1rem] leading-relaxed text-ink-soft">
               Long before a stage, there is a room with a wooden floor and a
-              teacher counting aloud. That is the part worth seeing, and it is the
-              part a trial session shows you.
+              teacher counting aloud. That is the part worth seeing, and you are
+              welcome to sit in on a class to see it.
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-3">
-              <TrialButton source="events-studio" />
+              <BookButton source="events-studio" />
             </div>
           </div>
         </div>
@@ -288,7 +288,7 @@ export default async function EventsPage() {
             Come and watch the class that gets them there.
           </p>
           <div className="mt-7 flex flex-wrap items-center gap-3">
-            <TrialButton source="events-footer" />
+            <BookButton source="events-footer" />
           </div>
         </div>
       </Section>

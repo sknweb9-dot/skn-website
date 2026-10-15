@@ -35,7 +35,7 @@
  * 1920-logical retina desktop needs ~966 device px and 720 under-resolved it.
  *
  * The order is the canonical Abhinaya Darpana sequence of 28 asamyuta hastas.
- * Spellings here are canonical for the codebase — lib/acts.ts resolves anchors
+ * Spellings here are canonical for the codebase — lib/home.ts resolves its sections' gestures
  * by exact name, and three differ from the reference guide (Padmakōśa,
  * Kāṅgūla, Sandaṃśa).
  */
@@ -56,7 +56,7 @@ export const FRAME_HEIGHT = 1198;
  * Aspect ratio of the plate.
  *
  * The whole plate is visible now, so this is just the frame ratio. It is kept as
- * a named export because StaticActs and the /hastas page size their stills by
+ * a named export because the home arch and the /hastas page size their stills by
  * it, and because --arch-ratio in globals.css must stay in step with it.
  */
 export const VISIBLE_RATIO = FRAME_WIDTH / FRAME_HEIGHT;
@@ -550,8 +550,8 @@ export const FEATURED_MUDRAS = MUDRAS.filter((m) => m.featured);
  * reference guide at 6fps. That is only true while the extraction is 6fps over
  * 54s. A re-extraction at another density would leave every range silently
  * pointing at the wrong gesture — the homepage would caption the hand
- * incorrectly and the act anchors in lib/acts.ts would drift with it, which is
- * exactly the class of bug the checker there exists to catch.
+ * incorrectly and the home sections' gestures in lib/home.ts would drift with it,
+ * which is exactly the class of bug the checks there exist to catch.
  *
  * So assert the invariant directly: the 28 ranges must tile 1..FRAME_COUNT with
  * no gap and no overlap. If this throws, rerun _research/extract_frames.ps1 and
@@ -586,7 +586,7 @@ export const VERSE_MUDRAS = MUDRAS.filter((m) => m.verse);
  * The gesture's frame range on the live sequence, 1-indexed and inclusive.
  *
  * frameStart/frameEnd are already live frame numbers, so this is now a plain
- * accessor. It is kept because ScrollStage, StaticActs and the /hastas page all
+ * accessor. It is kept because the home arch and the /hastas page all
  * call it, and because it is the right place to put any future remap if the
  * extraction density ever stops being 6fps.
  */
@@ -618,4 +618,10 @@ export function mudraByName(name: string): Mudra {
   const found = MUDRAS.find((m) => m.name === name);
   if (!found) throw new Error(`Unknown mudra: ${name}`);
   return found;
+}
+
+/** Which gesture a (possibly fractional) frame number falls in. */
+export function mudraAtFrame(frame: number): Mudra {
+  const f = Math.min(FRAME_COUNT, Math.max(1, Math.round(frame)));
+  return MUDRAS.find((m) => f >= m.frameStart && f <= m.frameEnd) ?? MUDRAS[0];
 }

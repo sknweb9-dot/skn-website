@@ -1,34 +1,56 @@
 /**
- * Shape and presentation of a trial-session enquiry.
+ * Presentation of an admissions enquiry, as the email the academy reads.
  *
- * The route validates; this module turns a validated enquiry into the mail the
- * academy actually reads. Kept separate from the transport in ./mail.ts so the
- * formatting can be exercised without sending anything.
+ * The route validates (with the shared rules in ./booking.ts); this module turns
+ * a validated enquiry into mail. Kept separate from the transport in ./mail.ts
+ * so the formatting can be exercised without sending anything.
  *
  * The email is built for Gmail on a phone, because that is where it will be
  * opened. Hence table layout with inline styles rather than the site's Tailwind
  * classes, no external images, no web fonts, and a plain-text alternative that
  * carries every field. Colours are the site tokens from app/globals.css so the
  * mail reads as the academy's own.
+ *
+ * WhatsApp is how the academy follows up, so when the parent says their number
+ * is on WhatsApp the primary button opens a chat with them, not a call.
  */
 
-import { branchBySlug, SITE } from './site';
-import { VENUES } from './classes';
+import { SITE } from './site';
+import { formatDays, type Weekday } from './classes';
+import {
+  batchTimeLabel,
+  parentWhatsappDigits,
+  REGION_LABELS,
+  venueLabel,
+  type Audience,
+  type BatchOption,
+  type CallTime,
+  type CommunitySize,
+  type Experience,
+  type Region,
+} from './booking';
 
 export type Enquiry = {
-  parentName: string;
+  audience: Audience;
+  /** The flow's one-sentence summary, recomputed on the server. */
+  summary: string;
   studentName: string;
-  age: number;
-  /** Branch slug, or 'online' */
-  branch: string;
-  /** Venue id from lib/classes.ts, or '' when the parent left it to us */
-  venue: string;
-  /** Programme label chosen in the form. Empty when the parent asked us to advise. */
-  stage: string;
+  /** Child's age; null for adults and communities. */
+  age: number | null;
+  experience: Experience | null;
+  experienceNote: string;
+  region: Region | null;
+  /** The batch they picked, resolved and confirmed open. Null for "suggest one". */
+  batch: BatchOption | null;
+  days: Weekday[];
+  community: { name: string; area: string; size: CommunitySize; ages: string } | null;
+  name: string;
   phone: string;
+  whatsapp: boolean;
   email: string;
+  callTime: CallTime | '';
   message: string;
-  /** Which CTA opened the modal, e.g. 'floating-cta', 'act-3', 'site' */
+  /** Which button brought them to /book, e.g. 'nav', 'venue-adroit' */
   source: string;
   receivedAt: Date;
 };
@@ -44,9 +66,7 @@ const C = {
   marigold: '#EC9A29',
   ink: '#2B1E16',
   inkSoft: '#5C4A3D',
-  // Mirrors --color-ink-faint. Was #8A7565 (4.11:1 on cream, failing AA) and
-  // was left behind when the site token moved; these labels sit on white and
-  // on silk, where #6F5B4D measures 6.3:1 and 5.4:1.
+  // Mirrors --color-ink-faint: 6.3:1 on white, 5.4:1 on silk.
   inkFaint: '#6F5B4D',
 } as const;
 
@@ -71,19 +91,8 @@ function telHref(phone: string): string {
   return phone.replace(/[^+\d]/g, '');
 }
 
-/** Human branch name. The form posts slugs; the academy thinks in place names. */
-export function branchLabel(slug: string): string {
-  if (slug === 'online') return 'Online / elsewhere';
-  const branch = branchBySlug(slug);
-  if (!branch) return slug || 'Not specified';
-  return branch.locality ? `${branch.label} — ${branch.locality}` : branch.label;
-}
-
-/** Venue name for the mail, or the fallback when none was chosen. */
-export function venueLabel(id: string): string {
-  const venue = VENUES.find((v) => v.id === id);
-  if (!venue) return 'Any — suggest the nearest';
-  return venue.area ? `${venue.name}, ${venue.area}` : venue.name;
+function waHref(enquiry: Enquiry): string {
+  return `https://wa.me/${parentWhatsappDigits(enquiry.phone, enquiry.region)}`;
 }
 
 /** The academy runs on IST, so the timestamp is stated in IST and labelled. */
@@ -101,15 +110,60 @@ export function formatReceived(date: Date): string {
   return `${formatted} IST`;
 }
 
-/**
- * Which CTA opened the modal, tidied for reading. The form posts slugs like
- * 'curriculum-hero' or 'floating', so this is deliberately a light touch: the
- * academy should see roughly which button was pressed, not a guessed sentence.
- */
+/** Which button brought them here, tidied for reading. Deliberately light-touch. */
 function sourceLabel(source: string): string {
   const cleaned = source.replace(/[-_]+/g, ' ').trim();
   if (!cleaned || cleaned === 'site') return 'Unspecified';
   return cleaned.charAt(0).toUpperCase() + cleaned.slice(1);
+}
+
+const AUDIENCE_LABEL: Record<Audience, string> = {
+  child: 'Admission — child',
+  adult: 'Admission — adult',
+  community: 'New community batch',
+};
+
+function experienceLabel(enquiry: Enquiry): string {
+  if (enquiry.experience === 'none') return 'Beginner';
+  if (enquiry.experience === 'some') {
+    return enquiry.experienceNote ? `Has trained before — ${enquiry.experienceNote}` : 'Has trained before';
+  }
+  return 'Not stated';
+}
+
+function batchLabel(enquiry: Enquiry): string {
+  if (!enquiry.batch) return 'None chosen — suggest one';
+  const { venue, batch, programme } = enquiry.batch;
+  return `${batch.code} · ${programme.label} · ${venueLabel(venue)} · ${batchTimeLabel(batch)}`;
+}
+
+/** Label/value pairs, in reading order, shared by the HTML and text bodies. */
+function fields(enquiry: Enquiry): [string, string][] {
+  const rows: [string, string][] = [
+    [enquiry.audience === 'child' ? 'Parent / guardian' : 'Name', enquiry.name],
+    ['Phone', `${enquiry.phone}${enquiry.whatsapp ? ' (WhatsApp)' : ' (not on WhatsApp — call)'}`],
+  ];
+  if (enquiry.email) rows.push(['Email', enquiry.email]);
+  rows.push(['Best time to reach', enquiry.callTime || 'Any time']);
+
+  if (enquiry.community) {
+    rows.push(
+      ['Community', enquiry.community.name],
+      ['Area', enquiry.community.area],
+      ['Children interested', enquiry.community.size],
+    );
+    if (enquiry.community.ages) rows.push(['Their ages', enquiry.community.ages]);
+    return rows;
+  }
+
+  if (enquiry.audience === 'child') {
+    rows.push(['Student', `${enquiry.studentName}, age ${enquiry.age ?? '?'}`]);
+  }
+  rows.push(['Experience', experienceLabel(enquiry)]);
+  if (enquiry.region) rows.push(['Where', REGION_LABELS[enquiry.region].title]);
+  rows.push(['Preferred batch', batchLabel(enquiry)]);
+  if (enquiry.days.length) rows.push(['Days that suit', formatDays(enquiry.days)]);
+  return rows;
 }
 
 // --- subject ---------------------------------------------------------------
@@ -119,35 +173,48 @@ function sourceLabel(source: string): string {
  * first forty characters survive.
  */
 export function enquirySubject(enquiry: Enquiry): string {
-  const branch = enquiry.branch === 'online' ? 'Online' : (branchBySlug(enquiry.branch)?.label ?? 'Enquiry');
-  return `Trial enquiry · ${enquiry.studentName} (${enquiry.age}) · ${branch}`;
+  if (enquiry.community) return `Community batch · ${enquiry.community.name} · ${enquiry.community.size}`;
+  const who = enquiry.audience === 'child' ? `${enquiry.studentName} (${enquiry.age ?? '?'})` : `${enquiry.name} (adult)`;
+  const where = enquiry.batch
+    ? enquiry.batch.batch.code
+    : enquiry.region
+      ? REGION_LABELS[enquiry.region].title
+      : 'No batch chosen';
+  return `Admission enquiry · ${who} · ${where}`;
 }
 
 // --- HTML ------------------------------------------------------------------
 
-function row(label: string, valueHtml: string, opts: { first?: boolean } = {}): string {
-  const border = opts.first ? 'none' : `1px solid ${C.silk}`;
+function row(label: string, valueHtml: string, first: boolean): string {
+  const border = first ? 'none' : `1px solid ${C.silk}`;
   return `
           <tr>
-            <th align="left" valign="top" style="width:34%;padding:12px 16px 12px 0;border-top:${border};font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:${C.inkFaint};">${label}</th>
+            <th align="left" valign="top" style="width:34%;padding:12px 16px 12px 0;border-top:${border};font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:${C.inkFaint};">${esc(label)}</th>
             <td valign="top" style="padding:12px 0;border-top:${border};font-family:'Helvetica Neue',Arial,sans-serif;font-size:15px;line-height:1.5;color:${C.ink};">${valueHtml}</td>
           </tr>`;
 }
 
-export function enquiryHtml(enquiry: Enquiry): string {
-  const parent = esc(enquiry.parentName);
-  const student = esc(enquiry.studentName);
-  const branch = esc(branchLabel(enquiry.branch));
-  const venue = esc(venueLabel(enquiry.venue));
-  const stage = enquiry.stage ? esc(enquiry.stage) : 'Not sure — asked us to advise';
-  const phone = esc(enquiry.phone);
-  const phoneUri = esc(telHref(enquiry.phone));
-  const email = esc(enquiry.email);
-  const received = esc(formatReceived(enquiry.receivedAt));
-  const source = esc(sourceLabel(enquiry.source));
+function button(href: string, text: string, solid: boolean): string {
+  const style = solid
+    ? `background:${C.kumkum};color:${C.cream};`
+    : `background:#FFFFFF;color:${C.teal};border:1px solid ${C.teal};`;
+  return `<a href="${href}" style="display:inline-block;margin:0 8px 8px 0;padding:13px 24px;${style}font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;font-weight:600;text-decoration:none;">${text}</a>`;
+}
 
+export function enquiryHtml(enquiry: Enquiry): string {
+  const name = esc(enquiry.name);
+  const phoneUri = esc(telHref(enquiry.phone));
   const link = (href: string, text: string) =>
     `<a href="${href}" style="color:${C.teal};text-decoration:none;border-bottom:1px solid ${C.marigold};">${text}</a>`;
+
+  const rows = fields(enquiry)
+    .map(([label, value], i) => {
+      let html = esc(value);
+      if (label === 'Phone') html = link(`tel:${phoneUri}`, esc(value));
+      if (label === 'Email') html = link(`mailto:${esc(value)}`, esc(value));
+      return row(label, html, i === 0);
+    })
+    .join('');
 
   const messageBlock = enquiry.message
     ? `
@@ -159,6 +226,10 @@ export function enquiryHtml(enquiry: Enquiry): string {
       </tr>`
     : '';
 
+  const actions = enquiry.whatsapp
+    ? button(esc(waHref(enquiry)), `WhatsApp ${name}`, true) + button(`tel:${phoneUri}`, 'Call', false)
+    : button(`tel:${phoneUri}`, `Call ${name}`, true);
+
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -168,7 +239,7 @@ export function enquiryHtml(enquiry: Enquiry): string {
 </head>
 <body style="margin:0;padding:0;background:${C.cream};">
   <!-- Preheader: the grey line Gmail shows next to the subject. -->
-  <div style="display:none;max-height:0;overflow:hidden;opacity:0;">${student}, age ${enquiry.age}, for ${branch}. Call ${phone}.</div>
+  <div style="display:none;max-height:0;overflow:hidden;opacity:0;">${esc(enquiry.summary)}</div>
 
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${C.cream};">
     <tr>
@@ -177,22 +248,15 @@ export function enquiryHtml(enquiry: Enquiry): string {
 
           <tr>
             <td style="padding:26px 28px 22px;background:${C.tealDeep};border-bottom:3px solid ${C.marigold};">
-              <p style="margin:0;font-family:'Helvetica Neue',Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:${C.marigold};">Trial session request</p>
-              <h1 style="margin:8px 0 0;font-family:Georgia,'Times New Roman',serif;font-size:24px;font-weight:normal;line-height:1.25;color:${C.cream};">${student}, age ${enquiry.age}</h1>
-              <p style="margin:6px 0 0;font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;color:rgba(251,248,241,.75);">for ${branch}</p>
+              <p style="margin:0;font-family:'Helvetica Neue',Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:${C.marigold};">${esc(AUDIENCE_LABEL[enquiry.audience])}</p>
+              <h1 style="margin:8px 0 0;font-family:Georgia,'Times New Roman',serif;font-size:22px;font-weight:normal;line-height:1.3;color:${C.cream};">${esc(enquiry.summary)}</h1>
             </td>
           </tr>
 
           <tr>
             <td style="padding:6px 28px 10px;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
-                ${row('Parent / guardian', parent, { first: true })}
-                ${row('Phone', link(`tel:${phoneUri}`, phone))}
-                ${row('Email', link(`mailto:${email}`, email))}
-                ${row('Student', `${student} · age ${enquiry.age}`)}
-                ${row('Nearest branch', branch)}
-                ${row('Venue', venue)}
-                ${row('Would start at', stage)}
+                ${rows}
               </table>
             </td>
           </tr>
@@ -201,22 +265,16 @@ export function enquiryHtml(enquiry: Enquiry): string {
 
           <tr>
             <td style="padding:0 28px 28px;">
-              <table role="presentation" cellpadding="0" cellspacing="0" border="0">
-                <tr>
-                  <td style="background:${C.kumkum};">
-                    <a href="tel:${phoneUri}" style="display:inline-block;padding:13px 26px;font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;font-weight:600;color:${C.cream};text-decoration:none;">Call ${parent}</a>
-                  </td>
-                </tr>
-              </table>
-              <p style="margin:12px 0 0;font-family:'Helvetica Neue',Arial,sans-serif;font-size:13px;line-height:1.5;color:${C.inkSoft};">Replying to this email answers ${parent} directly. The site promises a call within one working day.</p>
+              ${actions}
+              <p style="margin:6px 0 0;font-family:'Helvetica Neue',Arial,sans-serif;font-size:13px;line-height:1.5;color:${C.inkSoft};">The site tells them to expect a message within one working day, and that they may sit in on an ongoing class once it is arranged.${enquiry.email ? ` Replying to this email answers ${name} directly.` : ''}</p>
             </td>
           </tr>
 
           <tr>
             <td style="padding:16px 28px;background:${C.cream};border-top:1px solid ${C.silk};">
               <p style="margin:0;font-family:'Helvetica Neue',Arial,sans-serif;font-size:12px;line-height:1.6;color:${C.inkFaint};">
-                Received ${received}<br>
-                Button: ${source} · <a href="${SITE.url}" style="color:${C.inkFaint};">${esc(SITE.url.replace(/^https?:\/\//, ''))}</a>
+                Received ${esc(formatReceived(enquiry.receivedAt))}<br>
+                Button: ${esc(sourceLabel(enquiry.source))} · <a href="${SITE.url}" style="color:${C.inkFaint};">${esc(SITE.url.replace(/^https?:\/\//, ''))}</a>
               </p>
             </td>
           </tr>
@@ -232,30 +290,25 @@ export function enquiryHtml(enquiry: Enquiry): string {
 // --- plain text ------------------------------------------------------------
 
 export function enquiryText(enquiry: Enquiry): string {
+  const heading = AUDIENCE_LABEL[enquiry.audience].toUpperCase();
+  const width = Math.max(...fields(enquiry).map(([label]) => label.length)) + 2;
   const lines = [
-    'TRIAL SESSION REQUEST',
-    '=====================',
+    heading,
+    '='.repeat(heading.length),
     '',
-    `Student        ${enquiry.studentName}, age ${enquiry.age}`,
-    `Branch         ${branchLabel(enquiry.branch)}`,
-    `Venue          ${venueLabel(enquiry.venue)}`,
-    `Would start at ${enquiry.stage || 'Not sure — asked us to advise'}`,
+    enquiry.summary,
     '',
-    `Parent         ${enquiry.parentName}`,
-    `Phone          ${enquiry.phone}`,
-    `Email          ${enquiry.email}`,
+    ...fields(enquiry).map(([label, value]) => `${label.padEnd(width)}${value}`),
   ];
 
-  if (enquiry.message) {
-    lines.push('', 'What they told us', '-----------------', enquiry.message);
-  }
+  if (enquiry.whatsapp) lines.push('', `WhatsApp: ${waHref(enquiry)}`);
+  if (enquiry.message) lines.push('', 'What they told us', '-----------------', enquiry.message);
 
   lines.push(
     '',
     '---',
     `Received ${formatReceived(enquiry.receivedAt)}`,
     `Button   ${sourceLabel(enquiry.source)} · ${SITE.url}`,
-    'Reply to this email to answer the parent directly.',
   );
 
   return lines.join('\n');

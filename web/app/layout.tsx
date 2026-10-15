@@ -5,7 +5,6 @@ import { SITE } from '@/lib/site';
 import SmoothScroll from '@/components/SmoothScroll';
 import HashScroll from '@/components/HashScroll';
 import CurtainObserver from '@/components/CurtainObserver';
-import { BookingProvider } from '@/components/BookingProvider';
 import { AmbientProvider } from '@/components/AmbientProvider';
 
 const cinzel = Cinzel({
@@ -67,7 +66,7 @@ const body = Mukta({
 
 const TITLE = 'Bharatanatyam Dance Academy in Chennai | Shanti Kala Nikketan';
 const DESCRIPTION =
-  'Kalakshetra-style Bharatanatyam taught the Gurukulam way at five venues across Chennai — Thiruvanmiyur, Sholinganallur and Medavakkam — since 2009. An introductory programme from age 3.5, six graded levels to Arangetram, adults batches, and a branch in Scarborough, Canada. Book a trial session.';
+  'Kalakshetra-style Bharatanatyam taught the Gurukulam way at five venues across Chennai — Thiruvanmiyur, Sholinganallur and Medavakkam — since 2009. An introductory programme from age 3.5, six graded levels to Arangetram, adults batches, and a branch in Scarborough, Canada. Book a session.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -169,15 +168,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
-        <BookingProvider>
-          <AmbientProvider>
-            <SmoothScroll>
-              <HashScroll />
-              <CurtainObserver />
-              {children}
-            </SmoothScroll>
-          </AmbientProvider>
-        </BookingProvider>
+        <AmbientProvider>
+          <SmoothScroll>
+            <HashScroll />
+            <CurtainObserver />
+            {children}
+          </SmoothScroll>
+        </AmbientProvider>
       </body>
     </html>
   );

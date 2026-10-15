@@ -204,7 +204,7 @@ export default function EventGallery() {
     };
   }, [open, selected, closeGallery, requestClose]);
 
-  // Scroll lock and focus, following BookingModal and MobileMenu.
+  // Scroll lock and focus, following MobileMenu.
   useEffect(() => {
     if (!open) return;
 
