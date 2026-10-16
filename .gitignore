@@ -31,17 +31,22 @@ venv/
 # the history too, run: git rm -r --cached .playwright-mcp
 /.playwright-mcp/
 
-# --- Vendored skills -------------------------------------------------------
-# .kiro/skills/ IS committed (~6 MB). It is the project's design toolchain, all
-# three upstreams are permissively licensed, and the skills cannot function
-# without their bundled data — ui-ux-pro-max is a searchable database, not prose.
-# See .kiro/skills/NOTICES.md for attribution.
+# --- Kiro workspace ---------------------------------------------------------
+# .kiro/ is machine-local and nothing in it belongs in the repository. The agent
+# definitions carry this machine's absolute paths (the Open Design launcher is
+# invoked at C:\Users\<you>\.kiro\bin\open-design-mcp.ps1, and the sidecar pipe
+# name is regenerated per install), and the vendored skills are a toolchain, not
+# source.
 #
-# Only runtime scratch is excluded. impeccable's launcher caches its engine
-# binary outside the repo, so nothing is needed for that.
-/.kiro/skills/**/__pycache__/
-/.kiro/skills/**/*.pyc
-/.kiro/skills/impeccable/scripts/bin/
+# It WAS committed — agents, steering and ~6 MB of skills — so all of it stays
+# retrievable in history up to and including 3f32df0. Untracking is enough for
+# anything after this point; only a history rewrite would reach into the past,
+# and that is not worth changing every commit SHA on main for.
+#
+# Nothing is lost on disk: the untracking was `git rm --cached`, so the files
+# are still here. Upstream licences and attribution for the skills are recorded
+# in .kiro/skills/NOTICES.md, on disk.
+/.kiro/
 
 # --- Editor and OS noise ---------------------------------------------------
 .DS_Store
