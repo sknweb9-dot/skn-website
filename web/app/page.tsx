@@ -33,8 +33,12 @@ export const revalidate = 86400;
  * HomeStage uses, so a desktop visitor's first frame is already the stage and
  * does not jump from a stacked page. With script off this never runs and the
  * page is the stacked layout. HomeStage keeps the attribute honest afterwards.
+ *
+ * On the stage it also sets html[data-intro="wait"], which holds the hero's
+ * text on its first frame until the loading screen clears (FramePreloader
+ * removes it). The timeout is the way out if that never happens.
  */
-const STAGE_FLAG = `var d=document.documentElement,c=navigator.connection,s=c&&(c.saveData||c.effectiveType==='slow-2g'||c.effectiveType==='2g');if(matchMedia(${JSON.stringify(STAGE_QUERY)}).matches)d.dataset.stage='on';else if(!s&&matchMedia(${JSON.stringify(RAIL_QUERY)}).matches)d.dataset.stage='rail'`;
+const STAGE_FLAG = `var d=document.documentElement,c=navigator.connection,s=c&&(c.saveData||c.effectiveType==='slow-2g'||c.effectiveType==='2g');if(matchMedia(${JSON.stringify(STAGE_QUERY)}).matches){d.dataset.stage='on';d.dataset.intro='wait';setTimeout(function(){delete d.dataset.intro},14000)}else if(!s&&matchMedia(${JSON.stringify(RAIL_QUERY)}).matches)d.dataset.stage='rail'`;
 
 export default function HomePage() {
   return (

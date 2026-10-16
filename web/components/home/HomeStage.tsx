@@ -115,11 +115,35 @@ export default function HomeStage({ children }: { children: ReactNode }) {
       delete root.dataset.stage;
       delete root.dataset.stageLive;
     }
+    // The hero's text waits for the loading screen, which only the stage has
+    // (FramePreloader clears this when it goes). First loads are covered by the
+    // inline script in app/page.tsx; this is the client-side arrival, where that
+    // script does not run. During hydration `mode` is briefly null even on a
+    // desktop, so only let go of the hold if the stage is really not wanted.
+    let failsafe: number | undefined;
+    if (mode === 'on') {
+      if (!root.dataset.intro) {
+        root.dataset.intro = 'wait';
+        failsafe = window.setTimeout(() => delete root.dataset.intro, 14000);
+      }
+    } else if (failed || !window.matchMedia(STAGE_QUERY).matches) {
+      delete root.dataset.intro;
+    }
     return () => {
+      window.clearTimeout(failsafe);
       delete root.dataset.stage;
       delete root.dataset.stageLive;
     };
-  }, [mode]);
+  }, [mode, failed]);
+
+  // Leaving the page must never leave the hold behind: the next route's
+  // headline would sit on its first frame for good.
+  useEffect(() => {
+    const root = document.documentElement;
+    return () => {
+      delete root.dataset.intro;
+    };
+  }, []);
 
   return (
     <div ref={trackRef} className="home-track">

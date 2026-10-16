@@ -94,6 +94,17 @@ look at. Treat it as a question for the site owner, not a licence to strip them.
   between OKLCH hue 170 and 245 read as teal, which was rejected; keep blues at
   hue 255 and above.
 
+- **Text motion** is two paths, one look (`web/components/TextMotion.tsx`,
+  `web/components/Words.tsx`, the "Text motion" block in `globals.css`). The first
+  screen of each route plays from CSS at first paint (`tx-*-l` classes with
+  `data-tx-static`, used by `PageHero`, `/book` and the home hero; the home hero
+  is held by `html[data-intro]` until the loader clears). Everything below the
+  fold is lowered by `TextMotion` only while it is off-screen, and raised by an
+  IntersectionObserver plus a sweep. On the stage it replays per page, off
+  `data-state`. Opt out with `data-tx-skip`; the gallery route is skipped. Keep
+  the contract: nothing is hidden by CSS alone, and reduced motion fades only.
+  Use `data-count` on a numeral to count it up.
+
 ## Licensing
 
 Vendored skills carry their own licences — Apache 2.0 for `impeccable` and

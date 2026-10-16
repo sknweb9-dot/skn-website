@@ -88,7 +88,7 @@ export default function Footer() {
                     href={route.href}
                     className="inline-block py-1.5 text-sm text-cream/80 transition-colors hover:text-cream"
                   >
-                    {route.label}
+                    <span className="link-draw">{route.label}</span>
                   </Link>
                 </li>
               ))}

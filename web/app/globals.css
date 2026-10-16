@@ -796,6 +796,22 @@ html.lenis body {
     0 24px 60px -30px color-mix(in oklab, var(--color-teal-deep) 45%, transparent);
 }
 
+/* A text link's underline, drawn in from the left on hover and focus. The line
+   is a background, so it follows the text across wraps and takes its colour
+   from the link (marigold on the deep band, where it is the only accent). */
+@utility link-draw {
+  background-image: linear-gradient(var(--color-marigold), var(--color-marigold));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 1px;
+  padding-bottom: 2px;
+  transition: background-size 0.5s var(--ease-temple);
+  a:hover > &,
+  a:focus-visible > & {
+    background-size: 100% 1px;
+  }
+}
+
 /* Marigold hairline that fades at both ends — section divider. */
 @utility rule-fade {
   height: 1px;
@@ -950,6 +966,250 @@ html.lenis body {
   .curtain[data-curtain='down'] > * {
     clip-path: inset(100% 0 0 0);
     transform: scale(1.035);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Text motion.
+
+   Text is unveiled, in three voices, so the page is not one effect repeated:
+
+     words   (h1, h2)   each word is lifted out from behind a lintel, like a
+                        line of verse being read aloud, one word at a time
+     ink     (eyebrows) a left-to-right wipe, as if the line were being written
+     sweep   (the rest) a soft edge travels down the block, a few lines at a
+                        time, so a paragraph arrives in reading order
+
+   Two ways in, one look:
+     - FIRST SCREEN, by CSS at first paint: .tx-wl / .tx-ink-l / .tx-sweep-l /
+       .tx-rise-l, keyframes, `backwards` fill, so nothing waits for hydration
+       and nothing stays changed afterwards. components/PageShell.tsx and the
+       home hero use them.
+     - EVERYTHING BELOW, by components/TextMotion.tsx, which sets
+       [data-tx] (the voice) and [data-tx-state] (down, then up) on text that
+       is still below the fold, and removes both once it has arrived.
+
+   Nothing here hides anything on its own. The [data-tx-state] rules only match
+   after the script has put the attribute there.
+
+   The masks are the point of the sweep and the wipe. A mask is stationary in
+   the element's box while its image slides, so the edge is soft and always the
+   same size (2.6em, about a line and a half) however long the block is. The
+   gradient's stops are written in em so they resolve on the element that uses
+   them, not on :root.
+--------------------------------------------------------------------------- */
+:root {
+  --tx-mask-y: linear-gradient(to bottom, #000 calc(50% - 1.3em), transparent calc(50% + 1.3em));
+  --tx-mask-x: linear-gradient(to right, #000 calc(50% - 1.1em), transparent calc(50% + 1.1em));
+}
+
+/* Words. Shared by the server-rendered headline (components/Words.tsx) and the
+   one the engine builds. The clip's padding gives accents and descenders room;
+   the equal negative margin keeps it out of the line's height. */
+.tx-w {
+  display: inline-block;
+  vertical-align: top;
+  padding: 0.3em 0.06em 0.22em;
+  margin: -0.3em -0.06em -0.22em;
+}
+.tx-wi {
+  display: inline-block;
+}
+.tx-wl .tx-w,
+[data-tx='word'][data-tx-state] .tx-w {
+  overflow: hidden;
+}
+
+/* --- Below the fold: transitions, driven by [data-tx-state] ---------------- */
+
+[data-tx='word'][data-tx-state] .tx-wi {
+  transition:
+    transform 1s var(--ease-temple),
+    opacity 0.45s var(--ease-temple);
+  transition-delay: calc(var(--tx-d, 0s) + var(--i, 0) * 70ms);
+}
+[data-tx='word'][data-tx-state='down'] .tx-wi {
+  transform: translateY(115%);
+  opacity: 0;
+}
+[data-tx='word'][data-tx-state='up'] .tx-wi {
+  transform: none;
+  opacity: 1;
+}
+
+[data-tx='sweep'][data-tx-state] {
+  mask-image: var(--tx-mask-y);
+  -webkit-mask-image: var(--tx-mask-y);
+  mask-size: 100% calc(200% + 2.6em);
+  -webkit-mask-size: 100% calc(200% + 2.6em);
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  transition-property: opacity, translate, mask-position, -webkit-mask-position;
+  transition-duration: 0.5s, 1s, 1s, 1s;
+  transition-timing-function: var(--ease-temple);
+  transition-delay: var(--tx-d, 0s);
+}
+[data-tx='sweep'][data-tx-state='down'] {
+  opacity: 0;
+  translate: 0 0.6em;
+  mask-position: 0 100%;
+  -webkit-mask-position: 0 100%;
+}
+[data-tx='sweep'][data-tx-state='up'] {
+  opacity: 1;
+  translate: 0 0;
+  mask-position: 0 0;
+  -webkit-mask-position: 0 0;
+}
+
+/* The wipe runs along the text, so the box shrinks to the text while it plays
+   (and a centred line keeps its place). Removed with the state, at which point
+   the block is the same width again. */
+[data-tx='ink'][data-tx-state] {
+  width: fit-content;
+  mask-image: var(--tx-mask-x);
+  -webkit-mask-image: var(--tx-mask-x);
+  mask-size: calc(200% + 2.2em) 100%;
+  -webkit-mask-size: calc(200% + 2.2em) 100%;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  transition-property: opacity, translate, mask-position, -webkit-mask-position;
+  transition-duration: 0.45s, 0.9s, 0.9s, 0.9s;
+  transition-timing-function: var(--ease-temple);
+  transition-delay: var(--tx-d, 0s);
+}
+[data-tx='ink'][data-tx-center] {
+  margin-inline: auto;
+}
+[data-tx='ink'][data-tx-state='down'] {
+  opacity: 0;
+  translate: -0.5em 0;
+  mask-position: 100% 0;
+  -webkit-mask-position: 100% 0;
+}
+[data-tx='ink'][data-tx-state='up'] {
+  opacity: 1;
+  translate: 0 0;
+  mask-position: 0 0;
+  -webkit-mask-position: 0 0;
+}
+
+/* --- First screen: keyframes, at first paint -------------------------------- */
+
+@keyframes tx-word {
+  from {
+    transform: translateY(115%);
+    opacity: 0;
+  }
+}
+@keyframes tx-sweep {
+  from {
+    opacity: 0;
+    translate: 0 0.6em;
+    mask-image: var(--tx-mask-y);
+    -webkit-mask-image: var(--tx-mask-y);
+    mask-size: 100% calc(200% + 2.6em);
+    -webkit-mask-size: 100% calc(200% + 2.6em);
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    mask-position: 0 100%;
+    -webkit-mask-position: 0 100%;
+  }
+  40% {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+    mask-image: var(--tx-mask-y);
+    -webkit-mask-image: var(--tx-mask-y);
+    mask-size: 100% calc(200% + 2.6em);
+    -webkit-mask-size: 100% calc(200% + 2.6em);
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    mask-position: 0 0;
+    -webkit-mask-position: 0 0;
+  }
+}
+@keyframes tx-ink {
+  from {
+    opacity: 0;
+    translate: -0.5em 0;
+    mask-image: var(--tx-mask-x);
+    -webkit-mask-image: var(--tx-mask-x);
+    mask-size: calc(200% + 2.2em) 100%;
+    -webkit-mask-size: calc(200% + 2.2em) 100%;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    mask-position: 100% 0;
+    -webkit-mask-position: 100% 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+    mask-image: var(--tx-mask-x);
+    -webkit-mask-image: var(--tx-mask-x);
+    mask-size: calc(200% + 2.2em) 100%;
+    -webkit-mask-size: calc(200% + 2.2em) 100%;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    mask-position: 0 0;
+    -webkit-mask-position: 0 0;
+  }
+}
+@keyframes tx-rise {
+  from {
+    opacity: 0;
+    translate: 0 0.9rem;
+  }
+}
+@keyframes tx-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+/* --tx-base is where in the sequence each piece starts. */
+.tx-wl .tx-wi {
+  animation: tx-word 1.05s var(--ease-temple) backwards;
+  animation-delay: calc(var(--tx-base, 0.1s) + var(--i, 0) * 70ms);
+}
+.tx-sweep-l {
+  animation: tx-sweep 1s var(--ease-temple) backwards;
+  animation-delay: var(--tx-base, 0s);
+}
+.tx-ink-l {
+  animation: tx-ink 0.9s var(--ease-temple) backwards;
+  animation-delay: var(--tx-base, 0s);
+}
+.tx-rise-l {
+  animation: tx-rise 0.9s var(--ease-temple) backwards;
+  animation-delay: var(--tx-base, 0s);
+}
+
+/* The home hero waits for the loading screen to clear. Set by the inline script
+   in app/page.tsx (and by HomeStage), removed by FramePreloader. Paused, an
+   animation with a `backwards` fill sits on its first frame, so the text is
+   already in place to be lifted rather than appearing at the last moment. */
+html[data-intro='wait'] .tx-wl .tx-wi,
+html[data-intro='wait'] .tx-sweep-l,
+html[data-intro='wait'] .tx-ink-l,
+html[data-intro='wait'] .tx-rise-l {
+  animation-play-state: paused;
+}
+
+/* Reduced motion: the same order, as a plain fade. Class selectors outrank the
+   universal clamp below, which would otherwise make these instantaneous. */
+@media (prefers-reduced-motion: reduce) {
+  .tx-wl .tx-wi,
+  .tx-sweep-l,
+  .tx-ink-l,
+  .tx-rise-l {
+    animation: tx-fade 0.5s var(--ease-temple) backwards !important;
+    animation-delay: 0s !important;
   }
 }
 
@@ -1131,4 +1391,22 @@ html[data-stage='rail'] .home-timeline-track::before {
   bottom: 0;
   width: 2px;
   background: color-mix(in oklab, var(--color-marigold) 55%, transparent);
+}
+
+/* ---------------------------------------------------------------------------
+   The gallery's filter bar sticks under the masthead, and goes up to the top
+   with it: Nav writes html[data-nav-hidden] as it retires on the way down and
+   returns on the way up.
+--------------------------------------------------------------------------- */
+/* Up to four rows tall, so it only sticks where there is height to spare. */
+@media (min-width: 768px) and (min-height: 700px) {
+  .gallery-filters {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    transition: top 0.5s var(--ease-temple);
+  }
+  html:not([data-nav-hidden='true']) .gallery-filters {
+    top: var(--gallery-nav-h, 4.8rem);
+  }
 }

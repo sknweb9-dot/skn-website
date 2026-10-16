@@ -1,16 +1,12 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import JsonLd from '@/components/JsonLd';
-import EventGallery from '@/components/EventGallery';
 import InstagramRail from '@/components/InstagramRail';
 import { PageShell, PageHero, QuietLink, Section } from '@/components/PageShell';
 import BookButton from '@/components/BookButton';
 import VideoFacade from '@/components/VideoFacade';
 import {
   EVENTS_META,
-  GLOBE_ITEMS,
-  HAS_PLACEHOLDERS,
-  PHOTO_COUNT,
   UDAAN,
   VIDEOS,
   sectionMeta,
@@ -19,6 +15,7 @@ import {
 import { ARANGETRAM } from '@/lib/curriculum';
 import { fetchInstagramPosts } from '@/lib/instagram';
 import { SITE } from '@/lib/site';
+import { ALL_ITEMS } from '@/lib/gallery';
 import { eventsGraph } from '@/lib/schema';
 
 /**
@@ -81,30 +78,11 @@ export default async function EventsPage() {
       <JsonLd data={eventsGraph()} />
 
       <PageHero
-        eyebrow="Events & gallery"
+        eyebrow="Events"
         title="Every dancer gets a"
         accent="stage"
         lede="Udaan — flying high to reach our goals — is our own showcase, created so that every dancer has a platform irrespective of their stage of learning. Alongside it: Arangetrams, temple festivals, and outreach programmes."
       />
-
-      {/* Prototype notice. Rendered wherever lib/events.ts is still padded with
-          invented captions, including the current client test deployment. It
-          disappears on its own the moment PROTOTYPE_FILL is deleted. */}
-      {HAS_PLACEHOLDERS ? (
-        <div className="border-b border-kumkum/25 bg-kumkum/5">
-          <div className="mx-auto max-w-6xl px-5 py-3 sm:px-8">
-            <p className="font-sans text-[0.76rem] leading-relaxed text-kumkum">
-              <strong className="font-semibold">Prototype data.</strong> The
-              photographs are all the academy&rsquo;s own, but {PHOTO_COUNT - 11} of
-              the {PHOTO_COUNT} captions — album, title, date — are placeholders so
-              the globe has enough plates to judge. They are excluded from the
-              structured data and are visible only in this test deployment. Replace
-              them before final launch. See the placeholder policy at the top of{' '}
-              <code>lib/events.ts</code>.
-            </p>
-          </div>
-        </div>
-      ) : null}
 
       {/* --- Udaan, in the academy's own words ---------------------------- */}
       <Section id="udaan" eyebrow={UDAAN.eyebrow} heading={UDAAN.heading} tinted>
@@ -228,11 +206,12 @@ export default async function EventsPage() {
 
       {/* --- The gallery -------------------------------------------------- */}
       <Section
+        id="gallery"
         eyebrow="The gallery"
-        heading="Turn the sphere"
-        lede={`${GLOBE_ITEMS.length} plates — photographs and recordings, every one the academy's own. Open it to turn the globe, or read the index below.`}
+        heading="Every class, every stage"
+        lede={`${ALL_ITEMS.length} photographs and recordings, from every class and batch to Udaan, the Arangetrams and the festivals. Turn the globe, or find your child by venue and batch.`}
       >
-        <EventGallery />
+        <QuietLink href="/gallery">Open the gallery</QuietLink>
       </Section>
 
       {/* --- Instagram ---------------------------------------------------- */}
@@ -240,7 +219,7 @@ export default async function EventsPage() {
         id="instagram"
         eyebrow="As it happens"
         heading="From the academy’s Instagram"
-        lede="The gallery above is the record. This is the week — rehearsals, costume days, and whatever happened last night."
+        lede="The gallery is the record. This is the week — rehearsals, costume days, and whatever happened last night."
       >
         <InstagramRail posts={instagramPosts} />
       </Section>

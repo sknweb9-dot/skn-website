@@ -2,7 +2,8 @@ import { BRANCHES, FACULTY, FAQS, FOUNDERS, PRIMARY_BRANCH, SITE, type Branch } 
 import { TEACHING_PROGRAMMES } from './curriculum';
 import { allBatches, areasTaught, offlineVenuesForCity, venuesForCity } from './classes';
 import { MUDRAS } from './mudras';
-import { PUBLISHABLE_PHOTOS, VIDEOS, videoPoster, youtubeHref } from './events';
+import { VIDEOS, videoPoster, youtubeHref } from './events';
+import { ALBUMS, PHOTOS, albumDate } from './gallery';
 import { BOOK_PATH } from './booking';
 
 /**
@@ -400,32 +401,14 @@ export type Faq = { q: string; a: string };
  * the works it shows. Add VideoObject when the academy confirms upload dates and
  * durations, and Event only for performances still to come.
  *
- * Placeholder photo records are excluded, the same way `openingHoursFor` excludes
- * provisional batch timings — see the policy at the top of lib/events.ts.
+ * The photographs are described by galleryGraph(), on /gallery.
  */
 export function eventsGraph() {
   const url = abs('/events');
 
-  const photos = PUBLISHABLE_PHOTOS.map((photo, i) => ({
-    '@type': 'ListItem',
-    position: i + 1,
-    item: {
-      '@type': 'ImageObject',
-      '@id': `${url}#${photo.id}`,
-      contentUrl: abs(photo.src),
-      name: photo.title,
-      description: photo.alt,
-      caption: photo.album,
-      width: photo.width,
-      height: photo.height,
-      creditText: SITE.name,
-      ...(photo.date ? { datePublished: photo.date } : {}),
-    },
-  }));
-
   const recordings = VIDEOS.map((video, i) => ({
     '@type': 'ListItem',
-    position: photos.length + i + 1,
+    position: i + 1,
     item: {
       '@type': 'CreativeWork',
       '@id': `${url}#video-${video.id}`,
@@ -443,21 +426,21 @@ export function eventsGraph() {
       organizationNode(),
       websiteNode(),
       {
-        '@type': ['CollectionPage', 'ImageGallery'],
+        '@type': 'CollectionPage',
         '@id': `${url}#collection`,
         url,
-        name: 'Events & Gallery',
+        name: 'Events',
         description:
-          'Udaan, the academy\u2019s own showcase, with Arangetrams, temple festivals and performances \u2014 photographs and recordings from Shanti Kala Nikketan\u2019s own stages.',
+          'Udaan, the academy\u2019s own showcase, with Arangetrams, temple festivals and performances \u2014 recordings from Shanti Kala Nikketan\u2019s own stages.',
         isPartOf: { '@id': ID.website },
         publisher: { '@id': ID.org },
         about: { '@id': ID.org },
         mainEntity: {
           '@type': 'ItemList',
           '@id': `${url}#items`,
-          numberOfItems: photos.length + recordings.length,
+          numberOfItems: recordings.length,
           itemListOrder: 'https://schema.org/ItemListUnordered',
-          itemListElement: [...photos, ...recordings],
+          itemListElement: recordings,
         },
       },
       {
@@ -465,7 +448,7 @@ export function eventsGraph() {
         '@id': `${url}#breadcrumb`,
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
-          { '@type': 'ListItem', position: 2, name: 'Events & gallery', item: url },
+          { '@type': 'ListItem', position: 2, name: 'Events', item: url },
         ],
       },
     ],
@@ -506,6 +489,77 @@ export function locationFaqs(branch: Branch): Faq[] {
       a: `Yes. Our Introductory Programme assumes nothing at all and takes children from age 3.5, and adults are welcome as beginners too. No costume, no ghungroo and no prior experience are needed to start, and you are welcome to sit in on a class first.`,
     },
   ];
+}
+
+/**
+ * The gallery page: one representative photograph per event album.
+ *
+ * Not every photograph, and none of the class photographs. The index carries
+ * them all for the people who need them, but a search engine does not need two
+ * hundred ImageObjects, and photographs of children in class are for their
+ * parents, not for an image index.
+ */
+export function galleryGraph() {
+  const url = abs('/gallery');
+  const seen = new Set<string>();
+  const items = PHOTOS.filter((p) => {
+    if (p.group === 'classes' || seen.has(p.albumId)) return false;
+    seen.add(p.albumId);
+    return true;
+  }).map((photo, i) => {
+    const a = ALBUMS.find((x) => x.id === photo.albumId)!;
+    const date = albumDate(a);
+    return {
+      '@type': 'ListItem',
+      position: i + 1,
+      item: {
+        '@type': 'ImageObject',
+        '@id': `${url}#${photo.id}`,
+        contentUrl: abs(photo.src),
+        name: a.title,
+        description: photo.alt,
+        width: photo.width,
+        height: photo.height,
+        creditText: SITE.name,
+        caption: date ? `${a.title}, ${date}` : a.title,
+        ...(a.date ? { datePublished: a.date } : {}),
+      },
+    };
+  });
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      organizationNode(),
+      websiteNode(),
+      {
+        '@type': ['CollectionPage', 'ImageGallery'],
+        '@id': `${url}#collection`,
+        url,
+        name: 'Gallery',
+        description:
+          'Photographs from Shanti Kala Nikketan\u2019s classes, Udaan, Arangetrams and festivals \u2014 every one the academy\u2019s own.',
+        isPartOf: { '@id': ID.website },
+        publisher: { '@id': ID.org },
+        about: { '@id': ID.org },
+        mainEntity: {
+          '@type': 'ItemList',
+          '@id': `${url}#items`,
+          numberOfItems: items.length,
+          itemListOrder: 'https://schema.org/ItemListUnordered',
+          itemListElement: items,
+        },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `${url}#breadcrumb`,
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+          { '@type': 'ListItem', position: 2, name: 'Gallery', item: url },
+        ],
+      },
+    ],
+  };
 }
 
 /** The graph emitted on a location page. */

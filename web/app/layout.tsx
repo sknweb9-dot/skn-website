@@ -5,6 +5,7 @@ import { SITE } from '@/lib/site';
 import SmoothScroll from '@/components/SmoothScroll';
 import HashScroll from '@/components/HashScroll';
 import CurtainObserver from '@/components/CurtainObserver';
+import TextMotion from '@/components/TextMotion';
 import { AmbientProvider } from '@/components/AmbientProvider';
 
 const cinzel = Cinzel({
@@ -172,6 +173,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <SmoothScroll>
             <HashScroll />
             <CurtainObserver />
+            <TextMotion />
             {children}
           </SmoothScroll>
         </AmbientProvider>

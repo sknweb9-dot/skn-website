@@ -29,36 +29,12 @@
  *                  never appeared on the page. The pairing is transcribed
  *                  exactly as found rather than silently reinterpreted.
  *
- * THE PLACEHOLDER POLICY — read before adding anything
- * ---------------------------------------------------
- * lib/site.ts opens with "do not add unsourced claims here", because this data
- * feeds both the visible copy and the Schema.org graph. The photo records break
- * that rule on purpose, under containment, so the globe has enough plates to be
- * worth building before the academy's real albums arrive.
- *
- * `placeholder: true` means THE CAPTION IS INVENTED — the album, the title and
- * the date. The photograph itself is always genuine and always the academy's
- * own; nothing here is stock. Invented albums are drawn only from events we know
- * happened, so the smallest possible fiction is "this photo is from that event"
- * rather than "that event existed".
- *
- * Three mechanisms keep the fiction contained:
- *
- *   1. `eventsGraph()` in lib/schema.ts emits no placeholder record, the same
- *      way `openingHoursFor` excludes provisional batch timings.
- *   2. `verifyEvents()` at the foot of this file warns during production builds
- *      when placeholders are present, while still allowing an explicit
- *      `ALLOW_PLACEHOLDER_GALLERY=false` hard stop. The default is permissive
- *      because the current client-facing deployment is an intentional test site.
- *   3. `PROTOTYPE_FILL` is a single call. Delete it and the array shrinks to
- *      what is real.
- *
- * TO REPLACE WITH THE REAL ALBUMS
- * -------------------------------
- *   1. Drop the photographs into `web/public/img/gallery/`.
- *   2. Add a REAL_PHOTOS record each, with whatever album/date is known.
- *   3. Delete the PROTOTYPE_FILL spread from PHOTOS.
- *   4. Run `_research/make_globe_plates.ps1` to cut the 512px globe plates.
+ * PHOTOGRAPHS
+ * -----------
+ * The photographs moved to lib/gallery.ts when the gallery got its own page
+ * (/gallery). What stays here is the page's editorial content - the sections,
+ * the Udaan copy and the eleven recordings - plus the poster plates those
+ * recordings carry onto the gallery's globe.
  */
 
 import { SITE } from './site';
@@ -136,21 +112,6 @@ export function sectionMeta(id: EventSection): SectionMeta {
   if (!found) throw new Error(`Unknown event section: ${id}`);
   return found;
 }
-
-/**
- * Filter groups for the globe's control dock.
- *
- * Group and Solo are separate sections on the page, as they were on the old
- * site, but collapse into one filter pill: six pills plus "All" is already the
- * most a phone will carry on one row.
- */
-export const GLOBE_FILTERS: { label: string; sections: EventSection[] }[] = [
-  { label: 'Udaan', sections: ['udaan'] },
-  { label: 'Arangetrams', sections: ['arangetram'] },
-  { label: 'Performances', sections: ['group', 'solo'] },
-  { label: 'Outreach', sections: ['outreach'] },
-  { label: 'Classes', sections: ['studio'] },
-];
 
 // ---------------------------------------------------------------------------
 // The Udaan manifesto
@@ -406,41 +367,14 @@ export function videosBySection(section: EventSection): EventVideo[] {
 }
 
 // ---------------------------------------------------------------------------
-// Photographs
+// Posters
 // ---------------------------------------------------------------------------
 
-export type Photo = {
-  id: string;
-  section: EventSection;
-  /** Shown in the hover label and the detail panel */
-  title: string;
-  album: string;
-  /** Year or ISO date. Omitted where genuinely unknown. */
-  date?: string;
-  /** Full-size source, used in the detail panel */
-  src: string;
-  width: number;
-  height: number;
-  alt: string;
-  /**
-   * Globe plate, cut by `_research/make_globe_plates.ps1`. The whole image at its
-   * own aspect ratio with its long edge at PLATE_LONG_EDGE — nothing cropped.
-   * Derived from the source image, so several records may share one plate.
-   */
-  plate: string;
-  /**
-   * The CAPTION is invented — album, title, date. The photograph is genuine and
-   * the academy's own. See the placeholder policy at the top of this file.
-   */
-  placeholder?: boolean;
-};
-
 /**
- * Every photograph available, with its real pixel dimensions.
- *
- * Kept separate from the Photo records because the prototype fill reuses these
- * sources, and because one source may legitimately appear in more than one
- * album once the real albums land.
+ * The posters and stills the recordings were paired with on the old page, with
+ * their real pixel dimensions. A recording names its poster by key; the globe
+ * plate (long edge 512, cut by _research/make_globe_plates.ps1) and the
+ * full-size file come from the same entry.
  */
 type Source = { key: string; src: string; width: number; height: number };
 
@@ -456,417 +390,23 @@ const SOURCES: Source[] = [
   { key: 'nadasudha', src: '/img/event-nadasudha.jpg', width: 900, height: 675 },
   { key: 'jun2024', src: '/img/event-jun2024.jpg', width: 642, height: 900 },
   { key: 'canada', src: '/img/event-canada.jpg', width: 900, height: 506 },
-  { key: 'ensemble', src: '/img/ensemble.jpg', width: 1600, height: 1067 },
-  { key: 'embrace', src: '/img/embrace-dance.jpg', width: 1800, height: 970 },
-  { key: 'gallery-1', src: '/img/gallery-1.jpg', width: 1400, height: 1256 },
-  { key: 'gallery-2', src: '/img/gallery-2.jpg', width: 1400, height: 1400 },
-  { key: 'gallery-3', src: '/img/gallery-3.jpg', width: 1400, height: 1400 },
-  { key: 'stage-1', src: '/img/stage-1-intro.jpg', width: 970, height: 700 },
-  { key: 'stage-2', src: '/img/stage-2-foundation.jpg', width: 999, height: 667 },
-  { key: 'stage-3', src: '/img/stage-3-strength.jpg', width: 999, height: 666 },
-  { key: 'stage-4', src: '/img/stage-4-transition.jpg', width: 1000, height: 667 },
-  { key: 'stage-5', src: '/img/stage-5-expression.jpg', width: 1000, height: 627 },
-  { key: 'stage-6', src: '/img/stage-6-maturity.jpg', width: 1000, height: 667 },
-  { key: 'stage-7', src: '/img/stage-7-arangetram.jpg', width: 1000, height: 666 },
-  { key: 'hero-events', src: '/img/hero-events.jpg', width: 2000, height: 1333 },
-  { key: 'hero-photos', src: '/img/hero-photos.jpg', width: 2000, height: 1335 },
-  { key: 'hero-gurukulam', src: '/img/hero-gurukulam.jpg', width: 2000, height: 1335 },
-  { key: 'hero-skn', src: '/img/hero-skn.jpg', width: 1999, height: 1141 },
-  { key: 'hero-videos', src: '/img/hero-videos.jpg', width: 2000, height: 1333 },
 ];
 
 const SOURCE_BY_KEY = new Map(SOURCES.map((s) => [s.key, s]));
 
 function source(key: string): Source {
   const found = SOURCE_BY_KEY.get(key);
-  if (!found) throw new Error(`Unknown photo source: ${key}`);
+  if (!found) throw new Error(`Unknown poster source: ${key}`);
   return found;
 }
 
-/** Globe plate path for a source key. Cut by make_globe_plates.ps1. */
+/** Globe plate path for a plate key. */
 export function platePath(key: string): string {
   return `/img/globe/${key}.webp`;
 }
 
-/**
- * Long edge of a globe plate, in pixels. The short edge follows the image's own
- * aspect ratio — plates are not cropped to a square, so this is a bound rather
- * than a size. Cut by make_globe_plates.ps1; keep the two in step.
- */
+/** Long edge of a globe plate, in pixels. */
 export const PLATE_LONG_EDGE = 512;
-
-/** Every distinct plate the globe may need to fetch. */
-export const PLATE_KEYS = SOURCES.map((s) => s.key);
-
-/**
- * Photographs whose album and subject are known from the old site.
- *
- * These are the eleven posters and stills that /events itself published, so the
- * album and the title are the academy's own words. No placeholder flag.
- */
-const REAL_PHOTOS: Photo[] = [
-  {
-    id: 'p-udaan-2025-poster',
-    section: 'udaan',
-    title: 'Where Tradition Takes Flight',
-    album: 'Udaan 2025',
-    date: '2025',
-    alt: 'Poster for Udaan 2025, Where Tradition Takes Flight',
-    ...plate('udaan-2025-poster'),
-  },
-  {
-    id: 'p-udaan-2023-poster',
-    section: 'udaan',
-    title: 'Flying High',
-    album: 'Udaan 2023',
-    date: '2023-10',
-    alt: 'Poster for Udaan 2023, Flying High',
-    ...plate('udaan-2023-poster'),
-  },
-  {
-    id: 'p-aparna',
-    section: 'arangetram',
-    title: 'Aparna Manu — the academy’s first Arangetram',
-    album: 'Arangetrams',
-    alt: 'Aparna Manu in Bharatanatyam costume for her Arangetram',
-    ...plate('aparna'),
-  },
-  {
-    id: 'p-arangetram-k',
-    section: 'arangetram',
-    title: 'Smt Kirusanthini — Arangetram',
-    album: 'Arangetrams',
-    alt: 'Invitation for Smt Kirusanthini’s Bharatanatyam Arangetram',
-    ...plate('arangetram-k'),
-  },
-  {
-    id: 'p-arangetram-j',
-    section: 'arangetram',
-    title: 'Kum Jahnavi — Arangetram',
-    album: 'Arangetrams',
-    alt: 'Invitation for Kum Jahnavi’s Bharatanatyam Arangetram',
-    ...plate('arangetram-j'),
-  },
-  {
-    id: 'p-festival',
-    section: 'group',
-    title: 'Festival programme',
-    album: 'Performances',
-    alt: 'Flyer for a Shanti Kala Nikketan festival programme',
-    ...plate('festival'),
-  },
-  {
-    id: 'p-mylapore',
-    section: 'group',
-    title: 'Bharatiya Vidya Bhavan, Mylapore',
-    album: 'Performances',
-    alt: 'Programme notice for a performance at Bharatiya Vidya Bhavan, Mylapore',
-    ...plate('mylapore'),
-  },
-  {
-    id: 'p-athma',
-    section: 'group',
-    title: 'Invited programme',
-    album: 'Performances',
-    alt: 'Shanti Kala Nikketan dancers performing at an invited programme',
-    ...plate('athma'),
-  },
-  {
-    id: 'p-nadasudha',
-    section: 'group',
-    title: 'Nada Sudha — 27th Annual Music & Dance Festival',
-    album: 'Performances',
-    date: '2025',
-    alt: 'Shanti Kala Nikketan at the Nada Sudha annual music and dance festival',
-    ...plate('nadasudha'),
-  },
-  {
-    id: 'p-jun2024',
-    section: 'solo',
-    title: 'Aparna Manu — solo',
-    album: 'Performances',
-    alt: 'Aparna Manu performing a Bharatanatyam solo',
-    ...plate('jun2024'),
-  },
-  {
-    id: 'p-canada',
-    section: 'outreach',
-    title: 'Toronto temple festival',
-    album: 'Outreach',
-    date: '2025',
-    alt: 'Shanti Kala Nikketan dancers at a Toronto temple festival',
-    ...plate('canada'),
-  },
-];
-
-/** Spreads a source's src/width/height/plate into a Photo record. */
-function plate(key: string): Pick<Photo, 'src' | 'width' | 'height' | 'plate'> {
-  const s = source(key);
-  return { src: s.src, width: s.width, height: s.height, plate: platePath(key) };
-}
-
-// ---------------------------------------------------------------------------
-// Prototype fill — DELETE WHEN THE REAL ALBUMS ARRIVE
-// ---------------------------------------------------------------------------
-
-/**
- * Enough plates for the sphere to read as a sphere.
- *
- * Below roughly sixty, a Fibonacci sphere looks like a scattering rather than a
- * globe, and the whole point of the layout is even density. Ninety-six is
- * comfortable at the radius the globe uses and still cheap: the plates are
- * shared across records, so this costs texture memory for twenty-eight images,
- * not ninety-six.
- */
-const FILL_TARGET = 96;
-
-/**
- * Albums for invented captions.
- *
- * Every album named here is an event we have evidence actually happened — from
- * the old /events page or `_research/youtube.txt`. The invention is only which
- * photograph belongs to which, which is why the flag is on the record and not on
- * the album list. The studio entries describe what is visibly in the frame and
- * claim no event at all.
- */
-const FILL_ALBUMS: { album: string; section: EventSection; date?: string; titles: string[] }[] = [
-  {
-    album: 'Udaan 2025',
-    section: 'udaan',
-    date: '2025',
-    titles: ['Curtain up', 'Alarippu', 'The full ensemble', 'Jatiswaram', 'Finale', 'Taking the stage'],
-  },
-  {
-    album: 'Udaan 2023',
-    section: 'udaan',
-    date: '2023-10',
-    titles: ['Opening invocation', 'Shabdam', 'Group formation', 'The youngest dancers', 'Curtain call'],
-  },
-  {
-    album: 'Arangetrams',
-    section: 'arangetram',
-    titles: ['Varnam', 'Padam', 'Alankāram before the stage', 'The Guru’s blessing', 'Thillana'],
-  },
-  {
-    album: 'Jeevan Utsav 2022',
-    section: 'group',
-    date: '2022',
-    titles: ['A Celebration of Life through Dance', 'Ensemble', 'Nattuvangam and orchestra'],
-  },
-  {
-    album: 'Nada Sudha Festival',
-    section: 'group',
-    date: '2025',
-    titles: ['27th Annual Music & Dance Festival', 'On the Nada Sudha stage'],
-  },
-  {
-    album: 'Maha Shivaratri',
-    section: 'group',
-    titles: ['Offering to Lord Shiva', 'Night of the offering'],
-  },
-  {
-    album: 'Samarpanam, Navratri',
-    section: 'group',
-    date: '2025',
-    titles: ['Navratri offering', 'Samarpanam Festival'],
-  },
-  {
-    album: 'Bharatiya Vidya Bhavan, Mylapore',
-    section: 'group',
-    titles: ['Mylapore programme', 'Before the lamp'],
-  },
-  {
-    album: 'Solo performances',
-    section: 'solo',
-    titles: ['Abhinaya', 'A held pose', 'Araimandi'],
-  },
-  {
-    album: 'Toronto Temple Festival',
-    section: 'outreach',
-    date: '2025',
-    titles: ['Offering to Lord Vinayaka', 'Scarborough dancers', 'On the temple circuit'],
-  },
-  {
-    album: 'In the studio',
-    section: 'studio',
-    titles: [
-      'Adavu practice',
-      'Counting aloud',
-      'Araimandi, held',
-      'Hasta drill',
-      'The wooden floor',
-      'Correction in progress',
-      'Tala on the palm',
-      'Barefoot, first position',
-      'Learning the shloka',
-      'Class in session',
-    ],
-  },
-];
-
-/**
- * Pads the real records out to FILL_TARGET, cycling the available photographs
- * and the album list. Deterministic — no randomness — so the sphere is
- * identical between server render and hydration, and between builds.
- */
-function prototypeFill(realCount: number): Photo[] {
-  const needed = Math.max(0, FILL_TARGET - realCount);
-  const out: Photo[] = [];
-
-  // Flatten the album list into (album, title) pairs so captions do not repeat
-  // until every title in every album has been used once.
-  const captions = FILL_ALBUMS.flatMap((a) =>
-    a.titles.map((title) => ({ album: a.album, section: a.section, date: a.date, title })),
-  );
-
-  for (let i = 0; i < needed; i += 1) {
-    const caption = captions[i % captions.length];
-    // Offset the source cycle against the caption cycle so the same photograph
-    // does not land under the same caption on every lap.
-    const src = SOURCES[(i * 7 + 3) % SOURCES.length];
-    const lap = Math.floor(i / captions.length);
-
-    out.push({
-      id: `fill-${i.toString().padStart(3, '0')}`,
-      section: caption.section,
-      title: lap === 0 ? caption.title : `${caption.title} (${lap + 1})`,
-      album: caption.album,
-      ...(caption.date ? { date: caption.date } : {}),
-      src: src.src,
-      width: src.width,
-      height: src.height,
-      plate: platePath(src.key),
-      alt: `Shanti Kala Nikketan — ${caption.title}`,
-      placeholder: true,
-    });
-  }
-
-  return out;
-}
-
-const PROTOTYPE_FILL = prototypeFill(REAL_PHOTOS.length);
-
-/** Every plate on the globe, real records first. */
-export const PHOTOS: Photo[] = [...REAL_PHOTOS, ...PROTOTYPE_FILL];
-
-/** Records safe to publish as a claim — used by eventsGraph(). */
-export const PUBLISHABLE_PHOTOS: Photo[] = PHOTOS.filter((p) => !p.placeholder);
-
-export function photosBySection(section: EventSection): Photo[] {
-  return PHOTOS.filter((p) => p.section === section);
-}
-
-/** Distinct album names, in first-appearance order. */
-export function albums(): string[] {
-  return [...new Set(PHOTOS.map((p) => p.album))];
-}
-
-export const PHOTO_COUNT = PHOTOS.length;
-
-/** True while any caption on the page is invented. Drives the dev-only notice. */
-export const HAS_PLACEHOLDERS = PHOTOS.some((p) => p.placeholder);
-
-// ---------------------------------------------------------------------------
-// The globe's view of all this
-// ---------------------------------------------------------------------------
-
-/**
- * One flat list of everything the sphere carries.
- *
- * Photographs and videos sit on the same globe because a visitor spinning it is
- * looking for "what has the academy done", not sorting media types. What keeps
- * that honest is `kind`: a video plate is drawn with a play glyph and its hover
- * label says so, because a plate that zooms and a plate that leaves for YouTube
- * must not look identical.
- */
-export type GlobeItem = {
-  id: string;
-  kind: 'photo' | 'video';
-  section: EventSection;
-  title: string;
-  /** Album name for a photograph; the destination for a video. */
-  subtitle: string;
-  /** 512px-long-edge texture, whole image, nothing cropped */
-  plate: string;
-  /** Full-size image for the detail panel */
-  src: string;
-  width: number;
-  height: number;
-  alt: string;
-  /** Present only on videos */
-  href?: string;
-  /** Anchor for the matching entry in the page's editorial sections */
-  anchor: string;
-  placeholder?: boolean;
-};
-
-/**
- * Videos are spread through the photographs rather than grouped at the front.
- *
- * Fibonacci index determines position on the sphere, so a contiguous block of
- * videos would land as a contiguous patch — eleven play glyphs clustered on one
- * face, and none anywhere else. Interleaving at a regular stride scatters them
- * evenly, which is both better looking and more useful: whichever way the sphere
- * is turned, there is something to watch in view.
- */
-export function globeItems(): GlobeItem[] {
-  const photos: GlobeItem[] = PHOTOS.map((p) => ({
-    id: p.id,
-    kind: 'photo' as const,
-    section: p.section,
-    title: p.title,
-    subtitle: p.date ? `${p.album} · ${p.date}` : p.album,
-    plate: p.plate,
-    src: p.src,
-    width: p.width,
-    height: p.height,
-    alt: p.alt,
-    anchor: `#${p.section}`,
-    ...(p.placeholder ? { placeholder: true as const } : {}),
-  }));
-
-  const videos: GlobeItem[] = VIDEOS.map((v) => {
-    const poster = videoPoster(v);
-    return {
-      id: `v-${v.id}`,
-      kind: 'video' as const,
-      section: v.section,
-      title: v.title,
-      subtitle: v.kind === 'playlist' ? 'Playlist — opens YouTube' : 'Video — opens YouTube',
-      plate: platePath(v.plateKey),
-      src: poster.src,
-      width: poster.width,
-      height: poster.height,
-      alt: poster.alt,
-      href: youtubeHref(v),
-      anchor: `#video-${v.id}`,
-    };
-  });
-
-  if (videos.length === 0) return photos;
-
-  const stride = Math.max(1, Math.floor((photos.length + videos.length) / videos.length));
-  const out: GlobeItem[] = [];
-  let nextVideo = 0;
-
-  photos.forEach((photo, i) => {
-    out.push(photo);
-    if (nextVideo < videos.length && (i + 1) % stride === 0) {
-      out.push(videos[nextVideo]);
-      nextVideo += 1;
-    }
-  });
-  // Anything left over — short photo list, or a stride that did not divide
-  // evenly — goes on the end rather than being dropped.
-  out.push(...videos.slice(nextVideo));
-
-  return out;
-}
-
-export const GLOBE_ITEMS = globeItems();
-
-/** Distinct plate URLs the globe will fetch, for preloading. */
-export const GLOBE_PLATES = [...new Set(GLOBE_ITEMS.map((i) => i.plate))];
 
 // ---------------------------------------------------------------------------
 // Open Graph
@@ -884,90 +424,17 @@ export const EVENTS_META = {
 // Guards
 // ---------------------------------------------------------------------------
 
-/**
- * Keep placeholder use visible without blocking the client test deployment.
- *
- * The production check is still important: a placeholder caption reaching a
- * live page would put an invented album name next to a real photograph of a real
- * child, and the whole point of lib/site.ts's "no unsourced claims" rule is that
- * this data is also structured data. The current deployment is explicitly a
- * test site, so the default is permissive and emits a build warning. Set
- * ALLOW_PLACEHOLDER_GALLERY=false to restore the hard stop before a final launch.
- *
- * Everything else here is the ordinary sort of invariant — unique ids, plates
- * that resolve to a known source, sections that exist.
- */
 (function verifyEvents() {
   const ids = new Set<string>();
-  for (const record of [...PHOTOS, ...VIDEOS]) {
-    if (ids.has(record.id)) throw new Error(`Duplicate events id: ${record.id}`);
-    ids.add(record.id);
-    if (!SECTIONS.some((s) => s.id === record.section)) {
-      throw new Error(`${record.id} has unknown section "${record.section}"`);
-    }
-  }
-
-  const plateKeys = new Set(PLATE_KEYS.map(platePath));
-  for (const photo of PHOTOS) {
-    if (!plateKeys.has(photo.plate)) {
-      throw new Error(`${photo.id} references plate ${photo.plate}, which no source produces`);
-    }
-    if (!photo.alt.trim()) throw new Error(`${photo.id} has no alt text`);
-  }
-
   for (const video of VIDEOS) {
-    if (!PLATE_KEYS.includes(video.plateKey)) {
+    if (ids.has(video.id)) throw new Error(`Duplicate video id: ${video.id}`);
+    ids.add(video.id);
+    if (!SECTIONS.some((s) => s.id === video.section)) {
+      throw new Error(`${video.id} has unknown section "${video.section}"`);
+    }
+    if (!SOURCE_BY_KEY.has(video.plateKey)) {
       throw new Error(`Video ${video.id} names plate key "${video.plateKey}", which is not in SOURCES`);
     }
     if (!video.alt.trim()) throw new Error(`Video ${video.id} has no alt text`);
-  }
-
-  // The interleave must not lose or duplicate anything.
-  if (GLOBE_ITEMS.length !== PHOTOS.length + VIDEOS.length) {
-    throw new Error(
-      `globeItems() returned ${GLOBE_ITEMS.length} items for ${PHOTOS.length} photos ` +
-        `and ${VIDEOS.length} videos`,
-    );
-  }
-
-  // Every section named in a filter must exist, or a pill silently filters to
-  // nothing.
-  for (const filter of GLOBE_FILTERS) {
-    for (const id of filter.sections) {
-      if (!SECTIONS.some((s) => s.id === id)) {
-        throw new Error(`Filter "${filter.label}" names unknown section "${id}"`);
-      }
-    }
-  }
-
-  /**
-   * Server-side only, deliberately.
-   *
-   * This module is imported by client components, so the guard ships to the
-   * browser too — and there only NEXT_PUBLIC_* variables are inlined. Keeping
-   * the policy on the server means the browser never controls whether a build
-   * is allowed to contain placeholders.
-   *
-   * Production builds warn by default because the current Vercel deployment is
-   * an intentional client test site. Set ALLOW_PLACEHOLDER_GALLERY=false to
-   * fail closed while preparing the final content set.
-   */
-  const onServer = typeof window === 'undefined';
-  const allowPlaceholders = process.env.ALLOW_PLACEHOLDER_GALLERY !== 'false';
-  if (onServer && process.env.NODE_ENV === 'production' && HAS_PLACEHOLDERS) {
-    const count = PHOTOS.filter((p) => p.placeholder).length;
-    if (!allowPlaceholders) {
-      throw new Error(
-        `lib/events.ts contains ${count} invented photo captions and must not ship.\n` +
-          `  Add the academy's real albums to REAL_PHOTOS, then delete the\n` +
-          `  PROTOTYPE_FILL spread from PHOTOS. See the placeholder policy at the top\n` +
-          `  of that file. To allow the current test site, leave\n` +
-          `  ALLOW_PLACEHOLDER_GALLERY unset or set it to true.`,
-      );
-    }
-    console.warn(
-      `[events] Production build includes ${count} invented photo captions; ` +
-        'this is allowed for the current client test site. Replace them before final launch.',
-    );
   }
 })();

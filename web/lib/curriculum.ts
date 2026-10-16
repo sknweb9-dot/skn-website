@@ -34,6 +34,15 @@ export type Programme = {
   /** Parent-facing developmental framing. Interpretive, not doctrinal. */
   develops: string[];
   image: string;
+  /** What the picture shows, for people who cannot see it. Says only what is visible. */
+  imageAlt?: string;
+  /**
+   * One line under the picture, naming where it was taken. Set wherever the
+   * photograph is not an obvious picture of this programme, so the page never
+   * implies more than it knows: Levels 5 and 6 have no batch running at present,
+   * and borrow a stage photograph.
+   */
+  imageCaption?: string;
 };
 
 /**
@@ -62,7 +71,9 @@ export const LEVELS: Programme[] = [
       'Students establish a strong technical foundation through basic Adavus, Hastas, rhythm training, introductory theory, and devotional compositions such as Mallari and Nottuswaram.',
     repertoire: ['Basic Adavus', 'Hastas', 'Mallari', 'Nottuswaram'],
     develops: ['Posture and alignment', 'Counting and rhythm (tala)', 'Following multi-step instruction'],
-    image: '/img/stage-2-foundation.jpg',
+    image: '/img/pages/level-1.jpg',
+    imageAlt: 'A Level 1 batch at Casagrand Tranquil, students in a line with their arms raised overhead',
+    imageCaption: 'A Level 1 class at Casagrand Tranquil',
   },
   {
     id: 'level-2',
@@ -72,7 +83,9 @@ export const LEVELS: Programme[] = [
       'Building strength, precision, and coordination through advanced Adavus while expanding theoretical knowledge and introducing traditional repertoire including Kauthuvam and Todayamangalam.',
     repertoire: ['Advanced Adavus', 'Kauthuvam', 'Todayamangalam'],
     develops: ['Core strength and stamina', 'Balance and spatial control', 'Sustained practice habits'],
-    image: '/img/stage-3-strength.jpg',
+    image: '/img/pages/level-2.jpg',
+    imageAlt: 'A Level 2 batch at Adroit, four students in a deep seated stance with their hands forward',
+    imageCaption: 'A Level 2 class at Adroit',
   },
   {
     id: 'level-3',
@@ -82,7 +95,9 @@ export const LEVELS: Programme[] = [
       'Students begin their journey into the classical Margam, learning foundational performance pieces such as Alarippu, while continuing to strengthen technique and musical understanding through Tevaram and Divya Prabandham.',
     repertoire: ['Alarippu', 'Tevaram', 'Divya Prabandham'],
     develops: ['Memory for long sequences', 'Musical understanding', 'Independent self-correction'],
-    image: '/img/stage-4-transition.jpg',
+    image: '/img/pages/level-3.jpg',
+    imageAlt: 'A Level 3 batch at Appswamy Springs, students and their teacher in a lunge with arms outstretched',
+    imageCaption: 'A Level 3 class at Appswamy Springs',
   },
   {
     id: 'level-4',
@@ -92,7 +107,12 @@ export const LEVELS: Programme[] = [
       "Students expand their artistic vocabulary through Jatiswaram, Shabdam, Keerthanam, and Virutham, while developing expressive storytelling, abhinaya, and a deeper appreciation of Bharatanatyam's cultural heritage.",
     repertoire: ['Jatiswaram', 'Shabdam', 'Keerthanam', 'Virutham'],
     develops: ['Emotional articulation (abhinaya)', 'Narrative interpretation', 'Cultural literacy'],
-    image: '/img/stage-5-expression.jpg',
+    image: '/img/pages/level-4.jpg',
+    // CG R is one folder for two batches (R1 is Level 4, R2 is Level 1) and the
+    // archive does not say which students are in which picture, so the caption
+    // names the venue and does not claim the level.
+    imageAlt: 'Students in class at Casagrand Riviera, in a lunge with arms outstretched',
+    imageCaption: 'A class at Casagrand Riviera',
   },
   {
     id: 'level-5',
@@ -102,7 +122,9 @@ export const LEVELS: Programme[] = [
       'Technical excellence is refined through Thillana, Ashtapadi, Bhajan, and Javali, alongside advanced study of theory, literature, composers, and expressive interpretation.',
     repertoire: ['Thillana', 'Ashtapadi', 'Bhajan', 'Javali'],
     develops: ['Technical precision', 'Interpretive judgement', 'Knowledge of composers and texts'],
-    image: '/img/stage-6-maturity.jpg',
+    image: '/img/pages/level-5.jpg',
+    imageAlt: 'Two dancers in red costume at Udaan 2025, one bending low with an arm raised, the other standing in pose',
+    imageCaption: 'Udaan 2025, Kalakshetra Foundation',
   },
   {
     id: 'level-6',
@@ -112,7 +134,9 @@ export const LEVELS: Programme[] = [
       'The final academic level focuses on the most demanding elements of the Bharatanatyam repertoire, including Varnam, Padam, and Swarajathi, cultivating technical maturity, artistic excellence, and independent performance ability.',
     repertoire: ['Varnam', 'Padam', 'Swarajathi'],
     develops: ['Technical maturity', 'Artistic excellence', 'Independent performance ability'],
-    image: '/img/stage-7-arangetram.jpg',
+    image: '/img/pages/level-6.jpg',
+    imageAlt: 'A dancer in yellow and maroon costume with a floral headdress, hands in a gesture before her chest, on a blue stage',
+    imageCaption: 'From Jahnavi\u2019s Arangetram, 2025',
   },
 ];
 

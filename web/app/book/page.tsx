@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
+import type { CSSProperties } from 'react';
 import { Suspense } from 'react';
 import Footer from '@/components/Footer';
 import JsonLd from '@/components/JsonLd';
 import Nav from '@/components/Nav';
+import Words from '@/components/Words';
 import BookingFlowFromUrl from '@/components/BookingFlowFromUrl';
 import BookingFlow from '@/components/BookingFlow';
 import FaqList from '@/components/FaqList';
@@ -45,18 +47,28 @@ export default function BookPage() {
       <Nav />
       <main id="main" className="pt-[112px] pb-20 sm:pt-[128px]">
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
-          <header className="max-w-2xl">
-            <p className="eyebrow">Admissions</p>
-            <h1 className="mt-3 font-display text-[clamp(1.9rem,4.6vw,3.1rem)] leading-[1.05] font-semibold tracking-[-0.02em] text-teal-deep">
-              Book a session
+          <header className="max-w-2xl" data-tx-static>
+            <p className="eyebrow tx-ink-l w-fit" style={{ '--tx-base': '0.05s' } as CSSProperties}>
+              Admissions
+            </p>
+            <h1
+              className="tx-wl mt-3 font-display text-[clamp(1.9rem,4.6vw,3.1rem)] leading-[1.05] font-semibold tracking-[-0.02em] text-teal-deep"
+              style={{ '--tx-base': '0.14s' } as CSSProperties}
+            >
+              <Words text="Book a session" />
             </h1>
-            <p className="mt-4 max-w-measure text-[1.02rem] leading-relaxed text-ink-soft">
+            <p
+              className="tx-sweep-l mt-4 max-w-measure text-[1.02rem] leading-relaxed text-ink-soft"
+              style={{ '--tx-base': '0.5s' } as CSSProperties}
+            >
               Tell us a little about who is learning and where suits you. We will find the right batch and
               reply on WhatsApp.
             </p>
           </header>
 
-          <div className="mt-10">
+          {/* The form is left still: it is a task, and the Suspense boundary
+              hydrates on its own schedule, so the text engine stays out of it. */}
+          <div className="mt-10" data-tx-skip>
             <Suspense fallback={<BookingFlow />}>
               <BookingFlowFromUrl />
             </Suspense>

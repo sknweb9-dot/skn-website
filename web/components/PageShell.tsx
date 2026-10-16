@@ -1,9 +1,12 @@
-import type { ReactNode } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import Link from 'next/link';
 import FloatingCta from './FloatingCta';
 import Footer from './Footer';
 import Nav from './Nav';
-import Reveal from './Reveal';
+import Words from './Words';
+
+/** Where in the hero's sequence a piece starts: `--tx-base`, read by the tx-* classes. */
+const at = (seconds: number) => ({ '--tx-base': `${seconds}s` }) as CSSProperties;
 
 /**
  * Chrome shared by every non-home route.
@@ -58,20 +61,33 @@ export function PageHero({
 }) {
   return (
     <section className="border-b border-marigold/20 pt-[140px] pb-14 sm:pb-16">
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        {/* The one entrance on an inner route: eyebrow, headline, lede and
-            actions arrive in reading order. Short travel and a sub-second
-            duration, because it plays on every navigation. */}
-        <Reveal stagger y={14}>
-          <p className="eyebrow">{eyebrow}</p>
-          <h1 className="mt-4 max-w-3xl font-display text-[clamp(2rem,5.5vw,4rem)] leading-[1.02] font-semibold tracking-[-0.02em] text-teal-deep">
-            {accent ? `${title} ${accent}` : title}
-          </h1>
-          {lede ? (
-            <p className="mt-6 max-w-measure text-[1.02rem] leading-relaxed text-ink-soft">{lede}</p>
-          ) : null}
-          {children ? <div className="mt-8">{children}</div> : null}
-        </Reveal>
+      <div className="mx-auto max-w-6xl px-5 sm:px-8" data-tx-static>
+        {/* The one authored entrance on an inner route, played by CSS at first
+            paint so none of it waits for the page to hydrate: the eyebrow is
+            written in, the headline is lifted into place word by word, then the
+            lede is swept in and the actions rise. Roughly a second and a half
+            end to end; each piece is `backwards`-filled, so it holds its first
+            frame through its delay and leaves no styles behind. Below the hero,
+            text arrives as it is scrolled to (components/TextMotion.tsx). */}
+        <p className="eyebrow tx-ink-l w-fit" style={at(0.05)}>
+          {eyebrow}
+        </p>
+        <h1
+          className="tx-wl mt-4 max-w-3xl font-display text-[clamp(2rem,5.5vw,4rem)] leading-[1.02] font-semibold tracking-[-0.02em] text-teal-deep"
+          style={at(0.14)}
+        >
+          <Words text={accent ? `${title} ${accent}` : title} />
+        </h1>
+        {lede ? (
+          <p className="tx-sweep-l mt-6 max-w-measure text-[1.02rem] leading-relaxed text-ink-soft" style={at(0.55)}>
+            {lede}
+          </p>
+        ) : null}
+        {children ? (
+          <div className="tx-rise-l mt-8" style={at(0.8)}>
+            {children}
+          </div>
+        ) : null}
       </div>
     </section>
   );
@@ -115,15 +131,14 @@ export function Section({
             ) : null}
           </div>
         ) : null}
-        {/* No scroll entrance here, on purpose.
+        {/* Scroll entrance: text-only, by components/TextMotion.tsx.
 
-            Every section used to fade and rise 20-28px over a second as it
-            entered view. Repeated on every section of every route, that is the
-            generic entrance rather than an authored one, and it held content at
-            opacity 0 until a ScrollTrigger fired — so find-in-page, anchor jumps
-            and fast scrolls landed on blank space. The site's authored motion is
-            the scrubbed hand in the arch on the home page; each inner route gets
-            exactly one entrance, the hero, in PageHero above. */}
+            An earlier version faded and rose the whole section over a second as
+            it entered view, and held it at opacity 0 until a ScrollTrigger
+            fired, so find-in-page, anchor jumps and fast scrolls landed on
+            blank space. This one lowers only text that is still below the fold,
+            raises it from an IntersectionObserver backed by a sweep, and leaves
+            the section's boxes, rules and pictures alone. */}
         <div className={hasHeader ? 'mt-10' : ''}>{children}</div>
       </div>
     </section>
@@ -135,9 +150,12 @@ export function QuietLink({ href, children }: { href: string; children: ReactNod
   return (
     <Link
       href={href}
-      className="inline-flex items-center gap-1.5 rounded-full border border-teal/25 px-5 py-3 font-sans text-sm font-medium text-teal transition-colors hover:border-teal/50 hover:bg-teal/5"
+      className="group inline-flex items-center gap-1.5 rounded-full border border-teal/25 px-5 py-3 font-sans text-sm font-medium text-teal transition-colors hover:border-teal/50 hover:bg-teal/5"
     >
-      {children} <span aria-hidden>→</span>
+      {children}{' '}
+      <span aria-hidden className="transition-transform duration-300 ease-[var(--ease-temple)] group-hover:translate-x-1">
+        →
+      </span>
     </Link>
   );
 }

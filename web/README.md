@@ -10,7 +10,7 @@ npm install
 npm run dev      # http://localhost:3000
 npm run build    # production build; also type-checks
 npm run lint
-npm test         # vitest: booking, enquiry route, home, stage
+npm test         # vitest: booking, enquiry route, home, stage, gallery
 ```
 
 Copy `.env.example` to `.env.local` for enquiry email (Resend) and the Instagram

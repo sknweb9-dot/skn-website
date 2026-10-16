@@ -4,7 +4,7 @@ import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { gsap } from 'gsap';
-import type { EventSection, GlobeItem } from '@/lib/events';
+import type { GlobeItem } from '@/lib/gallery';
 import { plateExtent, plateTransform, type GlobeShape } from '@/lib/globe';
 
 /**
@@ -39,18 +39,32 @@ import { plateExtent, plateTransform, type GlobeShape } from '@/lib/globe';
  *
  * WHAT THIS COMPONENT DOES NOT DO
  * -------------------------------
- * It owns no chrome, no DOM list, and no routing. The photographs also exist as
- * real markup in GalleryGrid, which is what crawlers and screen readers get;
- * this canvas is a spectacle layered over content that already works without it.
+ * It owns no chrome, no DOM list, and no routing. Every photograph also exists as
+ * real markup in the gallery index (components/gallery/GalleryIndex.tsx), which is
+ * what crawlers and screen readers get; this canvas is a spectacle layered over
+ * content that already works without it.
  */
 
 export type GlobeMode = 'teaser' | 'full';
 
 export type GlobeHandle = {
   focusItem: (id: string) => void;
+  /**
+   * The Reset button: let go of any selected plate, bring the zoom back to its
+   * resting distance, and glide the sphere round to the front view it opened on.
+   * A drag or a new selection cancels the glide.
+   */
   resetView: () => void;
-  /** null clears the filter */
-  setFilter: (sections: EventSection[] | null) => void;
+  /**
+   * Close a selected plate without touching where the sphere is turned: the
+   * camera lets go of the plate and backs off to the resting distance from
+   * wherever it happens to be looking.
+   */
+  releaseFocus: () => void;
+  /** Draw closer (-1) or further away (1), for the plus and minus buttons. */
+  zoom: (direction: 1 | -1) => void;
+  /** The ids that stay lit; everything else dims. null clears the filter. */
+  setFilter: (ids: ReadonlySet<string> | null) => void;
   setAutoRotate: (on: boolean) => void;
   setShape: (shape: GlobeShape) => void;
   /**
@@ -72,6 +86,12 @@ type Props = {
   onReady?: () => void;
   /** Progress 0..1 while the teaser set loads. */
   onLoadProgress?: (loaded: number, total: number) => void;
+  /**
+   * On a page rather than in an overlay: the wheel and a vertical drag belong to
+   * the page, so scrolling past the globe still scrolls. The globe turns on a
+   * horizontal drag and a mouse drag, and zooms on the plus and minus buttons.
+   */
+  embedded?: boolean;
   className?: string;
 };
 
@@ -312,7 +332,7 @@ type PlateMesh = THREE.Mesh<THREE.PlaneGeometry, THREE.MeshBasicMaterial> & {
 };
 
 const GlobeCanvas = forwardRef<GlobeHandle, Props>(function GlobeCanvas(
-  { items, mode, onHover, onSelect, onReady, onLoadProgress, className = '' },
+  { items, mode, onHover, onSelect, onReady, onLoadProgress, embedded = false, className = '' },
   ref,
 ) {
   const hostRef = useRef<HTMLDivElement>(null);
@@ -331,6 +351,8 @@ const GlobeCanvas = forwardRef<GlobeHandle, Props>(function GlobeCanvas(
   const rafRef = useRef(0);
   const shapeRef = useRef<GlobeShape>('sphere');
   const modeRef = useRef<GlobeMode>(mode);
+  const embeddedRef = useRef(embedded);
+  embeddedRef.current = embedded;
   const focusedRef = useRef<PlateMesh | null>(null);
   const hoveredRef = useRef<PlateMesh | null>(null);
 
@@ -338,6 +360,8 @@ const GlobeCanvas = forwardRef<GlobeHandle, Props>(function GlobeCanvas(
   const targetDistRef = useRef(DIST.inside);
   const camGoalRef = useRef<THREE.Vector3 | null>(null);
   const targetGoalRef = useRef<THREE.Vector3 | null>(null);
+  /** True while the camera is gliding back to the front view (resetView). */
+  const homeRef = useRef(false);
 
   /**
    * Resting distance for the current mode, corrected for the frame's shape.
@@ -418,10 +442,18 @@ const GlobeCanvas = forwardRef<GlobeHandle, Props>(function GlobeCanvas(
     },
     resetView() {
       clearFocus(false);
+      homeRef.current = true;
     },
-    setFilter(sections) {
+    releaseFocus() {
+      clearFocus(false);
+    },
+    zoom(direction) {
+      if (focusedRef.current) return;
+      targetDistRef.current = THREE.MathUtils.clamp(targetDistRef.current + direction * 1.1, DIST.min, DIST.max);
+    },
+    setFilter(ids) {
       meshesRef.current.forEach((m) => {
-        m.userData.filtered = Boolean(sections) && !sections!.includes(m.userData.item.section);
+        m.userData.filtered = Boolean(ids) && !ids!.has(m.userData.item.id);
       });
     },
     setAutoRotate(on) {
@@ -456,6 +488,7 @@ const GlobeCanvas = forwardRef<GlobeHandle, Props>(function GlobeCanvas(
     if (!cameraRef.current || !controls) return;
 
     focusedRef.current = mesh;
+    homeRef.current = false;
     controls.autoRotate = false;
     controls.enableRotate = false;
 
@@ -746,6 +779,8 @@ const GlobeCanvas = forwardRef<GlobeHandle, Props>(function GlobeCanvas(
     }
 
     function onPointerDown(event: PointerEvent) {
+      // Taking hold of the sphere cancels a reset glide: the visitor is steering.
+      homeRef.current = false;
       dragged = false;
       downAt = { x: event.clientX, y: event.clientY };
     }
@@ -776,7 +811,7 @@ const GlobeCanvas = forwardRef<GlobeHandle, Props>(function GlobeCanvas(
     }
 
     function onWheel(event: WheelEvent) {
-      if (modeRef.current === 'teaser' || focusedRef.current) return;
+      if (embeddedRef.current || modeRef.current === 'teaser' || focusedRef.current) return;
       event.preventDefault();
       targetDistRef.current = THREE.MathUtils.clamp(
         targetDistRef.current + event.deltaY * 0.0022,
@@ -826,6 +861,10 @@ const GlobeCanvas = forwardRef<GlobeHandle, Props>(function GlobeCanvas(
     const plateNormal = new THREE.Vector3();
     const toCamera = new THREE.Vector3();
     const origin = new THREE.Vector3(0, 0, 0);
+    // The front view the globe opens on, and the scratch rotations for gliding to it.
+    const home = new THREE.Vector3(0, 0, 1);
+    const homeTurn = new THREE.Quaternion();
+    const homeStep = new THREE.Quaternion();
 
     function frame() {
       rafRef.current = requestAnimationFrame(frame);
@@ -861,6 +900,21 @@ const GlobeCanvas = forwardRef<GlobeHandle, Props>(function GlobeCanvas(
 
         scratchDir.copy(camera.position).normalize();
         if (scratchDir.lengthSq() < 1e-6) scratchDir.set(0, 0, 1);
+
+        // Reset: swing the camera round toward the front view along the shortest
+        // arc, a fraction per frame like the distance. Close enough counts as
+        // arrived (auto-rotate keeps nudging it, so it would never land exactly),
+        // and the last stretch snaps so the view is the same every time.
+        if (homeRef.current) {
+          if (scratchDir.dot(home) > 0.9995) {
+            scratchDir.copy(home);
+            homeRef.current = false;
+          } else {
+            homeTurn.setFromUnitVectors(scratchDir, home);
+            homeStep.identity().slerp(homeTurn, EASE.distance);
+            scratchDir.applyQuaternion(homeStep);
+          }
+        }
         camera.position.copy(scratchDir.multiplyScalar(RADIUS * distRef.current));
       }
 
@@ -1005,7 +1059,7 @@ const GlobeCanvas = forwardRef<GlobeHandle, Props>(function GlobeCanvas(
         ref={canvasRef}
         className="block h-full w-full outline-none"
         style={{
-          touchAction: 'none',
+          touchAction: embedded ? 'pan-y' : 'none',
           // In teaser mode the surrounding button owns the interaction.
           pointerEvents: mode === 'full' ? 'auto' : 'none',
         }}

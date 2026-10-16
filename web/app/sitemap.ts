@@ -20,6 +20,7 @@ const ROUTES: { path: string; changeFrequency: MetadataRoute.Sitemap[number]['ch
   { path: '/curriculum', changeFrequency: 'monthly', priority: 0.8 },
   { path: '/book', changeFrequency: 'monthly', priority: 0.7 },
   { path: '/events', changeFrequency: 'monthly', priority: 0.7 },
+  { path: '/gallery', changeFrequency: 'monthly', priority: 0.7 },
   { path: '/about', changeFrequency: 'yearly', priority: 0.6 },
   { path: '/lineage', changeFrequency: 'yearly', priority: 0.6 },
 ];

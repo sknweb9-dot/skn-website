@@ -106,6 +106,13 @@ export default function FramePreloader({
     return () => clearTimeout(t);
   }, [finished]);
 
+  // The home hero's text is held on its first frame until the screen starts to
+  // clear (html[data-intro], see globals.css), so it is lifted into place as the
+  // emblem fades rather than behind it.
+  useEffect(() => {
+    if (finished) delete document.documentElement.dataset.intro;
+  }, [finished]);
+
   if (gone) return null;
 
   const pct = Math.round(shown * 100);

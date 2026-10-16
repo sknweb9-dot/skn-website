@@ -128,7 +128,7 @@ export default function CurriculumPage() {
                 id={level.id}
                 className="glass grain rounded-[1.5rem] px-6 py-7 sm:px-8"
               >
-                <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_16rem] lg:gap-10">
+                <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-10">
                   <div>
                     <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                       <span className="font-display text-[0.78rem] tracking-[0.16em] text-nila-700">
@@ -154,7 +154,32 @@ export default function CurriculumPage() {
                     </div>
                   </div>
 
-                  <div className="lg:border-l lg:border-marigold/25 lg:pl-8">
+                  {/* The picture comes first on a phone and sits to the right of
+                      the prose from `lg`. Every source is 3:2, so nothing is
+                      cropped here; the caption says where it was taken, which
+                      matters for Levels 5 and 6 (no batch runs at them, so they
+                      borrow a stage photograph). */}
+                  <figure className="order-first lg:order-none">
+                    <div className="curtain overflow-hidden rounded-[1rem]">
+                      <Image
+                        src={level.image}
+                        alt={level.imageAlt ?? ''}
+                        width={1200}
+                        height={800}
+                        sizes="(max-width: 1024px) 100vw, 18rem"
+                        className="h-auto w-full"
+                      />
+                    </div>
+                    {level.imageCaption ? (
+                      <figcaption className="mt-2 font-sans text-micro text-ink-faint">
+                        {level.imageCaption}
+                      </figcaption>
+                    ) : null}
+                  </figure>
+                </div>
+
+                <div className="mt-6 grid gap-6 border-t border-marigold/25 pt-5 sm:grid-cols-2 lg:gap-10">
+                  <div>
                     <h4 className="eyebrow">What it develops</h4>
                     <ul className="mt-3 space-y-1.5">
                       {level.develops.map((item) => (
@@ -163,18 +188,20 @@ export default function CurriculumPage() {
                         </li>
                       ))}
                     </ul>
+                  </div>
 
-                    {/* Ties the syllabus to what is actually running, so the page
-                        is a timetable as well as a prospectus.
+                  {/* Ties the syllabus to what is actually running, so the page
+                      is a timetable as well as a prospectus.
 
-                        Capped at three: Level 1 runs at eight venues, and listing
-                        them all made the card several times taller than its own
-                        prose column. The rest live on /locations, which is the
-                        page built for comparing batches anyway. */}
+                      Capped at three: Level 1 runs at eight venues, and listing
+                      them all made the card several times taller than its own
+                      prose column. The rest live on /locations, which is the
+                      page built for comparing batches anyway. */}
+                  <div>
                     {batches.length > 0 ? (
-                      <div className="mt-5 border-t border-marigold/25 pt-4">
+                      <>
                         <h4 className="eyebrow">Running now</h4>
-                        <ul className="mt-2.5 space-y-2">
+                        <ul className="mt-3 space-y-2">
                           {batches.slice(0, 3).map(({ venue, batch }) => (
                             <li key={batch.code} className="font-sans text-[0.78rem] text-ink-faint">
                               <span className="text-ink-soft">
@@ -202,11 +229,14 @@ export default function CurriculumPage() {
                             {batches.length - 3 === 1 ? 'batch' : 'batches'} elsewhere
                           </Link>
                         ) : null}
-                      </div>
+                      </>
                     ) : (
-                      <p className="mt-5 border-t border-marigold/25 pt-4 font-sans text-[0.78rem] leading-relaxed text-ink-faint">
-                        Taught one to one at present. Write to us for availability.
-                      </p>
+                      <>
+                        <h4 className="eyebrow">Running now</h4>
+                        <p className="mt-3 font-sans text-[0.78rem] leading-relaxed text-ink-faint">
+                          Taught one to one at present. Write to us for availability.
+                        </p>
+                      </>
                     )}
                   </div>
                 </div>

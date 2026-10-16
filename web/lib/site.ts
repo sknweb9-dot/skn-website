@@ -600,8 +600,9 @@ export const FAQS = [
  *                 Arangetrams and the gallery. next.config.ts 308s the old path
  *                 so inbound links still land.
  *
- * The list is therefore five items rather than six, which the masthead is
- * happier with.
+ * The list was five items after those two left. /gallery has since joined it as
+ * the sixth, once the globe and the photographs got a page of their own; the
+ * inline masthead only shows from `lg`, and the full-screen menu covers the rest.
  */
 export const NAV_ROUTES = [
   { href: '/about', label: 'Academy' },
@@ -611,6 +612,7 @@ export const NAV_ROUTES = [
   // levels on /curriculum is looking for a batch next, not a gallery.
   { href: '/locations', label: 'Locations' },
   { href: '/events', label: 'Events' },
+  { href: '/gallery', label: 'Gallery' },
 ] as const;
 
 // Booking lives in ./booking.ts: the enquiry flow's rules, the /book URL and

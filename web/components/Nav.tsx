@@ -167,17 +167,19 @@ export default function Nav() {
                       <Link
                         href={route.href}
                         aria-current={active ? 'page' : undefined}
-                        className={`relative block rounded-full px-3.5 py-2 font-sans text-[0.8rem] tracking-wide transition-colors ${
+                        className={`group relative block rounded-full px-3.5 py-2 font-sans text-[0.8rem] tracking-wide transition-colors ${
                           active ? 'text-kumkum' : 'text-ink-soft hover:text-kumkum'
                         }`}
                       >
                         {route.label}
-                        {/* Marigold underscore for the current route. A filled
-                            pill would read as a button among five links. */}
+                        {/* Marigold underscore: always there for the current
+                            route, and drawn in from the left on hover for the
+                            others. A filled pill would read as a button among
+                            five links. */}
                         <span
                           aria-hidden
-                          className={`absolute inset-x-3.5 -bottom-0.5 h-px bg-marigold transition-opacity duration-300 ${
-                            active ? 'opacity-100' : 'opacity-0'
+                          className={`absolute inset-x-3.5 -bottom-0.5 h-px origin-left bg-marigold transition-transform duration-500 ease-[var(--ease-temple)] ${
+                            active ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100 group-focus-visible:scale-x-100'
                           }`}
                         />
                       </Link>

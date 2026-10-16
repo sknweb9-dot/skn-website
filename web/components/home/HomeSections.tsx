@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { ArrowUpRight, MessageCircle, Phone, PlayCircle } from 'lucide-react';
 import BookButton from '../BookButton';
 import ArchFrame from './ArchFrame';
+import Words from '../Words';
 import { bookHref, whatsappHref, type Audience } from '@/lib/booking';
 import {
   BEGIN,
@@ -166,15 +167,32 @@ export function HomeHero() {
   return (
     <Section id="hero" labelledBy="hero-heading">
       <Page steps={0} className="home-hero">
+        {/* The focal moment of the site. Played by CSS from first paint, held on
+            its first frame while the loading screen is up (html[data-intro]),
+            then: the headline is lifted into place word by word, the line under
+            it is swept in, and the button and credentials follow. Nothing here
+            is touched by TextMotion (data-tx-static). */}
         <h1
           id="hero-heading"
-          className="max-w-[18ch] font-display text-[clamp(1.9rem,3.8vw,3.2rem)] leading-[1.04] font-semibold tracking-[-0.02em] text-teal-deep"
+          data-tx-static
+          style={{ '--tx-base': '0.3s' } as CSSProperties}
+          className="tx-wl max-w-[18ch] font-display text-[clamp(1.9rem,3.8vw,3.2rem)] leading-[1.04] font-semibold tracking-[-0.02em] text-teal-deep"
         >
-          {HERO.heading}
+          <Words text={HERO.heading} />
         </h1>
-        <p className="mt-3 font-sans text-[1.05rem] text-ink-soft">{HERO.body}</p>
+        <p
+          data-tx-static
+          style={{ '--tx-base': '1.05s' } as CSSProperties}
+          className="tx-sweep-l mt-3 font-sans text-[1.05rem] text-ink-soft"
+        >
+          {HERO.body}
+        </p>
 
-        <div className="mt-6 flex flex-col items-center gap-4">
+        <div
+          data-tx-static
+          style={{ '--tx-base': '1.35s' } as CSSProperties}
+          className="tx-rise-l mt-6 flex flex-col items-center gap-4"
+        >
           <BookButton source="home-hero" />
           <p className="font-sans text-sm text-ink-faint">
             {HERO.credentials.join(' · ')}
@@ -215,7 +233,10 @@ export function HomeWhy() {
         <ul className="mt-5 grid max-w-[46rem] gap-x-12 gap-y-9 sm:grid-cols-2">
           {figures.map((f) => (
             <li key={f.label} className="border-t-2 border-marigold pt-4">
-              <p className="font-display text-[clamp(2.6rem,5vw,4.2rem)] leading-none font-semibold text-marigold">
+              <p
+                data-count
+                className="font-display text-[clamp(2.6rem,5vw,4.2rem)] leading-none font-semibold text-marigold"
+              >
                 {f.figure}
               </p>
               <p className="mt-3 max-w-[18rem] text-[1.05rem] leading-snug text-cream/90">{f.label}</p>
