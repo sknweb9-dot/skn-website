@@ -7,7 +7,7 @@ licensed and redistributable. Each skill folder keeps its own licence file.
 
 - **Upstream:** https://github.com/pbakaus/impeccable
 - **Licence:** Apache License 2.0 — `impeccable/LICENSE`
-- **Version:** 4.4.0 (skill), engine 4.0.0
+- **Version:** 4.6.0 (skill and engine)
 - **Vendored from:** the repository's own `.kiro/skills/impeccable/` variant,
   which already rewrites internal script paths to `.kiro/skills/impeccable/...`
   and omits the Claude-only `user-invocable` and `argument-hint` front matter.
@@ -18,8 +18,10 @@ licensed and redistributable. Each skill folder keeps its own licence file.
   Kiro's documented skill schema puts it.
 - **Runtime dependency:** `scripts/impeccable.cmd` runs a self-contained engine
   binary, downloaded once on first use. Verified working on Windows
-  (`--version` returns 4.0.0). The skill documents a degraded path if the
-  launcher is unavailable.
+  (`--version` returns 4.6.0). The skill documents a degraded path if the
+  launcher is unavailable. `npx impeccable update` resets the front matter and
+  deletes `LICENSE` and `NOTICE.md` from the skill folder; after running it,
+  restore those two files from git and move `version` back under `metadata`.
 
 ## frontend-design
 
