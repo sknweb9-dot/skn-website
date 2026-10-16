@@ -10,11 +10,14 @@
  * not discover one. They are also about 300KB of third-party JavaScript each,
  * which rules out a rail of them regardless.
  *
- * So this reads the Instagram Graph API, which needs:
+ * So this reads the Instagram API with Instagram Login (graph.instagram.com),
+ * which needs:
  *
- *   1. The academy's Instagram converted to a Business or Creator account.
- *   2. That account linked to a Facebook Page.
- *   3. A long-lived access token (60 days, refreshable) for that Page.
+ *   1. The academy's Instagram set to a Business or Creator account.
+ *   2. A Meta app with the Instagram API product, and that account added as a
+ *      tester or connected to it.
+ *   3. A long-lived access token (60 days, refreshable) generated for the
+ *      account. These start with "IGAA".
  *
  * That is genuinely a chore, and it is the only route to a live feed. Until it is
  * done, `instagramConfigured()` is false and the rail says so rather than
@@ -22,8 +25,10 @@
  *
  * CONFIGURATION (server-side only; never prefix these with NEXT_PUBLIC_)
  * ---------------------------------------------------------------------
- *   INSTAGRAM_TOKEN    long-lived access token
- *   INSTAGRAM_USER_ID  the IG user id the token is scoped to
+ *   INSTAGRAM_TOKEN    long-lived access token. INSTAGRAM_DISPLAY_API is read as
+ *                      well, because that is what the Meta dashboard calls it.
+ *   INSTAGRAM_USER_ID  optional. The token already belongs to one account, so
+ *                      when this is unset the feed is read from `me`.
  *
  * Called over `fetch` rather than through a Facebook SDK, for the same reasons
  * lib/mail.ts talks to Resend directly: one request, no dependency to keep
@@ -72,15 +77,16 @@ type GraphMedia = {
 };
 
 function token(): string {
-  return process.env.INSTAGRAM_TOKEN?.trim() ?? '';
+  return (process.env.INSTAGRAM_TOKEN ?? process.env.INSTAGRAM_DISPLAY_API)?.trim() ?? '';
 }
 
+/** `me` reads the account the token was issued for, so an id is optional. */
 function userId(): string {
-  return process.env.INSTAGRAM_USER_ID?.trim() ?? '';
+  return process.env.INSTAGRAM_USER_ID?.trim() || 'me';
 }
 
 export function instagramConfigured(): boolean {
-  return token().length > 0 && userId().length > 0;
+  return token().length > 0;
 }
 
 /** First sentence or 90 characters, whichever comes first. */

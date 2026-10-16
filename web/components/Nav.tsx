@@ -195,7 +195,6 @@ export default function Nav() {
               {pathname === BOOK_PATH ? null : (
                 <BookButton
                   source="nav"
-                  inline={false}
                   className="pointer-events-auto !px-5 !py-2.5"
                   showArrow={false}
                 />

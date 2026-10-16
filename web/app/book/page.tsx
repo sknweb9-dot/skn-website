@@ -26,9 +26,8 @@ export const metadata: Metadata = {
 /**
  * The admissions enquiry.
  *
- * Its own chrome rather than PageShell: no FloatingCta, because a bar offering
- * "Book a session" on the page where you are booking one is noise, and no
- * PageHero, because the flow should start above the fold on a phone.
+ * Its own chrome rather than PageShell: no PageHero, because the flow should
+ * start above the fold on a phone.
  *
  * STATIC, WITH THE PREFILL READ IN THE BROWSER
  * --------------------------------------------

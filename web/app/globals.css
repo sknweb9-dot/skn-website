@@ -350,6 +350,12 @@
   text-align: center;
   min-height: 100svh;
 }
+/* Tighter under the hero's arch than under the others: the headline belongs to
+   the gesture above it, and every pixel here is one the credentials line at the
+   foot of the first screen does not have. */
+.home-section[data-home-section='hero'] .home-stacked-arch {
+  margin-bottom: 1.25rem;
+}
 .home-section[data-home-section='hero'] .home-stacked-arch {
   /* Never taller than 42% of the screen, so a short phone still has its
      headline and button on the first screen. */
@@ -358,6 +364,37 @@
 @media (max-height: 700px) {
   .home-section[data-home-section='hero'] .home-stacked-arch {
     width: min(70vw, 17rem, calc(34svh * 0.7215));
+  }
+}
+/* Short phones, measured as the browser leaves them.
+
+   `svh` is the viewport with the browser's own bars showing, which is the screen
+   a phone starts on, so the hero is sized to that rather than to the full-height
+   figure that only appears after the bars have slid away. On a 375x553 window
+   the credentials line at the foot of the hero used to land 57px below the edge,
+   under the bar. Everything here buys that space back, a little at a time, so no
+   one piece looks squeezed: a smaller arch, a smaller headline (which also keeps
+   it on two lines at 375px), and tighter gaps. The foot is left 1.5rem of air. */
+@media (max-width: 40rem) and (max-height: 45rem) {
+  .home-section[data-home-section='hero'] {
+    padding-top: calc(var(--rail-nav-h, 4.8rem) + 0.5rem);
+    padding-bottom: 2rem;
+  }
+  .home-section[data-home-section='hero'] .home-stacked-arch {
+    width: min(70vw, 17rem, calc(30svh * 0.7215));
+    margin-bottom: 0.875rem;
+  }
+  .home-section[data-home-section='hero'] #hero-heading {
+    font-size: 1.65rem;
+  }
+  /* The line under the headline wrapped its last word ("2009") onto a line of
+     its own at 360px; one size down keeps it to one line. */
+  .home-section[data-home-section='hero'] .home-page-inner > p {
+    font-size: 1rem;
+  }
+  .home-section[data-home-section='hero'] .home-page-inner > div {
+    margin-top: 1rem;
+    gap: 0.75rem;
   }
 }
 .home-section[data-home-section='hero'] .home-page-inner {
@@ -926,6 +963,46 @@ html.lenis body {
   .cue-bead {
     animation: cue-bead 1.9s var(--ease-temple) infinite;
   }
+}
+
+/* The desktop cue: the word set vertically in ink, reading downward, with an
+   arrow under it that nods. Ink, not teal: this is the one thing on the first
+   screen that must not be missed, and it should read as the darkest mark there.
+   Ink is the site's black (#2b1e16, about 14:1 on cream). */
+.cue-word {
+  writing-mode: vertical-rl;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+.cue-arrow {
+  display: block;
+  width: 0.9rem;
+  height: 2.25rem;
+  color: var(--color-ink);
+}
+@keyframes cue-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(0.55rem);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .cue-arrow {
+    animation: cue-bounce 1.8s ease-in-out infinite;
+  }
+}
+
+/* The stage has its own cue, inside the live arch; the hero's still carries the
+   phone one, which the stage must not show a second time. */
+html[data-stage='on'] .rail-cue {
+  display: none;
 }
 
 /* ---------------------------------------------------------------------------

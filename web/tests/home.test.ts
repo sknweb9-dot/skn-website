@@ -114,6 +114,6 @@ describe('navigation', () => {
     for (const route of NAV_ROUTES) {
       expect(Object.keys(route).sort()).toEqual(['href', 'label']);
     }
-    expect(NAV_ROUTES.map((r) => r.label)).toEqual(['Academy', 'Lineage', 'Curriculum', 'Locations', 'Events', 'Gallery']);
+    expect(NAV_ROUTES.map((r) => r.label)).toEqual(['Home', 'Academy', 'Lineage', 'Curriculum', 'Locations', 'Events', 'Gallery']);
   });
 });

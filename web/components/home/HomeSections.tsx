@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { ArrowUpRight, MessageCircle, Phone, PlayCircle } from 'lucide-react';
 import BookButton from '../BookButton';
 import ArchFrame from './ArchFrame';
+import ScrollCue from '../ScrollCue';
 import Words from '../Words';
 import { bookHref, whatsappHref, type Audience } from '@/lib/booking';
 import {
@@ -89,7 +90,7 @@ function StackedArch({ id }: { id: HomeSectionId }) {
   const section = homeSection(id);
   const frame = Math.round(restingFrame(section));
   return (
-    <figure className="home-stacked-arch m-0" aria-hidden>
+    <figure className="home-stacked-arch relative m-0" aria-hidden>
       <div className="relative aspect-[720/1000] w-full">
         <div className="arch absolute inset-0 overflow-hidden bg-lamp">
           <Image
@@ -112,6 +113,7 @@ function StackedArch({ id }: { id: HomeSectionId }) {
           {section.mudra.literal}
         </span>
       </figcaption>
+      {id === 'hero' ? <ScrollCue variant="capsule" /> : null}
     </figure>
   );
 }

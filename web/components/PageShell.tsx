@@ -1,6 +1,5 @@
 import type { CSSProperties, ReactNode } from 'react';
 import Link from 'next/link';
-import FloatingCta from './FloatingCta';
 import Footer from './Footer';
 import Nav from './Nav';
 import Words from './Words';
@@ -16,12 +15,9 @@ const at = (seconds: number) => ({ '--tx-base': `${seconds}s` }) as CSSPropertie
  * the masthead / hero / footer arrangement five times invites them to drift
  * apart.
  *
- * FloatingCta lives here rather than in the shared layout. These are long
- * documents whose hero CTA scrolls out of reach within one screen, which is
- * exactly the gap it was written for. The home page does not get it: the acts
- * carry their own calls to action, the masthead returns on any upward scroll
- * with `Book a session` in it, and on a phone the bar would sit over the foot of the
- * act cards.
+ * There is no floating booking bar. One was tried and removed as excessive: the
+ * masthead returns on any upward scroll with `Book a session` in it, and the
+ * phone number is in the footer and the menu.
  */
 export function PageShell({ children }: { children: ReactNode }) {
   return (
@@ -29,7 +25,6 @@ export function PageShell({ children }: { children: ReactNode }) {
       <Nav />
       <main id="main">{children}</main>
       <Footer />
-      <FloatingCta />
     </>
   );
 }

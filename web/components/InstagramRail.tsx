@@ -232,9 +232,9 @@ function Unconfigured() {
       {process.env.NODE_ENV !== 'production' ? (
         <p className="mx-auto mt-6 max-w-lg rounded-xl border border-kumkum/30 bg-kumkum/5 px-4 py-3 font-sans text-[0.72rem] leading-relaxed text-kumkum">
           <strong className="font-semibold">Feed not connected.</strong> Set{' '}
-          <code>INSTAGRAM_TOKEN</code> and <code>INSTAGRAM_USER_ID</code> to show the
-          live rail — see <code>lib/instagram.ts</code> for what the account needs
-          first. Alternatively, send a list of post URLs and this can render them
+          <code>INSTAGRAM_TOKEN</code> to show the live rail — see{' '}
+          <code>lib/instagram.ts</code> for what the account needs first.
+          Alternatively, send a list of post URLs and this can render them
           as fixed embeds with no credentials at all.
         </p>
       ) : null}

@@ -518,7 +518,7 @@ function StageEngine({
       <div ref={wipeB} aria-hidden className="home-wipe" style={{ clipPath: 'inset(100% 0 0 0)' }} />
 
       <div ref={archRef} className="home-arch group" data-dark="false">
-        <ScrollCue ref={cueRef} />
+        <ScrollCue ref={cueRef} variant="vertical" />
         <div className="home-arch-box">
           <div className="home-arch-shape arch">
             <canvas

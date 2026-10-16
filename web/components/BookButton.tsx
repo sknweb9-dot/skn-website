@@ -41,10 +41,6 @@ const VARIANTS: Record<Variant, string> = {
  * The label lives in lib/booking.ts as BOOK_LABEL and is the default here, so a
  * new instance cannot drift. Contextual labels are still passed as children
  * where the button carries extra intent.
- *
- * `inline` marks a button that sits in page content. FloatingCta hides while
- * any inline button is on screen, so two booking controls are never shown side
- * by side. The masthead, menu and floating bar pass `inline={false}`.
  */
 export default function BookButton({
   source = 'site',
@@ -55,7 +51,6 @@ export default function BookButton({
   audience,
   region,
   venue,
-  inline = true,
   onClick,
 }: {
   source?: string;
@@ -63,7 +58,6 @@ export default function BookButton({
   className?: string;
   children?: React.ReactNode;
   showArrow?: boolean;
-  inline?: boolean;
   onClick?: () => void;
 } & Omit<BookPrefill, 'source'>) {
   const ref = useRef<HTMLAnchorElement>(null);
@@ -90,7 +84,6 @@ export default function BookButton({
       ref={ref}
       href={bookHref({ source, audience, region, venue })}
       onClick={onClick}
-      data-book-inline={inline ? '' : undefined}
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
       className={`group inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 font-sans text-sm font-semibold tracking-wide transition-[background-color,color,border-color,transform,box-shadow] duration-300 ${VARIANTS[variant]} ${className}`}

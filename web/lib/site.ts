@@ -603,8 +603,13 @@ export const FAQS = [
  * The list was five items after those two left. /gallery has since joined it as
  * the sixth, once the globe and the photographs got a page of their own; the
  * inline masthead only shows from `lg`, and the full-screen menu covers the rest.
+ *
+ * Home leads it. The logo already links home, but not everyone knows a logo is a
+ * link, so the word is there too: in the masthead, the menu and the footer, which
+ * all read this list.
  */
 export const NAV_ROUTES = [
+  { href: '/', label: 'Home' },
   { href: '/about', label: 'Academy' },
   { href: '/lineage', label: 'Lineage' },
   { href: '/curriculum', label: 'Curriculum' },

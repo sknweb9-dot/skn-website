@@ -151,7 +151,7 @@ export default function MobileMenu({ onClose }: { onClose: () => void }) {
       <div className="relative mt-auto px-4 pt-10 pb-8 sm:px-7">
         {/* Closes explicitly as well as by navigation: from /book itself the
             path does not change, so Nav's derived close would not fire. */}
-        <BookButton source="menu" className="w-full !py-4" inline={false} onClick={onClose} />
+        <BookButton source="menu" className="w-full !py-4" onClick={onClose} />
 
         <div className="mt-7 flex flex-col gap-2 font-sans text-sm text-ink-soft">
           <a href={`tel:${SITE.phoneE164}`} className="transition-colors hover:text-kumkum">
