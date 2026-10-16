@@ -241,6 +241,10 @@ function StageEngine({
     const dots = dotsRef.current;
     const dotEls = Array.from(dots?.querySelectorAll<HTMLButtonElement>('button') ?? []);
     const heroStill = pin.querySelector<HTMLElement>('[data-home-section="hero"] .home-stacked-arch');
+    // The hero's headline, line and button block, which leave with the arch.
+    const heroPieces = Array.from(
+      pin.querySelectorAll<HTMLElement>('[data-home-section="hero"] .home-page-inner > *'),
+    );
 
     // ---- state -------------------------------------------------------------
     let vh = window.innerHeight;
@@ -351,14 +355,27 @@ function StageEngine({
       const maxScroll = Math.max(1, stageScroll(plan, m));
       y = Math.min(maxScroll, Math.max(0, -track.getBoundingClientRect().top));
 
-      // Arch: hero pose -> dock pose.
-      const e = smooth(y / (m.hero * 0.7));
+      // Arch: hero pose -> dock pose. The glide is a fifth longer than the hero,
+      // so the first section arrives when the arch is about 93% of the way: its
+      // right edge has already cleared the column the section's text sits in,
+      // and the last few pixels of settling happen under the arriving words.
+      const e = smooth(y / (m.hero * 1.2));
       const lerp = (a: number, b: number) => a + (b - a) * e;
       arch.style.left = `${lerp(hero.left, dock.left)}px`;
       arch.style.top = `${lerp(hero.top, dock.top)}px`;
       arch.style.width = `${lerp(hero.width, dock.width)}px`;
       arch.style.height = `${lerp(hero.height, dock.height)}px`;
       if (cueRef.current) cueRef.current.style.opacity = String(1 - Math.min(1, y / 120));
+
+      // The hero's text leaves with the arch: each piece drifts up and fades on
+      // the scroll, headline first, so by the time the arch is half way there is
+      // only the arch crossing a clean ground. Opacity and a shift, never
+      // display or visibility: the text stays in the page and the reading order.
+      heroPieces.forEach((el, i) => {
+        const t = smooth((y / m.hero - (0.04 + i * 0.08)) / 0.5);
+        el.style.opacity = t > 0 ? String(1 - t) : '';
+        el.style.translate = t > 0 ? `0 ${(-2.4 * t).toFixed(2)}rem` : '';
+      });
 
       // Which page.
       const step = stepAt(y, plan, m);
@@ -507,6 +524,10 @@ function StageEngine({
       av.dispose();
       track.style.height = '';
       pageEls.forEach((el) => delete el.dataset.state);
+      heroPieces.forEach((el) => {
+        el.style.opacity = '';
+        el.style.translate = '';
+      });
       if (timelineTrack) timelineTrack.style.transform = '';
     };
   }, [trackRef, pinRef]);

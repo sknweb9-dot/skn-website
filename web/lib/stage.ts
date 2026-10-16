@@ -12,6 +12,12 @@
  * PAGE_VH of the viewport's height. The hero is step 0 and is HERO_VH tall; it
  * is declared with `data-steps="0"`.
  *
+ * The hero's length is the length of its hand-over, not of a pause. It was 0.8
+ * of a screen, of which the arch's glide to the left used only the first 0.56,
+ * and the last stretch was the hero's text standing alone in a screen the arch
+ * had left. It is now 0.5, and the glide is 1.2 times the hero (HomeStage), so
+ * the first section arrives while the arch is still settling into its dock.
+ *
  *   scroll position  ->  step  ->  page        (stepAt, activePage)
  *   scroll position  ->  moment of the footage (frameAt)
  *
@@ -20,7 +26,7 @@
  * hand's time is spread over whatever the plan gives each section.
  */
 
-export const HERO_VH = 0.8;
+export const HERO_VH = 0.5;
 export const PAGE_VH = 0.7;
 /** After the last page, the stage holds this many steps before the footer arrives. */
 export const TAIL_STEPS = 0.6;

@@ -32,7 +32,7 @@ const plan = buildPlan([
   { section: 'voices', steps: 1 },
   { section: 'begin', steps: 1 },
 ]);
-const m = metricsFor(1000); // hero 800px, page 700px
+const m = metricsFor(1000); // hero HERO_VH of that (500px), page 700px
 
 describe('buildPlan', () => {
   it('numbers steps from the hero at 0 and counts the rest', () => {
@@ -62,10 +62,10 @@ describe('buildPlan', () => {
 describe('stepAt and activePage', () => {
   it('holds the hero for HERO_VH of the viewport, then a page per PAGE_VH', () => {
     expect(stepAt(0, plan, m)).toBe(0);
-    expect(stepAt(799, plan, m)).toBe(0);
-    expect(stepAt(800, plan, m)).toBe(1);
-    expect(stepAt(1499, plan, m)).toBe(1);
-    expect(stepAt(1500, plan, m)).toBe(2);
+    expect(stepAt(m.hero - 1, plan, m)).toBe(0);
+    expect(stepAt(m.hero, plan, m)).toBe(1);
+    expect(stepAt(m.hero + 699, plan, m)).toBe(1);
+    expect(stepAt(m.hero + 700, plan, m)).toBe(2);
   });
 
   it('never runs past the last step', () => {
@@ -94,8 +94,8 @@ describe('stepAt and activePage', () => {
 describe('positions', () => {
   it('maps steps and sections back to scroll positions', () => {
     expect(yOfStep(0, m)).toBe(0);
-    expect(yOfStep(1, m)).toBe(800);
-    expect(yOfStep(3, m)).toBe(800 + 2 * 700);
+    expect(yOfStep(1, m)).toBe(m.hero);
+    expect(yOfStep(3, m)).toBe(m.hero + 2 * 700);
     expect(yOfSection('story', plan, m)).toBe(yOfStep(3, m));
     expect(stepAt(yOfSection('honours', plan, m), plan, m)).toBe(10);
   });
@@ -125,11 +125,11 @@ describe('the hand', () => {
   const anchors = anchorsFor(plan, m, frames);
 
   it('puts each anchor in the middle of its section', () => {
-    expect(anchors[0].y).toBe(400);
-    // why: steps 1..2 -> 800 + 1 page
-    expect(anchors[1].y).toBe(800 + 700);
+    expect(anchors[0].y).toBe(m.hero * 0.5);
+    // why: steps 1..2 -> the hero, then 1 page
+    expect(anchors[1].y).toBe(m.hero + 700);
     // story: steps 3..9 -> centre at (2 + 9) / 2 pages
-    expect(anchors[2].y).toBe(800 + 5.5 * 700);
+    expect(anchors[2].y).toBe(m.hero + 5.5 * 700);
   });
 
   it('reaches each gesture exactly at its anchor and plays forwards between them', () => {
