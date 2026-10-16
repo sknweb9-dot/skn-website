@@ -366,6 +366,13 @@
     width: min(70vw, 17rem, calc(34svh * 0.7215));
   }
 }
+/* On a phone the credentials line sits a little further from the button than on
+   a desktop, where the two read as a pair. */
+@media (max-width: 40rem) {
+  .home-section[data-home-section='hero'] .home-page-inner > div {
+    gap: 1.25rem;
+  }
+}
 /* Short phones, measured as the browser leaves them.
 
    `svh` is the viewport with the browser's own bars showing, which is the screen
@@ -394,7 +401,7 @@
   }
   .home-section[data-home-section='hero'] .home-page-inner > div {
     margin-top: 1rem;
-    gap: 0.75rem;
+    gap: 1.25rem;
   }
 }
 .home-section[data-home-section='hero'] .home-page-inner {
@@ -965,18 +972,24 @@ html.lenis body {
   }
 }
 
-/* The desktop cue: the word set vertically in ink, reading downward, with an
-   arrow under it that nods. Ink, not teal: this is the one thing on the first
-   screen that must not be missed, and it should read as the darkest mark there.
-   Ink is the site's black (#2b1e16, about 14:1 on cream). */
+/* The desktop cue: the word set vertically in ink, in the display face, reading
+   downward, with an arrow under it. Ink, not teal: this is the one thing on the
+   first screen that must not be missed, and it should read as the darkest mark
+   there. Ink is the site's black (#2b1e16, about 14:1 on cream). Cinzel is the
+   site's own inscriptional capital, already loaded, so the cue costs no request
+   and belongs to the headline below it rather than to the UI around it. */
 .cue-word {
+  display: flex;
   writing-mode: vertical-rl;
-  font-family: var(--font-sans);
-  font-size: 0.8125rem;
+  font-family: var(--font-display);
+  font-size: 1rem;
   font-weight: 600;
-  letter-spacing: 0.32em;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--color-ink);
+}
+.cue-letter {
+  display: inline-block;
 }
 .cue-arrow {
   display: block;
@@ -984,18 +997,68 @@ html.lenis body {
   height: 2.25rem;
   color: var(--color-ink);
 }
-@keyframes cue-bounce {
-  0%,
-  100% {
-    transform: translateY(0);
+
+/* A wave of springs. Each piece dips toward the page's direction of travel, then
+   is released and rings back through its rest position before settling, once
+   every 2.6s; the delay steps down the word and off the end of the arrow.
+
+   The release uses a damped spring, sampled into linear(): zeta 0.3, 15 rad/s,
+   which overshoots by a third of the dip and is still by the end of the curve.
+   The dip itself eases out. The rest of the cycle is stillness, on purpose: a cue
+   that never stops moving stops being seen.
+
+   No database entry covers spring easing (ui-ux-pro-max returned no match), so
+   the curve is computed rather than borrowed. linear() is in every current
+   browser; where it is not, the declaration is dropped and the release uses the
+   keyframe's default ease, which still reads as a nod. */
+@keyframes cue-spring {
+  0% {
+    translate: 0 0;
+    animation-timing-function: cubic-bezier(0.3, 0, 0.2, 1);
   }
-  50% {
-    transform: translateY(0.55rem);
+  14% {
+    translate: 0 var(--cue-amp, 0.3rem);
+    animation-timing-function: linear(
+      0,
+      0.168,
+      0.545,
+      0.948,
+      1.241,
+      1.367,
+      1.337,
+      1.211,
+      1.057,
+      0.934,
+      0.87,
+      0.867,
+      0.907,
+      0.964,
+      1.014,
+      1.044,
+      1.051,
+      1.04,
+      1.019,
+      0.999,
+      0.986,
+      0.981,
+      0.984,
+      0.991,
+      1
+    );
+  }
+  62%,
+  100% {
+    translate: 0 0;
   }
 }
 @media (prefers-reduced-motion: no-preference) {
+  .cue-letter,
   .cue-arrow {
-    animation: cue-bounce 1.8s ease-in-out infinite;
+    animation: cue-spring 2.6s infinite;
+    animation-delay: calc(var(--i, 0) * 0.09s);
+  }
+  .cue-arrow {
+    --cue-amp: 0.55rem;
   }
 }
 

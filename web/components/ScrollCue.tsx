@@ -1,3 +1,5 @@
+import type { CSSProperties } from 'react';
+
 /**
  * The invitation to scroll, set beside the arch. Two forms, one for each
  * presentation of the home page.
@@ -12,24 +14,29 @@
  * widely understood "scroll" affordance there is.
  *
  * It is server-rendered into the hero's still arch, so it sits in the document
- * and scrolls away with the hero rather than being driven by the script. It was
- * desktop-only until the phone layout got a hero arch wide enough to leave a
- * margin for it; the stage hides it (globals.css), which has its own.
+ * and scrolls away with the hero rather than being driven by the script. The
+ * stage hides it (globals.css), which has its own.
  *
  * `vertical` — the desktop stage
  * ------------------------------
- * The word set vertically in ink, reading downward, with an arrow beneath it that
- * bounces a few pixels. The word is still, the arrow moves: the eye follows the
- * direction of travel, and a quiet loop is enough on a large screen where the
- * cue has a lot of empty room to itself. Under reduced motion the arrow rests.
+ * The word set vertically in ink, in the display face, reading downward, with an
+ * arrow beneath it. Each letter and then the arrow dips and springs back in turn,
+ * a few pixels each, so a small wave runs down the word and off the end of the
+ * arrow: the direction the page is asked to go. The spring is a damped
+ * oscillation sampled into a CSS `linear()` curve (see `cue-spring` in
+ * globals.css), so the letters overshoot and settle rather than easing back.
+ * Then it rests for most of the cycle. Under reduced motion it all sits still.
  *
- * It is anchored to the arch's own box with `right-full`, not to the viewport
- * centre: an offset from the centre cannot stay beside the arch, because the
- * arch's width follows its clamped height. It inherits the arch's travel, which
- * costs nothing: it has faded out by 1.2% of scroll progress, and the arch first
- * moves at 10%. Opacity is written by the home arch on every tick, so nothing
- * here should set it.
+ * It is centred on the arch's left edge, where the side is straight, rather than
+ * hung from the dome's shoulder. It is anchored to the arch's own box with
+ * `right-full`, not to the viewport centre: an offset from the centre cannot
+ * stay beside the arch, because the arch's width follows its clamped height. It
+ * inherits the arch's travel, which costs nothing: it has faded out by 1.2% of
+ * scroll progress, and the arch first moves at 10%. Opacity is written by the
+ * home arch on every tick, so nothing here should set it.
  */
+const WORD = 'Scroll';
+
 export default function ScrollCue({
   variant,
   ref,
@@ -40,16 +47,18 @@ export default function ScrollCue({
   if (variant === 'capsule') {
     // A span, not a div: the hero still's own rules address its `> div` (to hide
     // the picture once the live arch is up), and this must not be caught by them.
+    // The figure is the picture plus its two-line caption, so half of it sits
+    // 1.5rem below the middle of the arch; the offset puts the cue on the arch.
     return (
       <span
         aria-hidden
-        className="rail-cue pointer-events-none absolute top-[6%] left-full ml-2.5 flex flex-col items-center gap-2.5"
+        className="rail-cue pointer-events-none absolute top-[calc(50%-1.5rem)] left-full ml-1 flex -translate-y-1/2 flex-col items-center gap-2.5"
       >
         <span className="cue-capsule">
           <span className="cue-bead" />
         </span>
-        <span className="font-sans text-xs font-semibold tracking-[0.18em] text-teal-deep uppercase">
-          Scroll
+        <span className="font-display text-micro font-semibold tracking-[0.04em] text-teal-deep uppercase">
+          {WORD}
         </span>
       </span>
     );
@@ -59,10 +68,25 @@ export default function ScrollCue({
     <div
       ref={ref}
       aria-hidden
-      className="pointer-events-none absolute top-[10%] right-full mr-8 flex flex-col items-center gap-4 lg:mr-12"
+      className="pointer-events-none absolute top-1/2 right-full mr-8 flex -translate-y-1/2 flex-col items-center gap-3.5 lg:mr-12"
     >
-      <span className="cue-word">Scroll</span>
-      <svg viewBox="0 0 16 40" className="cue-arrow" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <span className="cue-word">
+        {WORD.split('').map((letter, i) => (
+          <span key={i} className="cue-letter" style={{ '--i': i } as CSSProperties}>
+            {letter}
+          </span>
+        ))}
+      </span>
+      <svg
+        viewBox="0 0 16 40"
+        className="cue-arrow"
+        style={{ '--i': WORD.length } as CSSProperties}
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
         <path d="M8 2v34M2 30l6 6 6-6" />
       </svg>
     </div>
