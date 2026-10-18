@@ -129,7 +129,7 @@ export default function LineagePage() {
       {/* Milestones */}
       <Section
         eyebrow="The story so far"
-        heading="From one room to two countries"
+        heading="From one room to three countries"
         lede="Every entry below is drawn from the academy's own record."
       >
         <ol className="relative space-y-8 border-l border-marigold/30 pl-6 sm:pl-8">

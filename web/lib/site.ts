@@ -279,6 +279,7 @@ export const FACULTY: Person[] = [
     credentials: [
       'Diploma, Rukmini Devi College of Fine Arts, Kalakshetra Foundation',
       'M.A. Bharatanatyam, Tamil Nadu Dr. J. Jayalalithaa Music and Fine Arts University',
+      'Graded Artist, Doordarshan',
     ],
   },
   {
@@ -449,7 +450,7 @@ export const MILESTONES = [
     // Corrected by the academy: teaching began in Besant Nagar, under the name
     // Samarpan, with a single student. The move to Sholinganallur and the name
     // Shanti Kala Nikketan came later - see the 2018 entry.
-    body: 'Teaching begins in Besant Nagar under the name Samarpan, with a single student — Aparna. The Kalakshetra style of Bharatanatyam is the method from the first class.',
+    body: 'Teaching begins in Besant Nagar under the name Samarppan, with a single student — Aparna. The Kalakshetra style of Bharatanatyam is the method from the first class.',
     place: 'Besant Nagar, Chennai',
   },
   {
@@ -473,7 +474,7 @@ export const MILESTONES = [
   {
     year: 'Udaan',
     title: 'A platform for every dancer',
-    body: 'Udaan — "flying high to reach our goals" — is created so that every dancer has a stage, irrespective of their stage of learning. Editions follow in 2023 and 2025.',
+    body: 'Udaan — "flying high to reach our goals" — is created so that every dancer has a stage, irrespective of their level of learning. Editions follow in 2023 and 2025.',
     place: 'Chennai',
   },
   {

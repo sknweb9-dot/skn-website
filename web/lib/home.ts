@@ -505,7 +505,7 @@ export const VOICES_COPY = { heading: 'In their words' } as const;
 
 export const BEGIN = {
   heading: 'Who are the classes for?',
-  note: 'There is no separate trial class. Once you have been in touch, you are welcome to sit in on an ongoing session.',
+  note: 'You are welcome to observe one of our ongoing classes by getting in touch with us in advance',
 } as const;
 
 // ---------------------------------------------------------------------------
