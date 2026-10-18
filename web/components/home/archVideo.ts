@@ -25,6 +25,8 @@
  * the arch's own aspect (see `--arch-ratio`).
  */
 
+import { handShiftAtSeconds } from '@/lib/footage';
+
 /** The hand sits high in the cropped footage; the arch's dome is narrow at the top. */
 const SHIFT_DOWN = 0.07;
 
@@ -32,10 +34,12 @@ const VERTEX = `attribute vec2 p;varying vec2 uv;
 void main(){uv=vec2(p.x*.5+.5,.5-p.y*.5-(${SHIFT_DOWN.toFixed(3)}));gl_Position=vec4(p,0.,1.);}`;
 
 // Above the top of the footage there is only backdrop; mirror it so the first
-// row is not smeared into streaks across the shifted-down area.
-const FRAGMENT = `precision mediump float;varying vec2 uv;uniform sampler2D t;uniform float raw;
+// row is not smeared into streaks across the shifted-down area. `sx` moves the
+// picture toward the far side of the hand (lib/footage.ts); past the arm's edge
+// the clamp repeats the last column, which is the arm.
+const FRAGMENT = `precision mediump float;varying vec2 uv;uniform sampler2D t;uniform float raw;uniform float sx;
 void main(){
-  vec2 u=vec2(uv.x,abs(uv.y));
+  vec2 u=vec2(clamp(uv.x+sx,0.,1.),abs(uv.y));
   vec3 c=texture2D(t,u).rgb;
   float ch=max(max(c.r,c.g),c.b)-min(min(c.r,c.g),c.b);
   float a=smoothstep(.133,.243,ch);
@@ -91,6 +95,7 @@ export function createArchVideo(canvas: HTMLCanvasElement, video: HTMLVideoEleme
   for (const k of [gl.TEXTURE_MIN_FILTER, gl.TEXTURE_MAG_FILTER]) gl.texParameteri(gl.TEXTURE_2D, k, gl.LINEAR);
   gl.clearColor(0, 0, 0, 0);
   const rawLocation = gl.getUniformLocation(program, 'raw');
+  const shiftLocation = gl.getUniformLocation(program, 'sx');
 
   let raw = 0;
   let rawTarget = 0;
@@ -102,6 +107,7 @@ export function createArchVideo(canvas: HTMLCanvasElement, video: HTMLVideoEleme
     drawnAt = video.currentTime;
     gl.bindTexture(gl.TEXTURE_2D, texture);
     gl.uniform1f(rawLocation, raw);
+    gl.uniform1f(shiftLocation, handShiftAtSeconds(video.currentTime));
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, video);
     gl.viewport(0, 0, canvas.width, canvas.height);
     gl.clear(gl.COLOR_BUFFER_BIT);

@@ -27,6 +27,15 @@
  *    LABEL_GRID indirection — which existed because the previous ranges were
  *    transcribed off burned-in labels at a different density — is gone.
  *
+ *    EXCEPT THE FIRST FOUR. The guide's seconds fit gestures 5 to 28 and not the
+ *    opening ones, where the performer takes longer: by whole seconds the caption
+ *    named Ardhapatāka while the hand was still a Tripatāka, and Kartarimukha
+ *    while it was an Ardhapatāka. Those four were re-measured from the frames
+ *    (the hand's distance to each pose, frame by frame) and run Patāka 1-2,
+ *    Tripatāka 3-14, Ardhapatāka 15-27, Kartarimukha 28-36. Mayūra, from 37, is
+ *    where the guide and the footage meet again. Do not snap them back to
+ *    whole seconds.
+ *
  * 3. Hastas.mp4 carries no burned-in gesture labels, so there is nothing to crop
  *    off the bottom of the plate at draw time. VISIBLE_FRAME_HEIGHT is gone too;
  *    the whole plate is visible and VISIBLE_RATIO is simply the frame ratio.
@@ -103,7 +112,7 @@ export const MUDRAS: Mudra[] = [
     name: 'Patāka',
     literal: 'Flag',
     frameStart: 1,
-    frameEnd: 6,
+    frameEnd: 2,
     viniyoga: ['the beginning of dance', 'clouds', 'a forest', 'refusal', 'night', 'a river', 'wind', 'benediction'],
     reflection:
       'The first gesture a child is ever taught, and the last one they will ever outgrow. The hand that opens the dance is the same hand that gives the blessing at its end.',
@@ -113,8 +122,8 @@ export const MUDRAS: Mudra[] = [
     order: 2,
     name: 'Tripatāka',
     literal: 'Triangular Flag',
-    frameStart: 7,
-    frameEnd: 12,
+    frameStart: 3,
+    frameEnd: 14,
     viniyoga: ['a crown', 'a tree', 'the vajra', 'Indra', 'a lamp', 'rising flames', 'an arrow'],
     featured: false,
   },
@@ -122,8 +131,8 @@ export const MUDRAS: Mudra[] = [
     order: 3,
     name: 'Ardhapatāka',
     literal: 'Half Flag',
-    frameStart: 13,
-    frameEnd: 18,
+    frameStart: 15,
+    frameEnd: 27,
     viniyoga: ['tender shoots', 'a writing tablet', 'a knife', 'a banner', 'a tower', 'a horn', 'a riverbank'],
     featured: false,
   },
@@ -131,7 +140,7 @@ export const MUDRAS: Mudra[] = [
     order: 4,
     name: 'Kartarīmukha',
     literal: "Scissors",
-    frameStart: 19,
+    frameStart: 28,
     frameEnd: 36,
     viniyoga: ['separation of man and woman', 'opposition', 'the corner of the eye', 'lightning', 'a creeper', 'falling'],
     featured: false,
