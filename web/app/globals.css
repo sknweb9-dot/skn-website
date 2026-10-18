@@ -870,6 +870,46 @@ html.lenis body {
   }
 }
 
+/* ---------------------------------------------------------------------------
+   The blank globe (components/gallery/BlankGlobe.tsx): the gallery's teaser on
+   /events. Meridian and parallel rings in a box that spins about its axis, under
+   a fixed tilt, on a lit silk ball. Pure CSS 3D, so it is free; reduced motion
+   leaves it standing still.
+--------------------------------------------------------------------------- */
+.blank-globe {
+  perspective: 1100px;
+}
+.blank-globe-ball {
+  background-image: radial-gradient(
+    circle at 36% 30%,
+    var(--color-paper) 0%,
+    var(--color-silk) 62%,
+    var(--color-silk-deep) 100%
+  );
+  box-shadow: 0 1.6rem 2.4rem -1.4rem color-mix(in oklab, var(--color-teal-deep) 40%, transparent);
+}
+.blank-globe-tilt,
+.blank-globe-spin {
+  transform-style: preserve-3d;
+}
+.blank-globe-tilt {
+  transform: rotateX(-16deg) rotateZ(-14deg);
+}
+.blank-globe-line {
+  border: 1px solid color-mix(in oklab, var(--color-marigold) 70%, transparent);
+  border-radius: 9999px;
+}
+@keyframes blank-globe-spin {
+  to {
+    transform: rotateY(360deg);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .blank-globe-spin {
+    animation: blank-globe-spin 44s linear infinite;
+  }
+}
+
 /* Marigold hairline that fades at both ends — section divider. */
 @utility rule-fade {
   height: 1px;

@@ -1,14 +1,13 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
+import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import InstagramRail from '@/components/InstagramRail';
+import BlankGlobe from '@/components/gallery/BlankGlobe';
 import { PageShell, PageHero, QuietLink, Section } from '@/components/PageShell';
-import BookButton from '@/components/BookButton';
 import VideoFacade from '@/components/VideoFacade';
 import {
   EVENTS_META,
   UDAAN,
-  VIDEOS,
   sectionMeta,
   videosBySection,
 } from '@/lib/events';
@@ -35,9 +34,10 @@ import { eventsGraph } from '@/lib/schema';
  * ---------
  * The section order is the old /events page's own, reconstructed from DOM order
  * in _research/pages/events.html: Udaan, Arangetrams, Performances (Group then
- * Solo), Outreach. The gallery is new, and sits between the manifesto and the
- * recordings — it is the reason most people will come, and burying it under four
- * screens of copy would be perverse.
+ * Solo), Outreach. The gallery is new. It was first placed between the manifesto
+ * and the recordings; it sits after them now, with a blank globe as its teaser,
+ * and the Instagram rail follows. The page ends there, without a closing call to
+ * action: the masthead already carries one.
  */
 
 export const metadata: Metadata = {
@@ -118,34 +118,34 @@ export default async function EventsPage() {
         </div>
       </Section>
 
-      {/* --- Arangetrams -------------------------------------------------- */}
+      {/* --- Arangetrams --------------------------------------------------
+          One section. It used to be two: the videos under "The debut", and
+          under them a second block (its own label, its own headline) saying
+          the same thing about the programme. Now the words come first, then the
+          recordings, then the way in. */}
       <Section
         id="arangetram"
         eyebrow={sectionMeta('arangetram').eyebrow}
         heading={sectionMeta('arangetram').heading}
-        lede={sectionMeta('arangetram').lede}
         tinted
       >
-        <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="max-w-2xl">
+          <p className="max-w-measure text-[1.05rem] leading-relaxed font-medium text-teal-deep">
+            {ARANGETRAM.lead}
+          </p>
+          <p className="mt-4 max-w-measure text-[1rem] leading-relaxed text-ink-soft">
+            {ARANGETRAM.description}
+          </p>
+        </div>
+
+        <div className="mt-12 grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
           {videosBySection('arangetram').map((video) => (
             <VideoFacade key={video.id} video={video} />
           ))}
         </div>
 
-        <div className="mt-14 max-w-2xl border-t border-marigold/20 pt-10">
-          <p className="eyebrow">{ARANGETRAM.label}</p>
-          <h3 className="mt-3 font-display text-[clamp(1.35rem,3vw,1.9rem)] leading-tight font-semibold text-teal-deep">
-            The debut that everything points towards
-          </h3>
-          <p className="mt-4 max-w-measure text-[1.05rem] leading-relaxed font-medium text-teal-deep">
-            {ARANGETRAM.lead}
-          </p>
-          <p className="max-w-measure mt-4 text-[1rem] leading-relaxed text-ink-soft">
-            {ARANGETRAM.description}
-          </p>
-          <div className="mt-7">
-            <QuietLink href="/curriculum#arangetram">How students get there</QuietLink>
-          </div>
+        <div className="mt-10">
+          <QuietLink href="/curriculum#arangetram">How students get there</QuietLink>
         </div>
       </Section>
 
@@ -204,15 +204,33 @@ export default async function EventsPage() {
         </div>
       </Section>
 
-      {/* --- The gallery -------------------------------------------------- */}
-      <Section
-        id="gallery"
-        eyebrow="The gallery"
-        heading="Every class, every stage"
-        lede={`${ALL_ITEMS.length} photographs and recordings, from every class and batch to Udaan, the Arangetrams and the festivals. Turn the globe, or find your child by venue and batch.`}
-      >
-        <QuietLink href="/gallery">Open the gallery</QuietLink>
-      </Section>
+      {/* --- The gallery --------------------------------------------------
+          The words on the left; on the right a blank globe, turning, as a
+          teaser for the page it opens. It is not a picture of the gallery and
+          does not pretend to be one (components/gallery/BlankGlobe.tsx). */}
+      <section id="gallery" className="border-t border-marigold/20 py-16 sm:py-20">
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,19rem)] lg:gap-20">
+            <div>
+              <p className="eyebrow">The gallery</p>
+              <h2 className="mt-3 max-w-2xl font-display text-[clamp(1.6rem,3.8vw,2.5rem)] leading-[1.1] font-semibold text-teal-deep">
+                Every class, every stage
+              </h2>
+              <p className="mt-4 max-w-measure text-[0.98rem] leading-relaxed text-ink-soft">
+                {ALL_ITEMS.length} photographs and recordings, from every class and batch to Udaan, the
+                Arangetrams and the festivals. Explore the globe, or find your child by venue and batch.
+              </p>
+              <div className="mt-8">
+                <QuietLink href="/gallery">Open the gallery</QuietLink>
+              </div>
+            </div>
+
+            <Link href="/gallery" tabIndex={-1} aria-hidden className="mx-auto block w-full max-w-[15rem] lg:max-w-none">
+              <BlankGlobe />
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* --- Instagram ---------------------------------------------------- */}
       <Section
@@ -220,56 +238,9 @@ export default async function EventsPage() {
         eyebrow="As it happens"
         heading="From the academy’s Instagram"
         lede="The gallery is the record. This is the week — rehearsals, costume days, and whatever happened last night."
+        tinted
       >
         <InstagramRail posts={instagramPosts} />
-      </Section>
-
-      {/* --- Classes ------------------------------------------------------ */}
-      <Section
-        id="studio"
-        eyebrow={sectionMeta('studio').eyebrow}
-        heading={sectionMeta('studio').heading}
-        lede={sectionMeta('studio').lede}
-      >
-        <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
-          <figure className="curtain arch relative aspect-[0.9] overflow-hidden bg-teal-deep">
-            <Image
-              src="/img/hero-gurukulam.jpg"
-              alt="A Bharatanatyam class in progress at Shanti Kala Nikketan"
-              width={2000}
-              height={1335}
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="h-full w-full object-cover"
-            />
-          </figure>
-
-          <div className="max-w-xl">
-            <p className="max-w-measure text-[1rem] leading-relaxed text-ink-soft">
-              Long before a stage, there is a room with a wooden floor and a
-              teacher counting aloud. That is the part worth seeing, and you are
-              welcome to sit in on a class to see it.
-            </p>
-            <div className="mt-7 flex flex-wrap items-center gap-3">
-              <BookButton source="events-studio" />
-            </div>
-          </div>
-        </div>
-      </Section>
-
-      {/* --- Close -------------------------------------------------------- */}
-      <Section tinted>
-        <div className="max-w-2xl">
-          <h2 className="font-display text-[clamp(1.5rem,3.4vw,2.2rem)] leading-[1.12] font-semibold text-teal-deep">
-            {VIDEOS.length} recordings, and the room they came from
-          </h2>
-          <p className="max-w-measure mt-4 text-[0.98rem] leading-relaxed text-ink-soft">
-            Everything on this page happened on a stage our students stood on.
-            Come and watch the class that gets them there.
-          </p>
-          <div className="mt-7 flex flex-wrap items-center gap-3">
-            <BookButton source="events-footer" />
-          </div>
-        </div>
       </Section>
     </PageShell>
   );
