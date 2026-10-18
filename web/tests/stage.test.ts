@@ -147,6 +147,15 @@ describe('the hand', () => {
     expect(frameAt(last.y + 10000, anchors, m)).toBeCloseTo(last.frame + 2);
   });
 
+  it('can be asked to play on to the end of the footage', () => {
+    const last = anchors[6];
+    const end = 324;
+    const run = end - last.frame;
+    expect(frameAt(last.y, anchors, m, run, 1)).toBeCloseTo(last.frame);
+    expect(frameAt(last.y + m.page / 2, anchors, m, run, 1)).toBeCloseTo(last.frame + run / 2);
+    expect(frameAt(last.y + 10000, anchors, m, run, 1)).toBeCloseTo(end);
+  });
+
   it('refuses a mismatch between sections and gestures', () => {
     expect(() => anchorsFor(plan, m, [1, 2, 3])).toThrow();
   });

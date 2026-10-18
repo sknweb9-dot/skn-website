@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { HOME_SECTIONS, TONE_VALUES, restingFrame } from '@/lib/home';
-import { framePath, mudraAtFrame, MUDRAS } from '@/lib/mudras';
+import { FRAME_COUNT, framePath, mudraAtFrame, MUDRAS } from '@/lib/mudras';
 import { frameAt, frameToSeconds, metricsFor, railAnchors } from '@/lib/stage';
 import ArchFrame from './ArchFrame';
 import { createArchVideo } from './archVideo';
@@ -186,7 +186,9 @@ export default function RailEngine({ onFail }: { onFail: () => void }) {
         skin(i);
       }
 
-      player.setTarget(frameToSeconds(frameAt(y, anchors, metricsFor(vh))));
+      player.setTarget(
+        frameToSeconds(frameAt(y, anchors, metricsFor(vh), FRAME_COUNT - frames[frames.length - 1], 1)),
+      );
     };
 
     // The strip slides when the masthead comes and goes, with no scroll event to

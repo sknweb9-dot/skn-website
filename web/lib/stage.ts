@@ -162,9 +162,12 @@ export function anchorsFor(plan: StagePlan, m: Metrics, frames: number[]): Ancho
 
 /**
  * The frame the hand should be on at a scroll position: straight lines between
- * anchors, and a short run past the last so it does not freeze on arrival.
+ * anchors, then past the last anchor it keeps going for `runOut` more frames,
+ * reaching them after `runPages` pages of scroll, so it does not freeze on
+ * arrival. The home page passes enough to reach the last frame of the footage,
+ * so the final gesture is played rather than cut off at the last section's.
  */
-export function frameAt(y: number, anchors: Anchor[], m: Metrics, runOut = 2): number {
+export function frameAt(y: number, anchors: Anchor[], m: Metrics, runOut = 2, runPages = 0.8): number {
   const first = anchors[0];
   if (y <= first.y) return first.frame * (0.2 + (0.8 * Math.max(0, y)) / first.y);
   for (let i = 1; i < anchors.length; i += 1) {
@@ -175,7 +178,7 @@ export function frameAt(y: number, anchors: Anchor[], m: Metrics, runOut = 2): n
     }
   }
   const last = anchors[anchors.length - 1];
-  return last.frame + runOut * Math.min(1, (y - last.y) / (0.8 * m.page));
+  return last.frame + runOut * Math.min(1, (y - last.y) / (runPages * m.page));
 }
 
 /** Frame number (1-based, 6 per second of the 54 s clip) to a time in seconds. */

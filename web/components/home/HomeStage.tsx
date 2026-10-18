@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode, type RefObject } from 'react';
 import { HOME_SECTIONS, LOADING_LINES, TONE_VALUES, restingFrame } from '@/lib/home';
-import { MUDRAS, mudraAtFrame } from '@/lib/mudras';
+import { FRAME_COUNT, MUDRAS, mudraAtFrame } from '@/lib/mudras';
 import {
   RAIL_QUERY,
   STAGE_QUERY,
@@ -403,7 +403,7 @@ function StageEngine({
       });
       if (barRef.current) barRef.current.style.width = `${(100 * y) / maxScroll}%`;
 
-      player.setTarget(frameToSeconds(frameAt(y, anchors, m)));
+      player.setTarget(frameToSeconds(frameAt(y, anchors, m, FRAME_COUNT - frames[frames.length - 1], 1)));
     };
 
     // ---- the glide (components/home/handPlayer.ts) --------------------------
