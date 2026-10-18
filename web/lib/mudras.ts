@@ -96,7 +96,7 @@ export const MUDRAS: Mudra[] = [
   {
     order: 1,
     name: 'Patāka',
-    literal: 'the flag',
+    literal: 'Flag',
     frameStart: 1,
     frameEnd: 6,
     viniyoga: ['the beginning of dance', 'clouds', 'a forest', 'refusal', 'night', 'a river', 'wind', 'benediction'],
@@ -107,7 +107,7 @@ export const MUDRAS: Mudra[] = [
   {
     order: 2,
     name: 'Tripatāka',
-    literal: 'three parts of the flag',
+    literal: 'Triangular Flag',
     frameStart: 7,
     frameEnd: 12,
     viniyoga: ['a crown', 'a tree', 'the vajra', 'Indra', 'a lamp', 'rising flames', 'an arrow'],
@@ -116,7 +116,7 @@ export const MUDRAS: Mudra[] = [
   {
     order: 3,
     name: 'Ardhapatāka',
-    literal: 'half a flag',
+    literal: 'Half Flag',
     frameStart: 13,
     frameEnd: 18,
     viniyoga: ['tender shoots', 'a writing tablet', 'a knife', 'a banner', 'a tower', 'a horn', 'a riverbank'],
@@ -125,7 +125,7 @@ export const MUDRAS: Mudra[] = [
   {
     order: 4,
     name: 'Kartarīmukha',
-    literal: "the scissors' blades",
+    literal: "Scissors",
     frameStart: 19,
     frameEnd: 36,
     viniyoga: ['separation of man and woman', 'opposition', 'the corner of the eye', 'lightning', 'a creeper', 'falling'],
@@ -134,7 +134,7 @@ export const MUDRAS: Mudra[] = [
   {
     order: 5,
     name: 'Mayūra',
-    literal: 'the peacock',
+    literal: 'Peacock',
     frameStart: 37,
     frameEnd: 48,
     viniyoga: ["a peacock's beak", 'a creeper', 'a bird', 'wiping away tears', 'the forehead mark', 'parting the hair'],
@@ -143,7 +143,7 @@ export const MUDRAS: Mudra[] = [
   {
     order: 6,
     name: 'Ardhacandra',
-    literal: 'the half moon',
+    literal: 'Half Moon',
     frameStart: 49,
     frameEnd: 60,
     viniyoga: [
