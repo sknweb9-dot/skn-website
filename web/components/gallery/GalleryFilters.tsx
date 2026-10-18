@@ -59,7 +59,7 @@ export default function GalleryFilters({
               Everything
             </Chip>
             {groups.map((g) => (
-              <Chip key={g.id} active={filter.group === g.id} onClick={() => setGroup(g.id)} count={g.count}>
+              <Chip key={g.id} active={filter.group === g.id} onClick={() => setGroup(g.id)}>
                 {g.label}
               </Chip>
             ))}
@@ -106,7 +106,6 @@ export default function GalleryFilters({
                 key={o.id}
                 active={sub.kind === 'venue' ? filter.venue === o.id : filter.album === o.id}
                 onClick={() => setSub(o.id)}
-                count={o.count}
                 detail={o.detail}
               >
                 {o.label}
@@ -146,13 +145,11 @@ function Row({ label, children, className = '' }: { label: string; children: Rea
 function Chip({
   active,
   onClick,
-  count,
   detail,
   children,
 }: {
   active: boolean;
   onClick: () => void;
-  count?: number;
   detail?: string;
   children: React.ReactNode;
 }) {
@@ -169,9 +166,6 @@ function Chip({
     >
       <span>{children}</span>
       {detail ? <span className={`text-[0.7rem] ${active ? 'text-cream/80' : 'text-ink-faint'}`}>{detail}</span> : null}
-      {count !== undefined ? (
-        <span className={`text-[0.7rem] tabular-nums ${active ? 'text-cream/80' : 'text-ink-faint'}`}>{count}</span>
-      ) : null}
     </button>
   );
 }

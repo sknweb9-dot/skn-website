@@ -56,7 +56,6 @@ export default function GalleryIndex({ items, onOpen }: { items: GalleryItem[]; 
                 {section.title}
               </h2>
               {section.detail ? <p className="font-sans text-[0.85rem] text-ink-soft">{section.detail}</p> : null}
-              <p className="ml-auto font-sans text-micro text-ink-faint tabular-nums">{section.items.length}</p>
             </header>
 
             <ul className={`gap-3 sm:gap-4 ${columns}`}>
