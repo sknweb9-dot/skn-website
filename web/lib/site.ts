@@ -448,7 +448,7 @@ export const MILESTONES = [
     year: '2009',
     title: 'One room, one student',
     // Corrected by the academy: teaching began in Besant Nagar, under the name
-    // Samarpan, with a single student. The move to Sholinganallur and the name
+    // Samarppan, with a single student. The move to Sholinganallur and the name
     // Shanti Kala Nikketan came later - see the 2018 entry.
     body: 'Teaching begins in Besant Nagar under the name Samarppan, with a single student — Aparna. The Kalakshetra style of Bharatanatyam is the method from the first class.',
     place: 'Besant Nagar, Chennai',

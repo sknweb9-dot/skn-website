@@ -39,7 +39,7 @@ export const GROUPS: { id: GroupId; label: string }[] = [
   { id: 'arangetram', label: 'Arangetrams' },
   { id: 'festivals', label: 'Festivals and outreach' },
   { id: 'sunitta', label: 'Sunitta Menghanaani' },
-  { id: 'samarpan', label: 'Samarpan 2009' },
+  { id: 'samarpan', label: 'Samarppan 2009' },
   { id: 'videos', label: 'Recordings' },
 ];
 
@@ -71,7 +71,7 @@ const EVENT_ALBUMS: Album[] = [
   { id: 'sunitta-december-festival', group: 'sunitta', title: 'December Festival', date: '2015', dateText: '2015–16', section: 'solo' },
   { id: 'sunitta-first-solo', group: 'sunitta', title: 'First solo recital', date: '2013-10', section: 'solo' },
   { id: 'sunitta-awards', group: 'sunitta', title: 'Awards', section: 'solo' },
-  { id: 'samarpan-2009', group: 'samarpan', title: 'Samarpan, 2009', date: '2009', section: 'studio' },
+  { id: 'samarpan-2009', group: 'samarpan', title: 'Samarppan, 2009', date: '2009', section: 'studio' },
 ];
 
 /**
