@@ -70,7 +70,12 @@ export type Mudra = {
   order: number;
   /** IAST transliteration */
   name: string;
-  /** Literal translation of the gesture's name */
+  /**
+   * The gesture's name in English, as a label set beside it: capitalised, and
+   * without the article. Not a word-for-word translation of the Sanskrit -
+   * Kāṅgūla means "the tail-shaped hand", but the fruit it names is what a
+   * reader recognises.
+   */
   literal: string;
   /**
    * First and last frame where this gesture is on screen, on the live 324-frame
@@ -164,7 +169,7 @@ export const MUDRAS: Mudra[] = [
   {
     order: 7,
     name: 'Arāla',
-    literal: 'bent',
+    literal: 'Curved',
     frameStart: 61,
     frameEnd: 66,
     viniyoga: ['drinking poison', 'drinking nectar', 'a violent wind'],
@@ -173,7 +178,7 @@ export const MUDRAS: Mudra[] = [
   {
     order: 8,
     name: 'Śukatuṇḍa',
-    literal: "the parrot's beak",
+    literal: "Parrot's Beak",
     frameStart: 67,
     frameEnd: 78,
     viniyoga: ['shooting an arrow', 'a spear', 'mystery', 'recollection', 'ferocity', 'harsh speech'],
@@ -182,7 +187,7 @@ export const MUDRAS: Mudra[] = [
   {
     order: 9,
     name: 'Muṣṭi',
-    literal: 'the closed fist',
+    literal: 'Fist',
     frameStart: 79,
     frameEnd: 90,
     viniyoga: ['steadiness', 'grasping hair', 'holding things', 'wrestling', 'running'],
@@ -193,7 +198,7 @@ export const MUDRAS: Mudra[] = [
   {
     order: 10,
     name: 'Śikhara',
-    literal: 'the spire',
+    literal: 'Peak',
     frameStart: 91,
     frameEnd: 96,
     viniyoga: ['the god of love', 'a bow', 'a pillar', 'silence', 'a tooth', 'questioning', 'saying no', 'an embrace', 'firmness'],
@@ -202,7 +207,7 @@ export const MUDRAS: Mudra[] = [
   {
     order: 11,
     name: 'Kapittha',
-    literal: 'the wood apple',
+    literal: 'Wood Apple',
     frameStart: 97,
     frameEnd: 108,
     viniyoga: ['Lakshmi', 'Saraswati', 'holding cymbals', 'milking a cow', 'holding the end of a garment', 'holding a flower'],
@@ -211,7 +216,7 @@ export const MUDRAS: Mudra[] = [
   {
     order: 12,
     name: 'Kaṭakāmukha',
-    literal: 'the opening of a bracelet',
+    literal: 'Opening of a Bracelet',
     frameStart: 109,
     frameEnd: 144,
     viniyoga: ['plucking flowers', 'a pearl necklace', 'drawing an arrow', 'speech', 'glances', 'camphor', 'betel'],
@@ -220,7 +225,7 @@ export const MUDRAS: Mudra[] = [
   {
     order: 13,
     name: 'Sūcī',
-    literal: 'the needle',
+    literal: 'Needle',
     frameStart: 145,
     frameEnd: 150,
     viniyoga: [
@@ -243,7 +248,7 @@ export const MUDRAS: Mudra[] = [
   {
     order: 14,
     name: 'Candrakalā',
-    literal: 'the digit of the moon',
+    literal: 'Crescent Moon',
     frameStart: 151,
     frameEnd: 162,
     viniyoga: ['the moon on the first night', 'the face', "the crescent in Shiva's hair", 'measuring a cubit', 'the Ganga'],
@@ -252,7 +257,7 @@ export const MUDRAS: Mudra[] = [
   {
     order: 15,
     name: 'Padmakōśa',
-    literal: 'the lotus bud',
+    literal: 'Lotus Bud',
     frameStart: 163,
     frameEnd: 174,
     viniyoga: ['fruit', 'a bell', 'an egg', 'a water lily', 'a cluster of flowers', 'an offering of food'],
@@ -263,7 +268,7 @@ export const MUDRAS: Mudra[] = [
   {
     order: 16,
     name: 'Sarpaśīrṣa',
-    literal: "the serpent's head",
+    literal: "Serpent's Head",
     frameStart: 175,
     frameEnd: 186,
     viniyoga: ['sandal paste', 'a snake', 'slow movement', 'offering water to the gods', 'nourishing', "an elephant's ears"],
@@ -272,7 +277,7 @@ export const MUDRAS: Mudra[] = [
   {
     order: 17,
     name: 'Mṛgaśīrṣa',
-    literal: "the deer's head",
+    literal: "Deer's Head",
     frameStart: 187,
     frameEnd: 192,
     viniyoga: ['women', 'the cheek', 'a mirror', 'practising steps', 'discussion', 'the number three', 'calling the beloved', 'fear'],
@@ -281,7 +286,7 @@ export const MUDRAS: Mudra[] = [
   {
     order: 18,
     name: 'Siṃhamukha',
-    literal: "the lion's face",
+    literal: "Lion's Face",
     frameStart: 193,
     frameEnd: 204,
     viniyoga: ['the sacred fire offering', 'coral', 'a pearl', 'a lotus garland', 'an elephant', 'sacred grass', 'medicine', 'a tortoise'],
@@ -292,7 +297,7 @@ export const MUDRAS: Mudra[] = [
   {
     order: 19,
     name: 'Kāṅgūla',
-    literal: 'the tail-shaped hand',
+    literal: 'Jamun Fruit',
     frameStart: 205,
     frameEnd: 216,
     viniyoga: ['the lakuca fruit', 'small bells', 'a great bell', 'the cakora bird', 'a betel nut tree', 'a white water lily', 'a coconut'],
@@ -320,7 +325,7 @@ export const MUDRAS: Mudra[] = [
   {
     order: 20,
     name: 'Alapadma',
-    literal: 'the fully bloomed lotus',
+    literal: 'Fully Bloomed Lotus',
     frameStart: 217,
     frameEnd: 228,
     viniyoga: [
@@ -363,7 +368,7 @@ export const MUDRAS: Mudra[] = [
   {
     order: 21,
     name: 'Catura',
-    literal: 'the clever one',
+    literal: 'Four/Clever',
     frameStart: 229,
     frameEnd: 240,
     viniyoga: ['musk', 'a little', 'gold', 'sorrow', 'taste', 'the eyes', 'a promise', 'sweetness', 'a slow walk', 'the face'],
@@ -392,7 +397,7 @@ export const MUDRAS: Mudra[] = [
   {
     order: 22,
     name: 'Bhramara',
-    literal: 'the bee',
+    literal: 'Bee',
     frameStart: 241,
     frameEnd: 246,
     viniyoga: ['a bee', 'a parrot', 'wings', 'a crane', 'the cuckoo'],
@@ -416,7 +421,7 @@ export const MUDRAS: Mudra[] = [
   {
     order: 23,
     name: 'Haṃsāsya',
-    literal: "the swan's face",
+    literal: "Swan's Beak",
     frameStart: 247,
     frameEnd: 258,
     viniyoga: ['tying the mangalsutra', 'giving instruction', 'certainty', 'a pearl necklace', 'jasmine', 'painting', 'a bite'],
@@ -445,7 +450,7 @@ export const MUDRAS: Mudra[] = [
   {
     order: 24,
     name: 'Haṃsapakṣa',
-    literal: "the swan's wing",
+    literal: "Swan's Wing",
     frameStart: 259,
     frameEnd: 264,
     viniyoga: ['the number six', 'the building of a bridge', 'writing with the nails', 'covering'],
@@ -470,7 +475,7 @@ export const MUDRAS: Mudra[] = [
   {
     order: 25,
     name: 'Sandaṃśa',
-    literal: 'the pincers',
+    literal: 'Pincers',
     frameStart: 265,
     frameEnd: 276,
     viniyoga: ['the belly', 'an offering to God', 'a wound', 'a worm', 'great fear', 'worship', 'the number five'],
@@ -496,7 +501,7 @@ export const MUDRAS: Mudra[] = [
   {
     order: 26,
     name: 'Mukula',
-    literal: 'the bud',
+    literal: 'Flower Bud',
     frameStart: 277,
     frameEnd: 288,
     viniyoga: ['a water lily', 'eating', 'the five arrows of Manmatha', 'placing religious marks', 'the navel', 'a plantain flower'],
@@ -521,7 +526,7 @@ export const MUDRAS: Mudra[] = [
   {
     order: 27,
     name: 'Tāmracūḍa',
-    literal: "the cock's comb",
+    literal: "Cock's Comb",
     frameStart: 289,
     frameEnd: 300,
     viniyoga: ['writing', 'the number twelve', 'the crowing of a cock', 'a calf'],
@@ -532,7 +537,7 @@ export const MUDRAS: Mudra[] = [
   {
     order: 28,
     name: 'Triśūla',
-    literal: 'the trident',
+    literal: 'Trident',
     frameStart: 301,
     frameEnd: 324,
     viniyoga: ['a bilva leaf', 'the number three', 'a wood apple leaf'],
