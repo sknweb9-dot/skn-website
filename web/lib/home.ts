@@ -120,10 +120,10 @@ export const HERO = {
  */
 export function whyFigures(): { figure: string; label: string }[] {
   return [
-    { figure: `${METRICS.studentsTaught.toLocaleString('en-IN')}+`, label: 'students taught since 2009' },
-    { figure: `${METRICS.stages}+`, label: 'stages performed on' },
-    { figure: `${batchCount()}`, label: 'weekly batches, from children to adults' },
-    { figure: `${METRICS.countries}`, label: 'countries where our students live: India, Canada and the USA' },
+    { figure: `${METRICS.studentsTaught.toLocaleString('en-IN')}+`, label: 'Students taught since 2009' },
+    { figure: `${METRICS.stages}+`, label: 'Stages performed on' },
+    { figure: `${batchCount()}`, label: 'Weekly batches, from children to adults' },
+    { figure: `${METRICS.countries}`, label: 'Countries where our students live: India, Canada and the USA' },
   ];
 }
 
@@ -136,7 +136,7 @@ export const WHY = {
   care: [
     {
       title: 'No marks, no competition',
-      body: 'We look at understanding, effort, consistency and the ability to overcome fear.',
+      body: 'We look at effort, consistency and the ability to overcome fear.',
     },
     {
       title: 'Parents see the progress',
@@ -201,7 +201,7 @@ export const TIMELINE: Milestone[] = [
   {
     year: '2009',
     title: 'One room, one student',
-    body: 'Teaching begins in Besant Nagar under the name Samarpan, with a single student — Aparna.',
+    body: 'Teaching begins in Besant Nagar under the name Samarppan, with a single student — Aparna.',
     image: { src: '/img/home/story-2009.jpg', width: 1600, height: 1200, alt: 'A young student mirrors her teacher’s hand gesture in an early class, 2009' },
   },
   {
@@ -250,7 +250,7 @@ export const TIMELINE: Milestone[] = [
     year: '2026',
     title: 'Nada Sudha',
     body: 'Students perform at the 27th Nada Sudha Music & Dance Festival.',
-    image: { src: '/img/home/story-2026.jpg', width: 1160, height: 1600, alt: 'A student in full costume at the Nada Sudha festival, 2026' },
+    image: { src: '/img/home/story-2026.jpg', width: 1160, height: 1600, alt: 'Six dancers at Udaan 2025, three standing and three seated together under a single spotlight' },
   },
   {
     year: 'Today',

@@ -81,7 +81,7 @@ describe('whyFigures', () => {
   it('states the four confirmed figures', () => {
     const f = whyFigures();
     expect(f.map((x) => x.figure)).toEqual(['1,500+', '20+', '16', '3']);
-    expect(f[2].label).toContain('weekly batches');
+    expect(f[2].label).toContain('Weekly batches');
     expect(f[3].label).toContain('India, Canada and the USA');
   });
 });
