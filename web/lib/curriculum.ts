@@ -58,7 +58,7 @@ export const INTRODUCTORY: Programme = {
     'A gentle and joyful introduction designed for young children to develop rhythm, coordination, concentration, confidence, and cultural values. Through Sanskrit shlokas, devotional themes, storytelling, creative movement, rhythm exercises, and expressive dance activities, children are introduced to Indian culture in an engaging and age-appropriate manner before beginning formal Bharatanatyam training.',
   repertoire: ['Sanskrit shlokas', 'Devotional themes', 'Storytelling', 'Rhythm exercises'],
   develops: ['Listening and attention', 'Gross motor coordination', 'Comfort in front of others'],
-  image: '/img/stage-1-intro.jpg',
+  image: '/img/pages/introductory.jpg',
 };
 
 /** The six graded levels of formal training. */
@@ -73,7 +73,6 @@ export const LEVELS: Programme[] = [
     develops: ['Posture and alignment', 'Counting and rhythm (tala)', 'Following multi-step instruction'],
     image: '/img/pages/level-1.jpg',
     imageAlt: 'A Level 1 batch at Casagrand Tranquil, students in a line with their arms raised overhead',
-    imageCaption: 'A Level 1 class at Casagrand Tranquil',
   },
   {
     id: 'level-2',
@@ -85,7 +84,6 @@ export const LEVELS: Programme[] = [
     develops: ['Core strength and stamina', 'Balance and spatial control', 'Sustained practice habits'],
     image: '/img/pages/level-2.jpg',
     imageAlt: 'A Level 2 batch at Adroit, four students in a deep seated stance with their hands forward',
-    imageCaption: 'A Level 2 class at Adroit',
   },
   {
     id: 'level-3',
@@ -97,7 +95,6 @@ export const LEVELS: Programme[] = [
     develops: ['Memory for long sequences', 'Musical understanding', 'Independent self-correction'],
     image: '/img/pages/level-3.jpg',
     imageAlt: 'A Level 3 batch at Appswamy Springs, students and their teacher in a lunge with arms outstretched',
-    imageCaption: 'A Level 3 class at Appswamy Springs',
   },
   {
     id: 'level-4',
@@ -108,11 +105,7 @@ export const LEVELS: Programme[] = [
     repertoire: ['Jatiswaram', 'Shabdam', 'Keerthanam', 'Virutham'],
     develops: ['Emotional articulation (abhinaya)', 'Narrative interpretation', 'Cultural literacy'],
     image: '/img/pages/level-4.jpg',
-    // CG R is one folder for two batches (R1 is Level 4, R2 is Level 1) and the
-    // archive does not say which students are in which picture, so the caption
-    // names the venue and does not claim the level.
-    imageAlt: 'Students in class at Casagrand Riviera, in a lunge with arms outstretched',
-    imageCaption: 'A class at Casagrand Riviera',
+    imageAlt: 'Two students at Yathi Nithi in an abhinaya pose, one with a hand to her cheek and the other reaching out',
   },
   {
     id: 'level-5',
@@ -123,8 +116,10 @@ export const LEVELS: Programme[] = [
     repertoire: ['Thillana', 'Ashtapadi', 'Bhajan', 'Javali'],
     develops: ['Technical precision', 'Interpretive judgement', 'Knowledge of composers and texts'],
     image: '/img/pages/level-5.jpg',
-    imageAlt: 'Two dancers in red costume at Udaan 2025, one bending low with an arm raised, the other standing in pose',
-    imageCaption: 'Udaan 2025, Kalakshetra Foundation',
+    // CG R is one folder for two batches (R1 is Level 4, R2 is Level 1) and the
+    // archive does not say which students are in which picture, so the alt names
+    // the venue and does not claim the level.
+    imageAlt: 'Students at Casagrand Riviera, some standing and some kneeling in pose',
   },
   {
     id: 'level-6',
@@ -135,8 +130,7 @@ export const LEVELS: Programme[] = [
     repertoire: ['Varnam', 'Padam', 'Swarajathi'],
     develops: ['Technical maturity', 'Artistic excellence', 'Independent performance ability'],
     image: '/img/pages/level-6.jpg',
-    imageAlt: 'A dancer in yellow and maroon costume with a floral headdress, hands in a gesture before her chest, on a blue stage',
-    imageCaption: 'From Jahnavi\u2019s Arangetram, 2025',
+    imageAlt: 'A young dancer in a blue blouse and red skirt on a dark stage, hands raised beside her face in an expressive pose',
   },
 ];
 
@@ -159,7 +153,7 @@ export const ARANGETRAM = {
     'Orchestra rehearsals',
     'Individual mentoring',
   ],
-  image: '/img/stage-7-arangetram.jpg',
+  image: '/img/pages/arangetram.jpg',
 } as const;
 
 /** Introductory + six levels, in teaching order. Excludes Arangetram by design. */

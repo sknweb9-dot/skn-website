@@ -13,10 +13,6 @@ describe('level photographs', () => {
     }
   });
 
-  it('says where each photograph was taken', () => {
-    for (const level of LEVELS) expect(level.imageCaption?.trim(), `${level.id} caption`).toBeTruthy();
-  });
-
   it('never repeats a picture across levels', () => {
     const srcs = LEVELS.map((l) => l.image);
     expect(new Set(srcs).size).toBe(srcs.length);
