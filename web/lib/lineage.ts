@@ -89,7 +89,7 @@ export const EMBLEM = {
   elements: [
     {
       name: 'Lord Ganesha',
-      body: 'At its heart is Lord Ganesha, the remover of obstacles and the embodiment of wisdom, auspicious beginnings, and harmony. His presence reminds us that every artistic journey begins with humility, devotion, and the pursuit of knowledge.',
+      body: 'At its heart is Lord Ganesha — the remover of obstacles, and the embodiment of wisdom, auspicious beginnings, and harmony. He is specially drawn for this emblem, and each part of him carries one of the arts: the anklets at his feet represent dance, the shape of his stomach joins the Veena, symbolising music, and the hand mudra represents yoga. Together, they reflect our belief in the harmony of body, mind, art, and inner awareness, reminding us that every artistic journey begins with humility, devotion, and the pursuit of knowledge.',
     },
     {
       name: 'The three interwoven circles',
