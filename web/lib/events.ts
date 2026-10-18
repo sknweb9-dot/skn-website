@@ -201,7 +201,7 @@ export const VIDEOS: EventVideo[] = [
   {
     id: 'udaan-2023',
     section: 'udaan',
-    title: "UDAAN - FLYING HIGH - October '23",
+    title: "UDAAN 2023: FLYING HIGH",
     titleSource: 'og-title',
     kind: 'playlist',
     youtubeId: 'PLxyyMzhr0f3E-5yEp3Whr3hsbz6wC6GsO',
@@ -380,7 +380,7 @@ type Source = { key: string; src: string; width: number; height: number };
 
 const SOURCES: Source[] = [
   { key: 'udaan-2025-poster', src: '/img/event-udaan-2025.jpg', width: 867, height: 1300 },
-  { key: 'udaan-2023-poster', src: '/img/event-udaan-2023.jpg', width: 900, height: 600 },
+  { key: 'udaan-2023-poster', src: '/img/event-udaan-2023.jpg', width: 1000, height: 1000 },
   { key: 'aparna', src: '/img/event-aparna.jpg', width: 846, height: 900 },
   { key: 'arangetram-k', src: '/img/event-arangetram-k.jpg', width: 567, height: 567 },
   { key: 'arangetram-j', src: '/img/event-arangetram-j.jpg', width: 567, height: 567 },
