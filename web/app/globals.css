@@ -485,17 +485,29 @@ html[data-stage='on'] [data-home-section='hero'] .home-page:not([data-state]) {
 html[data-stage='on'] .home-stacked-arch {
   display: none;
 }
+html[data-stage='on'] [data-home-section='hero'] {
+  /* As tall as the room under the masthead allows once the hero's text block
+     (about 19rem, with its button and credentials), the caption and the bottom
+     padding are taken out, and never more than 46svh or 40rem. Without the
+     room term a short window put the arch's caption through the headline.
+
+     The slack is what the caps leave unused. On a laptop there is none: the arch
+     is held back by the room and fills it. On a large monitor the caps bite and
+     the room is left over, which used to open between the arch and the headline
+     (185px at 1920x1080, 530px at 2560x1440). It is shared out instead, half
+     above the arch and half below the text, so the arch, its caption and the
+     headline stay one group at the same distance from each other on every
+     screen, centred between the masthead and the foot. */
+  --hero-arch: max(9rem, min(46svh, 40rem, calc(96svh - 29.25rem)));
+  --hero-slack: max(0px, calc(96svh - 29.25rem - var(--hero-arch)));
+}
 html[data-stage='on'] [data-home-section='hero'] .home-stacked-arch {
   display: block;
   position: absolute;
   z-index: 20;
-  top: calc(var(--masthead) + 1rem);
+  top: calc(var(--masthead) + 1rem + var(--hero-slack) / 2);
   left: 50%;
-  /* As tall as the room under the masthead allows once the hero's text block
-     (about 19rem, with its button and credentials), the caption and the bottom
-     padding are taken out, and never more than 46svh or 28rem. Without the
-     last term a short window put the arch's caption through the headline. */
-  height: max(9rem, min(46svh, 28rem, calc(96svh - 29.25rem)));
+  height: var(--hero-arch);
   width: auto;
   aspect-ratio: 720 / 1000;
   margin: 0;
@@ -510,12 +522,14 @@ html[data-stage='on'] [data-home-section='hero'] .home-stacked-arch > div {
   aspect-ratio: auto;
 }
 
-/* The hero page: bottom-aligned under the arch and its caption. */
+/* The hero page: bottom-aligned under the arch and its caption. The bottom
+   padding carries half the slack (see --hero-slack above) so the text rises with
+   the arch as it drops, rather than staying at the foot of a tall screen. */
 html[data-stage='on'] .home-hero {
   justify-content: flex-end;
   align-items: center;
   text-align: center;
-  padding: var(--masthead) 2rem 4svh;
+  padding: var(--masthead) 2rem calc(4svh + var(--hero-slack) / 2);
 }
 
 /* The hero's heading is a single centred line; the other pages are left-set. */

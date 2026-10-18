@@ -4,6 +4,7 @@ import {
   HOME_EVENTS,
   HOME_SECTIONS,
   partitionEvents,
+  restingFrame,
   TONE_VALUES,
   VOICES,
   whyFigures,
@@ -115,5 +116,26 @@ describe('navigation', () => {
       expect(Object.keys(route).sort()).toEqual(['href', 'label']);
     }
     expect(NAV_ROUTES.map((r) => r.label)).toEqual(['Home', 'Academy', 'Lineage', 'Curriculum', 'Locations', 'Events', 'Gallery']);
+  });
+});
+
+describe('where the hand rests', () => {
+  it('stays inside the gesture the section names, and moves forward through the footage', () => {
+    let previous = -Infinity;
+    for (const section of HOME_SECTIONS) {
+      const frame = restingFrame(section);
+      expect(frame).toBeGreaterThanOrEqual(section.mudra.frameStart);
+      expect(frame).toBeLessThanOrEqual(section.mudra.frameEnd);
+      expect(frame).toBeGreaterThan(previous);
+      previous = frame;
+    }
+  });
+
+  it('rests the hero on the opening frame, where the footage is still a Patāka', () => {
+    // By the middle of its first second the hand has already folded toward
+    // Tripatāka, so a still taken there contradicts the caption beneath it.
+    const hero = HOME_SECTIONS[0];
+    expect(hero.mudra.order).toBe(1);
+    expect(Math.round(restingFrame(hero))).toBe(1);
   });
 });

@@ -70,11 +70,18 @@ export type HomeSection = {
   mudra: Mudra;
   /** Why this gesture, from its documented viniyoga. For maintainers. */
   because: string;
+  /**
+   * Where the hand rests while the section is read, when that is not the middle
+   * of the gesture's frames. The footage opens on a pure Patāka and has already
+   * folded into Tripatāka by the middle of its first second, so the hero rests at
+   * the start; every other gesture is held through its middle.
+   */
+  rest?: number;
   tone: Tone;
 };
 
 export const HOME_SECTIONS: HomeSection[] = [
-  { id: 'hero', label: 'Welcome', mudra: mudraByName('Patāka'), because: 'the beginning of dance; benediction', tone: 'cream' },
+  { id: 'hero', label: 'Welcome', mudra: mudraByName('Patāka'), because: 'the beginning of dance; benediction', rest: 1, tone: 'cream' },
   { id: 'why', label: 'Why SKN', mudra: mudraByName('Ardhapatāka'), because: 'tender shoots', tone: 'midnight' },
   { id: 'story', label: 'Our story', mudra: mudraByName('Kapittha'), because: 'Lakshmi and Saraswati: learning and the arts', tone: 'plum' },
   { id: 'honours', label: 'Honours', mudra: mudraByName('Siṃhamukha'), because: 'a lotus garland: being honoured', tone: 'cream' },
@@ -88,9 +95,14 @@ export function homeSection(id: HomeSectionId): HomeSection {
   return HOME_SECTIONS.find((s) => s.id === id)!;
 }
 
-/** The gesture's middle frame, which is where the hand rests while its section is read. */
+/**
+ * Where the hand rests while its section is read: the gesture's middle frame,
+ * unless the section says otherwise (the hero, whose gesture the footage leaves
+ * almost at once). This is also the frame shown as a still wherever the footage
+ * is not playing, so it has to look like the gesture the caption names.
+ */
 export function restingFrame(section: HomeSection): number {
-  return (section.mudra.frameStart + section.mudra.frameEnd) / 2;
+  return section.rest ?? (section.mudra.frameStart + section.mudra.frameEnd) / 2;
 }
 
 // ---------------------------------------------------------------------------
