@@ -153,7 +153,7 @@ export default async function EventsPage() {
       <Section
         id="group"
         eyebrow={sectionMeta('group').eyebrow}
-        heading="Performances"
+        heading="Ensemble"
         lede={sectionMeta('group').lede}
       >
         <h3 className="font-display text-[1.1rem] font-semibold text-teal-deep">Group</h3>
@@ -167,7 +167,7 @@ export default async function EventsPage() {
           id="solo"
           className="mt-14 scroll-mt-28 font-display text-[1.1rem] font-semibold text-teal-deep"
         >
-          Solo
+          Solo - Beyond the Debut
         </h3>
         <div className="mt-6 grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
           {videosBySection('solo').map((video) => (
