@@ -94,7 +94,7 @@ export const LEVELS: Programme[] = [
     repertoire: ['Alarippu', 'Tevaram', 'Divya Prabandham'],
     develops: ['Memory for long sequences', 'Musical understanding', 'Independent self-correction'],
     image: '/img/pages/level-3.jpg',
-    imageAlt: 'A Level 3 batch at Appswamy Springs, students and their teacher in a lunge with arms outstretched',
+    imageAlt: 'Six students seated in a row on the studio floor, each with one arm raised overhead and one held in front, at Appswamy Springs',
   },
   {
     id: 'level-4',
@@ -158,6 +158,19 @@ export const ARANGETRAM = {
 
 /** Introductory + six levels, in teaching order. Excludes Arangetram by design. */
 export const TEACHING_PROGRAMMES: Programme[] = [INTRODUCTORY, ...LEVELS];
+
+/**
+ * The adults section's photograph.
+ *
+ * Adults are not a programme of their own - they work through the same six
+ * levels in batches of their own, which is why the section draws its batches
+ * from lib/classes.ts rather than from a programme here. The picture belongs to
+ * AS5, the Monday adults batch, and there was nowhere else for it to live.
+ */
+export const ADULTS = {
+  image: '/img/pages/adults.jpg',
+  imageAlt: 'Two adults practising in class, both with one arm raised overhead and one hand at the waist',
+} as const;
 
 /** Transcribed framing for the curriculum as a whole. */
 export const CURRICULUM_INTRO = {

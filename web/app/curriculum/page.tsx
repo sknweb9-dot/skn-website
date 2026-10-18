@@ -4,7 +4,7 @@ import Link from 'next/link';
 import JsonLd from '@/components/JsonLd';
 import { PageHero, PageShell, Section } from '@/components/PageShell';
 import BookButton from '@/components/BookButton';
-import { ARANGETRAM, CURRICULUM_INTRO, INTRODUCTORY, LEVELS } from '@/lib/curriculum';
+import { ADULTS, ARANGETRAM, CURRICULUM_INTRO, INTRODUCTORY, LEVELS } from '@/lib/curriculum';
 import { SITE } from '@/lib/site';
 import { adultBatches, allBatches, formatBatchTime } from '@/lib/classes';
 import { homeGraph } from '@/lib/schema';
@@ -287,30 +287,45 @@ export default function CurriculumPage() {
         <Section
           eyebrow="Not only for children"
           heading="Adults follow the same syllabus"
-          lede="Beginning late changes the pace, not the path. Adults work through the same graded levels, in batches of their own."
+          lede="Beginning late changes the pace, not the path. Adults work through the same graded levels, in batches of their own. Teaching methodology is modified based on individual requirements."
         >
-          <ul className="grid items-start gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {adults.map(({ venue, batch, programme }) => (
-              <li
-                key={batch.code}
-                className="rounded-[1.25rem] border border-marigold/30 bg-paper/60 px-5 py-5"
-              >
-                <p className="font-display text-[0.72rem] tracking-[0.14em] text-nila-700">
-                  {batch.code}
-                </p>
-                <h3 className="mt-2 font-display text-[1.05rem] leading-snug font-semibold text-teal-deep">
-                  {programme.label} — {programme.name}
-                </h3>
-                <p className="mt-1.5 font-sans text-sm text-ink-soft">{venue.name}</p>
-                <p className="mt-0.5 font-sans text-xs text-ink-faint">
-                  {formatBatchTime(batch)}
-                  {batch.provisionalTiming ? ' (provisional)' : ''}
-                </p>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-8">
-            <BookButton source="curriculum-adults" audience="adult">Enquire about adult batches</BookButton>
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-14">
+            <div>
+              <ul className="grid items-start gap-5 sm:grid-cols-2">
+                {adults.map(({ venue, batch, programme }) => (
+                  <li
+                    key={batch.code}
+                    className="rounded-[1.25rem] border border-marigold/30 bg-paper/60 px-5 py-5"
+                  >
+                    <p className="font-display text-[0.72rem] tracking-[0.14em] text-nila-700">
+                      {batch.code}
+                    </p>
+                    <h3 className="mt-2 font-display text-[1.05rem] leading-snug font-semibold text-teal-deep">
+                      {programme.label} — {programme.name}
+                    </h3>
+                    <p className="mt-1.5 font-sans text-sm text-ink-soft">{venue.name}</p>
+                    <p className="mt-0.5 font-sans text-xs text-ink-faint">
+                      {formatBatchTime(batch)}
+                      {batch.provisionalTiming ? ' (provisional)' : ''}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-8">
+                <BookButton source="curriculum-adults" audience="adult">Enquire about adult batches</BookButton>
+              </div>
+            </div>
+
+            <figure className="curtain overflow-hidden rounded-[1.5rem]">
+              <Image
+                src={ADULTS.image}
+                alt={ADULTS.imageAlt}
+                width={1200}
+                height={800}
+                sizes="(max-width: 1024px) 100vw, 22rem"
+                className="h-auto w-full object-cover"
+              />
+            </figure>
           </div>
         </Section>
       ) : null}
