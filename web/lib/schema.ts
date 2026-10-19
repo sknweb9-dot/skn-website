@@ -2,7 +2,7 @@ import { BRANCHES, FACULTY, FAQS, FOUNDERS, PRIMARY_BRANCH, SITE, type Branch } 
 import { TEACHING_PROGRAMMES } from './curriculum';
 import { allBatches, areasTaught, offlineVenuesForCity, venuesForCity } from './classes';
 import { MUDRAS } from './mudras';
-import { VIDEOS, videoPoster, youtubeHref } from './events';
+import { VIDEOS, videoLabel, videoPoster, youtubeHref } from './events';
 import { ALBUMS, PHOTOS, albumDate } from './gallery';
 import { BOOK_PATH } from './booking';
 
@@ -406,13 +406,13 @@ export type Faq = { q: string; a: string };
 export function eventsGraph() {
   const url = abs('/events');
 
-  const recordings = VIDEOS.map((video, i) => ({
+  const videos = VIDEOS.map((video, i) => ({
     '@type': 'ListItem',
     position: i + 1,
     item: {
       '@type': 'CreativeWork',
       '@id': `${url}#video-${video.id}`,
-      name: video.title,
+      name: videoLabel(video),
       url: youtubeHref(video),
       thumbnailUrl: abs(videoPoster(video).src),
       author: { '@id': ID.org },
@@ -431,16 +431,16 @@ export function eventsGraph() {
         url,
         name: 'Events',
         description:
-          'Udaan, the academy\u2019s own showcase, with Arangetrams, temple festivals and performances \u2014 recordings from Shanti Kala Nikketan\u2019s own stages.',
+          'Udaan, the academy\u2019s own showcase, with Arangetrams, temple festivals and performances \u2014 videos from Shanti Kala Nikketan\u2019s own stages.',
         isPartOf: { '@id': ID.website },
         publisher: { '@id': ID.org },
         about: { '@id': ID.org },
         mainEntity: {
           '@type': 'ItemList',
           '@id': `${url}#items`,
-          numberOfItems: recordings.length,
+          numberOfItems: videos.length,
           itemListOrder: 'https://schema.org/ItemListUnordered',
-          itemListElement: recordings,
+          itemListElement: videos,
         },
       },
       {

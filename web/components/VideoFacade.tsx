@@ -5,6 +5,8 @@ import Image from 'next/image';
 import { ExternalLink, Play, X } from 'lucide-react';
 import {
   type EventVideo,
+  formatVideoDate,
+  videoLabel,
   videoPoster,
   youtubeEmbed,
   youtubeHref,
@@ -12,22 +14,23 @@ import {
 import { useSmoothScroll } from './SmoothScroll';
 
 /**
- * A recording, shown as a poster until someone asks for it.
+ * A video, shown as a poster until someone asks for it.
  *
  * WHY NOT AN IFRAME PER VIDEO
  * ---------------------------
- * There are eleven recordings on this page. Eleven live YouTube embeds is on the
+ * There are a dozen videos on this page. A dozen live YouTube embeds is on the
  * order of a megabyte of third-party JavaScript before anybody has pressed play,
  * and it sets tracking cookies on a page about children's dance classes. The
  * poster is a local image; the iframe is created on click, pointed at
  * youtube-nocookie.com, and destroyed on close.
  *
- * WHY THE TITLES CARRY A CAVEAT
- * -----------------------------
- * Eight of the eleven are unlisted on YouTube, which means oEmbed refused them
- * and their titles were read from og:title instead. They are almost certainly
- * right, but they are scraped rather than supplied, and `titleSource` on each
- * record says which. Nothing is asserted here that lib/events.ts cannot source.
+ * WHAT A CARD SAYS
+ * ----------------
+ * A title, a second line where the title alone is not enough (who danced, which
+ * edition), then the date and the place as the academy gave them, and a note
+ * where there is one worth keeping. All of it comes from lib/events.ts, which
+ * records where each title came from. Nothing about how a poster was paired is
+ * shown to visitors; that stays in the data for the academy to confirm.
  */
 export default function VideoFacade({ video }: { video: EventVideo }) {
   const [playing, setPlaying] = useState(false);
@@ -76,7 +79,7 @@ export default function VideoFacade({ video }: { video: EventVideo }) {
           <button
             type="button"
             onClick={() => setPlaying(true)}
-            aria-label={`Play: ${video.title}`}
+            aria-label={`Play: ${videoLabel(video)}`}
             className={frame}
           >
             {posterBody}
@@ -86,7 +89,7 @@ export default function VideoFacade({ video }: { video: EventVideo }) {
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`Watch on YouTube (opens in a new tab): ${video.title}`}
+            aria-label={`Watch on YouTube (opens in a new tab): ${videoLabel(video)}`}
             className={frame}
           >
             {posterBody}
@@ -97,12 +100,19 @@ export default function VideoFacade({ video }: { video: EventVideo }) {
           <h3 className="font-display text-[1rem] leading-snug font-semibold text-teal-deep">
             {video.title}
           </h3>
+          {video.detail ? (
+            <p className="mt-1 font-sans text-[0.88rem] leading-snug text-ink-soft">{video.detail}</p>
+          ) : null}
+          <p className="mt-1.5 font-sans text-[0.8rem] leading-snug text-ink-faint">
+            <time dateTime={video.date}>{formatVideoDate(video.date)}</time>
+            {video.place ? <span className="block">{video.place}</span> : null}
+          </p>
           {video.note ? (
-            <p className="max-w-measure mt-1.5 font-sans text-[0.8rem] leading-relaxed text-ink-soft">
+            <p className="max-w-measure mt-2 font-sans text-[0.8rem] leading-relaxed text-ink-soft">
               {video.note}
             </p>
           ) : null}
-          <p className="mt-2 flex flex-wrap items-center gap-x-2.5 gap-y-1 font-sans text-micro text-ink-faint">
+          <p className="mt-2.5 flex flex-wrap items-center gap-x-2.5 gap-y-1 font-sans text-micro text-ink-faint">
             <a
               href={href}
               target="_blank"
@@ -111,11 +121,6 @@ export default function VideoFacade({ video }: { video: EventVideo }) {
             >
               Open on YouTube <ExternalLink aria-hidden className="h-3 w-3" />
             </a>
-            {video.pairingUnconfirmed ? (
-              <span title="The poster paired with this recording on the old site may not belong to it.">
-                · poster pairing unconfirmed
-              </span>
-            ) : null}
           </p>
         </figcaption>
       </figure>
@@ -160,7 +165,7 @@ function Lightbox({ video, onClose }: { video: EventVideo; onClose: () => void }
     <div
       role="dialog"
       aria-modal="true"
-      aria-label={video.title}
+      aria-label={videoLabel(video)}
       onKeyDown={onKeyDown}
       className="fixed inset-0 z-[80] grid place-items-center bg-teal-deep/80 px-4 py-6 backdrop-blur-sm"
     >
@@ -177,7 +182,7 @@ function Lightbox({ video, onClose }: { video: EventVideo; onClose: () => void }
       <div className="relative z-10 w-full max-w-4xl">
         <div className="flex items-start justify-between gap-4 pb-3">
           <h2 className="font-display text-[0.95rem] leading-snug font-semibold text-cream sm:text-[1.05rem]">
-            {video.title}
+            {videoLabel(video)}
           </h2>
           <button
             ref={closeRef}
@@ -193,7 +198,7 @@ function Lightbox({ video, onClose }: { video: EventVideo; onClose: () => void }
         <div className="aspect-video w-full overflow-hidden rounded-[1.25rem] border border-marigold/30 bg-black">
           <iframe
             src={`${youtubeEmbed(video)}&autoplay=1`}
-            title={video.title}
+            title={videoLabel(video)}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
             loading="lazy"

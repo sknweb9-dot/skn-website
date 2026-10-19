@@ -33,8 +33,17 @@
  * -----------
  * The photographs moved to lib/gallery.ts when the gallery got its own page
  * (/gallery). What stays here is the page's editorial content - the sections,
- * the Udaan copy and the eleven recordings - plus the poster plates those
- * recordings carry onto the gallery's globe.
+ * their copy and the videos - plus the poster plates those videos carry onto the
+ * gallery's globe.
+ *
+ * THE 2026 RESTRUCTURE
+ * --------------------
+ * The academy supplied the page's copy and a dated, placed line for every video
+ * (when, where, in which city), so the scraped provenance above is history: every
+ * title is now `academy`. Within each section the videos run newest first. Six of
+ * the seven Outreach videos the academy listed are not on the page - two or three
+ * are enough - and the Udaan and Jeevan Utsav entries are single videos (a promo
+ * and a film) where they used to be playlists of the whole event.
  */
 
 import { SITE } from './site';
@@ -63,37 +72,36 @@ export type SectionMeta = {
 export const SECTIONS: SectionMeta[] = [
   {
     id: 'udaan',
-    eyebrow: 'Our own showcase',
-    heading: 'Udaan — flying high to reach our goals',
+    eyebrow: 'Flying High',
+    heading: 'Udaan',
     filter: 'Udaan',
-    lede: 'Created so that every dancer has a stage, irrespective of their stage of learning. Editions in 2023 and 2025.',
   },
   {
     id: 'arangetram',
-    eyebrow: 'The debut',
+    eyebrow: 'The Debut',
     heading: 'Arangetrams',
     filter: 'Arangetrams',
-    lede: 'The formal debut that the whole curriculum points towards — a full-length solo, danced once.',
-  },
-  {
-    id: 'group',
-    eyebrow: 'Performances',
-    heading: 'Group',
-    filter: 'Group',
-    lede: 'Temple festivals, invited programmes, and the annual music and dance season.',
   },
   {
     id: 'solo',
-    eyebrow: 'Performances',
+    eyebrow: 'Beyond the Debut',
     heading: 'Solo',
     filter: 'Solo',
+    lede: 'A platform for dancers to present individual performances, explore diverse repertoire, and establish their own artistic identity.',
+  },
+  {
+    id: 'group',
+    eyebrow: 'Together in Harmony',
+    heading: 'Ensemble',
+    filter: 'Ensemble',
+    lede: 'SKN Ensemble brings dancers together to celebrate Bharatanatyam through temple festivals, cultural celebrations, and invited performances. Rooted in tradition, teamwork, and devotion, these experiences nurture confidence, artistic expression, and the joy of performing together.',
   },
   {
     id: 'outreach',
-    eyebrow: 'Beyond Chennai',
+    eyebrow: 'Beyond Boundaries',
     heading: 'Outreach',
     filter: 'Outreach',
-    lede: 'Temple festival offerings and community programmes, in Chennai and wherever our Scarborough branch teaches.',
+    lede: 'Through SKN Outreach, we share the joy of Bharatanatyam with diverse communities through NGOs, special schools, temples, and cultural initiatives. These meaningful experiences nurture empathy, inclusivity, and compassion, reminding our dancers that art is not only about performing, but also about connecting and giving back.',
   },
   {
     id: 'studio',
@@ -118,28 +126,39 @@ export function sectionMeta(id: EventSection): SectionMeta {
 // ---------------------------------------------------------------------------
 
 /**
- * Verbatim from the old /events page, split into paragraphs at the sentence
- * boundaries the page itself used. Not paraphrased: this copy is the academy's
- * own statement of why Udaan exists, and it is better than anything we would
- * write for it.
+ * The page's own words, supplied by the academy in 2026. Each block is a micro
+ * heading (the eyebrow) over a heading, as the academy set them out: the
+ * subtitle is the small blue line, the name of the section is the heading.
+ * Apostrophes and dashes follow the rest of the site.
  */
-export const UDAAN = {
-  eyebrow: 'Udaan',
-  heading: 'Every dancer deserves a platform',
+export const EVENTS_INTRO = {
+  eyebrow: 'A Stage for All',
+  heading: 'Events',
   body: [
-    "Bharatanatyam is a beautiful and intense dance form, believed to be passed on to humans from the Gods! While mastering the art-form requires a 'life-time', every victory in one's path to learning the art should be celebrated.",
-    'For us at Shanti Kala Nikketan, Bharatanatyam is a Sadhana that helps in the overall development of one\u2019s character to be a creative and empathetic human being. Every dancer deserves a platform to perform and express themselves, irrespective of their stage of learning!',
-    'We are delighted to present \u201cUdaan\u201d as a humble offering to the art-form and as a platform for our dancers at Shanti Kala Nikketan to celebrate their accomplishment of moving one more step closer to learning the art!',
+    'Bharatanatyam is a beautiful and profound art form, traditionally believed to have divine origins. While mastering this art is a lifelong journey, every milestone along the way deserves to be celebrated.',
+    'At Shanti Kala Nikketan, we believe Bharatanatyam is a Sadhana \u2014 a path of discipline, self-discovery, and personal growth that nurtures creativity, confidence, and empathy. We believe every dancer deserves a platform to perform, express themselves, and celebrate their progress, regardless of their stage of learning.',
+    'Through our events, we create meaningful opportunities for every student to experience the joy of performing and grow as both an artist and an individual.',
   ],
-  /** The second block on the page — why the name. */
-  theme: {
-    label: 'Why Udaan',
-    body: [
-      '\u201cUdaan\u201d has been chosen as the theme of our performance to signify \u201cFlying high to reach our goals\u201d. In one\u2019s journey in learning Bharatanatyam, every dancer encounters numerous challenges. These challenges are overcome with more ease in the presence of a Guru.',
-      'Like a swan (Hamsa) meticulously separates the milk from a mixture of milk and water, the guiding light of a Guru enables a Sishya to separate and experience the beauty of the art while overcoming challenges, experience freedom to explore and thereby fly to great heights.',
-      'Our dancers are ready to enthrall you with their dance! Please have a look at their performance.',
-    ],
-  },
+} as const;
+
+export const UDAAN = {
+  eyebrow: 'Flying High',
+  heading: 'Udaan',
+  /** The small label over the second column, as the old page had it. */
+  why: 'Why Udaan',
+  body: [
+    'Udaan, meaning \u201cflight,\u201d is Shanti Kala Nikketan\u2019s celebration of artistic growth and a humble offering to the timeless art of Bharatanatyam. It provides a platform for our dancers to celebrate their achievements and take another step forward in their lifelong journey of learning.',
+    'Every dancer encounters challenges along this journey, but with the guidance of a Guru, these challenges become opportunities for growth. Just as the Hamsa (swan) is traditionally believed to separate milk from water, a Guru helps the Shishya develop the wisdom to recognise the essence of the art, overcome limitations, and discover the freedom to explore.',
+    'Through Udaan, our dancers spread their wings, embrace new possibilities, and aspire to greater heights \u2014 guided by tradition, dedication, and the joy of dance.',
+  ],
+} as const;
+
+export const ARANGETRAMS = {
+  body: [
+    'An Arangetram marks a significant milestone in a Bharatanatyam dancer\u2019s journey \u2014 their formal debut as a performer, reflecting years of dedication, discipline, perseverance, and artistic growth.',
+    'At Shanti Kala Nikketan, we believe an Arangetram is not merely a grand performance, but a celebration of the student\u2019s transformation as both an artist and an individual. It is a journey of self-discovery, confidence, responsibility, and deeper understanding of the art, nurtured through the guidance of the Guru.',
+    'For us, an Arangetram is not the culmination of learning, but the beginning of a new chapter \u2014 one that inspires the dancer to continue exploring, evolving, and growing with humility and devotion.',
+  ],
 } as const;
 
 // ---------------------------------------------------------------------------
@@ -153,7 +172,14 @@ export type EventVideo = {
   /** Stable slug — anchor target and React key */
   id: string;
   section: EventSection;
+  /** The headline of the card: an event, an organisation or a dancer. */
   title: string;
+  /** A second line where the title alone does not say enough (who danced, which edition). */
+  detail?: string;
+  /** When it happened, YYYY-MM-DD. */
+  date: string;
+  /** Where, as the academy gives it: a venue and a city, or just a city or country. */
+  place?: string;
   titleSource: TitleSource;
   kind: 'video' | 'playlist';
   /** YouTube video id, or playlist id when kind === 'playlist' */
@@ -189,46 +215,55 @@ export const VIDEOS: EventVideo[] = [
   // --- Udaan -------------------------------------------------------------
   {
     id: 'udaan-2025',
+    embeddable: false,
     section: 'udaan',
-    title: 'UDAAN 2025 : Where Tradition Takes Flight',
-    titleSource: 'oembed',
-    kind: 'playlist',
-    youtubeId: 'PLxyyMzhr0f3HS1_wu0bBvbhbLQolDyjzr',
+    title: 'Udaan 2025',
+    date: '2025-06-21',
+    place: 'Kalakshetra Foundation, Chennai',
+    titleSource: 'academy',
+    kind: 'video',
+    youtubeId: 'L4vTYrVB3aw',
     plateKey: 'udaan-2025-poster',
     alt: 'Poster for Udaan 2025, Where Tradition Takes Flight',
-    note: 'The full 2025 edition, as a playlist.',
   },
   {
     id: 'udaan-2023',
+    embeddable: false,
     section: 'udaan',
-    title: "UDAAN 2023: FLYING HIGH",
-    titleSource: 'og-title',
-    kind: 'playlist',
-    youtubeId: 'PLxyyMzhr0f3E-5yEp3Whr3hsbz6wC6GsO',
-    unlisted: true,
+    title: 'Udaan 2023',
+    date: '2023-10-20',
+    place: 'Narada Gana Sabha, Chennai',
+    titleSource: 'academy',
+    kind: 'video',
+    youtubeId: 'AeFacBa8zL8',
     plateKey: 'udaan-2023-poster',
     alt: 'Poster for Udaan 2023, Flying High',
-    note: 'The first edition. Labelled simply \u201cUdaan 2023\u201d on the old site.',
+    note: 'The promo for the first edition.',
   },
 
   // --- Arangetrams -------------------------------------------------------
   {
-    id: 'arangetram-aparna',
+    id: 'arangetram-jahnavi',
+    embeddable: false,
     section: 'arangetram',
-    title: 'Kum Aparna Manu | First Student | Bharatanatyam Arangetram',
-    titleSource: 'oembed',
+    title: 'Jahnavi Sivasubramanyam',
+    date: '2025-06-22',
+    place: 'Kalakshetra Foundation, Chennai',
+    titleSource: 'academy',
     kind: 'video',
-    youtubeId: 'eAIGMW4FPY4',
-    plateKey: 'aparna',
-    alt: 'Aparna Manu in Bharatanatyam costume for her Arangetram',
-    note: 'The academy\u2019s first student to reach her debut.',
+    youtubeId: 'wmnYYbxA950',
+    unlisted: true,
+    plateKey: 'arangetram-j',
+    alt: 'Invitation for Kum Jahnavi\u2019s Bharatanatyam Arangetram',
   },
   {
     id: 'arangetram-kirusanthini',
     embeddable: false,
     section: 'arangetram',
-    title: 'Smt Kirusanthini | Bharatanatyam Arangetram',
-    titleSource: 'og-title',
+    title: 'Kirusanthini',
+    date: '2024-01-09',
+    place: 'Black Box, Chennai',
+    titleSource: 'academy',
     kind: 'video',
     youtubeId: 'wt4wETJMaXI',
     unlisted: true,
@@ -237,77 +272,28 @@ export const VIDEOS: EventVideo[] = [
     note: 'Now head of the Scarborough branch.',
   },
   {
-    id: 'arangetram-jahnavi',
-    embeddable: false,
+    id: 'arangetram-aparna',
     section: 'arangetram',
-    title: 'Kum Jahnavi | Arangetram | A Journey of Grace, Rhythm & Devotion',
-    titleSource: 'og-title',
+    title: 'Aparna Manu',
+    date: '2018-06-16',
+    place: 'Bharatiya Vidya Bhavan, Chennai',
+    titleSource: 'academy',
     kind: 'video',
-    youtubeId: 'wmnYYbxA950',
-    unlisted: true,
-    plateKey: 'arangetram-j',
-    alt: 'Invitation for Kum Jahnavi\u2019s Bharatanatyam Arangetram',
+    youtubeId: 'eAIGMW4FPY4',
+    plateKey: 'aparna',
+    alt: 'Aparna Manu in Bharatanatyam costume for her Arangetram',
+    note: 'The academy\u2019s first student to reach her debut.',
   },
 
-  // --- Performances / Group ---------------------------------------------
-  {
-    id: 'jeevan-utsav-2022',
-    section: 'group',
-    title: 'Jeevan Utsav 2022 | A Celebration of Life through Dance',
-    titleSource: 'oembed',
-    kind: 'playlist',
-    youtubeId: 'PLxyyMzhr0f3HXB2Wls5HDTlEqUM6oLTUc',
-    plateKey: 'festival',
-    alt: 'Flyer for a Shanti Kala Nikketan festival programme',
-  },
-  {
-    id: 'maha-shivaratri',
-    embeddable: false,
-    section: 'group',
-    title: 'Offering to Lord Shiva on Maha Shivaratri',
-    titleSource: 'og-title',
-    kind: 'video',
-    youtubeId: 'x_zWuJIvNng',
-    unlisted: true,
-    pairingUnconfirmed: true,
-    plateKey: 'mylapore',
-    alt: 'Programme notice for a performance at Bharatiya Vidya Bhavan, Mylapore',
-    note: 'Poster and video pairing taken from the old page\u2019s DOM order; the poster names Mylapore.',
-  },
-  {
-    id: 'samarpanam-navratri-2025',
-    embeddable: false,
-    section: 'group',
-    title: 'Samarpanam Festival, Navratri 2025',
-    titleSource: 'og-title',
-    kind: 'video',
-    youtubeId: 'uLpZ8hUFLZY',
-    unlisted: true,
-    pairingUnconfirmed: true,
-    plateKey: 'athma',
-    alt: 'Shanti Kala Nikketan dancers performing at an invited programme',
-    note: 'Poster and video pairing taken from the old page\u2019s DOM order.',
-  },
-  {
-    id: 'nada-sudha-27',
-    embeddable: false,
-    section: 'group',
-    title: 'Nada Sudha - 27th Annual Music & Dance Festival 2025 - 2026',
-    titleSource: 'og-title',
-    kind: 'video',
-    youtubeId: 'RDW0MOFKFhY',
-    unlisted: true,
-    plateKey: 'nadasudha',
-    alt: 'Shanti Kala Nikketan at the Nada Sudha annual music and dance festival',
-  },
-
-  // --- Performances / Solo ----------------------------------------------
+  // --- Solo --------------------------------------------------------------
   {
     id: 'aparna-solo',
     embeddable: false,
     section: 'solo',
-    title: "Aparna Manu's Solo Performance",
-    titleSource: 'og-title',
+    title: 'Aparna Manu',
+    date: '2024-07-05',
+    place: 'Music Academy, Chennai',
+    titleSource: 'academy',
     kind: 'video',
     youtubeId: 'iD-Lf0YD8RY',
     unlisted: true,
@@ -315,13 +301,112 @@ export const VIDEOS: EventVideo[] = [
     alt: 'Aparna Manu performing a Bharatanatyam solo',
   },
 
+  // --- Ensemble ----------------------------------------------------------
+  {
+    id: 'nada-sudha-27',
+    embeddable: false,
+    section: 'group',
+    title: 'Nada Sudha',
+    detail: '27th Annual Music & Dance Festival',
+    date: '2026-01-24',
+    place: 'Chennai',
+    titleSource: 'academy',
+    kind: 'video',
+    youtubeId: 'RDW0MOFKFhY',
+    unlisted: true,
+    plateKey: 'nadasudha',
+    alt: 'Shanti Kala Nikketan at the Nada Sudha annual music and dance festival',
+  },
+  {
+    id: 'samarpanam-navratri-2025',
+    embeddable: false,
+    section: 'group',
+    title: 'Samarpanam Festival',
+    date: '2025-09-30',
+    place: 'Athma Academy, Chennai',
+    titleSource: 'academy',
+    kind: 'video',
+    youtubeId: 'uLpZ8hUFLZY',
+    unlisted: true,
+    // The poster and video were paired by DOM order on the old site; kept as
+    // data for the academy to confirm, and not shown to visitors.
+    pairingUnconfirmed: true,
+    plateKey: 'athma',
+    alt: 'Shanti Kala Nikketan dancers performing at an invited programme',
+  },
+  {
+    id: 'maha-shivaratri',
+    embeddable: false,
+    section: 'group',
+    title: 'Maha Shivaratri',
+    date: '2024-03-09',
+    place: 'Kapaleeshwarar Temple, Chennai',
+    titleSource: 'academy',
+    kind: 'video',
+    youtubeId: 'x_zWuJIvNng',
+    unlisted: true,
+    // The poster is a programme notice for Bharatiya Vidya Bhavan, Mylapore, and
+    // the video is from Kapaleeshwarar Temple: they may not belong together.
+    pairingUnconfirmed: true,
+    plateKey: 'mylapore',
+    alt: 'Programme notice for a performance at Bharatiya Vidya Bhavan, Mylapore',
+  },
+  {
+    id: 'jeevan-utsav-2022',
+    embeddable: false,
+    section: 'group',
+    title: 'Jeevan Utsav',
+    date: '2022-01-15',
+    place: 'Online, 6 countries',
+    titleSource: 'academy',
+    kind: 'video',
+    youtubeId: 'TAU7Yi5rPCE',
+    plateKey: 'festival',
+    alt: 'Flyer for the Jeevan Utsav festival programme',
+    note: 'The promo for the festival.',
+  },
+
   // --- Outreach ----------------------------------------------------------
+  // Three of the seven the academy listed: a community programme in Chennai, a
+  // partner's festival and the Toronto temple, so the page shows the range
+  // without becoming a list. The others can be added back here.
+  {
+    id: 'deaf-women-2026',
+    embeddable: false,
+    section: 'outreach',
+    title: 'Foundation of Deaf Women',
+    detail: 'SKN Teachers',
+    date: '2026-03-29',
+    place: 'Chennai',
+    titleSource: 'academy',
+    kind: 'video',
+    youtubeId: 'frel0kYJvM8',
+    plateKey: 'outreach-teachers',
+    alt: 'Shanti Kala Nikketan teachers dancing on stage at the Foundation of Deaf Women\u2019s International Women\u2019s Day event',
+  },
+  {
+    id: 'dorai-jahnavi-2025',
+    embeddable: false,
+    section: 'outreach',
+    title: 'Dorai Foundation',
+    detail: 'Jahnavi Sivasubramanyam',
+    date: '2025-10-04',
+    place: 'Chennai',
+    titleSource: 'academy',
+    kind: 'video',
+    youtubeId: '3YjSOxFNlKY',
+    plateKey: 'outreach-dorai',
+    alt: 'Jahnavi Sivasubramanyam dancing a Meera bhajan for the Dorai Foundation',
+  },
   {
     id: 'toronto-vinayaka-2025',
     embeddable: false,
     section: 'outreach',
-    title: 'Bharatanatyam Offering to Lord Vinayaka | Kirusanthini | Toronto Temple Festival 2025',
-    titleSource: 'og-title',
+    title: 'Toronto Temple Festival',
+    detail: 'Kirusanthini',
+    date: '2025-06-15',
+    place: 'Canada',
+    titleSource: 'academy',
     kind: 'video',
     youtubeId: 'cQS1QZo-Eyk',
     unlisted: true,
@@ -329,6 +414,20 @@ export const VIDEOS: EventVideo[] = [
     alt: 'Shanti Kala Nikketan dancers at a Toronto temple festival',
   },
 ];
+
+/** A card's full name, for labels, structured data and the gallery. */
+export function videoLabel(video: EventVideo): string {
+  const context =
+    video.detail ?? (video.section === 'arangetram' ? 'Arangetram' : video.section === 'solo' ? 'Solo' : undefined);
+  return context ? `${video.title}, ${context}` : video.title;
+}
+
+/** 9 Jan 2024, the way the home page writes dates. */
+export function formatVideoDate(iso: string): string {
+  return new Intl.DateTimeFormat('en-IN', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }).format(
+    new Date(`${iso}T00:00:00Z`),
+  );
+}
 
 /** The poster, resolved from SOURCES. */
 export function videoPoster(video: EventVideo): {
@@ -390,6 +489,8 @@ const SOURCES: Source[] = [
   { key: 'nadasudha', src: '/img/event-nadasudha.jpg', width: 900, height: 675 },
   { key: 'jun2024', src: '/img/event-jun2024.jpg', width: 642, height: 900 },
   { key: 'canada', src: '/img/event-canada.jpg', width: 900, height: 506 },
+  { key: 'outreach-teachers', src: '/img/event-outreach-teachers.jpg', width: 900, height: 506 },
+  { key: 'outreach-dorai', src: '/img/event-outreach-dorai.jpg', width: 900, height: 506 },
 ];
 
 const SOURCE_BY_KEY = new Map(SOURCES.map((s) => [s.key, s]));
@@ -415,7 +516,7 @@ export const PLATE_LONG_EDGE = 512;
 export const EVENTS_META = {
   title: 'Events & Gallery — Udaan, Arangetrams & Performances',
   description:
-    'Udaan, our own showcase created so that every dancer has a stage — with Arangetrams, temple festivals, and outreach programmes. Photographs and recordings from the academy’s own stages.',
+    'Udaan, our own showcase created so that every dancer has a stage — with Arangetrams, temple festivals, and outreach programmes. Photographs and videos from the academy’s own stages.',
   url: `${SITE.url}/events`,
   image: '/img/event-udaan-2025.jpg',
 } as const;
@@ -436,5 +537,8 @@ export const EVENTS_META = {
       throw new Error(`Video ${video.id} names plate key "${video.plateKey}", which is not in SOURCES`);
     }
     if (!video.alt.trim()) throw new Error(`Video ${video.id} has no alt text`);
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(video.date) || Number.isNaN(Date.parse(video.date))) {
+      throw new Error(`Video ${video.id} has date "${video.date}"; use YYYY-MM-DD.`);
+    }
   }
 })();

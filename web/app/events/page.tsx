@@ -6,12 +6,13 @@ import BlankGlobe from '@/components/gallery/BlankGlobe';
 import { PageShell, PageHero, QuietLink, Section } from '@/components/PageShell';
 import VideoFacade from '@/components/VideoFacade';
 import {
+  ARANGETRAMS,
+  EVENTS_INTRO,
   EVENTS_META,
   UDAAN,
   sectionMeta,
   videosBySection,
 } from '@/lib/events';
-import { ARANGETRAM } from '@/lib/curriculum';
 import { fetchInstagramPosts } from '@/lib/instagram';
 import { SITE } from '@/lib/site';
 import { ALL_ITEMS } from '@/lib/gallery';
@@ -32,13 +33,14 @@ import { eventsGraph } from '@/lib/schema';
  *
  * STRUCTURE
  * ---------
- * The section order is the old /events page's own, reconstructed from DOM order
- * in _research/pages/events.html: Udaan, Arangetrams, Performances (Group then
- * Solo), Outreach. The gallery is new. It was first placed between the manifesto
- * and the recordings; it sits after them now, with a blank globe as its teaser,
- * and the Instagram rail follows. The page ends there, without a closing call to
- * action: the masthead already carries one.
- */
+ * Each section is a micro heading (the eyebrow) over a heading, as the academy
+ * wrote them: the small blue line is the subtitle, the section's name is the
+ * heading. In order: Events (the hero), Udaan, Arangetrams (with Solo, "Beyond
+ * the Debut", as a sub-heading under it rather than a section), Ensemble, Outreach. Within a section the videos
+ * run newest first. The gallery follows, with a blank globe as its teaser, then
+ * the Instagram rail, and the page ends there without a closing call to action:
+ * the masthead already carries one.
+  */
 
 export const metadata: Metadata = {
   title: EVENTS_META.title,
@@ -73,41 +75,33 @@ export default async function EventsPage() {
    */
   const instagramPosts = await fetchInstagramPosts();
 
+  const solo = sectionMeta('solo');
+  const ensemble = sectionMeta('group');
+  const outreach = sectionMeta('outreach');
+
   return (
     <PageShell>
       <JsonLd data={eventsGraph()} />
 
-      <PageHero
-        eyebrow="Events"
-        title="Every dancer gets a"
-        accent="stage"
-        lede="Udaan — flying high to reach our goals — is our own showcase, created so that every dancer has a platform irrespective of their stage of learning. Alongside it: Arangetrams, temple festivals, and outreach programmes."
-      />
+      {/* The first paragraph is the hero's lede; the other two follow it. */}
+      <PageHero eyebrow={EVENTS_INTRO.eyebrow} title={EVENTS_INTRO.heading} lede={EVENTS_INTRO.body[0]}>
+        <div className="max-w-measure space-y-4 text-[1.02rem] leading-relaxed text-ink-soft">
+          <p>{EVENTS_INTRO.body[1]}</p>
+          <p>{EVENTS_INTRO.body[2]}</p>
+        </div>
+      </PageHero>
 
-      {/* --- Udaan, in the academy's own words ---------------------------- */}
+      {/* --- Udaan -------------------------------------------------------- */}
       <Section id="udaan" eyebrow={UDAAN.eyebrow} heading={UDAAN.heading} tinted>
         <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="max-w-2xl">
-            {UDAAN.body.map((paragraph) => (
-              <p
-                key={paragraph.slice(0, 32)}
-                className="mt-4 text-[1rem] leading-relaxed text-ink-soft first:mt-0"
-              >
-                {paragraph}
-              </p>
-            ))}
+            <p className="text-[1rem] leading-relaxed text-ink-soft">{UDAAN.body[0]}</p>
           </div>
 
           <div className="border-l border-marigold/25 pl-6">
-            <p className="eyebrow">{UDAAN.theme.label}</p>
-            {UDAAN.theme.body.map((paragraph) => (
-              <p
-                key={paragraph.slice(0, 32)}
-                className="mt-3.5 text-[1rem] leading-relaxed text-teal-deep"
-              >
-                {paragraph}
-              </p>
-            ))}
+            <p className="eyebrow">{UDAAN.why}</p>
+            <p className="mt-3.5 text-[1rem] leading-relaxed text-teal-deep">{UDAAN.body[1]}</p>
+            <p className="mt-3.5 text-[1rem] leading-relaxed text-teal-deep">{UDAAN.body[2]}</p>
           </div>
         </div>
 
@@ -118,24 +112,19 @@ export default async function EventsPage() {
         </div>
       </Section>
 
-      {/* --- Arangetrams --------------------------------------------------
-          One section. It used to be two: the videos under "The debut", and
-          under them a second block (its own label, its own headline) saying
-          the same thing about the programme. Now the words come first, then the
-          recordings, then the way in. */}
+      {/* --- Arangetrams ----------------------------------------------------
+          The words, then the videos, then the way in. */}
       <Section
         id="arangetram"
         eyebrow={sectionMeta('arangetram').eyebrow}
         heading={sectionMeta('arangetram').heading}
-        tinted
       >
         <div className="max-w-2xl">
           <p className="max-w-measure text-[1.05rem] leading-relaxed font-medium text-teal-deep">
-            {ARANGETRAM.lead}
+            {ARANGETRAMS.body[0]}
           </p>
-          <p className="mt-4 max-w-measure text-[1rem] leading-relaxed text-ink-soft">
-            {ARANGETRAM.description}
-          </p>
+          <p className="mt-4 max-w-measure text-[1rem] leading-relaxed text-ink-soft">{ARANGETRAMS.body[1]}</p>
+          <p className="mt-4 max-w-measure text-[1rem] leading-relaxed text-ink-soft">{ARANGETRAMS.body[2]}</p>
         </div>
 
         <div className="mt-12 grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
@@ -147,59 +136,51 @@ export default async function EventsPage() {
         <div className="mt-10">
           <QuietLink href="/curriculum#arangetram">How students get there</QuietLink>
         </div>
+
+        {/* Solo is not a section of its own: it is what comes after the debut,
+            so it sits under it, as a sub-heading, with its one video lined up
+            under the first of the Arangetram cards. */}
+        <div id="solo" className="mt-16 scroll-mt-28 border-t border-marigold/20 pt-12">
+          <p className="eyebrow">{solo.eyebrow}</p>
+          <h3 className="mt-3 font-display text-[1.5rem] leading-[1.1] font-semibold text-teal-deep">
+            {solo.heading}
+          </h3>
+          <div className="mt-8 grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
+            {videosBySection('solo').map((video) => (
+              <VideoFacade key={video.id} video={video} />
+            ))}
+            <p className="max-w-measure text-[1.05rem] leading-relaxed text-teal-deep sm:col-span-1 lg:col-span-2">
+              {solo.lede}
+            </p>
+          </div>
+        </div>
       </Section>
 
-      {/* --- Performances ------------------------------------------------- */}
-      <Section
-        id="group"
-        eyebrow={sectionMeta('group').eyebrow}
-        heading="Ensemble"
-        lede={sectionMeta('group').lede}
-      >
-        <h3 className="font-display text-[1.1rem] font-semibold text-teal-deep">Group</h3>
-        <div className="mt-6 grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
+      {/* --- Ensemble ----------------------------------------------------- */}
+      <Section id="group" eyebrow={ensemble.eyebrow} heading={ensemble.heading} lede={ensemble.lede} tinted>
+        <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
           {videosBySection('group').map((video) => (
             <VideoFacade key={video.id} video={video} />
           ))}
         </div>
+      </Section>
 
-        <h3
-          id="solo"
-          className="mt-14 scroll-mt-28 font-display text-[1.1rem] font-semibold text-teal-deep"
-        >
-          Solo - Beyond the Debut
-        </h3>
-        <div className="mt-6 grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
-          {videosBySection('solo').map((video) => (
+      {/* --- Outreach: a few, not all ------------------------------------- */}
+      <Section id="outreach" eyebrow={outreach.eyebrow} heading={outreach.heading} lede={outreach.lede}>
+        <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
+          {videosBySection('outreach').map((video) => (
             <VideoFacade key={video.id} video={video} />
           ))}
         </div>
-      </Section>
 
-      {/* --- Outreach ----------------------------------------------------- */}
-      <Section
-        id="outreach"
-        eyebrow={sectionMeta('outreach').eyebrow}
-        heading={sectionMeta('outreach').heading}
-        lede={sectionMeta('outreach').lede}
-        tinted
-      >
-        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-          <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-1">
-            {videosBySection('outreach').map((video) => (
-              <VideoFacade key={video.id} video={video} />
-            ))}
-          </div>
-
-          <div className="max-w-xl">
-            <p className="max-w-measure text-[1rem] leading-relaxed text-ink-soft">
-              Our Scarborough branch teaches at Morningside and Finch. Chennai and
-              Scarborough are one academy, one syllabus, and — allowing for the
-              nine and a half hours between them — one set of standards.
-            </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <QuietLink href="/locations/scarborough">The Scarborough branch</QuietLink>
-            </div>
+        <div className="mt-12 max-w-xl border-t border-marigold/20 pt-8">
+          <p className="max-w-measure text-[1rem] leading-relaxed text-ink-soft">
+            Our Scarborough branch teaches at Morningside and Finch. Chennai and
+            Scarborough are one academy, one syllabus, and — allowing for the
+            nine and a half hours between them — one set of standards.
+          </p>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <QuietLink href="/locations/scarborough">The Scarborough branch</QuietLink>
           </div>
         </div>
       </Section>
@@ -217,7 +198,7 @@ export default async function EventsPage() {
                 Every class, every stage
               </h2>
               <p className="mt-4 max-w-measure text-[0.98rem] leading-relaxed text-ink-soft">
-                {ALL_ITEMS.length} photographs and recordings, from every class and batch to Udaan, the
+                {ALL_ITEMS.length} photographs and videos, from every class and batch to Udaan, the
                 Arangetrams and the festivals. Explore the globe, or find your child by venue and batch.
               </p>
               <div className="mt-8">
