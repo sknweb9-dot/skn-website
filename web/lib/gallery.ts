@@ -96,10 +96,29 @@ const CLASS_ALBUMS: { id: string; venueId: string; batches: string[] }[] = [
   { id: 'class-pc2', venueId: 'prestige-courtyards', batches: ['PC2'] },
   { id: 'class-cg-r', venueId: 'casagrand-riviera', batches: ['CG R1', 'CG R2'] },
   { id: 'class-cg-t', venueId: 'casagrand-tranquil', batches: ['CG T1'] },
+  // One-to-one classes. They are filed exactly as the group classes are, by venue,
+  // so a parent finds them the same way.
+  { id: 'class-cg-t2', venueId: 'casagrand-tranquil', batches: ['CG T2'] },
+  // These two venues are in the archive but not (yet) on the Locations page, and
+  // have no batch code, so the filter stops at the venue.
+  { id: 'class-pw', venueId: 'purva-windermere', batches: [] },
+  { id: 'class-ag', venueId: 'appswamy-greensville', batches: [] },
+];
+
+/**
+ * Venues the gallery knows that classes.ts does not. classes.ts is the public
+ * schedule (Locations, booking, schema): a venue goes there when the academy has
+ * given a level and timings for it, and not before. The gallery only needs a
+ * name to file photographs under.
+ */
+const ARCHIVE_VENUES = [
+  { id: 'purva-windermere', name: 'Purva Windermere' },
+  { id: 'appswamy-greensville', name: 'Appswamy Greensville' },
 ];
 
 const BATCH_INFO = new Map(allBatches().map(({ batch, programme }) => [batch.code, { batch, programme }]));
-const VENUE_NAME = new Map(VENUES.map((v) => [v.id, v.name]));
+const VENUE_NAME = new Map([...VENUES, ...ARCHIVE_VENUES].map((v) => [v.id, v.name]));
+const KNOWN_BATCHES = new Set(CLASS_ALBUMS.flatMap((a) => a.batches));
 
 /** "Level 3 · Mon & Fri", from the same data as the Locations page. */
 export function batchLabel(code: string): string {
@@ -108,12 +127,26 @@ export function batchLabel(code: string): string {
   return `${info.programme.label} · ${formatDays(info.batch.days)}`;
 }
 
+/**
+ * What to say about a batch beyond its code: its level and days where the
+ * schedule has it, nothing where it does not (a batch that is only in the
+ * archive), so "CG T2 · CG T2" is never written.
+ */
+function batchDetail(code: string): string | null {
+  return BATCH_INFO.has(code) ? batchLabel(code) : null;
+}
+
+const batchTitle = (code: string) => {
+  const detail = batchDetail(code);
+  return detail ? `${code} · ${detail}` : code;
+};
+
 function classAlbum(a: (typeof CLASS_ALBUMS)[number]): Album {
   const venue = VENUE_NAME.get(a.venueId) ?? a.venueId;
   return {
     id: a.id,
     group: 'classes',
-    title: `${venue}: ${a.batches.join(' & ')}`,
+    title: a.batches.length ? `${venue}: ${a.batches.join(' & ')}` : venue,
     section: 'studio',
     venueId: a.venueId,
     batches: a.batches,
@@ -174,8 +207,8 @@ function photoItem([key, albumId, width, height, onGlobe]: (typeof RAW_PHOTOS)[n
   const a = album(albumId);
   const date = albumDate(a);
   const isClass = a.group === 'classes';
-  const title = isClass ? a.batches!.map((c) => `${c} · ${batchLabel(c)}`).join('  /  ') : a.title;
   const venue = a.venueId ? VENUE_NAME.get(a.venueId) : undefined;
+  const title = isClass ? (a.batches!.length ? a.batches!.map(batchTitle).join('  /  ') : venue ?? a.title) : a.title;
   return {
     id: key,
     kind: 'photo',
@@ -191,7 +224,7 @@ function photoItem([key, albumId, width, height, onGlobe]: (typeof RAW_PHOTOS)[n
     width,
     height,
     alt: isClass
-      ? `Students in class at ${venue}, batch ${a.batches!.join(' and ')}`
+      ? `Students in class at ${venue}${a.batches!.length ? `, batch ${a.batches!.join(' and ')}` : ''}`
       : `A photograph from ${a.title}${date ? `, ${date}` : ''}`,
     onGlobe,
   };
@@ -295,10 +328,14 @@ export function groupOptions(): (FilterOption & { id: GroupId })[] {
 export function subOptions(group: GroupId | null): { kind: 'album' | 'venue'; options: FilterOption[] } | null {
   if (!group || group === 'videos') return null;
   if (group === 'classes') {
-    const venues = VENUES.filter((v) => CLASS_ALBUMS.some((a) => a.venueId === v.id));
+    const venueIds = [...new Set(CLASS_ALBUMS.map((a) => a.venueId))];
     return {
       kind: 'venue',
-      options: venues.map((v) => ({ id: v.id, label: v.name, count: count((i) => i.venueId === v.id) })),
+      options: venueIds.map((id) => ({
+        id,
+        label: VENUE_NAME.get(id) ?? id,
+        count: count((i) => i.venueId === id),
+      })),
     };
   }
   return {
@@ -319,7 +356,7 @@ export function batchOptions(venueId: string | null): FilterOption[] {
   return codes.map((code) => ({
     id: code,
     label: code,
-    detail: batchLabel(code),
+    detail: batchDetail(code) ?? undefined,
     count: count((i) => i.batches?.includes(code) ?? false),
   }));
 }
@@ -343,7 +380,7 @@ export function indexSections(items: GalleryItem[]): IndexSection[] {
       if (!inAlbum.length) continue;
       const detail =
         a.group === 'classes'
-          ? a.batches!.map(batchLabel).join('  /  ')
+          ? a.batches!.map(batchDetail).filter(Boolean).join('  /  ') || null
           : albumDate(a);
       sections.push({ id: a.id, title: a.title, detail, group: a.group, items: inAlbum });
     }
@@ -376,7 +413,7 @@ export function queryToFilter(search: string): GalleryFilter {
     group: valid,
     album: albumId && ALBUM_BY_ID.has(albumId) ? albumId : null,
     venue: venue && VENUE_NAME.has(venue) ? venue : null,
-    batch: batch && BATCH_INFO.has(batch) ? batch : null,
+    batch: batch && KNOWN_BATCHES.has(batch) ? batch : null,
     query: (p.get('q') ?? '').slice(0, 80),
   };
 }

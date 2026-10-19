@@ -70,6 +70,11 @@ CLASS_ALBUMS = {
     "PC2": "class-pc2",
     "CG R": "class-cg-r",
     "CG T": "class-cg-t",
+    # One-to-one classes, filed like the group ones. The folders are named for the
+    # student; nothing here carries that name into a key, a title or alt text.
+    "Dhiya": "class-cg-t2",
+    "Sanjana": "class-pw",
+    "Yathi Nithi": "class-ag",
 }
 
 # The two Scarborough class photographs (they are also on the Scarborough

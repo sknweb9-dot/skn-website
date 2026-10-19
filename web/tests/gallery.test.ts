@@ -38,7 +38,7 @@ describe('the gallery data', () => {
   it('carries every class photograph in the index, so a parent can find their child', () => {
     const classes = PHOTOS.filter((p) => p.group === 'classes');
     expect(classes.length).toBeGreaterThanOrEqual(40);
-    expect(classes.every((p) => p.venueId && p.batches?.length)).toBe(true);
+    expect(classes.every((p) => p.venueId && p.batches)).toBe(true);
   });
 });
 
@@ -141,5 +141,48 @@ describe('the 2026-10 additions', () => {
     expect(ids).toContain('arangetram-aparna-cr6a1584');
     expect(ids).not.toContain('arangetram-jahnavi-3d3a1215');
     expect(ids).not.toContain('arangetram-jahnavi-3d3a1380');
+  });
+});
+
+describe('the one-to-one class folders', () => {
+  const inVenue = (venue: string) => PHOTOS.filter((p) => p.group === 'classes' && p.venueId === venue);
+
+  it('adds Purva Windermere and Appswamy Greensville to the venue filter, after the existing five', () => {
+    const labels = subOptions('classes')?.options.map((o) => o.label);
+    expect(labels).toEqual([
+      'Appswamy Springs',
+      'Adroit',
+      'Prestige Courtyards',
+      'Casagrand Riviera',
+      'Casagrand Tranquil',
+      'Purva Windermere',
+      'Appswamy Greensville',
+    ]);
+  });
+
+  it('files the photographs under those venues', () => {
+    expect(inVenue('purva-windermere')).toHaveLength(4);
+    expect(inVenue('appswamy-greensville')).toHaveLength(4);
+  });
+
+  it('gives Casagrand Tranquil a second batch, CG T2, that the URL can name', () => {
+    expect(batchOptions('casagrand-tranquil').map((o) => o.id)).toEqual(['CG T1', 'CG T2']);
+    expect(inVenue('casagrand-tranquil').filter((p) => p.batches?.includes('CG T2'))).toHaveLength(5);
+    expect(queryToFilter('group=classes&venue=casagrand-tranquil&batch=CG%20T2').batch).toBe('CG T2');
+  });
+
+  it('does not write a batch the schedule has never heard of twice', () => {
+    const t2 = PHOTOS.find((p) => p.batches?.includes('CG T2'));
+    expect(t2?.title).toBe('CG T2');
+  });
+
+  it('has no batch row for a venue with no batch code', () => {
+    expect(batchOptions('purva-windermere')).toEqual([]);
+  });
+
+  it('keeps students out of names, keys and alt text', () => {
+    for (const p of [...inVenue('purva-windermere'), ...inVenue('appswamy-greensville'), ...inVenue('casagrand-tranquil')]) {
+      expect(`${p.id} ${p.title} ${p.subtitle} ${p.alt}`).not.toMatch(/dhiya|sanjana|yathi|nithi/i);
+    }
   });
 });
