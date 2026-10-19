@@ -7,12 +7,14 @@ import Footer from '@/components/Footer';
 import JsonLd from '@/components/JsonLd';
 import Nav from '@/components/Nav';
 import BookButton from '@/components/BookButton';
+import LocationPhotos from '@/components/LocationPhotos';
 import VenueDirectory from '@/components/VenueDirectory';
 import { locationFaqs, locationGraph } from '@/lib/schema';
 import { isRegion } from '@/lib/booking';
 import { BRANCHES, FACULTY, FOUNDERS, SITE, branchBySlug } from '@/lib/site';
 import { TEACHING_PROGRAMMES } from '@/lib/curriculum';
-import { areasTaught, offlineVenuesForCity, venuesForCity } from '@/lib/classes';
+import { areasTaught, offlineVenuesForCity } from '@/lib/classes';
+import { locationPhotos, type LocationFolder } from '@/lib/locationPhotos';
 
 type Params = { city: string };
 
@@ -90,8 +92,14 @@ export default async function LocationPage({ params }: { params: Promise<Params>
   if (!branch) notFound();
 
   const faqs = locationFaqs(branch);
-  const venues = venuesForCity(branch.slug);
   const areas = areasTaught(branch.slug);
+
+  // Whatever has been dropped into public/img/locations/<slug>/. Empty means
+  // the whole section below is absent, not shown empty.
+  const photos = locationPhotos(
+    branch.slug as LocationFolder,
+    `A class at Shanti Kala Nikketan, ${branch.city}`,
+  );
 
   // Match on the named head of the branch rather than on role text, so the
   // founding school resolves to its Director (who sits in FOUNDERS).
@@ -147,6 +155,15 @@ export default async function LocationPage({ params }: { params: Promise<Params>
           </div>
         </section>
 
+        {/* Photographs. Two in view at a time once there are three or more. */}
+        {photos.length > 0 ? (
+          <section className="border-b border-marigold/20 py-12 sm:py-14">
+            <div className="mx-auto max-w-6xl px-5 sm:px-8">
+              <LocationPhotos photos={photos} label={`Photographs from ${branch.city}`} />
+            </div>
+          </section>
+        ) : null}
+
         {/* Venues and batches */}
         <section className="py-16 sm:py-20">
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
@@ -154,7 +171,6 @@ export default async function LocationPage({ params }: { params: Promise<Params>
             <h2 className="mt-3 max-w-2xl font-display text-[clamp(1.7rem,4vw,2.6rem)] leading-[1.1] font-semibold text-teal-deep">
               {offlineVenuesForCity(branch.slug).length}{' '}
               {offlineVenuesForCity(branch.slug).length === 1 ? 'venue' : 'venues'}
-              {venues.length > offlineVenuesForCity(branch.slug).length ? ', plus online' : ''}
             </h2>
             <div className="mt-6">
               <VenueDirectory citySlug={branch.slug} />

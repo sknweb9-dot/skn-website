@@ -1,4 +1,4 @@
-import { BRANCHES, FACULTY, FAQS, FOUNDERS, PRIMARY_BRANCH, SITE, type Branch } from './site';
+import { BRANCHES, FACULTY, FAQS, FOUNDERS, ONLINE, PRIMARY_BRANCH, SITE, type Branch } from './site';
 import { TEACHING_PROGRAMMES } from './curriculum';
 import { allBatches, areasTaught, offlineVenuesForCity, venuesForCity } from './classes';
 import { MUDRAS } from './mudras';
@@ -556,6 +556,33 @@ export function galleryGraph() {
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
           { '@type': 'ListItem', position: 2, name: 'Gallery', item: url },
+        ],
+      },
+    ],
+  };
+}
+
+/**
+ * The graph emitted on the online page: the organisation and a breadcrumb. No
+ * LocalBusiness node, because there is no place; the online batch itself is
+ * already described, with its schedule and `courseMode: online`, as a
+ * CourseInstance on the programmes in the home graph.
+ */
+export function onlineGraph() {
+  const url = abs(`/locations/${ONLINE.slug}`);
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      organizationNode(),
+      websiteNode(),
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `${url}#breadcrumb`,
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
+          { '@type': 'ListItem', position: 2, name: 'Locations', item: abs('/locations') },
+          { '@type': 'ListItem', position: 3, name: ONLINE.label, item: url },
         ],
       },
     ],

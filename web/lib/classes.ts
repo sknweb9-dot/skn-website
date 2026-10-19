@@ -70,7 +70,7 @@ export type Venue = {
   name: string;
   /** Neighbourhood, normalised (docx writes "Medavakam") */
   area?: string;
-  /** slug of the owning branch in site.ts */
+  /** slug of the owning location in site.ts: a branch, or 'online' */
   citySlug: string;
   mode: 'offline' | 'online';
   /**
@@ -157,7 +157,7 @@ export const VENUES: Venue[] = [
   {
     id: 'online-group',
     name: 'Online group class',
-    citySlug: 'chennai',
+    citySlug: 'online',
     mode: 'online',
     batches: [
       { code: 'ON1', programmeId: 'level-1', days: ['Wednesday', 'Saturday'], opens: '17:00', closes: '18:00', admissionOpen: true, audience: 'children' },

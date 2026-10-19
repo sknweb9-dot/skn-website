@@ -133,7 +133,9 @@ function PublicVenues({ citySlug }: { citySlug: string }) {
           <>
             {' '}
             <strong className="font-semibold text-kumkum">
-              {totalOpen} batches are currently taking admissions.
+              {totalOpen === 1
+                ? '1 batch is currently taking admissions.'
+                : `${totalOpen} batches are currently taking admissions.`}
             </strong>
           </>
         ) : null}
@@ -157,7 +159,7 @@ function PublicVenues({ citySlug }: { citySlug: string }) {
                 {/* The venue alone is enough: /book derives the region from it,
                     online included, and lists this venue's batches first. */}
                 <BookButton source={`venue-${venue.id}`} variant="outline" venue={venue.id}>
-                  Enquire about {venue.name}
+                  {venue.mode === 'online' ? 'Enquire about the online class' : `Enquire about ${venue.name}`}
                 </BookButton>
               </div>
             ) : null}

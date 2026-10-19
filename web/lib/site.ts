@@ -151,7 +151,7 @@ export const BRANCHES: Branch[] = [
     // Kelambakkam and Egattur were removed from this list at the academy's
     // request. The venue-level landmarks were removed with the street address.
     landmarks: ['Off Rajiv Gandhi Salai (OMR)', 'Sholinganallur Junction'],
-    formats: ['Group classes', 'Individual classes', 'Online classes', 'Theory and Sanskrit viniyoga'],
+    formats: ['Group classes', 'Individual classes', 'Theory and Sanskrit viniyoga'],
     image: '/img/hero-gurukulam.jpg',
   },
   {
@@ -189,6 +189,29 @@ export const BRANCHES: Branch[] = [
   // The Delhi branch is closed. It has been removed rather than marked inactive,
   // per the academy's instruction that it not appear anywhere on the site.
 ];
+
+/**
+ * The online group class, which has a page and a card of its own beside the
+ * branches but is not one of them: it is not a place, so it has no address,
+ * coordinates or opening hours, and it is deliberately left out of BRANCHES so
+ * that none of the places that list the academy's physical locations (the
+ * schema.org `location` array, the founding-school lookups) can pick it up.
+ *
+ * Its batches live in ./classes.ts under `citySlug: 'online'`.
+ */
+export const ONLINE = {
+  slug: 'online',
+  label: 'Online',
+  /** Heading on the card and the page. */
+  title: 'Online group class',
+  /** The small line over the heading, where a branch has "region, country". */
+  eyebrow: 'Live, from anywhere',
+  intro:
+    'Live group classes over video, open to students anywhere. The same Kalakshetra-style syllabus as our Chennai and Scarborough batches, taught in the Gurukulam manner.',
+  /** The batch timings are Indian time. Said once, on the page. */
+  timezone: 'IST',
+  timezoneName: 'Indian Standard Time',
+} as const;
 
 export const PRIMARY_BRANCH = BRANCHES[0];
 

@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { BRANCHES, SITE } from '@/lib/site';
+import { BRANCHES, ONLINE, SITE } from '@/lib/site';
 
 /**
  * Priorities reflect what we most want ranking, not an even spread.
@@ -48,5 +48,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       // The founding school is the page we most want ranking for Chennai.
       priority: branch.isPrimary ? 0.9 : 0.7,
     })),
+    {
+      url: `${SITE.url}/locations/${ONLINE.slug}`,
+      lastModified,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
   ];
 }

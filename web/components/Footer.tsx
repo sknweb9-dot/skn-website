@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { BRANCHES, NAV_ROUTES, SITE } from '@/lib/site';
+import { BRANCHES, NAV_ROUTES, ONLINE, SITE } from '@/lib/site';
 import { FacebookIcon, InstagramIcon, YoutubeIcon } from './SocialIcons';
 
 const SOCIALS = [
@@ -116,6 +116,17 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link
+                  href={`/locations/${ONLINE.slug}`}
+                  className="group block text-sm text-cream/80 transition-colors hover:text-cream"
+                >
+                  <span className="block font-sans font-semibold text-cream underline decoration-transparent underline-offset-4 transition-colors group-hover:decoration-marigold">
+                    {ONLINE.label}
+                  </span>
+                  <span className="block text-xs text-cream/70">{ONLINE.eyebrow}</span>
+                </Link>
+              </li>
             </ul>
 
             {/* Brand marks rather than words, with a 44px target each. The name is
