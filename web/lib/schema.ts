@@ -1,6 +1,6 @@
 import { BRANCHES, FACULTY, FAQS, FOUNDERS, ONLINE, PRIMARY_BRANCH, SITE, type Branch } from './site';
 import { TEACHING_PROGRAMMES } from './curriculum';
-import { allBatches, areasTaught, offlineVenuesForCity, venuesForCity } from './classes';
+import { allBatches, venuesForCity } from './classes';
 import { MUDRAS } from './mudras';
 import { VIDEOS, videoLabel, videoPoster, youtubeHref } from './events';
 import { ALBUMS, PHOTOS, albumDate } from './gallery';
@@ -374,8 +374,6 @@ export function hastasGraph() {
   };
 }
 
-export type Faq = { q: string; a: string };
-
 /**
  * The graph emitted on /events.
  *
@@ -447,42 +445,6 @@ export function eventsGraph() {
       },
     ],
   };
-}
-
-/** Location-specific questions, generated from the branch's own facts. */
-export function locationFaqs(branch: Branch): Faq[] {
-  const venues = offlineVenuesForCity(branch.slug);
-  const areas = areasTaught(branch.slug);
-  const catchmentOnly = branch.areaServed.filter((a) => !areas.includes(a));
-
-  return [
-    {
-      q: `Where is your Bharatanatyam class in ${branch.city}?`,
-      a:
-        venues.length > 1
-          ? `We teach at ${venues.length} venues across ${branch.city}: ${venues
-              .map((v) => `${v.name}${v.area ? ` (${v.area})` : ''}`)
-              .join(', ')}. The exact venue is shared once you get in touch.`
-          : branch.streetAddress
-            ? `Our ${branch.city} school is at ${branch.streetAddress}, ${branch.city} ${branch.postalCode ?? ''}. ${branch.landmarks.length ? `Look for ${branch.landmarks[0]}.` : ''}`.trim()
-            : `We teach in ${branch.city}${branch.locality ? ` at ${branch.locality}` : ''}. Write to ${SITE.email} for the current venue and batch timings.`,
-    },
-    {
-      q: `Which areas around ${branch.city} do your students come from?`,
-      a:
-        areas.length > 0
-          ? `We hold classes in ${areas.join(', ')}. Students also travel to us from ${catchmentOnly.join(', ')} — those are catchment neighbourhoods rather than venues.`
-          : `Students travel to us from ${branch.areaServed.join(', ')}.`,
-    },
-    {
-      q: `What style of Bharatanatyam is taught in ${branch.city}?`,
-      a: `The ${SITE.style}, taught through the ${SITE.method} method — identical to our founding school in Chennai${branch.head ? `, under ${branch.head}` : ''}.`,
-    },
-    {
-      q: `Can my child start Bharatanatyam in ${branch.city} with no experience?`,
-      a: `Yes. Our Introductory Programme assumes nothing at all and takes children from age 3.5, and adults are welcome as beginners too. No costume, no ghungroo and no prior experience are needed to start, and you are welcome to sit in on a class first.`,
-    },
-  ];
 }
 
 /**
@@ -601,15 +563,6 @@ export function locationGraph(branch: Branch) {
           { '@type': 'ListItem', position: 2, name: 'Locations', item: abs('/locations') },
           { '@type': 'ListItem', position: 3, name: branch.label, item: url },
         ],
-      },
-      {
-        '@type': 'FAQPage',
-        '@id': `${url}#faq`,
-        mainEntity: locationFaqs(branch).map((f) => ({
-          '@type': 'Question',
-          name: f.q,
-          acceptedAnswer: { '@type': 'Answer', text: f.a },
-        })),
       },
     ],
   };

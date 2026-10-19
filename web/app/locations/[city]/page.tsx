@@ -9,7 +9,7 @@ import Nav from '@/components/Nav';
 import BookButton from '@/components/BookButton';
 import LocationPhotos from '@/components/LocationPhotos';
 import VenueDirectory from '@/components/VenueDirectory';
-import { locationFaqs, locationGraph } from '@/lib/schema';
+import { locationGraph } from '@/lib/schema';
 import { isRegion } from '@/lib/booking';
 import { BRANCHES, FACULTY, FOUNDERS, SITE, branchBySlug } from '@/lib/site';
 import { TEACHING_PROGRAMMES } from '@/lib/curriculum';
@@ -91,7 +91,6 @@ export default async function LocationPage({ params }: { params: Promise<Params>
   const branch = branchBySlug(city);
   if (!branch) notFound();
 
-  const faqs = locationFaqs(branch);
   const areas = areasTaught(branch.slug);
 
   // Whatever has been dropped into public/img/locations/<slug>/. Empty means
@@ -300,27 +299,6 @@ export default async function LocationPage({ params }: { params: Promise<Params>
             </ol>
           </div>
         </section>
-
-        {/* Local FAQ */}
-        {faqs.length > 0 ? (
-          <section className="border-t border-marigold/20 bg-silk/40 py-16 sm:py-20">
-            <div className="mx-auto max-w-6xl px-5 sm:px-8">
-              <p className="eyebrow">{branch.city} · Questions</p>
-              <dl className="mt-8 divide-y divide-marigold/20 border-t border-marigold/20">
-                {faqs.map((faq) => (
-                  <div key={faq.q} className="py-6">
-                    <dt className="font-display text-[1.08rem] leading-snug font-semibold text-teal-deep">
-                      {faq.q}
-                    </dt>
-                    <dd className="mt-2.5 max-w-measure text-[0.93rem] leading-relaxed text-ink-soft">
-                      {faq.a}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-          </section>
-        ) : null}
 
         {/* Contact */}
         <section className="py-16 sm:py-20">
