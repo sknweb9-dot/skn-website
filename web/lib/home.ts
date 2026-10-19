@@ -462,7 +462,8 @@ export type Voice = {
 
 /**
  * Five parents' and one student's own words, taken from the academy's Google
- * Business Profile and cut to length here.
+ * Business Profile and cut to length here. The last of the six came later, in
+ * the reviewer's own words, and is the shortest of them: it needed no cutting.
  *
  * LENGTH. The reviews run to several hundred words each and three of them past
  * a thousand. A card is three inches wide and a page holds three across, so the
@@ -494,10 +495,10 @@ export const VOICES: Voice[] = [
     image: { src: '/img/home/voice-2.jpg', alt: '' },
   },
   {
-    name: 'Parent name',
-    quote: 'A parent’s words, to be collected from Instagram and set here.',
+    name: 'Mayuri’s parents',
+    quote:
+      'One of the best decisions we made for Mayuri was enrolling her at Shanti Kala Nikketan under Sunitta Ma’am’s guidance. Seeing Sunitta Ma’am carry forward the pure Kalakshetra legacy with such dedication, love, and discipline is a blessing. It has taught our daughter not just how to dance, but how to respect, persevere, and connect deeply with our culture.',
     image: { src: '/img/home/voice-3.jpg', alt: '' },
-    placeholder: true,
   },
   {
     name: 'Balaji P',
