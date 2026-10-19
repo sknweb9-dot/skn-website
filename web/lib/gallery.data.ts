@@ -159,6 +159,7 @@ export const RAW_PHOTOS: readonly [string, string, number, number, boolean][] = 
   ['class-pc2-dsc5146', 'class-pc2', 1400, 933, false],
   ['class-pc2-dsc5182', 'class-pc2', 933, 1400, false],
   ['class-cg-r-dsc4640', 'class-cg-r', 1400, 933, false],
+  ['class-cg-r-dsc4746-2', 'class-cg-r', 1400, 933, false],
   ['class-cg-r-dsc4746', 'class-cg-r', 1400, 933, false],
   ['class-cg-r-dsc4767', 'class-cg-r', 1400, 933, false],
   ['class-cg-r-dsc4819', 'class-cg-r', 1400, 933, false],
