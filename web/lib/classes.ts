@@ -57,11 +57,6 @@ export type Batch = {
   /** Batches explicitly flagged "Admission Open" in the docx. */
   admissionOpen: boolean;
   audience: 'children' | 'adults';
-  /**
-   * True where the timings are provisional rather than transcribed. Canada's
-   * were blank in the docx and are placeholders pending confirmation.
-   */
-  provisionalTiming?: boolean;
 };
 
 export type Venue = {
@@ -170,11 +165,10 @@ export const VENUES: Venue[] = [
     citySlug: 'scarborough',
     mode: 'offline',
     batches: [
-      // PROVISIONAL: the docx left Canada's timings blank. Weekend mornings are
-      // a placeholder to be confirmed with the branch.
-      { code: 'CA1', programmeId: 'level-1', days: ['Saturday'], opens: '10:00', closes: '11:00', admissionOpen: true, audience: 'children', provisionalTiming: true },
-      { code: 'CA2', programmeId: 'level-1', days: ['Saturday'], opens: '11:15', closes: '12:15', admissionOpen: true, audience: 'adults', provisionalTiming: true },
-      { code: 'CA3', programmeId: 'introductory', days: ['Sunday'], opens: '10:00', closes: '11:00', admissionOpen: true, audience: 'children', provisionalTiming: true },
+      // Timings confirmed by the academy (the docx had left them blank).
+      { code: 'CA1', programmeId: 'level-1', days: ['Saturday'], opens: '18:00', closes: '19:00', admissionOpen: true, audience: 'children' },
+      { code: 'CA2', programmeId: 'level-1', days: ['Sunday'], opens: '17:00', closes: '18:00', admissionOpen: true, audience: 'adults' },
+      { code: 'CA3', programmeId: 'introductory', days: ['Sunday'], opens: '17:00', closes: '18:00', admissionOpen: true, audience: 'children' },
     ],
   },
 ];

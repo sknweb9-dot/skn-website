@@ -210,7 +210,6 @@ export default function CurriculumPage() {
                               </span>
                               <span className="block">
                                 {formatBatchTime(batch)}
-                                {batch.provisionalTiming ? ' (provisional)' : ''}
                               </span>
                               {batch.admissionOpen ? (
                                 <span className="mt-0.5 inline-block font-semibold text-kumkum">
@@ -306,7 +305,6 @@ export default function CurriculumPage() {
                     <p className="mt-1.5 font-sans text-sm text-ink-soft">{venue.name}</p>
                     <p className="mt-0.5 font-sans text-xs text-ink-faint">
                       {formatBatchTime(batch)}
-                      {batch.provisionalTiming ? ' (provisional)' : ''}
                     </p>
                   </li>
                 ))}

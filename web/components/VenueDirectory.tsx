@@ -86,9 +86,6 @@ function BatchRow({
             <span className="font-sans text-xs text-ink-soft">
               {formatBatchTime(batch)}
             </span>
-            {batch.provisionalTiming ? (
-              <span className="font-sans text-micro text-ink-faint">(provisional)</span>
-            ) : null}
             {showAdmission && batch.admissionOpen ? (
               <span className="rounded-full bg-kumkum/10 px-2 py-0.5 font-sans text-micro font-semibold tracking-[0.08em] text-kumkum uppercase">
                 Admission open

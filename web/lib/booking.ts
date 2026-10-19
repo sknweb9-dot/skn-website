@@ -24,7 +24,7 @@
  */
 
 import { INTRODUCTORY, LEVELS, type Programme } from './curriculum';
-import { VENUES, formatBatchTime, formatDays, type Batch, type Venue, type Weekday } from './classes';
+import { VENUES, formatBatchTime, type Batch, type Venue, type Weekday } from './classes';
 import { BRANCHES, SITE } from './site';
 
 // ---------------------------------------------------------------------------
@@ -256,9 +256,9 @@ export function venueLabel(venue: Venue): string {
   return venue.area ? `${venue.name}, ${venue.area}` : venue.name;
 }
 
-/** Canada's timings are placeholders (see classes.ts), so they are not stated as fact. */
+/** How a batch's timing reads in the booking flow and in the summary. */
 export function batchTimeLabel(batch: Batch): string {
-  return batch.provisionalTiming ? `${formatDays(batch.days)} · timings to be confirmed` : formatBatchTime(batch);
+  return formatBatchTime(batch);
 }
 
 export const REGION_LABELS: Record<Region, { title: string; detail: string }> = {

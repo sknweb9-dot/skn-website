@@ -79,15 +79,11 @@ function postalAddress(branch: Branch) {
  * (when can someone turn up and find us there) and it stays truthful without
  * anyone maintaining a second list.
  *
- * Batches marked `provisionalTiming` are excluded: Canada's slots are
- * placeholders, and publishing a guess as structured data would send a parent to
- * a closed door.
  */
 function openingHoursFor(citySlug: string) {
   const slots = venuesForCity(citySlug)
     .filter((v) => v.mode === 'offline')
-    .flatMap((v) => v.batches)
-    .filter((b) => !b.provisionalTiming);
+    .flatMap((v) => v.batches);
 
   if (slots.length === 0) return {};
 
@@ -234,11 +230,9 @@ function courseNodes() {
      * One CourseInstance per real batch, carrying its actual weekly schedule.
      * The previous build emitted one instance per branch with no schedule at
      * all, which told Google nothing a parent could act on.
-     *
-     * Provisional timings are excluded — see openingHoursFor.
      */
     hasCourseInstance: allBatches()
-      .filter(({ programme: p, batch }) => p.id === programme.id && !batch.provisionalTiming)
+      .filter(({ programme: p }) => p.id === programme.id)
       .map(({ venue, batch }) => ({
         '@type': 'CourseInstance',
         name: `${programme.label} — ${venue.name} (${batch.code})`,

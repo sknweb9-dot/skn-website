@@ -143,9 +143,10 @@ describe('summarize', () => {
     expect(summarize(EMPTY_DRAFT)).toBeNull();
   });
 
-  it('does not state provisional Canada timings as fact', () => {
+  it('states the confirmed Canada timings in the summary', () => {
     const text = summarize(draft({ audience: 'adult', experience: 'none', region: 'scarborough', batch: 'CA2' }));
-    expect(text).toContain('timings to be confirmed');
+    expect(text).toContain('Sun');
+    expect(text).toContain('5 pm');
   });
 });
 
