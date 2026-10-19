@@ -1060,5 +1060,32 @@
   "date": "2009",
   "w": 2048,
   "h": 1536
+ },
+ {
+  "folder": "Events/17th Oct 2026 - Navaratri",
+  "file": "PXL_20261017_213832788.TS-001.ABT.jpg",
+  "album": "Navaratri",
+  "section": "group",
+  "date": "2026-10",
+  "w": 3072,
+  "h": 4080
+ },
+ {
+  "folder": "Events/17th Oct 2026 - Navaratri",
+  "file": "PXL_20261017_214011329.jpg",
+  "album": "Navaratri",
+  "section": "group",
+  "date": "2026-10",
+  "w": 3072,
+  "h": 4080
+ },
+ {
+  "folder": "Events/17th Oct 2026 - Navaratri",
+  "file": "PXL_20261017_214321340.jpg",
+  "album": "Navaratri",
+  "section": "group",
+  "date": "2026-10",
+  "w": 4080,
+  "h": 3072
  }
 ]

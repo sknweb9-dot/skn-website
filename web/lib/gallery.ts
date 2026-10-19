@@ -31,13 +31,14 @@ import { VIDEOS, platePath, sectionMeta, videoLabel, videoPoster, youtubeHref, t
 // Groups and albums
 // ---------------------------------------------------------------------------
 
-export type GroupId = 'classes' | 'udaan' | 'arangetram' | 'festivals' | 'sunitta' | 'samarpan' | 'videos';
+export type GroupId = 'classes' | 'udaan' | 'arangetram' | 'festivals' | 'canada' | 'sunitta' | 'samarpan' | 'videos';
 
 export const GROUPS: { id: GroupId; label: string }[] = [
   { id: 'classes', label: 'Classes' },
   { id: 'udaan', label: 'Udaan' },
   { id: 'arangetram', label: 'Arangetrams' },
   { id: 'festivals', label: 'Festivals and outreach' },
+  { id: 'canada', label: 'Canada' },
   { id: 'sunitta', label: 'Sunitta Menghanaani' },
   { id: 'samarpan', label: 'Samarppan 2009' },
   { id: 'videos', label: 'Videos' },
@@ -67,6 +68,10 @@ const EVENT_ALBUMS: Album[] = [
   { id: 'samarpanam', group: 'festivals', title: 'Samarpanam Festival, Athma Academy', date: '2025', section: 'group' },
   { id: 'maha-shivaratri', group: 'festivals', title: 'Maha Shivaratri, Kapaleeshwarar Temple', date: '2024-03', section: 'outreach' },
   { id: 'jeevan-utsav', group: 'festivals', title: 'Jeevan Utsav', date: '2022', section: 'group' },
+  // The Canada filter: Navaratri on 17 October 2026 (the folder's own date), and
+  // the two photographs of the Scarborough class that are also on its location page.
+  { id: 'canada-navaratri', group: 'canada', title: 'Navaratri', date: '2026-10', dateText: '17 October 2026', section: 'group' },
+  { id: 'canada-classes', group: 'canada', title: 'Classes in Scarborough', section: 'studio' },
   { id: 'sunitta-second-solo', group: 'sunitta', title: 'Second solo recital', date: '2015-02', section: 'solo' },
   { id: 'sunitta-december-festival', group: 'sunitta', title: 'December Festival', date: '2015', dateText: '2015–16', section: 'solo' },
   { id: 'sunitta-first-solo', group: 'sunitta', title: 'First solo recital', date: '2013-10', section: 'solo' },

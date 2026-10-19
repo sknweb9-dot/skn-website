@@ -121,6 +121,9 @@ export const RAW_PHOTOS: readonly [string, string, number, number, boolean][] = 
   ['samarpan-2009-p1010132', 'samarpan-2009', 1400, 1050, true],
   ['samarpan-2009-p1010135', 'samarpan-2009', 1400, 1050, true],
   ['samarpan-2009-p1010141', 'samarpan-2009', 1400, 1050, true],
+  ['canada-navaratri-pxl-20261017-213832788-ts-001-abt', 'canada-navaratri', 1054, 1400, true],
+  ['canada-navaratri-pxl-20261017-214011329', 'canada-navaratri', 1054, 1400, true],
+  ['canada-navaratri-pxl-20261017-214321340', 'canada-navaratri', 1400, 1054, true],
   ['class-as1-dsc6004', 'class-as1', 1400, 933, false],
   ['class-as1-dsc6028', 'class-as1', 1400, 933, false],
   ['class-as1-dsc6052', 'class-as1', 1400, 933, false],
@@ -168,4 +171,6 @@ export const RAW_PHOTOS: readonly [string, string, number, number, boolean][] = 
   ['class-cg-t-dsc5652', 'class-cg-t', 1400, 933, false],
   ['class-cg-t-dsc5670', 'class-cg-t', 1400, 933, true],
   ['class-cg-t-dsc5690', 'class-cg-t', 933, 1400, false],
+  ['canada-classes-ca1', 'canada-classes', 1054, 1400, false],
+  ['canada-classes-ca3', 'canada-classes', 1400, 1054, false],
 ];

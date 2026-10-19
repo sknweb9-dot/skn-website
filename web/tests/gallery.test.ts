@@ -118,3 +118,28 @@ describe('structured data', () => {
     expect(ids.some((id) => id.includes('class-'))).toBe(false);
   });
 });
+
+import { PHOTOS as ALL_PHOTOS, matches as matchesFilter, NO_FILTER as NO_FILTER_ALL, groupOptions as groupOpts } from '@/lib/gallery';
+
+describe('the 2026-10 additions', () => {
+  it('has a Canada filter of five: Navaratri and the two Scarborough class photographs', () => {
+    const canada = ALL_PHOTOS.filter((p) => matchesFilter(p, { ...NO_FILTER_ALL, group: 'canada' }));
+    expect(canada).toHaveLength(5);
+    expect(canada.filter((p) => p.albumId === 'canada-navaratri')).toHaveLength(3);
+    expect(canada.filter((p) => p.albumId === 'canada-classes')).toHaveLength(2);
+    expect(groupOpts().some((g) => g.id === 'canada' && g.label === 'Canada')).toBe(true);
+  });
+
+  it('dates Navaratri the way its folder does', () => {
+    const navaratri = ALL_PHOTOS.find((p) => p.albumId === 'canada-navaratri');
+    expect(navaratri?.subtitle).toBe('Navaratri \u00b7 17 October 2026');
+  });
+
+  it('has the two new Aparna Manu photographs and no longer has the two removed Jahnavi ones', () => {
+    const ids = ALL_PHOTOS.map((p) => p.id);
+    expect(ids).toContain('arangetram-aparna-cr6a1501');
+    expect(ids).toContain('arangetram-aparna-cr6a1584');
+    expect(ids).not.toContain('arangetram-jahnavi-3d3a1215');
+    expect(ids).not.toContain('arangetram-jahnavi-3d3a1380');
+  });
+});
