@@ -226,6 +226,24 @@
  },
  {
   "folder": "Events/Arangetrams/Aparna Manu 2018",
+  "file": "CR6A1501.JPG",
+  "album": "Arangetram: Aparna Manu",
+  "section": "arangetram",
+  "date": "2018",
+  "w": 3840,
+  "h": 5760
+ },
+ {
+  "folder": "Events/Arangetrams/Aparna Manu 2018",
+  "file": "CR6A1584.JPG",
+  "album": "Arangetram: Aparna Manu",
+  "section": "arangetram",
+  "date": "2018",
+  "w": 5760,
+  "h": 3840
+ },
+ {
+  "folder": "Events/Arangetrams/Aparna Manu 2018",
   "file": "CR6A8412.JPG",
   "album": "Arangetram: Aparna Manu",
   "section": "arangetram",
@@ -379,15 +397,6 @@
  },
  {
   "folder": "Events/Arangetrams/Jahnavi 2025",
-  "file": "3D3A1215.JPG",
-  "album": "Arangetram: Jahnavi Sivasubramanyam",
-  "section": "arangetram",
-  "date": "2025-06",
-  "w": 6000,
-  "h": 4000
- },
- {
-  "folder": "Events/Arangetrams/Jahnavi 2025",
   "file": "3D3A1254.JPG",
   "album": "Arangetram: Jahnavi Sivasubramanyam",
   "section": "arangetram",
@@ -398,15 +407,6 @@
  {
   "folder": "Events/Arangetrams/Jahnavi 2025",
   "file": "3D3A1259.JPG",
-  "album": "Arangetram: Jahnavi Sivasubramanyam",
-  "section": "arangetram",
-  "date": "2025-06",
-  "w": 6000,
-  "h": 4000
- },
- {
-  "folder": "Events/Arangetrams/Jahnavi 2025",
-  "file": "3D3A1380.JPG",
   "album": "Arangetram: Jahnavi Sivasubramanyam",
   "section": "arangetram",
   "date": "2025-06",
