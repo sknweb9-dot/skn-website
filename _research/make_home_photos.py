@@ -31,6 +31,11 @@ OUT = ROOT / "web" / "public" / "img" / "home"
 LONG_EDGE = 1600
 QUALITY = 80
 
+# The parents' photographs are cut square and small: they are shown as 72-pixel
+# circles, so a 640-pixel master is already more than the site can use.
+PORTRAIT_EDGE = 640
+PORTRAIT_QUALITY = 85
+
 # key -> path under SRC. A trailing "*" matches the first file with that prefix,
 # for the phone uploads whose names are UUIDs.
 PHOTOS: dict[str, str] = {
@@ -65,14 +70,26 @@ PHOTOS: dict[str, str] = {
 # list, but the archive has no photograph of it, and a 2018 Arangetram picture
 # under a 2024 caption would misdate her.
 
-# Placeholder portraits for the parents' quotes, square-cropped. Replaced when
-# the academy sends the real photographs.
+# The parents' own photographs, sent with their reviews: six files, numbered in
+# the academy's order, one for each card in the "In their words" section of
+# the home page (lib/home.ts). Square-cropped.
+#
+# THREE OF THEM CAME OUT LYING DOWN. The photographer held the camera in
+# portrait, and the three files carry the orientation tag that says so
+# (EXIF 8), but the cut was once taken from the stored pixels instead of the
+# tagged ones, so the families were photographed on their sides. open_photo
+# reads the tag, and with it the three stand up: their crops are taken from
+# the turned file, which is a tall one, hence the focus of 0.5 - the middle
+# band, holding the whole figure.
+#
+# key -> (path, vertical focus 0..1 for the square crop)
 PORTRAITS: dict[str, tuple[str, float]] = {
-    # key -> (path, vertical focus 0..1 for the square crop)
-    "voice-1": ("Classes/PC2/_DSC5182.jpg", 0.30),
-    "voice-2": ("Classes/Dhiya/_DSC5732.jpg", 0.25),
-    "voice-3": ("Classes/AS3/_DSC5971.jpg", 0.30),
-    "voice-4": ("Classes/CG T/_DSC5690.jpg", 0.35),
+    "voice-1": ("Reviews/Reviews/1. DSC_6401.JPG", 0.00),
+    "voice-2": ("Reviews/Reviews/2. _DSC4129.JPG", 0.50),
+    "voice-3": ("Reviews/Reviews/3. _MG_1885.JPG", 0.30),
+    "voice-4": ("Reviews/Reviews/4. _DSC4561.JPG", 0.00),
+    "voice-5": ("Reviews/Reviews/5. 3D3A1237.JPG", 0.00),
+    "voice-6": ("Reviews/Reviews/6. _DSC3376.JPG", 0.35),
 }
 
 
@@ -126,13 +143,21 @@ def adyar_times() -> tuple[int, int]:
     return save(im, "press-adyar", 1800)
 
 
+def portrait(key: str, rel: str, focus_y: float) -> tuple[int, int]:
+    """One parent's photograph: square, and standing the right way up."""
+    im = square(open_photo(resolve(rel)), focus_y)
+    im.thumbnail((PORTRAIT_EDGE, PORTRAIT_EDGE), Image.LANCZOS)
+    im.save(OUT / f"{key}.jpg", "JPEG", quality=PORTRAIT_QUALITY, optimize=True)
+    return im.size
+
+
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     for key, rel in PHOTOS.items():
         w, h = save(open_photo(resolve(rel)), key)
         print(f"{key:28} {w}x{h}")
     for key, (rel, focus) in PORTRAITS.items():
-        w, h = save(square(open_photo(resolve(rel)), focus), key, 640)
+        w, h = portrait(key, rel, focus)
         print(f"{key:28} {w}x{h}")
     print(f"{'press-toi':28} {'x'.join(map(str, times_of_india()))}")
     print(f"{'press-adyar':28} {'x'.join(map(str, adyar_times()))}")
