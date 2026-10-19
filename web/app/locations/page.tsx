@@ -22,7 +22,7 @@ import { homeGraph } from '@/lib/schema';
 
 const TITLE = 'Our Locations — Bharatanatyam Classes in Chennai & Scarborough';
 const DESCRIPTION =
-  'Shanti Kala Nikketan teaches Kalakshetra-style Bharatanatyam at five venues across Chennai — Thiruvanmiyur, Sholinganallur and Medavakkam — plus an online batch and a branch at Morningside & Finch in Scarborough, Canada.';
+  'Shanti Kala Nikketan teaches Kalakshetra Bani Bharatanatyam at five venues across Chennai — Thiruvanmiyur, Sholinganallur and Medavakkam — plus an online batch and a branch at Morningside & Finch in Scarborough, Canada.';
 
 export const metadata: Metadata = {
   title: TITLE,

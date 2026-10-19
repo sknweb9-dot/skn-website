@@ -21,7 +21,7 @@ import { ONLINE, SITE } from '@/lib/site';
 
 const TITLE = 'Online Bharatanatyam Classes \u2014 Live Group Class';
 const DESCRIPTION =
-  'A live online Bharatanatyam group class, open to students anywhere: the Kalakshetra-style syllabus of Shanti Kala Nikketan, taught in the Gurukulam manner over video. See the batch and book a session.';
+  'A live online Bharatanatyam group class, open to students anywhere: the Kalakshetra Bani syllabus of Shanti Kala Nikketan, taught in the Gurukulam manner over video. See the batch and book a session.';
 
 const PHOTO_ALT = `${ONLINE.title}, Shanti Kala Nikketan`;
 

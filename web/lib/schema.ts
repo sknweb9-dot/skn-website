@@ -180,7 +180,7 @@ function organizationNode() {
     sameAs: [SITE.socials.instagram, SITE.socials.facebook, SITE.socials.youtube],
     knowsAbout: [
       'Bharatanatyam',
-      'Kalakshetra style',
+      'Kalakshetra Bani',
       'Gurukulam education',
       'Abhinaya',
       'Tala',

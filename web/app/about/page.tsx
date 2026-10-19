@@ -9,7 +9,7 @@ import { homeGraph } from '@/lib/schema';
 
 const TITLE = 'About the Academy';
 const DESCRIPTION =
-  'Founded on 18 April 2009, Shanti Kala Nikketan preserves and promotes Indian classical arts through the Gurukulam tradition and the Kalakshetra bani of Bharatanatyam — in Chennai and internationally.';
+  'Founded on 18 April 2009, Shanti Kala Nikketan preserves and promotes Indian classical arts through the Gurukulam tradition and the Kalakshetra Bani of Bharatanatyam — in Chennai and internationally.';
 
 export const metadata: Metadata = {
   title: TITLE,

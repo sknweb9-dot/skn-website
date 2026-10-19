@@ -22,7 +22,7 @@ export const SITE = {
   email: 'shantikalanikketan@gmail.com',
   phoneDisplay: '+91 98840 22306',
   phoneE164: '+919884022306',
-  style: 'Kalakshetra style of Bharatanatyam',
+  style: 'Kalakshetra Bani of Bharatanatyam',
   method: 'Gurukulam',
   logo: '/img/logo-emblem.png',
   ogImage: '/img/hero-home.jpg',
@@ -134,7 +134,7 @@ export const BRANCHES: Branch[] = [
     head: 'Smt. Sunitta Menghanaani',
     isPrimary: true,
     intro:
-      'Where Shanti Kala Nikketan began in 2009, and now five venues across Thiruvanmiyur, Sholinganallur and Medavakkam — the Kalakshetra style taught in the Gurukulam manner.',
+      'Where Shanti Kala Nikketan began in 2009, and now five venues across Thiruvanmiyur, Sholinganallur and Medavakkam — the Kalakshetra Bani taught in the Gurukulam manner.',
     areaServed: [
       'Sholinganallur',
       'Thiruvanmiyur',
@@ -207,7 +207,7 @@ export const ONLINE = {
   /** The small line over the heading, where a branch has "region, country". */
   eyebrow: 'Live, from anywhere',
   intro:
-    'Live group classes over video, open to students anywhere. The same Kalakshetra-style syllabus as our Chennai and Scarborough batches, taught in the Gurukulam manner.',
+    'Live group classes over video, open to students anywhere. The same Kalakshetra Bani syllabus as our Chennai and Scarborough batches, taught in the Gurukulam manner.',
   /** The batch timings are Indian time. Said once, on the page. */
   timezone: 'IST',
   timezoneName: 'Indian Standard Time',
@@ -280,7 +280,7 @@ export const FACULTY: Person[] = [
   {
     name: 'S. Kirusanthini',
     role: 'Head, Canada Branch',
-    bio: 'A Bharatanatyam dancer, choreographer, and teacher with strong artistic roots in Sri Lanka. She began her training in the Vazhuvoor style under Smt. Sangeetha Karthikeyan and later studied the Kalakshetra style for over nine years under Sunitta Menghanaani, whom she joined in 2017. Her dance and teaching work extends to AIMA in Chennai and the SEED NGO in Sri Lanka.',
+    bio: 'A Bharatanatyam dancer, choreographer, and teacher with strong artistic roots in Sri Lanka. She began her training in the Vazhuvoor style under Smt. Sangeetha Karthikeyan and later studied the Kalakshetra Bani for over nine years under Sunitta Menghanaani, whom she joined in 2017. Her dance and teaching work extends to AIMA in Chennai and the SEED NGO in Sri Lanka.',
     image: '/img/team-kirusanthini.jpg',
     portraitConfirmed: true,
     credentials: [
@@ -473,7 +473,7 @@ export const MILESTONES = [
     // Corrected by the academy: teaching began in Besant Nagar, under the name
     // Samarppan, with a single student. The move to Sholinganallur and the name
     // Shanti Kala Nikketan came later - see the 2018 entry.
-    body: 'Teaching begins in Besant Nagar under the name Samarppan, with a single student — Aparna. The Kalakshetra style of Bharatanatyam is the method from the first class.',
+    body: 'Teaching begins in Besant Nagar under the name Samarppan, with a single student — Aparna. The Kalakshetra Bani of Bharatanatyam is the method from the first class.',
     place: 'Besant Nagar, Chennai',
   },
   {
@@ -519,7 +519,7 @@ export const MILESTONES = [
  * pauses before enquiring, and emitted as FAQPage markup only there: FAQ
  * structured data must match questions visible on the same page.
  *
- * Left out, on purpose: progression through the levels, the Kalakshetra bani,
+ * Left out, on purpose: progression through the levels, the Kalakshetra Bani,
  * Gurukulam, literature and theory, "is it extracurricular", practice at home,
  * classes outside Chennai, Arangetram being optional, what makes SKN
  * different, and how to join. Each is covered by /curriculum, /about,

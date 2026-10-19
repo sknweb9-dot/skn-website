@@ -67,7 +67,7 @@ const body = Mukta({
 
 const TITLE = 'Bharatanatyam Dance Academy in Chennai | Shanti Kala Nikketan';
 const DESCRIPTION =
-  'Kalakshetra-style Bharatanatyam taught the Gurukulam way at five venues across Chennai — Thiruvanmiyur, Sholinganallur and Medavakkam — since 2009. An introductory programme from age 3.5, six graded levels to Arangetram, adults batches, and a branch in Scarborough, Canada. Book a session.';
+  'Kalakshetra Bani Bharatanatyam taught the Gurukulam way at five venues across Chennai — Thiruvanmiyur, Sholinganallur and Medavakkam — since 2009. An introductory programme from age 3.5, six graded levels to Arangetram, adults batches, and a branch in Scarborough, Canada. Book a session.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -83,7 +83,7 @@ export const metadata: Metadata = {
     'classical dance classes in Chennai',
     'Bharatanatyam classes in Chennai',
     'Bharatanatyam dance academy Sholinganallur',
-    'Kalakshetra style Bharatanatyam Chennai',
+    'Kalakshetra Bani Bharatanatyam Chennai',
     'dance classes OMR Chennai',
     'Bharatanatyam classes for kids Chennai',
     'Bharatanatyam classes Perungudi',

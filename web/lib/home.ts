@@ -112,7 +112,7 @@ export function restingFrame(section: HomeSection): number {
 export const HERO = {
   heading: 'Not just an artform. A way of life.',
   body: SITE.signature,
-  credentials: ['Since 2009', 'Kalakshetra bani', 'Chennai & Canada'],
+  credentials: ['Since 2009', 'Kalakshetra Bani', 'Chennai & Canada'],
   /**
    * Worded as coverage of Udaan, not of the school. The Adyar Times piece names
    * the academy; the Times of India spread covers the evening at Kalakshetra and

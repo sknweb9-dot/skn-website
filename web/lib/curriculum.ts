@@ -178,7 +178,7 @@ export const CURRICULUM_INTRO = {
   heading: 'Six levels, not six terms',
   body: [
     'At SKN, Bharatanatyam is not simply taught — it is experienced as a lifelong journey of learning, discipline, and self-discovery.',
-    'Rooted in the timeless Gurukulam tradition and the Kalakshetra bani, our curriculum has been thoughtfully designed to guide every student through a structured progression of technical excellence, artistic expression, theoretical understanding, and stage confidence.',
+    'Rooted in the timeless Gurukulam tradition and the Kalakshetra Bani, our curriculum has been thoughtfully designed to guide every student through a structured progression of technical excellence, artistic expression, theoretical understanding, and stage confidence.',
     'Each level builds naturally upon the previous one, ensuring that students develop a strong foundation before progressing towards advanced repertoire and ultimately, the Arangetram.',
   ],
 } as const;

@@ -41,8 +41,8 @@ export async function generateMetadata({
   const title = `Bharatanatyam Dance Academy in ${branch.city}`;
   const description =
     areas.length > 1
-      ? `Kalakshetra-style Bharatanatyam classes at ${venueCount} venues across ${branch.city} — ${areas.join(', ')}. An introductory programme from age 3.5, six graded levels to Arangetram, and adults batches. Book a session.`
-      : `Kalakshetra-style Bharatanatyam classes in ${branch.city}${
+      ? `Kalakshetra Bani Bharatanatyam classes at ${venueCount} venues across ${branch.city} — ${areas.join(', ')}. An introductory programme from age 3.5, six graded levels to Arangetram, and adults batches. Book a session.`
+      : `Kalakshetra Bani Bharatanatyam classes in ${branch.city}${
           branch.head ? `, led by ${branch.head}` : ''
         }. Group, individual and adults batches from age 3.5 to Arangetram. Book a session.`;
 
