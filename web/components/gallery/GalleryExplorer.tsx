@@ -75,7 +75,7 @@ export default function GalleryExplorer() {
         <div className="mx-auto max-w-[110rem]">
           <GalleryStage ref={stage} litCount={lit ? lit.size : null} />
           <p className="sr-only">
-            The globe is a visual view of the photographs and recordings listed below. Everything on it, and more, is in the index.
+            The globe is a visual view of the photographs and videos listed below. Everything on it, and more, is in the index.
           </p>
           {lit && lit.size === 0 ? (
             <p className="mt-3 text-center font-sans text-[0.82rem] text-ink-faint">

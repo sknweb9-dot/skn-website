@@ -36,7 +36,7 @@ export default function GalleryPage() {
         eyebrow="The gallery"
         title="Every stage,"
         accent="every class"
-        lede={`${PHOTOS.length} photographs and ${ALL_ITEMS.length - PHOTOS.length} recordings, every one the academy's own. Turn the globe, or filter by venue and batch to find your child.`}
+        lede={`${PHOTOS.length} photographs and ${ALL_ITEMS.length - PHOTOS.length} videos, every one the academy's own. Turn the globe, or filter by venue and batch to find your child.`}
       />
 
       <GalleryExplorer />

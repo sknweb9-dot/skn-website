@@ -1,5 +1,5 @@
 /**
- * The gallery: every photograph and recording, the albums they belong to, and
+ * The gallery: every photograph and video, the albums they belong to, and
  * the filters that find them.
  *
  * WHERE THE WORDS COME FROM
@@ -18,14 +18,14 @@
  * TWO SETS
  * --------
  * The index lists every photograph, so a parent can find their child. The globe
- * carries a curated subset (`onGlobe`) plus the recordings, because a sphere of
+ * carries a curated subset (`onGlobe`) plus the videos, because a sphere of
  * two hundred plates stops being legible. A filter applies to both: the globe
  * dims what does not match, the index hides it.
  */
 
 import { RAW_PHOTOS } from './gallery.data';
 import { allBatches, formatDays, VENUES } from './classes';
-import { VIDEOS, platePath, videoPoster, youtubeHref, type EventSection } from './events';
+import { VIDEOS, platePath, sectionMeta, videoLabel, videoPoster, youtubeHref, type EventSection } from './events';
 
 // ---------------------------------------------------------------------------
 // Groups and albums
@@ -40,7 +40,7 @@ export const GROUPS: { id: GroupId; label: string }[] = [
   { id: 'festivals', label: 'Festivals and outreach' },
   { id: 'sunitta', label: 'Sunitta Menghanaani' },
   { id: 'samarpan', label: 'Samarppan 2009' },
-  { id: 'videos', label: 'Recordings' },
+  { id: 'videos', label: 'Videos' },
 ];
 
 export type Album = {
@@ -137,7 +137,7 @@ export function albumDate(a: Album): string | null {
 // Items
 // ---------------------------------------------------------------------------
 
-/** One plate on the globe, one cell in the index. Photographs and recordings alike. */
+/** One plate on the globe, one cell in the index. Photographs and videos alike. */
 export type GalleryItem = {
   id: string;
   kind: 'photo' | 'video';
@@ -158,7 +158,7 @@ export type GalleryItem = {
   height: number;
   alt: string;
   onGlobe: boolean;
-  /** Recordings only */
+  /** Videos only */
   href?: string;
 };
 
@@ -198,10 +198,10 @@ function videoItem(video: (typeof VIDEOS)[number]): GalleryItem {
     id: `v-${video.id}`,
     kind: 'video',
     group: 'videos',
-    albumId: 'recordings',
+    albumId: 'videos',
     section: video.section,
-    title: video.title,
-    subtitle: video.kind === 'playlist' ? 'Playlist · opens YouTube' : 'Recording · opens YouTube',
+    title: videoLabel(video),
+    subtitle: `${sectionMeta(video.section).heading} · opens YouTube`,
     plate: platePath(video.plateKey),
     src: poster.src,
     width: poster.width,
@@ -217,7 +217,7 @@ export const RECORDINGS: GalleryItem[] = VIDEOS.map(videoItem);
 export const ALL_ITEMS: GalleryItem[] = [...PHOTOS, ...RECORDINGS];
 
 /**
- * The globe: the curated photographs with the recordings spread through them.
+ * The globe: the curated photographs with the videos spread through them.
  *
  * Plates are laid out by index along a Fibonacci spiral, so a contiguous block of
  * recordings would land as one patch on one face of the sphere. Interleaving at a
@@ -330,7 +330,7 @@ export function indexSections(items: GalleryItem[]): IndexSection[] {
   for (const g of GROUPS) {
     if (g.id === 'videos') {
       const vids = items.filter((i) => i.kind === 'video');
-      if (vids.length) sections.push({ id: 'recordings', title: 'Recordings', detail: 'Open on YouTube', group: 'videos', items: vids });
+      if (vids.length) sections.push({ id: 'videos', title: 'Videos', detail: 'Open on YouTube', group: 'videos', items: vids });
       continue;
     }
     for (const a of ALBUMS.filter((x) => x.group === g.id)) {
