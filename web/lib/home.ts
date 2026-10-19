@@ -461,51 +461,61 @@ export type Voice = {
 };
 
 /**
- * PLACEHOLDERS. Replace each with a real parent's photo, name and words as they
- * arrive, and delete `placeholder: true`. The build warns while any remain.
+ * Five parents' and one student's own words, taken from the academy's Google
+ * Business Profile and cut to length here.
+ *
+ * LENGTH. The reviews run to several hundred words each and three of them past
+ * a thousand. A card is three inches wide and a page holds three across, so the
+ * full text would be several screens of scrolling for six sentences of meaning.
+ * Each is cut to the claim and the outcome, in the writer's own voice and order;
+ * nothing is rewritten. Lakshmi K's loses the incident about the other girl,
+ * Yamini Siva's the "Kudos to all participants" opening, Balaji P's the four
+ * years his daughter has been dancing.
+ *
+ * No `context`. It claimed a level or a relation the reviews do not state, and
+ * three of these six are about the studio rather than about one child's progress.
+ *
+ * The photographs are the academy's own, numbered in the order they were sent
+ * and matched to the reviews by that number. The alt text is empty because the
+ * card already carries the name beside it; describing a family photograph would
+ * say nothing the figcaption has not already said.
  */
 export const VOICES: Voice[] = [
   {
-    name: 'Parent name',
-    context: 'Parent, Level 1',
-    quote: 'A parent’s words about what the classes have meant for their child will go here.',
+    name: 'Lakshmi K',
+    quote:
+      'I am proud to say that my daughter, Aparna Manu is the first student of Shanti Kala Niketan since the age of 5. Sunitta Ma’am promised her she would never stop teaching her, and that promise has held till date — we are more like a family. She has not only shaped Aparna into a beautiful dancer but made her a confident person ready to face the world, and with good values. We are very lucky to be associated with SKN. I wish SKN all the best!',
     image: { src: '/img/home/voice-1.jpg', alt: '' },
-    placeholder: true,
   },
   {
-    name: 'Parent name',
-    context: 'Parent, Introductory Programme',
-    quote: 'A second parent’s words will go here — a sentence or two, in their own voice.',
+    name: 'Sanghamitra M',
+    quote:
+      'It has been a wonderful experience re-learning Bharatanatyam systematically under the training and guidance of Guru Sunita Menghanaani. The way she breaks down tough modules into easy to grasp sections is amazing. She truly promotes the philosophy that everyone with the right mindset and passion can dance beautifully with practice and dedication.',
     image: { src: '/img/home/voice-2.jpg', alt: '' },
-    placeholder: true,
   },
   {
     name: 'Parent name',
-    context: 'Parent, Level 3',
-    quote: 'A third quote will go here once the academy has collected it.',
+    quote: 'A parent’s words, to be collected from Instagram and set here.',
     image: { src: '/img/home/voice-3.jpg', alt: '' },
     placeholder: true,
   },
   {
-    name: 'Parent name',
-    context: 'Adult student',
-    quote: 'A fourth, perhaps from an adult student, will go here.',
+    name: 'Balaji P',
+    quote:
+      'Excellent teachers. I will highly recommend SKN for people of all ages who are interested in Bharatanatyam. For students from age 5 to 50 they adapt the teaching based on one’s strength and capabilities. We parents also started learning Bharatanatyam, and truly enjoy the journey with SKN.',
     image: { src: '/img/home/voice-4.jpg', alt: '' },
-    placeholder: true,
   },
   {
-    name: 'Parent name',
-    context: 'Parent, Level 2',
-    quote: 'A fifth quote, in the parent’s own words, will go here.',
-    image: { src: '/img/home/voice-1.jpg', alt: '' },
-    placeholder: true,
+    name: 'Yamini Siva',
+    quote:
+      'Excellent program, well planned and executed. Teachers in the institution are very kind and committed in taking the dance form to the students. My daughter Jahnavi performed a shabdam in this program. I have watched a few classes and am amazed at the way Sunitta Maam teaches the dance — she explains the meaning of the lyrics and asks her to show expressions in her own way. Very fortunate to be with SKN, which makes a kid believe in herself.',
+    image: { src: '/img/home/voice-5.jpg', alt: '' },
   },
   {
-    name: 'Parent name',
-    context: 'Parent, Level 4',
-    quote: 'A sixth quote, in the parent’s own words, will go here.',
-    image: { src: '/img/home/voice-2.jpg', alt: '' },
-    placeholder: true,
+    name: 'Prachi Goel',
+    quote:
+      'Both my daughters are learning with Shanti kala niketan. My daughters are enjoying learning with teachers. We are very happy with teachers and their teaching techniques.',
+    image: { src: '/img/home/voice-6.jpg', alt: '' },
   },
 ];
 
@@ -526,26 +536,16 @@ export const BEGIN = {
 
 /** From "Bharatanatyam - Loading Screen Hooks" in `Website Contents.docx`. */
 export const LOADING_LINES = [
-  'One dancer. Many characters. Zero costume changes.',
-  'In Bharatanatyam, even an eyebrow has a vocabulary.',
-  'The bells don’t follow the rhythm — they help create it.',
-  'A glance can become a sentence.',
-  'One hand. Hundreds of possibilities.',
-  'A pause can speak louder than a movement.',
-  'The eyes can dance before the feet move.',
-  'One expression can change an entire story.',
-  'A single gesture can carry an entire world.',
-  'The feet keep tala; the eyes tell the story.',
-  'Bharatanatyam turns the human body into a language.',
-  'A dancer can become a bird without ever leaving the stage.',
-  'Sometimes, silence is part of the choreography.',
-  'Sometimes, the smallest movement carries the deepest emotion.',
-  'Rhythm can be heard before the dancer takes a step.',
-  'A dancer can tell a story without saying a single word.',
-  'The body moves, but the story lives in the expression.',
-  'Bharatanatyam can make a moment last without moving forward.',
-  'When movement meets meaning, dance becomes storytelling.',
-  'A dancer can make a single glance change the entire story.',
+  "Dancers stain fingertips and soles with red Alta dye to magnify subtle gestures and footwork for the audience.",
+  "An Arangetram ('ascending the stage') marks a dancer's first full solo performance after years of training.",
+  "Dancers wear 50 to 100 tuned bronze bells on each ankle, functioning as live percussionists.",
+  "The core stance, Araimandi, is built entirely on equilateral triangles formed by the hips, knees, and feet.",
+  "With 52 classical hand mudras, dancers can narrate entire epics without uttering a word.",
+  "Before moving to the modern stage, Bharatanatyam flourished in temple sanctums as Sadir Attam.",
+  "All 108 foundational poses (karanas) are sculpted into the granite towers of Chidambaram Temple.",
+  "Classical texts dictate: 'Where the hands go, the eyes must follow; where the eyes go, the mind follows.'",
+  "Recitals open with Alarippu ('to bloom'), a movement sequence that systematically awakens every joint.",
+  "A single Varnam can demand up to 45 to 60 continuous minutes of synchronized footwork and storytelling."
 ] as const;
 
 // ---------------------------------------------------------------------------
