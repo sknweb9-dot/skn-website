@@ -23,7 +23,7 @@
 /globefolio-3d-image-animation/.env
 /globefolio-3d-image-animation/.env.local
 
-# --- Python tooling in _research/ and _build/ ------------------------------
+# --- Python tooling in _research/ -------------------------------------------
 __pycache__/
 *.py[cod]
 *.egg-info/
