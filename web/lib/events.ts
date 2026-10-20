@@ -42,8 +42,9 @@
  * (when, where, in which city), so the scraped provenance above is history: every
  * title is now `academy`. Within each section the videos run newest first. Six of
  * the seven Outreach videos the academy listed are not on the page - two or three
- * are enough - and the Udaan and Jeevan Utsav entries are single videos (a promo
- * and a film) where they used to be playlists of the whole event.
+ * are enough - and the Udaan 2025 and Jeevan Utsav entries are single videos
+ * where they used to be playlists of the whole event. Udaan 2023 is a playlist
+ * again: the whole first edition, and not the promo that was standing in for it.
  */
 
 import { SITE } from './site';
@@ -234,11 +235,11 @@ export const VIDEOS: EventVideo[] = [
     date: '2023-10-20',
     place: 'Narada Gana Sabha, Chennai',
     titleSource: 'academy',
-    kind: 'video',
-    youtubeId: 'AeFacBa8zL8',
+    kind: 'playlist',
+    youtubeId: 'PLxyyMzhr0f3E-5yEp3Whr3hsbz6wC6GsO',
+    unlisted: true,
     plateKey: 'udaan-2023-poster',
     alt: 'Poster for Udaan 2023, Flying High',
-    note: 'The promo for the first edition.',
   },
 
   // --- Arangetrams -------------------------------------------------------
