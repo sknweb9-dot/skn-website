@@ -142,7 +142,7 @@ export default function Nav() {
                 alt=""
                 width={44}
                 height={44}
-                priority
+                loading="eager"
                 className="size-9 sm:size-11"
               />
               <span className="hidden leading-tight sm:block">

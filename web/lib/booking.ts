@@ -25,7 +25,8 @@
 
 import { INTRODUCTORY, LEVELS, type Programme } from './curriculum';
 import { VENUES, formatBatchTime, type Batch, type Venue, type Weekday } from './classes';
-import { BRANCHES, SITE } from './site';
+import { BRANCHES } from './branches';
+import { SITE } from './site';
 
 // ---------------------------------------------------------------------------
 // Vocabulary
@@ -42,7 +43,7 @@ export type Audience = (typeof AUDIENCES)[number];
 export const REGIONS = ['chennai', 'online', 'scarborough'] as const;
 export type Region = (typeof REGIONS)[number];
 
-export const EXPERIENCE = ['none', 'some'] as const;
+const EXPERIENCE = ['none', 'some'] as const;
 export type Experience = (typeof EXPERIENCE)[number];
 
 export const CALL_TIMES = ['Morning', 'Afternoon', 'Evening', 'Any time'] as const;
@@ -241,13 +242,13 @@ export function findOpenBatch(code: string): BatchOption | null {
   return null;
 }
 
-export function venueById(id: string | null | undefined): Venue | null {
+function venueById(id: string | null | undefined): Venue | null {
   if (!id) return null;
   return VENUES.find((v) => v.id === id) ?? null;
 }
 
 /** The region a venue belongs to, for prefilling from a venue's own button. */
-export function regionOfVenue(venue: Venue): Region {
+function regionOfVenue(venue: Venue): Region {
   if (venue.mode === 'online') return 'online';
   return venue.citySlug === 'scarborough' ? 'scarborough' : 'chennai';
 }

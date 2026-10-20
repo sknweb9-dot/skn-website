@@ -1,62 +1,22 @@
 /**
- * Events and gallery — single source of truth for /events.
+ * Events and gallery: the editorial content of /events.
  *
- * PROVENANCE
- * ----------
- * The video records below are transcribed from the old site's /events page,
- * reconstructed from `_research/pages/events.html` by DOM order and
- * cross-referenced with `_research/youtube.txt` and `_research/alts.txt`. The
- * page paired each item as a YouTube link immediately followed by its poster
- * image, in these sections:
+ * Six sections (Udaan, Arangetrams, Solo, Ensemble, Outreach, and the class
+ * photographs under `studio`), each with the academy's own copy, and a dated,
+ * placed card for every video. Within a section the videos run newest first.
+ * Outreach shows two or three of the academy's seven, on purpose.
  *
- *   Udaan          two playlists, preceded by the manifesto copy in UDAAN below
- *   Arangetrams    three videos
- *   Performances   Group (four), then Solo (one)
- *   Outreach       one video
- *
- * Two honesty flags ride along with each record, and both matter:
- *
- *   `titleSource`  Eight of the eleven titles came from og:title because oEmbed
- *                  returned 401 — those videos are unlisted. The titles are
- *                  therefore scraped, not supplied by the academy. Anything
- *                  marked 'og-title' should be confirmed before print.
- *   `pairingUnconfirmed`
- *                  Two image/video pairings look wrong even though the DOM has
- *                  them adjacent: the Maha Shivaratri video sits with
- *                  `Mylapore pgrm.jpg`, and the Samarpanam video with
- *                  `5. Sept Athma Academy.JPG`. Those numeric prefixes — 3., 5.,
- *                  6. — imply an owner-maintained series whose items 1, 2 and 4
- *                  never appeared on the page. The pairing is transcribed
- *                  exactly as found rather than silently reinterpreted.
- *
- * PHOTOGRAPHS
- * -----------
- * The photographs moved to lib/gallery.ts when the gallery got its own page
- * (/gallery). What stays here is the page's editorial content - the sections,
- * their copy and the videos - plus the poster plates those videos carry onto the
- * gallery's globe.
- *
- * THE 2026 RESTRUCTURE
- * --------------------
- * The academy supplied the page's copy and a dated, placed line for every video
- * (when, where, in which city), so the scraped provenance above is history: every
- * title is now `academy`. Within each section the videos run newest first. Six of
- * the seven Outreach videos the academy listed are not on the page - two or three
- * are enough - and the Udaan 2025 and Jeevan Utsav entries are single videos
- * where they used to be playlists of the whole event. Udaan 2023 is a playlist
- * again: the whole first edition, and not the promo that was standing in for it.
+ * The photographs live in lib/gallery.ts. What this file adds to the gallery is
+ * the poster plate each video carries onto the globe.
  */
-
-import { SITE } from './site';
 
 // ---------------------------------------------------------------------------
 // Sections
 // ---------------------------------------------------------------------------
 
 /**
- * The old page's own structure. `studio` is the one addition: class and
- * rehearsal photographs that are not from a named performance, which the old
- * site kept on a separate /photos page.
+ * The page's sections. `studio` is for class and rehearsal photographs that are
+ * not from a named performance; it has no videos.
  */
 export type EventSection = 'udaan' | 'arangetram' | 'group' | 'solo' | 'outreach' | 'studio';
 
@@ -70,7 +30,7 @@ export type SectionMeta = {
   lede?: string;
 };
 
-export const SECTIONS: SectionMeta[] = [
+const SECTIONS: SectionMeta[] = [
   {
     id: 'udaan',
     eyebrow: 'Flying High',
@@ -145,7 +105,7 @@ export const EVENTS_INTRO = {
 export const UDAAN = {
   eyebrow: 'Flying High',
   heading: 'Udaan',
-  /** The small label over the second column, as the old page had it. */
+  /** The small label over the second column. */
   why: 'Why Udaan',
   body: [
     'Udaan, meaning \u201cflight,\u201d is Shanti Kala Nikketan\u2019s celebration of artistic growth and a humble offering to the timeless art of Bharatanatyam. It provides a platform for our dancers to celebrate their achievements and take another step forward in their lifelong journey of learning.',
@@ -180,9 +140,6 @@ export const OUTREACH = {
 // Videos
 // ---------------------------------------------------------------------------
 
-/** Where a title came from. Only 'academy' is authoritative. */
-export type TitleSource = 'oembed' | 'og-title' | 'page-label' | 'academy';
-
 export type EventVideo = {
   /** Stable slug — anchor target and React key */
   id: string;
@@ -195,25 +152,16 @@ export type EventVideo = {
   date: string;
   /** Where, as the academy gives it: a venue and a city, or just a city or country. */
   place?: string;
-  titleSource: TitleSource;
   kind: 'video' | 'playlist';
   /** YouTube video id, or playlist id when kind === 'playlist' */
   youtubeId: string;
   /**
-   * Unlisted on YouTube: plays when linked or embedded, absent from YouTube
-   * search and from the channel's public list. The academy has confirmed these
-   * are intended to be publicly reachable.
-   */
-  unlisted?: boolean;
-  /**
-   * Poster image, as the old page paired it. Named by SOURCES key rather than
+   * Poster image. Named by SOURCES key rather than
    * by path so the dimensions and the globe plate come from one place — a poster
    * resized or recut then only has to change in SOURCES.
    */
   plateKey: string;
   alt: string;
-  /** The DOM pairing of poster to video looks wrong; confirm with the academy */
-  pairingUnconfirmed?: boolean;
   /** Shown under the title where there is something worth saying */
   note?: string;
   /**
@@ -235,7 +183,6 @@ export const VIDEOS: EventVideo[] = [
     title: 'Udaan 2025',
     date: '2025-06-21',
     place: 'Kalakshetra Foundation, Chennai',
-    titleSource: 'academy',
     kind: 'video',
     youtubeId: 'L4vTYrVB3aw',
     plateKey: 'udaan-2025-poster',
@@ -248,10 +195,8 @@ export const VIDEOS: EventVideo[] = [
     title: 'Udaan 2023',
     date: '2023-10-20',
     place: 'Narada Gana Sabha, Chennai',
-    titleSource: 'academy',
     kind: 'playlist',
     youtubeId: 'PLxyyMzhr0f3E-5yEp3Whr3hsbz6wC6GsO',
-    unlisted: true,
     plateKey: 'udaan-2023-poster',
     alt: 'Poster for Udaan 2023, Flying High',
   },
@@ -264,10 +209,8 @@ export const VIDEOS: EventVideo[] = [
     title: 'Jahnavi Sivasubramanyam',
     date: '2025-06-22',
     place: 'Kalakshetra Foundation, Chennai',
-    titleSource: 'academy',
     kind: 'video',
     youtubeId: 'wmnYYbxA950',
-    unlisted: true,
     plateKey: 'arangetram-j',
     alt: 'Invitation for Kum Jahnavi\u2019s Bharatanatyam Arangetram',
   },
@@ -278,10 +221,8 @@ export const VIDEOS: EventVideo[] = [
     title: 'Kirusanthini',
     date: '2024-01-09',
     place: 'Black Box, Chennai',
-    titleSource: 'academy',
     kind: 'video',
     youtubeId: 'wt4wETJMaXI',
-    unlisted: true,
     plateKey: 'arangetram-k',
     alt: 'Invitation for Smt Kirusanthini\u2019s Bharatanatyam Arangetram',
     note: 'Now head of the Scarborough branch.',
@@ -292,7 +233,6 @@ export const VIDEOS: EventVideo[] = [
     title: 'Aparna Manu',
     date: '2018-06-16',
     place: 'Bharatiya Vidya Bhavan, Chennai',
-    titleSource: 'academy',
     kind: 'video',
     youtubeId: 'eAIGMW4FPY4',
     plateKey: 'aparna',
@@ -308,10 +248,8 @@ export const VIDEOS: EventVideo[] = [
     title: 'Aparna Manu',
     date: '2024-07-05',
     place: 'Music Academy, Chennai',
-    titleSource: 'academy',
     kind: 'video',
     youtubeId: 'iD-Lf0YD8RY',
-    unlisted: true,
     plateKey: 'jun2024',
     alt: 'Aparna Manu performing a Bharatanatyam solo',
   },
@@ -325,10 +263,8 @@ export const VIDEOS: EventVideo[] = [
     detail: '27th Annual Music & Dance Festival',
     date: '2026-01-24',
     place: 'Chennai',
-    titleSource: 'academy',
     kind: 'video',
     youtubeId: 'RDW0MOFKFhY',
-    unlisted: true,
     plateKey: 'nadasudha',
     alt: 'Shanti Kala Nikketan at the Nada Sudha annual music and dance festival',
   },
@@ -339,13 +275,10 @@ export const VIDEOS: EventVideo[] = [
     title: 'Samarpanam Festival',
     date: '2025-09-30',
     place: 'Athma Academy, Chennai',
-    titleSource: 'academy',
     kind: 'video',
     youtubeId: 'uLpZ8hUFLZY',
-    unlisted: true,
-    // The poster and video were paired by DOM order on the old site; kept as
-    // data for the academy to confirm, and not shown to visitors.
-    pairingUnconfirmed: true,
+    // The poster and the video were paired by position on the old site and the
+    // pairing has not been confirmed with the academy.
     plateKey: 'athma',
     alt: 'Shanti Kala Nikketan dancers performing at an invited programme',
   },
@@ -356,13 +289,10 @@ export const VIDEOS: EventVideo[] = [
     title: 'Maha Shivaratri',
     date: '2024-03-09',
     place: 'Kapaleeshwarar Temple, Chennai',
-    titleSource: 'academy',
     kind: 'video',
     youtubeId: 'x_zWuJIvNng',
-    unlisted: true,
     // The poster is a programme notice for Bharatiya Vidya Bhavan, Mylapore, and
     // the video is from Kapaleeshwarar Temple: they may not belong together.
-    pairingUnconfirmed: true,
     plateKey: 'mylapore',
     alt: 'Programme notice for a performance at Bharatiya Vidya Bhavan, Mylapore',
   },
@@ -373,7 +303,6 @@ export const VIDEOS: EventVideo[] = [
     title: 'Jeevan Utsav',
     date: '2022-01-15',
     place: 'Online, 6 countries',
-    titleSource: 'academy',
     kind: 'video',
     youtubeId: 'TAU7Yi5rPCE',
     plateKey: 'festival',
@@ -393,7 +322,6 @@ export const VIDEOS: EventVideo[] = [
     detail: 'SKN Teachers',
     date: '2026-03-29',
     place: 'Chennai',
-    titleSource: 'academy',
     kind: 'video',
     youtubeId: 'frel0kYJvM8',
     plateKey: 'outreach-teachers',
@@ -407,7 +335,6 @@ export const VIDEOS: EventVideo[] = [
     detail: 'Jahnavi Sivasubramanyam',
     date: '2025-10-04',
     place: 'Chennai',
-    titleSource: 'academy',
     kind: 'video',
     youtubeId: '3YjSOxFNlKY',
     plateKey: 'outreach-dorai',
@@ -421,10 +348,8 @@ export const VIDEOS: EventVideo[] = [
     detail: 'Kirusanthini',
     date: '2025-06-15',
     place: 'Canada',
-    titleSource: 'academy',
     kind: 'video',
     youtubeId: 'cQS1QZo-Eyk',
-    unlisted: true,
     plateKey: 'canada',
     alt: 'Shanti Kala Nikketan dancers at a Toronto temple festival',
   },
@@ -485,8 +410,7 @@ export function videosBySection(section: EventSection): EventVideo[] {
 // ---------------------------------------------------------------------------
 
 /**
- * The posters and stills the recordings were paired with on the old page, with
- * their real pixel dimensions. A recording names its poster by key; the globe
+ * The posters and stills the videos carry, with their real pixel dimensions. A video names its poster by key; the globe
  * plate (long edge 512, cut by _research/make_globe_plates.ps1) and the
  * full-size file come from the same entry.
  */
@@ -520,21 +444,6 @@ function source(key: string): Source {
 export function platePath(key: string): string {
   return `/img/globe/${key}.webp`;
 }
-
-/** Long edge of a globe plate, in pixels. */
-export const PLATE_LONG_EDGE = 512;
-
-// ---------------------------------------------------------------------------
-// Open Graph
-// ---------------------------------------------------------------------------
-
-export const EVENTS_META = {
-  title: 'Events & Gallery — Udaan, Arangetrams & Performances',
-  description:
-    'Udaan, our own showcase created so that every dancer has a stage — with Arangetrams, temple festivals, and outreach programmes. Photographs and videos from the academy’s own stages.',
-  url: `${SITE.url}/events`,
-  image: '/img/event-udaan-2025.jpg',
-} as const;
 
 // ---------------------------------------------------------------------------
 // Guards

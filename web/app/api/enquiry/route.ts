@@ -44,16 +44,18 @@ import { SITE } from '@/lib/site';
  * parent chose, and for their audience — anything else becomes "suggest one"
  * rather than being echoed into the academy's inbox.
  *
- * SECURITY NOTE — read before deploying
- * -------------------------------------
+ * ABUSE PROTECTION
+ * ------------------
  * This route is public and unauthenticated by design: it is a public contact
- * form. It validates and size-caps input, drops honeypot hits, and rate-limits
- * per IP. That is enough to stop casual abuse, not a determined spammer.
+ * form. It size-caps the body, rejects a cross-site Origin, validates and caps
+ * every field, drops honeypot hits, and rate-limits per client address.
  *
- * Still outstanding:
- *   1. A CAPTCHA (Cloudflare Turnstile) verified server-side here.
- *   2. A durable rate limiter. The in-memory map below is per-instance, so on
- *      serverless it resets on cold start and does not share state.
+ * What that does not do. The limiter below is per instance, so on Vercel it only
+ * slows a burst that happens to land on one warm function and resets on a cold
+ * start. For a limit that holds, add a Vercel Firewall rate-limit rule for
+ * POST /api/enquiry (Project > Firewall), and for a determined spammer a CAPTCHA
+ * (Cloudflare Turnstile) verified here. Both are deployment-side and need
+ * accounts, which is why neither is in the code.
  */
 
 type Payload = Record<string, unknown>;
@@ -68,10 +70,21 @@ const UNDELIVERED =
   `or email ${SITE.email} — we will not have seen this form.`;
 
 const RATE_LIMIT = { windowMs: 60_000, max: 5 };
+/** Most distinct clients remembered at once; beyond it, expired entries go first. */
+const MAX_TRACKED = 5_000;
+/** An enquiry is a few hundred bytes of JSON. Anything near this is not one. */
+const MAX_BODY_BYTES = 16 * 1024;
 const hits = new Map<string, { count: number; resetAt: number }>();
+
+function prune(now: number) {
+  for (const [key, entry] of hits) {
+    if (now > entry.resetAt) hits.delete(key);
+  }
+}
 
 function rateLimited(key: string): boolean {
   const now = Date.now();
+  if (hits.size >= MAX_TRACKED) prune(now);
   const entry = hits.get(key);
 
   if (!entry || now > entry.resetAt) {
@@ -82,9 +95,30 @@ function rateLimited(key: string): boolean {
   return entry.count > RATE_LIMIT.max;
 }
 
+/**
+ * `x-vercel-forwarded-for` is set by Vercel's edge and replaces anything the
+ * visitor sent, so it is the one to trust there. The others cover local runs and
+ * other hosts.
+ */
 function clientKey(request: Request): string {
-  const forwarded = request.headers.get('x-forwarded-for');
-  return forwarded?.split(',')[0]?.trim() || request.headers.get('x-real-ip') || 'unknown';
+  const h = request.headers;
+  return (
+    h.get('x-vercel-forwarded-for')?.split(',')[0]?.trim() ||
+    h.get('x-real-ip') ||
+    h.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+    'unknown'
+  );
+}
+
+/** A browser always sends Origin on a POST; a different site's page sends its own. */
+function crossSite(request: Request): boolean {
+  const origin = request.headers.get('origin');
+  if (!origin) return false;
+  try {
+    return new URL(origin).host !== (request.headers.get('host') ?? new URL(request.url).host);
+  } catch {
+    return true;
+  }
 }
 
 function str(value: unknown, max: number): string {
@@ -135,9 +169,24 @@ export async function POST(request: Request) {
     );
   }
 
+  if (crossSite(request)) {
+    return NextResponse.json({ ok: false, error: 'Not allowed.' }, { status: 403 });
+  }
+
+  const declared = Number(request.headers.get('content-length') ?? 0);
+  if (declared > MAX_BODY_BYTES) {
+    return NextResponse.json({ ok: false, error: 'That is too large to be an enquiry.' }, { status: 413 });
+  }
+
   let body: Payload;
   try {
-    body = (await request.json()) as Payload;
+    // Read as text so the size is checked on what actually arrived, not only on
+    // what the header claimed.
+    const text = await request.text();
+    if (text.length > MAX_BODY_BYTES) {
+      return NextResponse.json({ ok: false, error: 'That is too large to be an enquiry.' }, { status: 413 });
+    }
+    body = JSON.parse(text) as Payload;
   } catch {
     return NextResponse.json({ ok: false, error: 'Malformed request.' }, { status: 400 });
   }

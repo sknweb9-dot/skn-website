@@ -39,34 +39,19 @@ $out = Join-Path $img 'globe'
 # key -> source file. The key becomes the plate filename and must match the
 # `key` field in web/lib/events.ts SOURCES.
 $plates = [ordered]@{
-  'udaan-2025-poster' = 'event-udaan-2025.jpg'
-  'udaan-2023-poster' = 'event-udaan-2023.jpg'
-  'aparna'            = 'event-aparna.jpg'
-  'arangetram-k'      = 'event-arangetram-k.jpg'
-  'arangetram-j'      = 'event-arangetram-j.jpg'
-  'festival'          = 'event-festival.jpg'
-  'mylapore'          = 'event-mylapore.jpg'
-  'athma'             = 'event-athma.jpg'
-  'nadasudha'         = 'event-nadasudha.jpg'
-  'jun2024'           = 'event-jun2024.jpg'
-  'canada'            = 'event-canada.jpg'
-  'ensemble'          = 'ensemble.jpg'
-  'embrace'           = 'embrace-dance.jpg'
-  'gallery-1'         = 'gallery-1.jpg'
-  'gallery-2'         = 'gallery-2.jpg'
-  'gallery-3'         = 'gallery-3.jpg'
-  'stage-1'           = 'stage-1-intro.jpg'
-  'stage-2'           = 'stage-2-foundation.jpg'
-  'stage-3'           = 'stage-3-strength.jpg'
-  'stage-4'           = 'stage-4-transition.jpg'
-  'stage-5'           = 'stage-5-expression.jpg'
-  'stage-6'           = 'stage-6-maturity.jpg'
-  'stage-7'           = 'stage-7-arangetram.jpg'
-  'hero-events'       = 'hero-events.jpg'
-  'hero-photos'       = 'hero-photos.jpg'
-  'hero-gurukulam'    = 'hero-gurukulam.jpg'
-  'hero-skn'          = 'hero-skn.jpg'
-  'hero-videos'       = 'hero-videos.jpg'
+  'udaan-2025-poster'   = 'event-udaan-2025.jpg'
+  'udaan-2023-poster'   = 'event-udaan-2023.jpg'
+  'aparna'              = 'event-aparna.jpg'
+  'arangetram-k'        = 'event-arangetram-k.jpg'
+  'arangetram-j'        = 'event-arangetram-j.jpg'
+  'festival'            = 'event-festival.jpg'
+  'mylapore'            = 'event-mylapore.jpg'
+  'athma'               = 'event-athma.jpg'
+  'nadasudha'           = 'event-nadasudha.jpg'
+  'jun2024'             = 'event-jun2024.jpg'
+  'canada'              = 'event-canada.jpg'
+  'outreach-teachers'   = 'event-outreach-teachers.jpg'
+  'outreach-dorai'      = 'event-outreach-dorai.jpg'
 }
 
 # Long edge, in pixels. A plate is drawn at anything from ~40px on the far side
@@ -100,7 +85,9 @@ if ($missing.Count -gt 0) {
   throw ("Missing source images: " + ($missing -join ', '))
 }
 
-$files = Get-ChildItem $out -Filter *.webp
+# Only the poster plates: the folder also holds the gallery's, which
+# _research/make_gallery_assets.py cuts.
+$files = $plates.Keys | ForEach-Object { Get-Item (Join-Path $out ("{0}.webp" -f $_)) }
 Write-Output ("plates=" + $made)
 Write-Output ("totalKB=" + [math]::Round((($files | Measure-Object Length -Sum).Sum / 1KB)))
 Write-Output ("avgKB=" + [math]::Round((($files | Measure-Object Length -Average).Average / 1KB), 1))

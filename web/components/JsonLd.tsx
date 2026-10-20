@@ -6,7 +6,7 @@ export default function JsonLd({ data }: { data: object }) {
   return (
     <script
       type="application/ld+json"
-      // The payload is built from typed constants in lib/site.ts, never from
+      // The payload is built from typed constants in lib/, never from
       // user input. JSON.stringify escaping is sufficient here; we additionally
       // neutralise "</" so a stray value can never close the script element.
       dangerouslySetInnerHTML={{

@@ -10,46 +10,27 @@ import VenueDirectory from '@/components/VenueDirectory';
 import { venuesForCity } from '@/lib/classes';
 import { locationPhotos } from '@/lib/locationPhotos';
 import { onlineGraph } from '@/lib/schema';
-import { ONLINE, SITE } from '@/lib/site';
+import { ONLINE_SEO, pageMetadata } from '@/lib/seo';
+import { ONLINE } from '@/lib/branches';
+import { SITE } from '@/lib/site';
 
 /**
  * /locations/online. A static route, so it takes precedence over the dynamic
  * /locations/[city] and the branch pages are unaffected. It is not a branch: no
  * address, no map, no neighbourhoods, no "who teaches here" (see ONLINE in
- * lib/site.ts for why it is kept out of BRANCHES).
+ * lib/branches.ts for why it is kept out of BRANCHES).
  */
-
-const TITLE = 'Online Bharatanatyam Classes \u2014 Live Group Class';
-const DESCRIPTION =
-  'A live online Bharatanatyam group class, open to students anywhere: the Kalakshetra Bani syllabus of Shanti Kala Nikketan, taught in the Gurukulam manner over video. See the batch and book a session.';
 
 const PHOTO_ALT = `${ONLINE.title}, Shanti Kala Nikketan`;
 
 export async function generateMetadata(): Promise<Metadata> {
   // The first photograph in the folder is the card's picture on /locations, so
   // it is the one to share. Without one, the site's own image stands in.
-  const cover = locationPhotos('online', PHOTO_ALT)[0]?.src ?? SITE.ogImage;
-  return {
-    title: TITLE,
-    description: DESCRIPTION,
-    keywords: [
-      'online Bharatanatyam classes',
-      'online classical dance classes',
-      'Bharatanatyam classes online for kids',
-      'live Bharatanatyam class',
-      'learn Bharatanatyam online',
-    ],
-    alternates: { canonical: `/locations/${ONLINE.slug}` },
-    openGraph: {
-      type: 'website',
-      title: TITLE,
-      description: DESCRIPTION,
-      url: `${SITE.url}/locations/${ONLINE.slug}`,
-      siteName: SITE.name,
-      images: [{ url: cover, width: 1200, height: 630, alt: `${SITE.name}, online classes` }],
-    },
-    twitter: { card: 'summary_large_image', title: TITLE, description: DESCRIPTION, images: [cover] },
-  };
+  const cover = locationPhotos('online', PHOTO_ALT)[0]?.src;
+  return pageMetadata({
+    ...ONLINE_SEO,
+    ...(cover ? { image: { url: cover, alt: `${SITE.name}, online classes` } } : {}),
+  });
 }
 
 export default function OnlinePage() {

@@ -94,7 +94,7 @@ export const LEVELS: Programme[] = [
     repertoire: ['Alarippu', 'Tevaram', 'Divya Prabandham'],
     develops: ['Memory for long sequences', 'Musical understanding', 'Independent self-correction'],
     image: '/img/pages/level-3.jpg',
-    imageAlt: 'Six students seated in a row on the studio floor, each with one arm raised overhead and one held in front, at Appswamy Springs',
+    imageAlt: 'Six students seated in a row on the studio floor, each with one arm raised overhead and one held in front, at Appaswamy Springs',
   },
   {
     id: 'level-4',

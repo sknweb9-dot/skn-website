@@ -5,8 +5,8 @@ import JsonLd from '@/components/JsonLd';
 import { PageHero, PageShell, QuietLink, Section } from '@/components/PageShell';
 import BookButton from '@/components/BookButton';
 import { FRAME_HEIGHT, FRAME_WIDTH, MUDRAS, VERSE_MUDRAS, framePath, liveFrames } from '@/lib/mudras';
-import { SITE } from '@/lib/site';
 import { hastasGraph, slugify } from '@/lib/schema';
+import { PAGE_SEO, pageMetadata } from '@/lib/seo';
 
 /**
  * UNLINKED AND NOINDEXED — read this before reviving the page.
@@ -30,36 +30,7 @@ import { hastasGraph, slugify } from '@/lib/schema';
  * must not be — the home page's arch (components/home) depends on
  * framePath, MUDRAS and FRAME_COUNT, and lib/home.ts on mudraByName.
  */
-const TITLE = 'The 28 Asamyuta Hastas of Bharatanatyam';
-const DESCRIPTION =
-  'A reference to the twenty-eight single-hand gestures of Bharatanatyam in the canonical Abhinaya Darpana order — each with its literal meaning, documented viniyoga, and where published, its Sanskrit shloka with a word-by-word gloss.';
-
-export const metadata: Metadata = {
-  title: TITLE,
-  description: DESCRIPTION,
-  alternates: { canonical: '/hastas' },
-  /**
-   * Unlinked at the academy's request, so also unindexed. `follow: false`
-   * because the only outbound links here go to pages already in the sitemap —
-   * there is no crawl path that needs preserving through this page.
-   */
-  robots: { index: false, follow: false },
-  keywords: [
-    'asamyuta hastas',
-    'Bharatanatyam mudras list',
-    '28 hastas Abhinaya Darpana',
-    'Bharatanatyam hand gestures meaning',
-    'viniyoga hastas',
-    'Bharatanatyam theory class',
-    ...MUDRAS.map((m) => `${m.name} hasta`),
-  ],
-  openGraph: {
-    title: `${TITLE} | ${SITE.name}`,
-    description: DESCRIPTION,
-    url: `${SITE.url}/hastas`,
-    type: 'article',
-  },
-};
+export const metadata: Metadata = pageMetadata(PAGE_SEO.hastas);
 
 export default function HastasPage() {
   return (
@@ -190,7 +161,8 @@ export default function HastasPage() {
                           href={`https://www.youtube.com/watch?v=${mudra.verse.videoId}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="mt-4 inline-flex items-center gap-1.5 font-sans text-[0.8rem] font-medium text-kumkum hover:underline"
+                          aria-label={`Theory Class: ${mudra.name}`}
+                          className="mt-1.5 -mb-2.5 inline-flex items-center gap-1.5 py-2.5 font-sans text-[0.8rem] font-medium text-kumkum hover:underline"
                         >
                           <CirclePlay className="size-4" aria-hidden /> Theory Class
                         </a>

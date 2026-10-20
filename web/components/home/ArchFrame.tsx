@@ -2,7 +2,7 @@
  * A temple doorway rather than a hairline: a solid marigold border on the
  * aperture's own edge, and a fine second line just outside it. Closed at the
  * foot, because the arch sits against every ground on the page and needs a firm
- * edge on each. Same path as the `arch` mask in globals.css, scaled to the box.
+ * edge on each. Same path as the `arch` mask in app/styles/shapes.css, scaled to the box.
  *
  * Shared by the live arch (HomeStage) and the still one each section carries in
  * the stacked layout, so the two cannot drift apart.

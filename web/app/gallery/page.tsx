@@ -4,23 +4,9 @@ import GalleryExplorer from '@/components/gallery/GalleryExplorer';
 import { PageHero, PageShell } from '@/components/PageShell';
 import { ALL_ITEMS, PHOTOS } from '@/lib/gallery';
 import { galleryGraph } from '@/lib/schema';
-import { SITE } from '@/lib/site';
+import { PAGE_SEO, pageMetadata } from '@/lib/seo';
 
-const TITLE = 'Gallery';
-const DESCRIPTION =
-  'Photographs from Shanti Kala Nikketan: every class and batch, Udaan, Arangetrams, temple festivals and Sunitta Menghanaani\u2019s own stage. Find your child by venue and batch.';
-
-export const metadata: Metadata = {
-  title: TITLE,
-  description: DESCRIPTION,
-  alternates: { canonical: '/gallery' },
-  openGraph: {
-    title: `${TITLE} | ${SITE.name}`,
-    description: DESCRIPTION,
-    url: `${SITE.url}/gallery`,
-    type: 'website',
-  },
-};
+export const metadata: Metadata = pageMetadata(PAGE_SEO.gallery);
 
 /**
  * The gallery: a globe to turn, and under it every photograph, filterable down to

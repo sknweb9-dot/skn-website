@@ -7,7 +7,7 @@ import { splitWords } from '@/lib/textMotion';
  * Each word sits in a clip (`.tx-w`) and its text in a layer that starts below
  * the clip's edge (`.tx-wi`), so the words are lifted into view rather than
  * faded. The animation is pure CSS on the parent's `.tx-wl` class; see "Text
- * motion" in app/globals.css. Server-rendered, so with no script the words are
+ * motion" in app/styles/text-motion.css. Server-rendered, so with no script the words are
  * simply there, and the markup is the same shape the client engine builds for
  * headings further down the page (components/TextMotion.tsx).
  *

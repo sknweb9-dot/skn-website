@@ -68,7 +68,7 @@ import ScrollCue from '../ScrollCue';
  * (focusin below). Dots and PageUp/PageDown move between pages.
  */
 
-const R = 0.7215; // arch width / height; see --arch-ratio in globals.css
+const R = 0.7215; // arch width / height; see --arch-ratio in app/styles/tokens.css
 
 function subscribe(onChange: () => void) {
   const list = window.matchMedia(STAGE_QUERY);

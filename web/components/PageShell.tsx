@@ -129,7 +129,7 @@ export function Section({
         {/* Scroll entrance: text-only, by components/TextMotion.tsx.
 
             An earlier version faded and rose the whole section over a second as
-            it entered view, and held it at opacity 0 until a ScrollTrigger
+            it entered view, and held it at opacity 0 until a scroll trigger
             fired, so find-in-page, anchor jumps and fast scrolls landed on
             blank space. This one lowers only text that is still below the fold,
             raises it from an IntersectionObserver backed by a sweep, and leaves

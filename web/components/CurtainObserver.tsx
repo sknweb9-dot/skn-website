@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 
 /**
  * Raises the `.curtain` on editorial photographs — see the curtain block in
- * app/globals.css for the design and the safety contract.
+ * app/styles/curtain.css for the design and the safety contract.
  *
  * Mounted once in the root layout and re-run on every route change, so pages
  * stay server components and only mark their photographs with a class.

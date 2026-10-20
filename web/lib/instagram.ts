@@ -49,7 +49,7 @@ const TIMEOUT_MS = 6_000;
 export const REVALIDATE_SECONDS = 3600;
 
 /** Most recent posts to show. Beyond a couple of dozen the rail stops being read. */
-export const POST_LIMIT = 12;
+const POST_LIMIT = 12;
 
 export type InstagramPost = {
   id: string;
@@ -85,7 +85,7 @@ function userId(): string {
   return process.env.INSTAGRAM_USER_ID?.trim() || 'me';
 }
 
-export function instagramConfigured(): boolean {
+function instagramConfigured(): boolean {
   return token().length > 0;
 }
 
@@ -107,7 +107,7 @@ function kindOf(type: GraphMedia['media_type']): InstagramPost['kind'] {
 /**
  * Newest first, which is the order the API returns and the order the rail wants.
  *
- * Never throws. A feed is decoration on this page; the Udaan copy, the recordings
+ * Never throws. A feed is decoration on this page; the Udaan copy, the videos
  * and the globe do not depend on it, so a bad token or a slow response should cost
  * nothing but the rail.
  */

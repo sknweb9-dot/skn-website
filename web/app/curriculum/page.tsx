@@ -5,25 +5,11 @@ import JsonLd from '@/components/JsonLd';
 import { PageHero, PageShell, Section } from '@/components/PageShell';
 import BookButton from '@/components/BookButton';
 import { ADULTS, ARANGETRAM, CURRICULUM_INTRO, INTRODUCTORY, LEVELS } from '@/lib/curriculum';
-import { SITE } from '@/lib/site';
 import { adultBatches, allBatches, formatBatchTime } from '@/lib/classes';
 import { homeGraph } from '@/lib/schema';
+import { PAGE_SEO, pageMetadata } from '@/lib/seo';
 
-const TITLE = 'Curriculum — Six Graded Levels to Arangetram';
-const DESCRIPTION =
-  'An Introductory Programme from age 3.5, then six graded levels — Foundation, Technique Development, Margam Preparation, Repertoire & Expression, Advanced Artistry and Mastery — followed by a dedicated Performance & Arangetram Programme.';
-
-export const metadata: Metadata = {
-  title: TITLE,
-  description: DESCRIPTION,
-  alternates: { canonical: '/curriculum' },
-  openGraph: {
-    title: `${TITLE} | ${SITE.name}`,
-    description: DESCRIPTION,
-    url: `${SITE.url}/curriculum`,
-    type: 'website',
-  },
-};
+export const metadata: Metadata = pageMetadata(PAGE_SEO.curriculum);
 
 /** Batches currently running at a given programme, for the "running now" note. */
 function batchesFor(programmeId: string) {

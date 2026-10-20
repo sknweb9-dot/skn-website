@@ -1,0 +1,40 @@
+/* ---------------------------------------------------------------------------
+   The curtain.
+
+   Photographs of the academy's stage, classes and teachers rise into view the
+   way a proscenium curtain lifts: the picture is uncovered from the floor
+   upward, once, when it arrives. It is the inner-page counterpart to the home
+   page's arch — performance vocabulary, not a generic fade — and it replaced
+   the fade-and-rise that used to run on every section.
+
+   Driven by components/CurtainObserver.tsx. The contract that keeps it safe:
+     - Nothing is hidden by CSS alone. An image is lowered only by JS, only
+       when it is still BELOW the fold at the moment the page settles, and it
+       is raised by an IntersectionObserver — which fires on wheel, touch,
+       anchor jumps and find-in-page alike. With no JS, or reduced motion, the
+       photograph is simply there.
+     - It plays in time, not scrubbed against scroll. A scroll-linked version
+       was tried first and rejected: a bottom-up wipe tied to scroll leaves a
+       picture that is already mostly on screen almost entirely covered, which
+       reads as a hole in the page rather than a curtain.
+
+   Text is never curtained. Only photographs, and only the large editorial ones
+   — not gallery grids, thumbnails or avatars, where it would become a cascade.
+--------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  /* The clip goes on the picture INSIDE the frame, never on the frame.
+     The frame is what CurtainObserver watches, and Chrome's
+     IntersectionObserver measures the observed element after its own
+     clip-path: a frame clipped to inset(100%) reports no intersection, so it
+     was never raised — an on-screen photograph stayed lowered for good. */
+  .curtain > * {
+    transition:
+      clip-path 0.95s var(--ease-temple),
+      transform 1.2s var(--ease-temple);
+    transform-origin: 50% 100%;
+  }
+  .curtain[data-curtain='down'] > * {
+    clip-path: inset(100% 0 0 0);
+    transform: scale(1.035);
+  }
+}

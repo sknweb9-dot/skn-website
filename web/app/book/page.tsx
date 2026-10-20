@@ -9,19 +9,10 @@ import BookingFlowFromUrl from '@/components/BookingFlowFromUrl';
 import BookingFlow from '@/components/BookingFlow';
 import FaqList from '@/components/FaqList';
 import { bookGraph } from '@/lib/schema';
-import { FAQS, SITE } from '@/lib/site';
+import { FAQS } from '@/lib/faqs';
+import { PAGE_SEO, pageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'Book a session',
-  description:
-    'Tell us who the classes are for and where suits you, and we will suggest a batch. Children from age 3.5, adults, online classes, Scarborough, and new batches in residential communities.',
-  alternates: { canonical: '/book' },
-  openGraph: {
-    title: `Book a session | ${SITE.name}`,
-    url: `${SITE.url}/book`,
-    type: 'website',
-  },
-};
+export const metadata: Metadata = pageMetadata(PAGE_SEO.book);
 
 /**
  * The admissions enquiry.

@@ -15,7 +15,7 @@ import type { CSSProperties } from 'react';
  *
  * It is server-rendered into the hero's still arch, so it sits in the document
  * and scrolls away with the hero rather than being driven by the script. The
- * stage hides it (globals.css), which has its own.
+ * stage hides it (app/styles/scroll-cue.css), which has its own.
  *
  * `vertical` — the desktop stage
  * ------------------------------
@@ -24,7 +24,7 @@ import type { CSSProperties } from 'react';
  * a few pixels each, so a small wave runs down the word and off the end of the
  * arrow: the direction the page is asked to go. The spring is a damped
  * oscillation sampled into a CSS `linear()` curve (see `cue-spring` in
- * globals.css), so the letters overshoot and settle rather than easing back.
+ * app/styles/scroll-cue.css), so the letters overshoot and settle rather than easing back.
  * Then it rests for most of the cycle. Under reduced motion it all sits still.
  *
  * It is centred on the arch's left edge, where the side is straight, rather than

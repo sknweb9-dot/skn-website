@@ -1,0 +1,409 @@
+/* ---------------------------------------------------------------------------
+   The home stage.
+
+   The home page's markup is a stack of sections, each holding one or more
+   pages ([data-page]). By default (no script, a phone, a small window, reduced
+   motion) that is simply a stacked page: each section on its own ground, with
+   its gesture as a still arch above it.
+
+   html[data-stage="on"] turns the same markup into a stage: a sticky pin one
+   viewport tall, inside a track as tall as the scroll it needs, with the pages
+   laid over one another and shown one at a time. The attribute is set before
+   first paint by an inline script in app/page.tsx and kept honest by
+   components/home/HomeStage.tsx, from the one media query in lib/stage.ts.
+
+   Everything stage-specific is under html[data-stage="on"]. The `staged:`
+   variant below is for utilities that differ only there.
+--------------------------------------------------------------------------- */
+@custom-variant staged (html[data-stage="on"] &);
+
+/* The colour of the arch's niche. Registered so it can transition: the niche
+   changes with the section, behind the wipe. */
+@property --niche {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #1a0d0d;
+}
+
+:root {
+  --masthead: 5.5rem;
+  /* The arch's width over its height; the mask path and the footage's crop
+     share it. */
+  --arch-ratio: 0.7215;
+  --dock-col: 21vw;
+}
+
+/* --- Stacked (default) ---------------------------------------------------- */
+
+.home-section {
+  position: relative;
+  background-color: var(--tone);
+  padding: 4.5rem 1.25rem 4rem;
+}
+@media (min-width: 40rem) {
+  .home-section {
+    padding-inline: 2rem;
+  }
+}
+.home-section > .home-page {
+  max-width: 60rem;
+  margin-inline: auto;
+}
+.home-section > .home-page + .home-page {
+  margin-top: 4rem;
+}
+.home-stacked-arch {
+  width: min(62vw, 15rem);
+  margin: 0 auto 2.75rem;
+}
+/* The hero is the page's first screen: a larger arch, centred above the line. */
+.home-section[data-home-section='hero'] {
+  padding-top: calc(var(--masthead) + 1rem);
+  text-align: center;
+  min-height: 100svh;
+}
+/* Tighter under the hero's arch than under the others: the headline belongs to
+   the gesture above it, and every pixel here is one the credentials line at the
+   foot of the first screen does not have. */
+.home-section[data-home-section='hero'] .home-stacked-arch {
+  margin-bottom: 1.25rem;
+}
+.home-section[data-home-section='hero'] .home-stacked-arch {
+  /* Never taller than 42% of the screen, so a short phone still has its
+     headline and button on the first screen. */
+  width: min(70vw, 17rem, calc(42svh * 0.7215));
+}
+@media (max-height: 700px) {
+  .home-section[data-home-section='hero'] .home-stacked-arch {
+    width: min(70vw, 17rem, calc(34svh * 0.7215));
+  }
+}
+/* On a phone the credentials line sits a little further from the button than on
+   a desktop, where the two read as a pair. */
+@media (max-width: 40rem) {
+  .home-section[data-home-section='hero'] .home-page-inner > div {
+    gap: 1.25rem;
+  }
+}
+/* Short phones, measured as the browser leaves them.
+
+   `svh` is the viewport with the browser's own bars showing, which is the screen
+   a phone starts on, so the hero is sized to that rather than to the full-height
+   figure that only appears after the bars have slid away. On a 375x553 window
+   the credentials line at the foot of the hero used to land 57px below the edge,
+   under the bar. Everything here buys that space back, a little at a time, so no
+   one piece looks squeezed: a smaller arch, a smaller headline (which also keeps
+   it on two lines at 375px), and tighter gaps. The foot is left 1.5rem of air. */
+@media (max-width: 40rem) and (max-height: 45rem) {
+  .home-section[data-home-section='hero'] {
+    padding-top: calc(var(--rail-nav-h, 4.8rem) + 0.5rem);
+    padding-bottom: 2rem;
+  }
+  .home-section[data-home-section='hero'] .home-stacked-arch {
+    width: min(70vw, 17rem, calc(30svh * 0.7215));
+    margin-bottom: 0.875rem;
+  }
+  .home-section[data-home-section='hero'] #hero-heading {
+    font-size: 1.65rem;
+  }
+  /* The line under the headline wrapped its last word ("2009") onto a line of
+     its own at 360px; one size down keeps it to one line. */
+  .home-section[data-home-section='hero'] .home-page-inner > p {
+    font-size: 1rem;
+  }
+  .home-section[data-home-section='hero'] .home-page-inner > div {
+    margin-top: 1rem;
+    gap: 1.25rem;
+  }
+}
+.home-section[data-home-section='hero'] .home-page-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Text colours for a dark ground. Eyebrows go marigold (6.0:1 and up on every
+   dark tone), and the focus ring follows. */
+@utility on-dark {
+  color: var(--color-cream);
+  --eyebrow-color: var(--color-marigold);
+}
+.on-dark :focus-visible {
+  outline-color: var(--color-marigold);
+}
+
+/* The live arch, the wipes, the dots and the progress bar exist only on the
+   stage; the engine mounts them. */
+
+/* --- The stage ------------------------------------------------------------ */
+
+html[data-stage='on'] .home-track {
+  position: relative;
+}
+html[data-stage='on'] .home-pin {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  background-color: var(--color-cream);
+}
+/* Sections are only a grouping now; each page places itself. */
+html[data-stage='on'] .home-section {
+  display: contents;
+  padding: 0;
+  background: none;
+}
+html[data-stage='on'] .home-section > .home-page {
+  max-width: none;
+  margin: 0;
+}
+html[data-stage='on'] .home-page {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--masthead) 4.5rem 0 calc(var(--dock-col) + 4.5rem);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(14px);
+  transition:
+    opacity 0.22s ease,
+    transform 0.22s ease;
+}
+html[data-stage='on'] .home-page[data-state='before'] {
+  transform: translateY(-14px);
+}
+html[data-stage='on'] .home-page[data-state='on'] {
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+  transition:
+    opacity 0.45s ease 0.12s,
+    transform 0.45s ease 0.12s;
+}
+html[data-stage='on'] .home-page-inner {
+  max-height: calc(100svh - var(--masthead) - 1.5rem);
+}
+
+/* Before the engine has mounted: the hero shows, and its still arch sits where
+   the live one will be, so the first paint is already the stage. */
+html[data-stage='on'] [data-home-section='hero'] .home-page:not([data-state]) {
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+}
+html[data-stage='on'] .home-stacked-arch {
+  display: none;
+}
+html[data-stage='on'] [data-home-section='hero'] {
+  /* As tall as the room under the masthead allows once the hero's text block
+     (about 19rem, with its button and credentials), the caption and the bottom
+     padding are taken out, and never more than 46svh or 40rem. Without the
+     room term a short window put the arch's caption through the headline.
+
+     The slack is what the caps leave unused. On a laptop there is none: the arch
+     is held back by the room and fills it. On a large monitor the caps bite and
+     the room is left over, which used to open between the arch and the headline
+     (185px at 1920x1080, 530px at 2560x1440). It is shared out instead, half
+     above the arch and half below the text, so the arch, its caption and the
+     headline stay one group at the same distance from each other on every
+     screen, centred between the masthead and the foot. */
+  --hero-arch: max(9rem, min(46svh, 40rem, calc(96svh - 29.25rem)));
+  --hero-slack: max(0px, calc(96svh - 29.25rem - var(--hero-arch)));
+}
+html[data-stage='on'] [data-home-section='hero'] .home-stacked-arch {
+  display: block;
+  position: absolute;
+  z-index: 20;
+  top: calc(var(--masthead) + 1rem + var(--hero-slack) / 2);
+  left: 50%;
+  height: var(--hero-arch);
+  width: auto;
+  aspect-ratio: 720 / 1000;
+  margin: 0;
+  transform: translateX(-50%);
+}
+html[data-stage-live] [data-home-section='hero'] .home-stacked-arch {
+  visibility: hidden;
+}
+html[data-stage='on'] [data-home-section='hero'] .home-stacked-arch > div {
+  height: 100%;
+  width: 100%;
+  aspect-ratio: auto;
+}
+
+/* The hero page: bottom-aligned under the arch and its caption. The bottom
+   padding carries half the slack (see --hero-slack above) so the text rises with
+   the arch as it drops, rather than staying at the foot of a tall screen. */
+html[data-stage='on'] .home-hero {
+  justify-content: flex-end;
+  align-items: center;
+  text-align: center;
+  padding: var(--masthead) 2rem calc(4svh + var(--hero-slack) / 2);
+}
+
+/* The hero's heading is a single centred line; the other pages are left-set. */
+html[data-stage='on'] .home-timeline {
+  align-items: stretch;
+}
+
+/* The timeline: a window four entries tall that fades at top and bottom; the
+   track inside it is moved by the scroll. */
+html[data-stage='on'] .home-timeline-window {
+  --entry-h: 9.4rem;
+  position: relative;
+  height: calc(var(--entry-h) * 4);
+  max-width: 54rem;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 12%, #000 88%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 12%, #000 88%, transparent 100%);
+}
+html[data-stage='on'] .home-timeline-track {
+  display: block;
+  will-change: transform;
+  /* As deep as the fade at each end of the window (12% of four entries), so the
+     first entry rests clear of the top fade and the last clear of the bottom. */
+  padding-block: calc(var(--entry-h) * 4 * 0.12);
+}
+html[data-stage='on'] .home-timeline-entry {
+  height: var(--entry-h);
+  border-top: 0;
+  padding-top: 0;
+  position: relative;
+  padding-left: 2.75rem;
+}
+html[data-stage='on'] .home-timeline-entry::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.45rem;
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 9999px;
+  background: var(--color-marigold);
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--color-marigold) 25%, transparent);
+}
+html[data-stage='on'] .home-timeline-track::before {
+  content: '';
+  position: absolute;
+  left: 0.4rem;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: color-mix(in oklab, var(--color-marigold) 55%, transparent);
+}
+
+/* --- Stage furniture (mounted by the engine) ------------------------------ */
+
+.home-wipe {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.home-arch {
+  position: absolute;
+  z-index: 20;
+  pointer-events: none;
+}
+.home-arch-box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.home-arch-shape {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background-color: var(--niche);
+  transition: --niche 0.8s ease 0.15s;
+}
+/* The lamp: a warm glow behind the hand, in the niche. Off on light grounds,
+   where the arch shows the footage as filmed. */
+.home-arch-shape::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    ellipse 54% 46% at 50% 46%,
+    rgba(255, 216, 150, 0.62) 0%,
+    rgba(240, 168, 72, 0.3) 30%,
+    rgba(236, 160, 60, 0) 80%
+  );
+  opacity: var(--glow-opacity, 0);
+  transition: opacity 0.8s ease 0.15s;
+}
+.home-arch-canvas {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+/* The source of the shader's texture. Out of sight unless WebGL is missing. */
+.home-arch-video {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  width: 2px;
+  height: 2px;
+}
+.home-arch[data-gl='off'] .home-arch-canvas {
+  display: none;
+}
+.home-arch[data-gl='off'] .home-arch-video {
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.home-arch-caption {
+  position: absolute;
+  top: calc(100% + 0.75rem);
+  left: 0;
+  right: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.home-dots {
+  position: absolute;
+  z-index: 30;
+  right: 1.1rem;
+  top: 50%;
+  display: grid;
+  gap: 0.25rem;
+  transform: translateY(-50%);
+}
+/* A 24px target around a 12px dot. */
+.home-dots button {
+  position: relative;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.home-dots button::before {
+  content: '';
+  position: absolute;
+  inset: 0.375rem;
+  border-radius: 9999px;
+  border: 2px solid var(--color-marigold);
+  background: transparent;
+  transition: background-color 0.3s ease;
+}
+.home-dots button[data-active='true']::before {
+  background: var(--color-marigold);
+}
+.home-bar {
+  position: absolute;
+  z-index: 60;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 0;
+  background: var(--color-marigold);
+}

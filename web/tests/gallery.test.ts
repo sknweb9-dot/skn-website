@@ -5,7 +5,7 @@ import {
   GLOBE_ITEMS,
   NO_FILTER,
   PHOTOS,
-  RECORDINGS,
+  VIDEO_ITEMS,
   batchOptions,
   filterToQuery,
   groupOptions,
@@ -30,8 +30,8 @@ describe('the gallery data', () => {
     for (const p of PHOTOS) expect(ALBUMS.some((a) => a.id === p.albumId)).toBe(true);
   });
 
-  it('keeps every plate the globe carries, and the recordings, once', () => {
-    expect(GLOBE_ITEMS.length).toBe(PHOTOS.filter((p) => p.onGlobe).length + RECORDINGS.length);
+  it('keeps every plate the globe carries, and the videos, once', () => {
+    expect(GLOBE_ITEMS.length).toBe(PHOTOS.filter((p) => p.onGlobe).length + VIDEO_ITEMS.length);
     expect(new Set(GLOBE_ITEMS.map((i) => i.id)).size).toBe(GLOBE_ITEMS.length);
   });
 
@@ -147,16 +147,16 @@ describe('the 2026-10 additions', () => {
 describe('the one-to-one class folders', () => {
   const inVenue = (venue: string) => PHOTOS.filter((p) => p.group === 'classes' && p.venueId === venue);
 
-  it('adds Purva Windermere and Appswamy Greensville to the venue filter, after the existing five', () => {
+  it('adds Purva Windermere and Appaswamy Greensville to the venue filter, after the existing five', () => {
     const labels = subOptions('classes')?.options.map((o) => o.label);
     expect(labels).toEqual([
-      'Appswamy Springs',
+      'Appaswamy Springs',
       'Adroit',
       'Prestige Courtyards',
       'Casagrand Riviera',
       'Casagrand Tranquil',
       'Purva Windermere',
-      'Appswamy Greensville',
+      'Appaswamy Greensville',
     ]);
   });
 

@@ -1,50 +1,62 @@
 import type { NextConfig } from 'next';
 
+/**
+ * Headers every response carries. None of these can break the site as built:
+ * the CSP lists only the directives that do not touch scripts or styles (the
+ * site uses inline scripts for the stage flag and the structured data, which a
+ * script-src policy would need nonces for), and nothing on the site is framed by
+ * anyone else or posts a form off-site.
+ */
+const SECURITY_HEADERS = [
+  { key: 'X-Content-Type-Options', value: 'nosniff' },
+  { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+  { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+  { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(), payment=(), usb=()' },
+  {
+    key: 'Content-Security-Policy',
+    value: "base-uri 'self'; object-src 'none'; form-action 'self'; frame-ancestors 'self'",
+  },
+];
+
+/**
+ * Photographs, plates and hand frames are not content-hashed, so they cannot be
+ * cached "forever". A day fresh plus a week of stale-while-revalidate means a
+ * returning visitor does not re-ask for each one, and a replaced photograph is
+ * live within a day.
+ */
+const ASSET_CACHE = 'public, max-age=86400, stale-while-revalidate=604800';
+
 const nextConfig: NextConfig = {
-  /**
-   * The footage the home arch plays. Not content-hashed, so a day rather than a
-   * year: long enough that a returning visitor does not re-fetch two megabytes,
-   * short enough that a re-cut shows up the next day. Range requests (which the
-   * browser needs to seek) are served by Next's static handler as it is.
-   */
+  poweredByHeader: false,
+
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    // The Instagram rail's pictures. Instagram serves them from its CDN on signed
+    // URLs; routing them through the optimizer turns 1290px originals into the
+    // ~480px the rail shows.
+    remotePatterns: [
+      { protocol: 'https', hostname: '**.fbcdn.net' },
+      { protocol: 'https', hostname: '**.cdninstagram.com' },
+    ],
+  },
+
   headers() {
     return [
-      {
-        source: '/video/:path*',
-        headers: [{ key: 'Cache-Control', value: 'public, max-age=86400, stale-while-revalidate=604800' }],
-      },
+      { source: '/:path*', headers: SECURITY_HEADERS },
+      { source: '/img/:path*', headers: [{ key: 'Cache-Control', value: ASSET_CACHE }] },
+      { source: '/frames/:path*', headers: [{ key: 'Cache-Control', value: ASSET_CACHE }] },
+      // The footage the home arch plays. Range requests (which the browser needs
+      // to seek) are served by the static handler as they are.
+      { source: '/video/:path*', headers: [{ key: 'Cache-Control', value: ASSET_CACHE }] },
     ];
   },
-  /**
-   * /performances folded into /events.
-   *
-   * The two pages had come to say the same things — the Udaan hero copy, the
-   * gallery, the Arangetram block — and two near-identical pages compete with
-   * each other in search rather than adding up. /events won the URL because it
-   * is what the academy itself calls the page, and because it matches the path
-   * on the old Wix site, so existing inbound links and bookmarks still land.
-   *
-   * 308 rather than 307: this is not coming back, and a permanent redirect lets
-   * Google transfer the old path's standing instead of holding both.
-   */
+
   redirects() {
     return [
-      {
-        source: '/performances',
-        destination: '/events',
-        permanent: true,
-      },
-      /**
-       * The old Wix site had /photos as a separate album page. Its albums were
-       * served from Wix's pro-gallery API and were never captured (see
-       * _research/STATUS.txt), but the path may still be linked from elsewhere,
-       * and /events#gallery is now where photographs live.
-       */
-      {
-        source: '/photos',
-        destination: '/events',
-        permanent: true,
-      },
+      // /performances folded into /events, and /photos (the old Wix album page)
+      // lands there too. 308, because neither is coming back.
+      { source: '/performances', destination: '/events', permanent: true },
+      { source: '/photos', destination: '/events', permanent: true },
     ];
   },
 };

@@ -143,3 +143,51 @@ describe('the enquiry email', () => {
     expect(html).toContain('Call Priya');
   });
 });
+
+describe('abuse protection', () => {
+  const send = (init: RequestInit & { headers?: Record<string, string> }, ipAddress: string) =>
+    POST(
+      new Request('http://localhost/api/enquiry', {
+        method: 'POST',
+        ...init,
+        headers: { 'x-forwarded-for': ipAddress, ...(init.headers ?? {}) },
+      }),
+    );
+
+  it('refuses a request from another site with 403', async () => {
+    const res = await send(
+      { body: JSON.stringify(CHILD), headers: { Origin: 'https://evil.example', Host: 'localhost' } },
+      '10.8.0.1',
+    );
+    expect(res.status).toBe(403);
+  });
+
+  it('accepts a request from its own origin', async () => {
+    const res = await send(
+      { body: JSON.stringify(CHILD), headers: { Origin: 'http://localhost', Host: 'localhost' } },
+      '10.8.0.2',
+    );
+    expect(res.status).toBe(200);
+  });
+
+  it('refuses a body too large to be an enquiry with 413', async () => {
+    const res = await send({ body: JSON.stringify({ ...CHILD, message: 'x'.repeat(20_000) }) }, '10.8.0.3');
+    expect(res.status).toBe(413);
+  });
+
+  it('rate-limits a client after five requests in a minute', async () => {
+    const results: number[] = [];
+    for (let i = 0; i < 7; i++) results.push((await send({ body: JSON.stringify(CHILD) }, '10.8.0.4')).status);
+    expect(results.slice(0, 5)).toEqual([200, 200, 200, 200, 200]);
+    expect(results.slice(5)).toEqual([429, 429]);
+  });
+
+  it('trusts the host-set client address over a header the visitor can send', async () => {
+    // Same x-forwarded-for, different x-vercel-forwarded-for: separate buckets.
+    for (let i = 0; i < 6; i++) {
+      await send({ body: JSON.stringify(CHILD), headers: { 'x-vercel-forwarded-for': '203.0.113.7' } }, '10.8.0.5');
+    }
+    const other = await send({ body: JSON.stringify(CHILD), headers: { 'x-vercel-forwarded-for': '203.0.113.8' } }, '10.8.0.5');
+    expect(other.status).toBe(200);
+  });
+});

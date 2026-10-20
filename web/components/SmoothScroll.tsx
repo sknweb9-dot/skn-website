@@ -2,9 +2,7 @@
 
 import Lenis from 'lenis';
 import { createContext, useContext, useEffect, useMemo, useRef } from 'react';
-import { gsap } from 'gsap';
 import { usePathname } from 'next/navigation';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
 
 type ScrollToOptions = {
@@ -85,42 +83,23 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
   );
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    if (native) {
-      // Native scrolling only. ScrollTrigger still works; nothing to sync.
-      ScrollTrigger.refresh();
-      return;
-    }
+    // Native scrolling only: nothing to drive.
+    if (native) return;
 
     const lenis = new Lenis({
       duration: 1.15,
-      // Long, decelerating ease — momentum without the drift.
+      // Long, decelerating ease: momentum without the drift.
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
       wheelMultiplier: 1,
       touchMultiplier: 1.6,
-      autoRaf: false,
+      autoRaf: true,
     });
     lenisRef.current = lenis;
 
-    // Drive ScrollTrigger from Lenis rather than the native scroll event, and
-    // drive Lenis from GSAP's ticker so both share one rAF loop.
-    const onScroll = () => ScrollTrigger.update();
-    lenis.on('scroll', onScroll);
-
-    const raf = (time: number) => lenis.raf(time * 1000);
-    gsap.ticker.add(raf);
-    gsap.ticker.lagSmoothing(0);
-
-    ScrollTrigger.refresh();
-
     return () => {
-      lenis.off('scroll', onScroll);
-      gsap.ticker.remove(raf);
-      gsap.ticker.lagSmoothing(500, 33);
       lenis.destroy();
       lenisRef.current = null;
     };

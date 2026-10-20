@@ -125,10 +125,10 @@ export default function PhotoScroller({
               fill
               sizes="(max-width: 640px) 84vw, (max-width: 1152px) 46vw, 560px"
               className="object-cover"
-              priority={i < 2}
-              // Five or six small photographs: fetch them all up front, so
-              // tapping "next" never shows an empty frame while one loads.
-              loading={i < 2 ? undefined : 'eager'}
+              // Five or six small photographs: fetch them all, so tapping "next" never
+              // shows an empty frame, and the two in view first.
+              loading="eager"
+              fetchPriority={i < 2 ? 'auto' : 'low'}
             />
           </li>
         ))}

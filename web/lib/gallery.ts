@@ -33,7 +33,7 @@ import { VIDEOS, platePath, sectionMeta, videoLabel, videoPoster, youtubeHref, t
 
 export type GroupId = 'classes' | 'udaan' | 'arangetram' | 'festivals' | 'canada' | 'sunitta' | 'samarpan' | 'videos';
 
-export const GROUPS: { id: GroupId; label: string }[] = [
+const GROUPS: { id: GroupId; label: string }[] = [
   { id: 'classes', label: 'Classes' },
   { id: 'udaan', label: 'Udaan' },
   { id: 'arangetram', label: 'Arangetrams' },
@@ -117,7 +117,7 @@ const CLASS_ALBUMS: { id: string; venueId: string; batches: string[]; programme?
  */
 const ARCHIVE_VENUES = [
   { id: 'purva-windermere', name: 'Purva Windermere' },
-  { id: 'appswamy-greensville', name: 'Appswamy Greensville' },
+  { id: 'appswamy-greensville', name: 'Appaswamy Greensville' },
 ];
 
 const BATCH_INFO = new Map(allBatches().map(({ batch, programme }) => [batch.code, { batch, programme }]));
@@ -187,17 +187,17 @@ export type GalleryItem = {
   id: string;
   kind: 'photo' | 'video';
   group: GroupId;
-  /** Album id for a photograph; the video's section for a recording. */
+  /** Album id for a photograph; the video's section for a video. */
   albumId: string;
   section: EventSection;
   venueId?: string;
   batches?: string[];
   title: string;
-  /** Album and date for a photograph; the destination for a recording. */
+  /** Album and date for a photograph; the destination for a video. */
   subtitle: string;
   /** 512px-long-edge texture, whole image, nothing cropped */
   plate: string;
-  /** Full-size image (or the recording's poster) */
+  /** Full-size image (or the video's poster) */
   src: string;
   width: number;
   height: number;
@@ -258,21 +258,21 @@ function videoItem(video: (typeof VIDEOS)[number]): GalleryItem {
 }
 
 export const PHOTOS: GalleryItem[] = RAW_PHOTOS.map(photoItem);
-export const RECORDINGS: GalleryItem[] = VIDEOS.map(videoItem);
-export const ALL_ITEMS: GalleryItem[] = [...PHOTOS, ...RECORDINGS];
+export const VIDEO_ITEMS: GalleryItem[] = VIDEOS.map(videoItem);
+export const ALL_ITEMS: GalleryItem[] = [...PHOTOS, ...VIDEO_ITEMS];
 
 /**
  * The globe: the curated photographs with the videos spread through them.
  *
  * Plates are laid out by index along a Fibonacci spiral, so a contiguous block of
- * recordings would land as one patch on one face of the sphere. Interleaving at a
+ * videos would land as one patch on one face of the sphere. Interleaving at a
  * regular stride scatters them, so whichever way the sphere is turned there is
  * something to watch in view. The photographs keep album order otherwise, so
  * neighbouring plates come from the same stage.
  */
-export function globeItems(): GalleryItem[] {
+function globeItems(): GalleryItem[] {
   const photos = PHOTOS.filter((p) => p.onGlobe);
-  const videos = RECORDINGS;
+  const videos = VIDEO_ITEMS;
   const stride = Math.max(1, Math.floor((photos.length + videos.length) / videos.length));
   const out: GalleryItem[] = [];
   let next = 0;
@@ -439,7 +439,7 @@ export function queryToFilter(search: string): GalleryFilter {
   for (const a of CLASS_ALBUMS) {
     if (!VENUE_NAME.has(a.venueId)) throw new Error(`Class album ${a.id} names unknown venue ${a.venueId}`);
   }
-  if (GLOBE_ITEMS.length !== PHOTOS.filter((p) => p.onGlobe).length + RECORDINGS.length) {
+  if (GLOBE_ITEMS.length !== PHOTOS.filter((p) => p.onGlobe).length + VIDEO_ITEMS.length) {
     throw new Error('globeItems() lost or duplicated an item.');
   }
 })();

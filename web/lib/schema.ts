@@ -1,4 +1,7 @@
-import { BRANCHES, FACULTY, FAQS, FOUNDERS, ONLINE, PRIMARY_BRANCH, SITE, type Branch } from './site';
+import { BRANCHES, ONLINE, PRIMARY_BRANCH, type Branch } from './branches';
+import { FACULTY, FOUNDERS } from './people';
+import { FAQS } from './faqs';
+import { SITE } from './site';
 import { TEACHING_PROGRAMMES } from './curriculum';
 import { allBatches, venuesForCity } from './classes';
 import { MUDRAS } from './mudras';
@@ -22,18 +25,6 @@ import { BOOK_PATH } from './booking';
  * openingHoursSpecification is now derived from real batch timings; see
  * `openingHoursFor`.
  */
-
-export type OpeningHours = {
-  days: string[];
-  opens: string;
-  closes: string;
-};
-
-/**
- * Kept only for the type export. Hours are derived from ./classes.ts now — do
- * not populate this by hand, or the site will have two disagreeing schedules.
- */
-export const HOURS: OpeningHours[] = [];
 
 const abs = (path: string) => new URL(path, SITE.url).toString();
 
@@ -142,8 +133,13 @@ function branchNode(branch: Branch) {
   };
 }
 
-function organizationNode() {
-  const founderIds = FOUNDERS.map((f) => ({ '@id': ID.person(f.name) }));
+/**
+ * The organisation. Its links to people, branches and courses are references by
+ * `@id`, so they belong only in a graph that also contains those nodes (the home
+ * graph). Everywhere else the organisation is emitted without them: a reference
+ * to a node that is not on the page points at nothing.
+ */
+function organizationNode(withReferences = false) {
   return {
     '@type': ['DanceSchool', 'EducationalOrganization'],
     '@id': ID.org,
@@ -173,9 +169,6 @@ function organizationNode() {
           },
         }
       : {}),
-    founder: founderIds,
-    employee: FACULTY.map((f) => ({ '@id': ID.person(f.name) })),
-    location: BRANCHES.map((b) => ({ '@id': ID.branch(b.slug) })),
     areaServed: BRANCHES.flatMap((b) => b.areaServed).map((name) => ({ '@type': 'Place', name })),
     sameAs: [SITE.socials.instagram, SITE.socials.facebook, SITE.socials.youtube],
     knowsAbout: [
@@ -189,14 +182,21 @@ function organizationNode() {
       'Asamyuta Hasta',
       'Abhinaya Darpana',
     ],
-    hasOfferCatalog: {
-      '@type': 'OfferCatalog',
-      name: 'Bharatanatyam programmes',
-      itemListElement: TEACHING_PROGRAMMES.map((programme) => ({
-        '@type': 'Offer',
-        itemOffered: { '@id': ID.course(programme.id) },
-      })),
-    },
+    ...(withReferences
+      ? {
+          founder: FOUNDERS.map((f) => ({ '@id': ID.person(f.name) })),
+          employee: FACULTY.map((f) => ({ '@id': ID.person(f.name) })),
+          location: BRANCHES.map((b) => ({ '@id': ID.branch(b.slug) })),
+          hasOfferCatalog: {
+            '@type': 'OfferCatalog',
+            name: 'Bharatanatyam programmes',
+            itemListElement: TEACHING_PROGRAMMES.map((programme) => ({
+              '@type': 'Offer',
+              itemOffered: { '@id': ID.course(programme.id) },
+            })),
+          },
+        }
+      : {}),
     ...openingHoursFor(PRIMARY_BRANCH.slug),
   };
 }
@@ -291,7 +291,7 @@ export function homeGraph() {
   return {
     '@context': 'https://schema.org',
     '@graph': [
-      organizationNode(),
+      organizationNode(true),
       websiteNode(),
       ...BRANCHES.map(branchNode),
       ...personNodes(),
@@ -381,13 +381,13 @@ export function hastasGraph() {
  * -----------------------------
  * `Event` nodes, and `VideoObject` nodes. Both want dates we do not have.
  *
- * Most of these performances are recorded only as a YouTube title, and eight of
- * those titles came from og:title because the videos are unlisted and oEmbed
- * refused them — so there is no reliable `startDate` for an Event and no
- * `uploadDate` for a VideoObject. Emitting either with a guessed date is the same
- * category of mistake as the fabricated star rating this file already refuses to
- * carry, and it would be worse here, because a wrong Event date can put a
- * performance in Google's event listings on a day nothing happens.
+ * The dates the site holds are the dates of the performances, not the dates
+ * the videos were uploaded or how long they run, and a VideoObject needs the
+ * latter. An Event needs a start time and a venue address, which most of these do
+ * not have either. Emitting either with a guessed value is the same category of
+ * mistake as the fabricated star rating this file already refuses to carry, and
+ * it would be worse here, because a wrong Event date can put a performance in
+ * Google's event listings on a day nothing happens.
  *
  * So the page describes itself honestly: a CollectionPage holding an ItemList of
  * the works it shows. Add VideoObject when the academy confirms upload dates and

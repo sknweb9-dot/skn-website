@@ -113,11 +113,13 @@ export default function VideoFacade({ video }: { video: EventVideo }) {
             </p>
           ) : null}
           <p className="mt-2.5 flex flex-wrap items-center gap-x-2.5 gap-y-1 font-sans text-micro text-ink-faint">
+            {/* py-3 with -my-3: a 39px target on a 15px line, without moving the layout. */}
             <a
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 underline decoration-marigold/40 underline-offset-4 transition-colors hover:text-ink"
+              aria-label={`Open on YouTube: ${videoLabel(video)}`}
+              className="-my-3 inline-flex items-center gap-1 py-3 underline decoration-marigold/40 underline-offset-4 transition-colors hover:text-ink"
             >
               Open on YouTube <ExternalLink aria-hidden className="h-3 w-3" />
             </a>

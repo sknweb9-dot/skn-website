@@ -68,10 +68,10 @@ EXCLUDE = {
 # In-class photographs chosen by eye from the batch folders (Classes/<batch>/).
 # album: "In class at <venue>". Venue names are the site's own (lib/classes.ts).
 CLASS_PICKS = [
-    ("Classes/AS2", "_DSC6201.jpg", "In class at Appswamy Springs"),
-    ("Classes/AS3", "_DSC5971.jpg", "In class at Appswamy Springs"),
-    ("Classes/AS4", "_DSC6322.jpg", "In class at Appswamy Springs"),
-    ("Classes/AS5", "_DSC6436.jpg", "In class at Appswamy Springs"),
+    ("Classes/AS2", "_DSC6201.jpg", "In class at Appaswamy Springs"),
+    ("Classes/AS3", "_DSC5971.jpg", "In class at Appaswamy Springs"),
+    ("Classes/AS4", "_DSC6322.jpg", "In class at Appaswamy Springs"),
+    ("Classes/AS5", "_DSC6436.jpg", "In class at Appaswamy Springs"),
     ("Classes/AD1", "_DSC5398.jpg", "In class at Adroit"),
     ("Classes/PC1", "_DSC5100.jpg", "In class at Prestige Courtyards"),
     ("Classes/PC2", "_DSC5080.jpg", "In class at Prestige Courtyards"),

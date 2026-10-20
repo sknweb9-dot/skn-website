@@ -12,7 +12,7 @@ import type { CSSProperties } from 'react';
  * It is real 3D, not an animation of ellipses: six meridian rings stand at
  * thirty-degree turns inside a box that spins about its axis, with five parallels
  * across them, and the whole thing is tilted the way a globe is. The spin and the
- * rest of the CSS are in app/globals.css ("The blank globe"). Under reduced motion
+ * rest of the CSS are in app/styles/blank-globe.css. Under reduced motion
  * it stands still, tilted, and is still a globe.
  *
  * Decoration for a link that is already on the page in words, so it is hidden from

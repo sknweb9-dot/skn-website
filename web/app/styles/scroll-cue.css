@@ -1,0 +1,125 @@
+/* The scroll cue: a capsule with a bead travelling down it. See ScrollCue.tsx
+   for why it is this plain. The teal edge, at 80%, clears the 3:1 non-text
+   floor on every ground the arch sits on; the bead is marigold, which here is ornament on a shape that
+   already carries the meaning. */
+.cue-capsule {
+  position: relative;
+  display: block;
+  width: 1.75rem;
+  height: 3rem;
+  border: 2px solid color-mix(in oklab, var(--color-teal) 80%, transparent);
+  border-radius: 9999px;
+}
+
+.cue-bead {
+  position: absolute;
+  top: 0.45rem;
+  left: 50%;
+  width: 0.4rem;
+  height: 0.4rem;
+  margin-left: -0.2rem;
+  border-radius: 9999px;
+  background-color: var(--color-marigold);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cue-bead {
+    animation: cue-bead 1.9s var(--ease-temple) infinite;
+  }
+}
+
+/* The desktop cue: the word set vertically in ink, in the display face, reading
+   downward, with an arrow under it. Ink, not teal: this is the one thing on the
+   first screen that must not be missed, and it should read as the darkest mark
+   there. Ink is the site's black (#2b1e16, about 14:1 on cream). Cinzel is the
+   site's own inscriptional capital, already loaded, so the cue costs no request
+   and belongs to the headline below it rather than to the UI around it. */
+.cue-word {
+  display: flex;
+  writing-mode: vertical-rl;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+.cue-letter {
+  display: inline-block;
+}
+.cue-arrow {
+  display: block;
+  width: 0.9rem;
+  height: 2.25rem;
+  color: var(--color-ink);
+}
+
+/* A wave of springs. Each piece dips toward the page's direction of travel, then
+   is released and rings back through its rest position before settling, once
+   every 2.6s; the delay steps down the word and off the end of the arrow.
+
+   The release uses a damped spring, sampled into linear(): zeta 0.3, 15 rad/s,
+   which overshoots by a third of the dip and is still by the end of the curve.
+   The dip itself eases out. The rest of the cycle is stillness, on purpose: a cue
+   that never stops moving stops being seen.
+
+   No database entry covers spring easing (ui-ux-pro-max returned no match), so
+   the curve is computed rather than borrowed. linear() is in every current
+   browser; where it is not, the declaration is dropped and the release uses the
+   keyframe's default ease, which still reads as a nod. */
+@keyframes cue-spring {
+  0% {
+    translate: 0 0;
+    animation-timing-function: cubic-bezier(0.3, 0, 0.2, 1);
+  }
+  14% {
+    translate: 0 var(--cue-amp, 0.3rem);
+    animation-timing-function: linear(
+      0,
+      0.168,
+      0.545,
+      0.948,
+      1.241,
+      1.367,
+      1.337,
+      1.211,
+      1.057,
+      0.934,
+      0.87,
+      0.867,
+      0.907,
+      0.964,
+      1.014,
+      1.044,
+      1.051,
+      1.04,
+      1.019,
+      0.999,
+      0.986,
+      0.981,
+      0.984,
+      0.991,
+      1
+    );
+  }
+  62%,
+  100% {
+    translate: 0 0;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .cue-letter,
+  .cue-arrow {
+    animation: cue-spring 2.6s infinite;
+    animation-delay: calc(var(--i, 0) * 0.09s);
+  }
+  .cue-arrow {
+    --cue-amp: 0.55rem;
+  }
+}
+
+/* The stage has its own cue, inside the live arch; the hero's still carries the
+   phone one, which the stage must not show a second time. */
+html[data-stage='on'] .rail-cue {
+  display: none;
+}

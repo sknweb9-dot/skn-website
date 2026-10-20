@@ -1,0 +1,17 @@
+/* ---------------------------------------------------------------------------
+   The gallery's filter bar sticks under the masthead, and goes up to the top
+   with it: Nav writes html[data-nav-hidden] as it retires on the way down and
+   returns on the way up.
+--------------------------------------------------------------------------- */
+/* Up to four rows tall, so it only sticks where there is height to spare. */
+@media (min-width: 768px) and (min-height: 700px) {
+  .gallery-filters {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    transition: top 0.5s var(--ease-temple);
+  }
+  html:not([data-nav-hidden='true']) .gallery-filters {
+    top: var(--gallery-nav-h, 4.8rem);
+  }
+}

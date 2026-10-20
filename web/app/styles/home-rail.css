@@ -1,0 +1,144 @@
+/* ---------------------------------------------------------------------------
+   The home rail (phones and tablets).
+
+   html[data-stage="rail"]: the page stays a stacked page, each section on its
+   own ground, and a small arch is pinned under the masthead while the hand plays
+   as you scroll (components/home/HomeRail.tsx). The hero's own still arch stays
+   in the page as the place the live arch starts from; every other section drops
+   its still, because the pinned arch is showing that section's gesture.
+--------------------------------------------------------------------------- */
+@property --rail-tone {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #fbf8f1;
+}
+
+html[data-stage='rail'] .home-section:not([data-home-section='hero']) .home-stacked-arch {
+  display: none;
+}
+/* Room under the masthead for the hero's arch. */
+html[data-stage='rail'] .home-section[data-home-section='hero'] {
+  padding-top: calc(var(--rail-nav-h, 4.8rem) + 1rem);
+}
+/* Once the live arch is up, the hero's still keeps its place and its caption but
+   not its picture. */
+html[data-stage='rail'][data-stage-live] [data-home-section='hero'] .home-stacked-arch {
+  visibility: visible;
+}
+html[data-stage='rail'][data-stage-live] [data-home-section='hero'] .home-stacked-arch > div {
+  visibility: hidden;
+}
+/* Sections after the first sit under the pinned strip when you land on them, so
+   they open with a little more air than the stacked default. */
+html[data-stage='rail'] .home-section:not([data-home-section='hero']) {
+  padding-top: 3.5rem;
+}
+
+.home-rail-bar {
+  position: fixed;
+  z-index: 30;
+  inset-inline: 0;
+  top: var(--rail-nav-h, 4.8rem);
+  height: var(--rail-bar-h, 10rem);
+  pointer-events: none;
+  opacity: 0;
+  background-color: var(--rail-tone);
+  transition:
+    top 0.5s var(--ease-temple),
+    --rail-tone 0.45s ease;
+}
+html[data-nav-hidden='true'] .home-rail-bar {
+  top: 0;
+}
+/* A soft lower edge, so text sliding under the strip fades rather than being cut. */
+.home-rail-bar::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  top: 100%;
+  height: 0.9rem;
+  background: linear-gradient(var(--rail-tone), transparent);
+}
+
+.home-rail-arch {
+  position: fixed;
+  z-index: 35;
+  pointer-events: none;
+}
+.home-rail-arch[data-ready] .home-rail-still {
+  opacity: 0;
+}
+.home-rail-still {
+  transition: opacity 0.3s ease;
+}
+
+.home-rail-caption {
+  position: fixed;
+  z-index: 35;
+  inset-inline-end: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.2rem;
+  pointer-events: none;
+  opacity: 0;
+  color: var(--color-teal-deep);
+  transition: color 0.45s ease;
+}
+.home-rail-caption[data-dark='true'] {
+  color: var(--color-cream);
+  --eyebrow-color: var(--color-marigold);
+}
+.home-rail-name {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  letter-spacing: 0.12em;
+  line-height: 1.2;
+  color: var(--color-kumkum);
+  transition: color 0.45s ease;
+}
+.home-rail-caption[data-dark='true'] .home-rail-name {
+  color: var(--color-marigold);
+}
+.home-rail-literal {
+  font-size: var(--text-micro);
+  letter-spacing: 0.06em;
+  color: var(--color-ink-faint);
+  transition: color 0.45s ease;
+}
+.home-rail-caption[data-dark='true'] .home-rail-literal {
+  color: color-mix(in oklab, var(--color-cream) 80%, transparent);
+}
+
+/* The timeline, on the rail: the stage's dotted line, in the page's own flow. */
+html[data-stage='rail'] .home-timeline-track {
+  display: block;
+  position: relative;
+}
+html[data-stage='rail'] .home-timeline-entry {
+  position: relative;
+  padding-left: 2.25rem;
+  padding-bottom: 2.25rem;
+  border-top: 0;
+  padding-top: 0;
+}
+html[data-stage='rail'] .home-timeline-entry::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.4rem;
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 9999px;
+  background: var(--color-marigold);
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--color-marigold) 25%, transparent);
+}
+html[data-stage='rail'] .home-timeline-track::before {
+  content: '';
+  position: absolute;
+  left: 0.4rem;
+  top: 0.4rem;
+  bottom: 0;
+  width: 2px;
+  background: color-mix(in oklab, var(--color-marigold) 55%, transparent);
+}

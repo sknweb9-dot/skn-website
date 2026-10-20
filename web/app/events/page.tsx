@@ -9,63 +9,29 @@ import VideoFacade from '@/components/VideoFacade';
 import {
   ARANGETRAMS,
   EVENTS_INTRO,
-  EVENTS_META,
   OUTREACH,
   UDAAN,
   sectionMeta,
   videosBySection,
 } from '@/lib/events';
 import { fetchInstagramPosts } from '@/lib/instagram';
-import { SITE } from '@/lib/site';
 import { ALL_ITEMS } from '@/lib/gallery';
 import { eventsGraph } from '@/lib/schema';
+import { PAGE_SEO, pageMetadata } from '@/lib/seo';
 
 /**
- * Events & gallery — the merge of the old site's /events and /photos pages, and
- * of this site's former /performances route.
+ * Events & gallery. Each section is a micro heading (the eyebrow) over a heading,
+ * as the academy wrote them: the small blue line is the subtitle, the section's
+ * name is the heading. In order: Events (the hero), Udaan, Arangetrams (with
+ * Solo, "Beyond the Debut", as a sub-heading under it), Ensemble, Outreach. The
+ * gallery follows, with a blank globe as its teaser, then the Instagram rail; the
+ * page ends there without a closing call to action, since the masthead already
+ * carries one.
  *
- * WHY ONE PAGE AND NOT THREE
- * --------------------------
- * /performances had drifted into saying the same things as this: the Udaan hero
- * copy, a photograph grid, the Arangetram block. Two near-identical pages compete
- * with each other in search rather than adding up, so it folded in and
- * next.config.ts 308s the old path. /photos on the old Wix site is redirected here
- * too — its albums were served from Wix's pro-gallery API and were never
- * captured, so there is nothing to preserve but the URL.
- *
- * STRUCTURE
- * ---------
- * Each section is a micro heading (the eyebrow) over a heading, as the academy
- * wrote them: the small blue line is the subtitle, the section's name is the
- * heading. In order: Events (the hero), Udaan, Arangetrams (with Solo, "Beyond
- * the Debut", as a sub-heading under it rather than a section), Ensemble, Outreach. Within a section the videos
- * run newest first. The gallery follows, with a blank globe as its teaser, then
- * the Instagram rail, and the page ends there without a closing call to action:
- * the masthead already carries one.
-  */
+ * /performances and the old /photos redirect here (next.config.ts).
+ */
 
-export const metadata: Metadata = {
-  title: EVENTS_META.title,
-  description: EVENTS_META.description,
-  alternates: { canonical: '/events' },
-  keywords: [
-    'Udaan Shanti Kala Nikketan',
-    'Bharatanatyam Arangetram Chennai',
-    'Bharatanatyam performance Chennai',
-    'Nada Sudha festival',
-    'Bharatanatyam Scarborough Toronto',
-    'dance academy gallery Chennai',
-  ],
-  openGraph: {
-    title: `${EVENTS_META.title} | ${SITE.name}`,
-    description: EVENTS_META.description,
-    url: EVENTS_META.url,
-    type: 'website',
-    images: [
-      { url: EVENTS_META.image, width: 867, height: 1300, alt: 'Udaan 2025' },
-    ],
-  },
-};
+export const metadata: Metadata = pageMetadata(PAGE_SEO.events);
 
 export default async function EventsPage() {
   /**

@@ -11,9 +11,12 @@ import LocationPhotos from '@/components/LocationPhotos';
 import VenueDirectory from '@/components/VenueDirectory';
 import { locationGraph } from '@/lib/schema';
 import { isRegion } from '@/lib/booking';
-import { BRANCHES, FACULTY, FOUNDERS, SITE, branchBySlug } from '@/lib/site';
+import { BRANCHES, branchBySlug } from '@/lib/branches';
+import { FACULTY, FOUNDERS } from '@/lib/people';
+import { SITE } from '@/lib/site';
 import { TEACHING_PROGRAMMES } from '@/lib/curriculum';
 import { areasTaught, offlineVenuesForCity } from '@/lib/classes';
+import { branchSeo, pageMetadata } from '@/lib/seo';
 import { locationPhotos, type LocationFolder } from '@/lib/locationPhotos';
 
 type Params = { city: string };
@@ -32,58 +35,7 @@ export async function generateMetadata({
   const { city } = await params;
   const branch = branchBySlug(city);
   if (!branch) return {};
-
-  const areas = areasTaught(branch.slug);
-  const venueCount = offlineVenuesForCity(branch.slug).length;
-
-  // The root layout appends "| Shanti Kala Nikketan" via its title template,
-  // so the site name must not be repeated here.
-  const title = `Bharatanatyam Dance Academy in ${branch.city}`;
-  const description =
-    areas.length > 1
-      ? `Kalakshetra Bani Bharatanatyam classes at ${venueCount} venues across ${branch.city} — ${areas.join(', ')}. An introductory programme from age 3.5, six graded levels to Arangetram, and adults batches. Book a session.`
-      : `Kalakshetra Bani Bharatanatyam classes in ${branch.city}${
-          branch.head ? `, led by ${branch.head}` : ''
-        }. Group, individual and adults batches from age 3.5 to Arangetram. Book a session.`;
-
-  return {
-    title,
-    description,
-    keywords: [
-      `dance academy in ${branch.city}`,
-      `classical dance classes in ${branch.city}`,
-      `Bharatanatyam classes in ${branch.city}`,
-      `Bharatanatyam academy ${branch.locality ?? branch.city}`,
-      `Indian classical dance ${branch.city}`,
-      `Bharatanatyam for kids ${branch.city}`,
-      `Bharatanatyam for adults ${branch.city}`,
-      ...areas.map((area) => `Bharatanatyam classes ${area}`),
-      ...branch.areaServed.map((area) => `Bharatanatyam classes ${area}`),
-    ],
-    alternates: { canonical: `/locations/${branch.slug}` },
-    openGraph: {
-      type: 'website',
-      title,
-      description,
-      url: `${SITE.url}/locations/${branch.slug}`,
-      siteName: SITE.name,
-      locale: branch.countryCode === 'IN' ? 'en_IN' : 'en_CA',
-      images: [
-        { url: branch.image, width: 1200, height: 630, alt: `${SITE.name} in ${branch.city}` },
-      ],
-    },
-    twitter: { card: 'summary_large_image', title, description, images: [branch.image] },
-    other: {
-      'geo.region': `${branch.countryCode}-${branch.regionCode}`,
-      'geo.placename': `${branch.locality ?? branch.city}, ${branch.city}`,
-      ...(branch.geo
-        ? {
-            'geo.position': `${branch.geo.lat};${branch.geo.lng}`,
-            ICBM: `${branch.geo.lat}, ${branch.geo.lng}`,
-          }
-        : {}),
-    },
-  };
+  return pageMetadata(branchSeo(branch));
 }
 
 export default async function LocationPage({ params }: { params: Promise<Params> }) {

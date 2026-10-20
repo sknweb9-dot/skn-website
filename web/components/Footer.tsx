@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { BRANCHES, NAV_ROUTES, ONLINE, SITE } from '@/lib/site';
+import { BRANCHES, ONLINE } from '@/lib/branches';
+import { NAV_ROUTES, SITE } from '@/lib/site';
 import { FacebookIcon, InstagramIcon, YoutubeIcon } from './SocialIcons';
 
 const SOCIALS = [
@@ -45,11 +46,11 @@ export default function Footer() {
               </span>
             </div>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-cream/80">{SITE.signature}</p>
-            <div className="mt-5 space-y-1.5 text-sm">
+            <div className="mt-4 text-sm">
               <p>
                 <a
                   href={`mailto:${SITE.email}`}
-                  className="text-cream underline decoration-marigold/60 underline-offset-4 hover:decoration-marigold"
+                  className="inline-block py-1.5 text-cream underline decoration-marigold/60 underline-offset-4 hover:decoration-marigold"
                 >
                   {SITE.email}
                 </a>
@@ -57,7 +58,7 @@ export default function Footer() {
               <p>
                 <a
                   href={`tel:${SITE.phoneE164}`}
-                  className="text-cream underline decoration-marigold/60 underline-offset-4 hover:decoration-marigold"
+                  className="inline-block py-1.5 text-cream underline decoration-marigold/60 underline-offset-4 hover:decoration-marigold"
                 >
                   {SITE.phoneDisplay}
                 </a>
@@ -67,7 +68,7 @@ export default function Footer() {
                 <p key={b.slug}>
                   <a
                     href={`tel:${b.contact!.phoneE164}`}
-                    className="text-cream underline decoration-marigold/60 underline-offset-4 hover:decoration-marigold"
+                    className="inline-block py-1.5 text-cream underline decoration-marigold/60 underline-offset-4 hover:decoration-marigold"
                   >
                     {b.contact!.phoneDisplay}
                   </a>

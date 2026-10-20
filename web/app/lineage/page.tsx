@@ -3,24 +3,12 @@ import Image from 'next/image';
 import JsonLd from '@/components/JsonLd';
 import { PageHero, PageShell, Section } from '@/components/PageShell';
 import { DIRECTOR, FOUNDER } from '@/lib/lineage';
-import { FACULTY, MILESTONES, SITE } from '@/lib/site';
+import { FACULTY } from '@/lib/people';
+import { MILESTONES } from '@/lib/lineage';
 import { homeGraph } from '@/lib/schema';
+import { PAGE_SEO, pageMetadata } from '@/lib/seo';
 
-const TITLE = 'Our Lineage — Founder, Director & Faculty';
-const DESCRIPTION =
-  'The vision of founder Om – Guru – Om, the Kalakshetra training of Co-Founder & Director Sunitta Menghanaani, and the faculty who teach the Gurukulam tradition at Shanti Kala Nikketan.';
-
-export const metadata: Metadata = {
-  title: TITLE,
-  description: DESCRIPTION,
-  alternates: { canonical: '/lineage' },
-  openGraph: {
-    title: `${TITLE} | ${SITE.name}`,
-    description: DESCRIPTION,
-    url: `${SITE.url}/lineage`,
-    type: 'website',
-  },
-};
+export const metadata: Metadata = pageMetadata(PAGE_SEO.lineage);
 
 export default function LineagePage() {
   return (

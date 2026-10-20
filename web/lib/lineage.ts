@@ -107,3 +107,46 @@ export const EMBLEM = {
   close:
     'Together, these elements embody the spirit of Shanti Kala Nikketan — where the arts are nurtured with authenticity, discipline, and devotion, inspiring individuals to grow not only as accomplished artists but also as compassionate human beings.',
 } as const;
+
+/** The lineage timeline, year by year. */
+export const MILESTONES = [
+  {
+    year: '2009',
+    title: 'One room, one student',
+    // Corrected by the academy: teaching began in Besant Nagar, under the name
+    // Samarppan, with a single student. The move to Sholinganallur and the name
+    // Shanti Kala Nikketan came later - see the 2018 entry.
+    body: 'Teaching begins in Besant Nagar under the name Samarppan, with a single student — Aparna. The Kalakshetra Bani of Bharatanatyam is the method from the first class.',
+    place: 'Besant Nagar, Chennai',
+  },
+  {
+    year: '2018',
+    title: 'Shanti Kala Nikketan',
+    body: "Having moved to Sholinganallur, the school formally takes the name Shanti Kala Nikketan under Om Guru Om, drawing on his vision for a cultural renaissance.",
+    place: 'Sholinganallur, Chennai',
+  },
+  {
+    year: 'The Gurukulam',
+    title: 'Six levels, not six terms',
+    body: 'Students practise the classical art form alongside literature and mythology — a Gurukulam education where Guru and Shishya flourish together, structured across an introductory programme and six graded levels.',
+    place: 'Chennai',
+  },
+  {
+    year: 'First Arangetram',
+    title: 'Aparna Manu takes the stage',
+    body: 'The first student of the school completes her Arangetram — the milestone every level of the syllabus is built towards.',
+    place: 'Chennai',
+  },
+  {
+    year: 'Udaan',
+    title: 'A platform for every dancer',
+    body: 'Udaan — "flying high to reach our goals" — is created so that every dancer has a stage, irrespective of their level of learning. Editions follow in 2023 and 2025.',
+    place: 'Chennai',
+  },
+  {
+    year: 'Today',
+    title: 'The tradition travels',
+    body: 'Five venues across Thiruvanmiyur, Sholinganallur and Medavakkam, an online batch, and a second branch in Scarborough, Canada at Morningside & Finch.',
+    place: 'Chennai · Scarborough',
+  },
+] as const;

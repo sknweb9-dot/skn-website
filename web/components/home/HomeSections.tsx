@@ -98,7 +98,7 @@ function StackedArch({ id }: { id: HomeSectionId }) {
             alt=""
             fill
             unoptimized
-            priority={id === 'hero'}
+            preload={id === 'hero'}
             sizes="(min-width: 640px) 16rem, 60vw"
             className="object-cover object-[50%_18%]"
           />
@@ -484,9 +484,7 @@ function WatchLink({ href }: { href: string }) {
 
 /**
  * Three quotes a page, as plain type with a rule between them: no boxes. The
- * section opens on the words themselves. Placeholder quotes carry a marker in
- * development only, so a launch cannot show one by accident without the build
- * warning about it (lib/home.ts).
+ * section opens on the words themselves.
  */
 function chunk<T>(items: readonly T[], size: number): T[][] {
   const out: T[][] = [];
@@ -495,7 +493,6 @@ function chunk<T>(items: readonly T[], size: number): T[][] {
 }
 
 export function HomeVoices() {
-  const showMarker = process.env.NODE_ENV !== 'production';
   const groups = chunk(VOICES, 3);
   return (
     <Section id="voices" labelledBy="voices-heading">
@@ -528,11 +525,6 @@ export function HomeVoices() {
                   <figcaption>
                     <span className="block font-sans text-[1rem] font-semibold text-ink">{v.name}</span>
                     {v.context ? <span className="block font-sans text-sm text-ink-faint">{v.context}</span> : null}
-                    {showMarker && v.placeholder ? (
-                      <span className="mt-2 inline-block rounded-sm border border-dashed border-ink-faint px-1.5 py-0.5 font-sans text-micro tracking-[0.14em] text-ink-faint uppercase">
-                        placeholder
-                      </span>
-                    ) : null}
                   </figcaption>
                 </figure>
               </li>

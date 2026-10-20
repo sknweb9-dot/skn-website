@@ -96,7 +96,7 @@ export function HoverLabel({
  * plate the camera has just travelled to stays in view. Arrow keys step through,
  * and Escape (handled by the stage) puts the globe back in orbit.
  *
- * On a recording this is a facade, not an embed: eleven live iframes would be a
+ * On a video this is a facade, not an embed: eleven live iframes would be a
  * megabyte of third-party script and a cookie question on a page about children.
  * The visitor leaves for YouTube on purpose, and the button says so first.
  */
@@ -131,7 +131,7 @@ export function PlateDetail({
     >
       <div className="flex items-start justify-between gap-3 border-b border-marigold/20 pb-3">
         <div>
-          <p className="eyebrow">{isVideo ? 'Recording' : 'Photograph'}</p>
+          <p className="eyebrow">{isVideo ? 'Video' : 'Photograph'}</p>
           <p className="mt-1 font-sans text-[0.72rem] text-ink-faint">{item.subtitle}</p>
         </div>
         <IconButton onClick={onClose} label="Back to the globe">

@@ -17,7 +17,7 @@ import {
  * TEXT MOTION
  * -----------
  * The engine behind the site's text entrances. The look lives in CSS (the "Text
- * motion" block in app/globals.css); this decides what moves, and when.
+ * motion" block, app/styles/text-motion.css); this decides what moves, and when.
  *
  * Three kinds of text, three entrances, so the page is not one effect repeated:
  *   word   h1/h2 headlines. Each word is lifted out from behind a lintel.

@@ -220,7 +220,7 @@ function Lightbox({
           width={item.width}
           height={item.height}
           sizes="100vw"
-          priority
+          preload
           onClick={(e) => e.stopPropagation()}
           className="max-h-full w-auto max-w-full rounded-lg object-contain shadow-2xl"
         />

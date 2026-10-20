@@ -8,7 +8,7 @@ import {
 } from '@/lib/classes';
 import { imageSize } from '@/lib/imageSize';
 import { locationPhotos } from '@/lib/locationPhotos';
-import { BRANCHES, ONLINE } from '@/lib/site';
+import { BRANCHES, ONLINE } from '@/lib/branches';
 
 const batch = (code: string) => {
   const found = VENUES.flatMap((v) => v.batches).find((b) => b.code === code);

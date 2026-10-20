@@ -8,7 +8,7 @@
  * The email is built for Gmail on a phone, because that is where it will be
  * opened. Hence table layout with inline styles rather than the site's Tailwind
  * classes, no external images, no web fonts, and a plain-text alternative that
- * carries every field. Colours are the site tokens from app/globals.css so the
+ * carries every field. Colours are the site tokens from app/styles/tokens.css so the
  * mail reads as the academy's own.
  *
  * WhatsApp is how the academy follows up, so when the parent says their number
@@ -55,7 +55,7 @@ export type Enquiry = {
   receivedAt: Date;
 };
 
-// --- tokens, mirroring app/globals.css -------------------------------------
+// --- tokens, mirroring app/styles/tokens.css -------------------------------------
 
 const C = {
   cream: '#FBF8F1',
@@ -96,7 +96,7 @@ function waHref(enquiry: Enquiry): string {
 }
 
 /** The academy runs on IST, so the timestamp is stated in IST and labelled. */
-export function formatReceived(date: Date): string {
+function formatReceived(date: Date): string {
   const formatted = new Intl.DateTimeFormat('en-IN', {
     timeZone: 'Asia/Kolkata',
     weekday: 'short',

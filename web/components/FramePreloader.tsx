@@ -107,7 +107,7 @@ export default function FramePreloader({
   }, [finished]);
 
   // The home hero's text is held on its first frame until the screen starts to
-  // clear (html[data-intro], see globals.css), so it is lifted into place as the
+  // clear (html[data-intro], see app/styles/text-motion.css), so it is lifted into place as the
   // emblem fades rather than behind it.
   useEffect(() => {
     if (finished) delete document.documentElement.dataset.intro;
@@ -155,7 +155,7 @@ export default function FramePreloader({
             alt=""
             width={168}
             height={168}
-            priority
+            preload
             className="absolute inset-[15%] size-[70%] object-contain"
           />
         </div>
@@ -181,10 +181,10 @@ export default function FramePreloader({
         {line ?? 'Preparing the gestures'}
       </p>
 
-      {/* The figure, for anyone who cannot see the drawing. */}
-      <span className="sr-only" aria-live="polite" aria-atomic="true">
-        {pct}% loaded
-      </span>
+      {/* The figure, for anyone who cannot see the drawing. Not a live region: it
+          changes on every frame, and a screen reader would read out each one. The
+          progressbar role above carries the value for those who ask. */}
+      <span className="sr-only">{pct}% loaded</span>
     </div>
   );
 }

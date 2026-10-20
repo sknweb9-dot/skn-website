@@ -90,7 +90,7 @@ export default function GalleryFilters({
                 value={filter.query}
                 onChange={(event) => onChange({ ...filter, query: event.target.value })}
                 placeholder="Search photos"
-                className="min-h-10 w-full rounded-full border border-ink/15 bg-paper/75 py-2 pr-4 pl-9 font-sans text-[0.85rem] text-ink placeholder:text-ink-faint/70 focus:border-teal focus:outline-none"
+                className="min-h-10 w-full rounded-full border border-ink/15 bg-paper/75 py-2 pr-4 pl-9 font-sans text-[0.85rem] text-ink placeholder:text-ink-faint focus:border-teal focus:outline-none"
               />
             </label>
           </div>

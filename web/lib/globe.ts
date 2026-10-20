@@ -37,7 +37,7 @@ export type PlateTransform = {
 };
 
 /** π(3 − √5) — one turn divided by the golden ratio, in radians. */
-export const GOLDEN_ANGLE = Math.PI * (3 - Math.sqrt(5));
+const GOLDEN_ANGLE = Math.PI * (3 - Math.sqrt(5));
 
 /**
  * Even distribution over a full sphere.
@@ -46,7 +46,7 @@ export const GOLDEN_ANGLE = Math.PI * (3 - Math.sqrt(5));
  * off the exact poles, where a tangent plate would be seen edge-on from every
  * orbit position and read as a sliver.
  */
-export function fibonacciSphere(index: number, total: number, radius: number): PlateTransform {
+function fibonacciSphere(index: number, total: number, radius: number): PlateTransform {
   const v = (index + 0.5) / total;
   const theta = GOLDEN_ANGLE * index;
   const y = 1 - 2 * v;
@@ -70,7 +70,7 @@ export function fibonacciSphere(index: number, total: number, radius: number): P
  * Row count is derived from the item count rather than fixed, so the band keeps
  * roughly square proportions whether it is carrying 40 plates or 400.
  */
-export function ringBand(index: number, total: number, radius: number): PlateTransform {
+function ringBand(index: number, total: number, radius: number): PlateTransform {
   // Fewer, taller rows than a naive √N split. At six rows the band came out as a
   // small squat disc that used none of the viewport; five rows on a wider barrel
   // reads as a cylinder you are standing inside the mouth of.

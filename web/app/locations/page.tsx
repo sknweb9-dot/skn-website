@@ -7,7 +7,8 @@ import JsonLd from '@/components/JsonLd';
 import Nav from '@/components/Nav';
 import BookButton from '@/components/BookButton';
 import OnlinePlaceholder from '@/components/OnlinePlaceholder';
-import { BRANCHES, ONLINE, SITE } from '@/lib/site';
+import { BRANCHES, ONLINE } from '@/lib/branches';
+import { SITE } from '@/lib/site';
 import {
   INDIVIDUAL_TEACHING,
   areasTaught,
@@ -19,22 +20,9 @@ import {
 } from '@/lib/classes';
 import { locationPhotos } from '@/lib/locationPhotos';
 import { homeGraph } from '@/lib/schema';
+import { PAGE_SEO, pageMetadata } from '@/lib/seo';
 
-const TITLE = 'Our Locations — Bharatanatyam Classes in Chennai & Scarborough';
-const DESCRIPTION =
-  'Shanti Kala Nikketan teaches Kalakshetra Bani Bharatanatyam at five venues across Chennai — Thiruvanmiyur, Sholinganallur and Medavakkam — plus an online batch and a branch at Morningside & Finch in Scarborough, Canada.';
-
-export const metadata: Metadata = {
-  title: TITLE,
-  description: DESCRIPTION,
-  alternates: { canonical: '/locations' },
-  openGraph: {
-    title: `${TITLE} | ${SITE.name}`,
-    description: DESCRIPTION,
-    url: `${SITE.url}/locations`,
-    type: 'website',
-  },
-};
+export const metadata: Metadata = pageMetadata(PAGE_SEO.locations);
 
 /** What a card on this page needs, whether it is a branch or the online class. */
 type LocationCardData = {

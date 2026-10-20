@@ -164,7 +164,7 @@ export const WHY = {
     },
   ],
   photos: [
-    { src: '/img/home/why-group.jpg', width: 1600, height: 1067, alt: 'Students of an Appswamy Springs batch with their teachers, in practice saris' },
+    { src: '/img/home/why-group.jpg', width: 1600, height: 1067, alt: 'Students of an Appaswamy Springs batch with their teachers, in practice saris' },
     { src: '/img/home/why-motion.jpg', width: 1600, height: 1067, alt: 'Young students at Adroit holding a Bharatanatyam pose in a line' },
     { src: '/img/home/why-adults.jpg', width: 1600, height: 1067, alt: 'The adults batch dancing with their teacher' },
   ],
@@ -325,7 +325,7 @@ export type HomeEvent = {
   city: string;
   description?: string;
   image: { src: string; width: number; height: number; alt: string };
-  /** A recording, where there is one. */
+  /** A video, where there is one. */
   href?: string;
 };
 
@@ -456,8 +456,6 @@ export type Voice = {
   context?: string;
   quote: string;
   image: { src: string; alt: string };
-  /** True until the academy's real quote replaces it. */
-  placeholder?: boolean;
 };
 
 /**
@@ -582,9 +580,4 @@ export const LOADING_LINES = [
     throw new Error(`FEATURED_EVENT_TITLE "${FEATURED_EVENT_TITLE}" is not in HOME_EVENTS.`);
   }
 
-  // Same policy as the gallery's invented captions: allowed, but never silent.
-  const placeholders = VOICES.filter((v) => v.placeholder).length;
-  if (placeholders > 0 && typeof window === 'undefined' && process.env.NODE_ENV === 'production') {
-    console.warn(`[home] ${placeholders} parent quotes are still placeholders. Replace them in lib/home.ts before launch.`);
-  }
 })();

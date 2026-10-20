@@ -1,0 +1,74 @@
+/* ---------------------------------------------------------------------------
+   Variants
+--------------------------------------------------------------------------- */
+
+/* Short phones — iPhone SE and 8 at 375x667, and anything similar.
+   
+   Height, not width, is the binding constraint on the home stage: the arch's
+   own height budget is whatever is left after the act card, so a 358px card on
+   a 667px screen forces the arch back down to 219px wide and undoes the phone
+   layout entirely. Under this variant the acts drop to a single paragraph and
+   the arch reclaims the space.
+
+   Deliberately `width < 40rem` as well as `height < 45rem`, so a short laptop
+   window never loses copy. Googlebot's smartphone rendering uses a very tall
+   viewport, so indexed content is unaffected. */
+@custom-variant phone-short (@media (width < 40rem) and (height < 45rem));
+
+/* ---------------------------------------------------------------------------
+   Base
+--------------------------------------------------------------------------- */
+:root {
+  color-scheme: light;
+  /* Lenis drives scrolling; native smooth scroll fights it. */
+  scroll-behavior: auto;
+}
+
+html {
+  background-color: var(--color-cream);
+  -webkit-text-size-adjust: 100%;
+  /* Safety net, not a fix. `overflow-x: clip` on body alone does not stop the
+     document scrolling sideways — html remains the scroller — so a single
+     unbreakable word wide enough to overflow its grid cell can put the whole
+     page into horizontal scroll. Causes still get fixed at the source; this
+     stops one from shipping as a sitewide layout bug. */
+  overflow-x: clip;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-synthesis-weight: none;
+  overflow-x: clip;
+}
+
+/* Lenis sets these itself, but declaring them avoids a first-paint jump. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+::selection {
+  background-color: var(--color-marigold);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-teal);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Anchor targets must clear the fixed masthead. HashScroll applies the same
+   offset when it drives Lenis; this covers native jumps — a pasted deep link
+   before JS runs, or find-in-page. Keep the two values in step. */
+[id] {
+  scroll-margin-top: 6.5rem;
+}

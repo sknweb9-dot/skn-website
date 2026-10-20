@@ -1,0 +1,50 @@
+/* There was a `foil` utility here: a marigold-to-kumkum gradient clipped to
+   text, used on the second half of every page headline and on the display
+   numerals. It measured 1.5-3.1:1 on cream — under the 3:1 floor even for large
+   text — and was removed rather than retuned. Display numerals are teal-deep
+   on light grounds and cream on the .ground-deep band. Do not revive gradient
+   text on a light ground; no stop of marigold passes there. */
+
+/* The temple arch aperture. Applied as a mask so it scales with the element,
+   which clip-path: path() would not. Path is drawn for a 720x1000 box to match
+   --arch-ratio. */
+@utility arch {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 720 1000' preserveAspectRatio='none'%3E%3Cpath d='M0 1000V420C0 196 150 54 360 24c210 30 360 172 360 396v580Z' fill='%23fff'/%3E%3C/svg%3E");
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 720 1000' preserveAspectRatio='none'%3E%3Cpath d='M0 1000V420C0 196 150 54 360 24c210 30 360 172 360 396v580Z' fill='%23fff'/%3E%3C/svg%3E");
+  -webkit-mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+}
+
+/* Fine film grain over a light ground. Pure CSS, no image request. */
+@utility grain {
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.055;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+/* Hides the scrollbar on a deliberately-scrollable strip — the gallery's filter
+   pills, which are a horizontal row on a phone. The strip keeps its own
+   affordances (the pills visibly run off the edge, and the active one scrolls
+   into view), so the bar is redundant furniture rather than the only signal. */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Masks the left and right of a scrolling row — the Instagram rail, whose cards
+   should fade at the edges rather than being guillotined by the container. */
+@utility mask-x {
+  mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+}

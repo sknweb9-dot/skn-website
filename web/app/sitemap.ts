@@ -1,58 +1,27 @@
 import type { MetadataRoute } from 'next';
-import { BRANCHES, ONLINE, SITE } from '@/lib/site';
+import { BRANCHES, ONLINE } from '@/lib/branches';
+import { PAGE_SEO, type PageSeo } from '@/lib/seo';
+import { SITE } from '@/lib/site';
 
 /**
- * Priorities reflect what we most want ranking, not an even spread.
+ * Every page that may be indexed, and only those. The list is built from the
+ * pages' own search copy, so a page that is marked noindex there (/hastas, which
+ * is unlinked at the academy's request) cannot also be offered here: that would
+ * send Google two contradictory signals. /performances and /photos are absent
+ * because they redirect (next.config.ts).
  *
- * The home page and the founding-school location page carry the commercial
- * intent. /events is close behind: it is where the photographs and the Udaan
- * record live, so it is the page most likely to be shared and linked.
- *
- * /hastas is deliberately ABSENT. It still resolves, but it is unlinked and
- * noindexed at the academy's request — listing it in the sitemap while telling
- * robots not to index it sends Google two contradictory signals.
- *
- * /performances is absent because it no longer exists as a page; next.config.ts
- * 308s it to /events.
+ * `lastModified` is the time of the build, which is when the content last changed.
+ * Priority and change frequency are left out; Google ignores both.
  */
-const ROUTES: { path: string; changeFrequency: MetadataRoute.Sitemap[number]['changeFrequency']; priority: number }[] = [
-  { path: '/locations', changeFrequency: 'monthly', priority: 0.8 },
-  { path: '/curriculum', changeFrequency: 'monthly', priority: 0.8 },
-  { path: '/book', changeFrequency: 'monthly', priority: 0.7 },
-  { path: '/events', changeFrequency: 'monthly', priority: 0.7 },
-  { path: '/gallery', changeFrequency: 'monthly', priority: 0.7 },
-  { path: '/about', changeFrequency: 'yearly', priority: 0.6 },
-  { path: '/lineage', changeFrequency: 'yearly', priority: 0.6 },
-];
-
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
 
-  return [
-    {
-      url: SITE.url,
-      lastModified,
-      changeFrequency: 'weekly',
-      priority: 1,
-    },
-    ...ROUTES.map((route) => ({
-      url: `${SITE.url}${route.path}`,
-      lastModified,
-      changeFrequency: route.changeFrequency,
-      priority: route.priority,
-    })),
-    ...BRANCHES.map((branch) => ({
-      url: `${SITE.url}/locations/${branch.slug}`,
-      lastModified,
-      changeFrequency: 'monthly' as const,
-      // The founding school is the page we most want ranking for Chennai.
-      priority: branch.isPrimary ? 0.9 : 0.7,
-    })),
-    {
-      url: `${SITE.url}/locations/${ONLINE.slug}`,
-      lastModified,
-      changeFrequency: 'monthly' as const,
-      priority: 0.7,
-    },
+  const paths = [
+    '/',
+    ...(Object.values(PAGE_SEO) as PageSeo[]).filter((page) => !page.noindex).map((page) => page.path),
+    ...BRANCHES.map((branch) => `/locations/${branch.slug}`),
+    `/locations/${ONLINE.slug}`,
   ];
+
+  return paths.map((path) => ({ url: path === '/' ? SITE.url : `${SITE.url}${path}`, lastModified }));
 }

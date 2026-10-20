@@ -1,0 +1,34 @@
+/* ---------------------------------------------------------------------------
+   Motion preferences. GSAP timelines additionally check this in JS so pinned
+   sections collapse into a plain document rather than merely stop animating.
+
+   Reduced motion means no MOVEMENT, not no feedback. The previous rule clamped
+   every transition to 0.01ms, which also killed hover colour changes, focus
+   and border feedback, and the fade on the floating booking bar — state
+   changes that carry meaning and do not trigger vestibular symptoms.
+
+   So transitions keep their authored durations but are restricted to
+   non-spatial properties: anything that was going to slide or scale now snaps,
+   while colour and opacity still ease. Keyframe animations — the emblem's
+   turn, the scroll cue, the rise — are still clamped, except the two
+   entrances below, which are swapped for a plain fade.
+--------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-property:
+      color, background-color, border-color, outline-color, text-decoration-color, fill, stroke,
+      opacity !important;
+  }
+
+  /* The booking modal and gallery panel (animate-rise) and the route
+     transition keep their arrival, as opacity only. A class selector
+     outranks the universal rule above, so this wins over the clamp. */
+  .animate-rise,
+  .page-enter {
+    animation: page-in 0.24s var(--ease-temple) both !important;
+  }
+}

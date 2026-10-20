@@ -3,25 +3,12 @@ import Image from 'next/image';
 import JsonLd from '@/components/JsonLd';
 import { PageHero, PageShell, Section } from '@/components/PageShell';
 import { ABOUT, EMBLEM } from '@/lib/lineage';
-import { METRICS, SITE, yearsOfLineage } from '@/lib/site';
+import { METRICS, yearsOfLineage } from '@/lib/site';
 import { batchCount, individualStudentCount } from '@/lib/classes';
 import { homeGraph } from '@/lib/schema';
+import { PAGE_SEO, pageMetadata } from '@/lib/seo';
 
-const TITLE = 'About the Academy';
-const DESCRIPTION =
-  'Founded on 18 April 2009, Shanti Kala Nikketan preserves and promotes Indian classical arts through the Gurukulam tradition and the Kalakshetra Bani of Bharatanatyam — in Chennai and internationally.';
-
-export const metadata: Metadata = {
-  title: TITLE,
-  description: DESCRIPTION,
-  alternates: { canonical: '/about' },
-  openGraph: {
-    title: `${TITLE} | ${SITE.name}`,
-    description: DESCRIPTION,
-    url: `${SITE.url}/about`,
-    type: 'website',
-  },
-};
+export const metadata: Metadata = pageMetadata(PAGE_SEO.about);
 
 export default function AboutPage() {
   const years = yearsOfLineage();

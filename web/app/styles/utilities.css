@@ -1,0 +1,93 @@
+/* ---------------------------------------------------------------------------
+   Utilities
+--------------------------------------------------------------------------- */
+/* Applied by app/template.tsx, which React remounts on every navigation. */
+@utility page-enter {
+  animation: page-in 0.42s var(--ease-temple) both;
+}
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  /* Was a deep marigold, at 3.08:1 on cream. At 11px the WCAG large-text 3:1
+     allowance does not apply, so the requirement is 4.5:1 — and this is the
+     single most repeated element in the design, so it failed everywhere it
+     appeared. nila-700 gives 6.51:1 on cream and 5.83:1 on silk with no change
+     to size, weight, tracking or case. */
+  color: var(--eyebrow-color, var(--color-nila-700));
+}
+
+/* The deep-teal band. The one structural use of colour on the site.
+
+   Everything else is cream with jewel accents, which made the palette read as
+   the generic warm-cream default: four grounds 1.04-1.12:1 apart and no colour
+   anywhere except in small marks. This band — teal-deep with a marigold edge,
+   like the border of a silk saree — is where the jewel tones are finally a
+   surface. It carries the footer on every route.
+
+   Contrast on teal-deep, all measured:
+     cream 12.10   cream/80 8.32   cream/70 6.77   cream/60 5.39
+     marigold 5.64   nila-300 (emblem cyan) 5.31
+   Kumkum measures 1.76 here, so no kumkum text or hover inside the band. The
+   global focus ring is teal and would vanish, so it is re-pointed too.
+   .eyebrow reads --eyebrow-color, which is why labels follow automatically. */
+@utility ground-deep {
+  background-color: var(--color-teal-deep);
+  color: var(--color-cream);
+  --eyebrow-color: var(--color-nila-300);
+}
+
+/* Unlayered on purpose, like the global :focus-visible it overrides. Nested
+   inside @utility it landed in the utilities layer and lost to the unlayered
+   base rule whatever its specificity, leaving a teal ring on teal. */
+.ground-deep :focus-visible {
+  outline-color: var(--color-marigold);
+}
+
+/* Frosted warm glass. The editorial card treatment used across every act.
+   Opacity is high (88%) on purpose: where a card overlaps the arch, a more
+   transparent panel let the aperture's edge show through as a hard rectangular
+   seam cutting across the curve. At this weight it reads as a stone plinth the
+   arch rises behind. */
+@utility glass {
+  background-color: color-mix(in oklab, white 88%, var(--color-silk));
+  backdrop-filter: blur(14px) saturate(1.1);
+  -webkit-backdrop-filter: blur(14px) saturate(1.1);
+  border: 1px solid color-mix(in oklab, var(--color-marigold) 34%, transparent);
+  color: var(--color-ink);
+  box-shadow: 0 1px 0 0 color-mix(in oklab, white 70%, transparent) inset;
+}
+
+/* Elevation, for glass that floats OVER moving imagery: the act cards above the
+   scrubbed arch, and the gallery chrome over the globe. There the diffuse
+   shadow is doing a job — separating a panel from a picture that keeps
+   changing under it.
+
+   Cards sitting in the document on flat cream used to carry the same 60px
+   shadow. On a still ground it separated nothing; it was the "hairline plus
+   wide soft shadow" pairing that reads as a UI kit, so those cards now keep
+   the edge and lose the shadow. Do not add this to in-flow cards. */
+@utility glass-lifted {
+  box-shadow:
+    0 1px 0 0 color-mix(in oklab, white 70%, transparent) inset,
+    0 24px 60px -30px color-mix(in oklab, var(--color-teal-deep) 45%, transparent);
+}
+
+/* A text link's underline, drawn in from the left on hover and focus. The line
+   is a background, so it follows the text across wraps and takes its colour
+   from the link (marigold on the deep band, where it is the only accent). */
+@utility link-draw {
+  background-image: linear-gradient(var(--color-marigold), var(--color-marigold));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 1px;
+  padding-bottom: 2px;
+  transition: background-size 0.5s var(--ease-temple);
+  a:hover > &,
+  a:focus-visible > & {
+    background-size: 100% 1px;
+  }
+}

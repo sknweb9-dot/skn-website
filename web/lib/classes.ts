@@ -92,7 +92,7 @@ function programmeOf(id: string): Programme {
 export const VENUES: Venue[] = [
   {
     id: 'appswamy-springs',
-    name: 'Appswamy Springs',
+    name: 'Appaswamy Springs',
     area: 'Thiruvanmiyur',
     citySlug: 'chennai',
     mode: 'offline',
@@ -257,7 +257,7 @@ export function formatDays(days: Weekday[]): string {
 }
 
 /** "17:00" -> "5.00 pm", matching how the academy writes its own timings. */
-export function formatTime(hhmm: string): string {
+function formatTime(hhmm: string): string {
   const [h, m] = hhmm.split(':').map(Number);
   const suffix = h >= 12 ? 'pm' : 'am';
   const hour = h % 12 === 0 ? 12 : h % 12;

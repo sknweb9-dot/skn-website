@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import Image from 'next/image';
 import { ArrowUpRight, Pause, Play } from 'lucide-react';
 import { InstagramIcon } from './SocialIcons';
 import type { InstagramPost } from '@/lib/instagram';
@@ -34,13 +35,15 @@ import { SITE } from '@/lib/site';
  * treatment. It also stops on hover and on keyboard focus, because reading a
  * caption while it slides away is miserable.
  *
- * WHY PLAIN <img>
- * ---------------
- * Instagram serves media from a CDN on signed URLs that expire after a few days.
- * Routing those through next/image would mean whitelisting a third-party CDN in
- * `images.remotePatterns` and filling the optimizer's cache with entries keyed on
- * URLs that are already dead. These are small, lazy, off the critical path, and
- * come pre-sized by Instagram.
+ * WHY THE PICTURES GO THROUGH THE IMAGE OPTIMIZER
+ * -------------------------------------------------
+ * Instagram serves media at 1290px or more from its CDN on signed URLs. The rail
+ * shows them at about 240px, so sent as they are they were most of this page's
+ * weight. The CDN hosts are allowed in `images.remotePatterns` (next.config.ts),
+ * which makes the optimizer fetch each one once and serve a right-sized copy.
+ * When a URL's signature lapses the optimizer cannot fetch it and the picture is
+ * missing, exactly as it would have been with a plain <img>; the page is rebuilt
+ * from a fresh feed hourly (lib/instagram.ts), so that window is short.
  */
 
 /** Seconds a single post takes to cross the rail. */
@@ -69,7 +72,7 @@ export default function InstagramRail({ posts }: { posts: InstagramPost[] }) {
           href={SITE.socials.instagram}
           target="_blank"
           rel="noopener noreferrer"
-          className="group inline-flex items-center gap-2 font-sans text-[0.85rem] font-medium text-teal transition-colors hover:text-teal-lit"
+          className="group inline-flex min-h-11 items-center gap-2 font-sans text-[0.85rem] font-medium text-teal transition-colors hover:text-teal-lit"
         >
           <InstagramIcon className="h-4 w-4" />
           @shantikalanikketan
@@ -159,15 +162,12 @@ function Card({
       className="group relative block w-[13.5rem] shrink-0 overflow-hidden rounded-[1rem] border border-marigold/25 bg-paper/60 transition-colors duration-200 hover:border-teal/50 focus-visible:outline-2 focus-visible:outline-teal focus-visible:outline-offset-4 sm:w-[15rem]"
     >
       <div className="relative aspect-square overflow-hidden bg-silk">
-        {/* eslint-disable-next-line @next/next/no-img-element -- Instagram CDN
-            URLs are signed and expire; see the note at the top of this file. */}
-        <img
+        <Image
           src={post.imageUrl}
           alt={post.alt}
-          loading="lazy"
-          decoding="async"
-          referrerPolicy="no-referrer"
-          className="h-full w-full object-cover"
+          fill
+          sizes="(max-width: 640px) 216px, 240px"
+          className="object-cover"
         />
         {newest ? (
           <span className="absolute top-2.5 left-2.5 rounded-full bg-cream/90 px-2.5 py-1 font-sans text-micro font-semibold tracking-[0.14em] text-nila-700 uppercase">

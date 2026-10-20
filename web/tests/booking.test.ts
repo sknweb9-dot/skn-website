@@ -14,7 +14,7 @@ import {
   type BookingDraft,
 } from '@/lib/booking';
 import { nextOpen } from '@/lib/accordion';
-import { FAQS } from '@/lib/site';
+import { FAQS } from '@/lib/faqs';
 
 const draft = (over: Partial<BookingDraft>): BookingDraft => ({ ...EMPTY_DRAFT, ...over });
 const codes = (options: ReturnType<typeof openBatchesFor>) => options.map((o) => o.batch.code);

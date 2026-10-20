@@ -105,14 +105,12 @@ describe('tones', () => {
 });
 
 describe('voices', () => {
-  it('fills two pages of three, and flags any that are still placeholders', () => {
+  it('fills two pages of three, every one a real parent with a real quote', () => {
     expect(VOICES.length).toBeGreaterThanOrEqual(6);
     for (const v of VOICES) {
       expect(v.name.trim(), 'name').not.toBe('');
+      expect(v.name, 'name is not the template one').not.toBe('Parent name');
       expect(v.quote.trim(), `${v.name} quote`).not.toBe('');
-      // A voice still carrying the placeholder name must say so. Otherwise the
-      // build's warning stays silent and the card ships reading "Parent name".
-      if (v.name === 'Parent name') expect(v.placeholder, `${v.name} flag`).toBe(true);
     }
   });
 });

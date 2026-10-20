@@ -17,8 +17,8 @@
  *    left of the leftmost fingertip across all 1620 frames and keeps the green
  *    sleeve out of frame; _research/hand_extent.py is the measurement and
  *    _research/crop_candidates.py shows the rejected alternatives. The crop
- *    holds ratio 0.7215, so --arch-ratio, the arch mask, ArchOutline and
- *    CROP_BIAS are all unchanged.
+ *    holds ratio 0.7215, so --arch-ratio, the arch mask and CROP_BIAS are all
+ *    unchanged.
  *
  * 2. 6fps over 54s is exactly 324 frames, and every gesture boundary in
  *    _research/../asamyuta_hastas_reference_guide.md falls on a whole second.
@@ -56,19 +56,11 @@ export const FRAME_COUNT = 324;
 export const FRAMES_PER_SECOND = 6;
 
 /** Zero-padded width used in frame filenames. */
-export const FRAME_PAD = 4;
+const FRAME_PAD = 4;
 
+/** The plate's size. `--arch-ratio` in app/styles/tokens.css must stay in step with width / height. */
 export const FRAME_WIDTH = 864;
 export const FRAME_HEIGHT = 1198;
-
-/**
- * Aspect ratio of the plate.
- *
- * The whole plate is visible now, so this is just the frame ratio. It is kept as
- * a named export because the home arch and the /hastas page size their stills by
- * it, and because --arch-ratio in globals.css must stay in step with it.
- */
-export const VISIBLE_RATIO = FRAME_WIDTH / FRAME_HEIGHT;
 
 export function framePath(index: number): string {
   const clamped = Math.min(Math.max(index, 1), FRAME_COUNT);
@@ -100,10 +92,8 @@ export type Mudra = {
    * Theory Class lessons. Present only where the academy has published it.
    */
   verse?: { shloka: string[]; gloss: string[]; videoId: string };
-  /** Editorial reflection shown on featured cards. Interpretive, not doctrinal. */
+  /** Editorial reflection. Interpretive, not doctrinal. */
   reflection?: string;
-  /** Whether this gesture gets a full floating card during the scrub */
-  featured: boolean;
 };
 
 export const MUDRAS: Mudra[] = [
@@ -116,7 +106,6 @@ export const MUDRAS: Mudra[] = [
     viniyoga: ['the beginning of dance', 'clouds', 'a forest', 'refusal', 'night', 'a river', 'wind', 'benediction'],
     reflection:
       'The first gesture a child is ever taught, and the last one they will ever outgrow. The hand that opens the dance is the same hand that gives the blessing at its end.',
-    featured: true,
   },
   {
     order: 2,
@@ -125,7 +114,6 @@ export const MUDRAS: Mudra[] = [
     frameStart: 3,
     frameEnd: 14,
     viniyoga: ['a crown', 'a tree', 'the vajra', 'Indra', 'a lamp', 'rising flames', 'an arrow'],
-    featured: false,
   },
   {
     order: 3,
@@ -134,7 +122,6 @@ export const MUDRAS: Mudra[] = [
     frameStart: 15,
     frameEnd: 27,
     viniyoga: ['tender shoots', 'a writing tablet', 'a knife', 'a banner', 'a tower', 'a horn', 'a riverbank'],
-    featured: false,
   },
   {
     order: 4,
@@ -143,7 +130,6 @@ export const MUDRAS: Mudra[] = [
     frameStart: 28,
     frameEnd: 36,
     viniyoga: ['separation of man and woman', 'opposition', 'the corner of the eye', 'lightning', 'a creeper', 'falling'],
-    featured: false,
   },
   {
     order: 5,
@@ -152,7 +138,6 @@ export const MUDRAS: Mudra[] = [
     frameStart: 37,
     frameEnd: 48,
     viniyoga: ["a peacock's beak", 'a creeper', 'a bird', 'wiping away tears', 'the forehead mark', 'parting the hair'],
-    featured: false,
   },
   {
     order: 6,
@@ -173,7 +158,6 @@ export const MUDRAS: Mudra[] = [
     ],
     reflection:
       'One hand holds the moon at half. It is the gesture of the self — of prayer, and of standing up. Children learn very early that the same shape can mean anxiety or devotion, and that the difference is entirely in the eyes.',
-    featured: true,
   },
   {
     order: 7,
@@ -182,7 +166,6 @@ export const MUDRAS: Mudra[] = [
     frameStart: 61,
     frameEnd: 66,
     viniyoga: ['drinking poison', 'drinking nectar', 'a violent wind'],
-    featured: false,
   },
   {
     order: 8,
@@ -191,7 +174,6 @@ export const MUDRAS: Mudra[] = [
     frameStart: 67,
     frameEnd: 78,
     viniyoga: ['shooting an arrow', 'a spear', 'mystery', 'recollection', 'ferocity', 'harsh speech'],
-    featured: false,
   },
   {
     order: 9,
@@ -202,7 +184,6 @@ export const MUDRAS: Mudra[] = [
     viniyoga: ['steadiness', 'grasping hair', 'holding things', 'wrestling', 'running'],
     reflection:
       'Steadiness, made visible. Before a dancer can express anything, the hand must first learn to hold — and to hold nothing at all without trembling.',
-    featured: true,
   },
   {
     order: 10,
@@ -211,7 +192,6 @@ export const MUDRAS: Mudra[] = [
     frameStart: 91,
     frameEnd: 96,
     viniyoga: ['the god of love', 'a bow', 'a pillar', 'silence', 'a tooth', 'questioning', 'saying no', 'an embrace', 'firmness'],
-    featured: false,
   },
   {
     order: 11,
@@ -220,7 +200,6 @@ export const MUDRAS: Mudra[] = [
     frameStart: 97,
     frameEnd: 108,
     viniyoga: ['Lakshmi', 'Saraswati', 'holding cymbals', 'milking a cow', 'holding the end of a garment', 'holding a flower'],
-    featured: false,
   },
   {
     order: 12,
@@ -229,7 +208,6 @@ export const MUDRAS: Mudra[] = [
     frameStart: 109,
     frameEnd: 144,
     viniyoga: ['plucking flowers', 'a pearl necklace', 'drawing an arrow', 'speech', 'glances', 'camphor', 'betel'],
-    featured: false,
   },
   {
     order: 13,
@@ -252,7 +230,6 @@ export const MUDRAS: Mudra[] = [
     ],
     reflection:
       'A single finger, and it can mean the number one, the sun, or the absolute. Learning that scale of meaning in one gesture is how a child begins to grasp that precision and imagination are not opposites.',
-    featured: true,
   },
   {
     order: 14,
@@ -261,7 +238,6 @@ export const MUDRAS: Mudra[] = [
     frameStart: 151,
     frameEnd: 162,
     viniyoga: ['the moon on the first night', 'the face', "the crescent in Shiva's hair", 'measuring a cubit', 'the Ganga'],
-    featured: false,
   },
   {
     order: 15,
@@ -272,7 +248,6 @@ export const MUDRAS: Mudra[] = [
     viniyoga: ['fruit', 'a bell', 'an egg', 'a water lily', 'a cluster of flowers', 'an offering of food'],
     reflection:
       'The hand becomes a vessel — not yet open, not yet given. In the Gurukulam this is the shape of what a student is: holding something that has not bloomed, and learning the patience to let it.',
-    featured: true,
   },
   {
     order: 16,
@@ -281,7 +256,6 @@ export const MUDRAS: Mudra[] = [
     frameStart: 175,
     frameEnd: 186,
     viniyoga: ['sandal paste', 'a snake', 'slow movement', 'offering water to the gods', 'nourishing', "an elephant's ears"],
-    featured: false,
   },
   {
     order: 17,
@@ -290,7 +264,6 @@ export const MUDRAS: Mudra[] = [
     frameStart: 187,
     frameEnd: 192,
     viniyoga: ['women', 'the cheek', 'a mirror', 'practising steps', 'discussion', 'the number three', 'calling the beloved', 'fear'],
-    featured: false,
   },
   {
     order: 18,
@@ -301,7 +274,6 @@ export const MUDRAS: Mudra[] = [
     viniyoga: ['the sacred fire offering', 'coral', 'a pearl', 'a lotus garland', 'an elephant', 'sacred grass', 'medicine', 'a tortoise'],
     reflection:
       'Named for the lion, used for the offering into fire. The tradition rarely lets a gesture stay literal for long — the fierce and the devotional share a single hand.',
-    featured: true,
   },
   {
     order: 19,
@@ -329,7 +301,6 @@ export const MUDRAS: Mudra[] = [
       ],
       videoId: 'Key6fbXDNc0',
     },
-    featured: false,
   },
   {
     order: 20,
@@ -372,7 +343,6 @@ export const MUDRAS: Mudra[] = [
     },
     reflection:
       'The bud has opened. Separation and the full moon, a lake and a village, praise itself — all held in one spread palm. This is the gesture students reach for when a song turns from describing the world to loving it.',
-    featured: true,
   },
   {
     order: 21,
@@ -401,7 +371,6 @@ export const MUDRAS: Mudra[] = [
       ],
       videoId: 'hOL47OYH_ec',
     },
-    featured: false,
   },
   {
     order: 22,
@@ -425,7 +394,6 @@ export const MUDRAS: Mudra[] = [
       ],
       videoId: 'jh3ML6T2RRk',
     },
-    featured: false,
   },
   {
     order: 23,
@@ -454,7 +422,6 @@ export const MUDRAS: Mudra[] = [
       ],
       videoId: '_dBDwVF8Jiw',
     },
-    featured: false,
   },
   {
     order: 24,
@@ -479,7 +446,6 @@ export const MUDRAS: Mudra[] = [
     },
     reflection:
       'A bridge, and the act of covering. The academy teaches each gesture with its verse — so a nine-year-old learns Sanskrit grammar and the shape of a swan’s wing in the same breath.',
-    featured: true,
   },
   {
     order: 25,
@@ -505,7 +471,6 @@ export const MUDRAS: Mudra[] = [
       ],
       videoId: 'e39ivEbqBcA',
     },
-    featured: false,
   },
   {
     order: 26,
@@ -530,7 +495,6 @@ export const MUDRAS: Mudra[] = [
       ],
       videoId: 'LRYJZI7M1bM',
     },
-    featured: false,
   },
   {
     order: 27,
@@ -541,7 +505,6 @@ export const MUDRAS: Mudra[] = [
     viniyoga: ['writing', 'the number twelve', 'the crowing of a cock', 'a calf'],
     reflection:
       'Twenty-eight gestures, learned one at a time, over years. No shortcut exists — which is exactly the lesson. A child who can do this can do anything that asks for patience.',
-    featured: true,
   },
   {
     order: 28,
@@ -550,11 +513,8 @@ export const MUDRAS: Mudra[] = [
     frameStart: 301,
     frameEnd: 324,
     viniyoga: ['a bilva leaf', 'the number three', 'a wood apple leaf'],
-    featured: false,
   },
 ];
-
-export const FEATURED_MUDRAS = MUDRAS.filter((m) => m.featured);
 
 /**
  * Fail loudly at module load if the gesture schedule and the exported sequence
@@ -606,25 +566,6 @@ export const VERSE_MUDRAS = MUDRAS.filter((m) => m.verse);
  */
 export function liveFrames(m: Mudra): { start: number; end: number } {
   return { start: m.frameStart, end: m.frameEnd };
-}
-
-/**
- * Normalised scroll progress (0–1) spanned by a gesture.
- *
- * Frame n covers progress [(n-1)/FRAME_COUNT, n/FRAME_COUNT], so an inclusive
- * range [start, end] spans from (start-1)/FRAME_COUNT to end/FRAME_COUNT.
- */
-export function mudraProgress(m: Mudra): { start: number; end: number; mid: number } {
-  const start = (m.frameStart - 1) / FRAME_COUNT;
-  const end = m.frameEnd / FRAME_COUNT;
-  return { start, end, mid: (start + end) / 2 };
-}
-
-/** Which gesture is on screen at a given normalised scroll progress. */
-export function mudraAtProgress(progress: number): Mudra {
-  const clamped = Math.min(1, Math.max(0, progress));
-  const frame = Math.min(FRAME_COUNT, Math.floor(clamped * FRAME_COUNT) + 1);
-  return MUDRAS.find((m) => frame >= m.frameStart && frame <= m.frameEnd) ?? MUDRAS[0];
 }
 
 /** Look up a gesture by IAST name. Throws at module load if the name is wrong. */

@@ -6,7 +6,7 @@ import { Maximize2, Minimize2, Minus, Pause, Play, Plus, RotateCcw } from 'lucid
 import { GLOBE_ITEMS, type GalleryItem } from '@/lib/gallery';
 import type { GlobeShape } from '@/lib/globe';
 import { usePrefersReducedMotion } from '@/lib/usePrefersReducedMotion';
-import type { GlobeHandle } from '../GlobeCanvas';
+import type { GlobeHandle } from './GlobeCanvas';
 import { HoverLabel, IconButton, PlateDetail, Segment } from './Chrome';
 
 /**
@@ -23,7 +23,7 @@ import { HoverLabel, IconButton, PlateDetail, Segment } from './Chrome';
  * crosses it is a trap. The globe turns on a mouse drag or a horizontal swipe
  * and zooms on the buttons.
  */
-const GlobeCanvas = dynamic(() => import('../GlobeCanvas'), { ssr: false, loading: () => null });
+const GlobeCanvas = dynamic(() => import('./GlobeCanvas'), { ssr: false, loading: () => null });
 
 const PREPARE_MARGIN = '400px';
 
