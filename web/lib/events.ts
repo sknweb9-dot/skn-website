@@ -162,6 +162,20 @@ export const ARANGETRAMS = {
   ],
 } as const;
 
+/**
+ * The closing words of the outreach section, and the playlist that holds the
+ * rest of the academy's outreach work.
+ *
+ * The section shows three of the programmes; the playlist is where the others
+ * are kept, so a parent can see the reach of the work without the page
+ * carrying every link to it.
+ */
+export const OUTREACH = {
+  body: 'These are three of the academy’s outreach programmes. The rest are gathered in one playlist on YouTube.',
+  playlist: 'https://www.youtube.com/playlist?list=PLxyyMzhr0f3HAWlYCWp-ll5-0_5SX-OIE',
+  playlistLabel: 'SKN Outreach Moments',
+} as const;
+
 // ---------------------------------------------------------------------------
 // Videos
 // ---------------------------------------------------------------------------

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { ExternalLink } from 'lucide-react';
 import JsonLd from '@/components/JsonLd';
 import InstagramRail from '@/components/InstagramRail';
 import BlankGlobe from '@/components/gallery/BlankGlobe';
@@ -9,6 +10,7 @@ import {
   ARANGETRAMS,
   EVENTS_INTRO,
   EVENTS_META,
+  OUTREACH,
   UDAAN,
   sectionMeta,
   videosBySection,
@@ -174,13 +176,17 @@ export default async function EventsPage() {
         </div>
 
         <div className="mt-12 max-w-xl border-t border-marigold/20 pt-8">
-          <p className="max-w-measure text-[1rem] leading-relaxed text-ink-soft">
-            Our Scarborough branch teaches at Morningside and Finch. Chennai and
-            Scarborough are one academy, one syllabus, and — allowing for the
-            nine and a half hours between them — one set of standards.
-          </p>
+          <p className="max-w-measure text-[1rem] leading-relaxed text-ink-soft">{OUTREACH.body}</p>
           <div className="mt-7 flex flex-wrap gap-3">
-            <QuietLink href="/locations/scarborough">The Scarborough branch</QuietLink>
+            <a
+              href={OUTREACH.playlist}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-1.5 rounded-full border border-teal/25 px-5 py-3 font-sans text-sm font-medium text-teal transition-colors hover:border-teal/50 hover:bg-teal/5"
+            >
+              {OUTREACH.playlistLabel}
+              <ExternalLink aria-hidden className="h-3.5 w-3.5" />
+            </a>
           </div>
         </div>
       </Section>
