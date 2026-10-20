@@ -12,6 +12,11 @@
 # mudra.mp4 (2.9 MB) is already tracked from earlier work and stays tracked.
 /Hastas.mp4
 
+# The academy's own archive: the class and event shoots, the parents'
+# photographs, the reviews. _research/ cuts the site's images out of it, and
+# every one of those scripts reads it from disk, so it stays where it is.
+/Stuff from NAS/
+
 # --- Vite prototype in globefolio-3d-image-animation/ ----------------------
 /globefolio-3d-image-animation/node_modules/
 /globefolio-3d-image-animation/dist/
