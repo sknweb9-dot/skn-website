@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Cinzel, Mukta } from 'next/font/google';
 import './globals.css';
-import { HOME_SEO } from '@/lib/seo';
+import { DEFAULT_SOCIAL_IMAGE, HOME_SEO } from '@/lib/seo';
 import { SITE } from '@/lib/site';
 import SmoothScroll from '@/components/SmoothScroll';
 import HashScroll from '@/components/HashScroll';
@@ -64,20 +64,13 @@ export const metadata: Metadata = {
     description: HOME_SEO.description,
     url: SITE.url,
     locale: 'en_IN',
-    images: [
-      {
-        url: SITE.ogImage,
-        width: 1200,
-        height: 630,
-        alt: 'The academy’s Udaan 2025 class on stage, each holding a certificate',
-      },
-    ],
+    images: [DEFAULT_SOCIAL_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
     title: HOME_SEO.title,
     description: HOME_SEO.description,
-    images: [SITE.ogImage],
+    images: [DEFAULT_SOCIAL_IMAGE.url],
   },
   robots: {
     index: true,

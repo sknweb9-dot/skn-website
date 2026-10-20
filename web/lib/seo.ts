@@ -27,11 +27,11 @@ export const DESCRIPTION_LIMIT = 160;
 type SocialImage = { url: string; width?: number; height?: number; alt: string };
 
 /** What a page shares when it has no picture of its own. */
-const DEFAULT_SOCIAL_IMAGE: SocialImage = {
+export const DEFAULT_SOCIAL_IMAGE: SocialImage = {
   url: SITE.ogImage,
-  width: 2000,
-  height: 1335,
-  alt: 'Students of Shanti Kala Nikketan performing Bharatanatyam',
+  width: 1200,
+  height: 630,
+  alt: 'The academy\u2019s Udaan 2025 class on stage, each holding a certificate',
 };
 
 /** The title as it appears in a result: the page's own, then the site name. */
