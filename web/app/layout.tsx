@@ -67,9 +67,9 @@ export const metadata: Metadata = {
     images: [
       {
         url: SITE.ogImage,
-        width: 2000,
-        height: 1335,
-        alt: 'Students of Shanti Kala Nikketan performing Bharatanatyam',
+        width: 1200,
+        height: 630,
+        alt: 'A dancer performing at Udaan 2025, the academy’s own showcase',
       },
     ],
   },

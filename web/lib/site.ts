@@ -25,7 +25,13 @@ export const SITE = {
   style: 'Kalakshetra Bani of Bharatanatyam',
   method: 'Gurukulam',
   logo: '/img/logo-emblem.png',
-  ogImage: '/img/hero-home.jpg',
+  /**
+   * The link-preview card: what a chat app shows above the title when the
+   * site's address is pasted into a message. Cut by
+   * _research/make_og_image.py, 1200 x 630. It has a name of its own because
+   * readers cache a preview by its image address, and a new one is fetched.
+   */
+  ogImage: '/img/og-home.jpg',
   socials: {
     instagram: 'https://www.instagram.com/shantikalanikketan',
     facebook: 'https://www.facebook.com/shantikalanikketan',
