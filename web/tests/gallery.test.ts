@@ -171,13 +171,20 @@ describe('the one-to-one class folders', () => {
     expect(queryToFilter('group=classes&venue=casagrand-tranquil&batch=CG%20T2').batch).toBe('CG T2');
   });
 
-  it('does not write a batch the schedule has never heard of twice', () => {
+  it('writes the level once, and not the batch code twice', () => {
     const t2 = PHOTOS.find((p) => p.batches?.includes('CG T2'));
-    expect(t2?.title).toBe('CG T2');
+    expect(t2?.title).toBe('CG T2 · Level 3');
   });
 
-  it('has no batch row for a venue with no batch code', () => {
-    expect(batchOptions('purva-windermere')).toEqual([]);
+  it('gives the two archive-only venues a batch of their own, named as every other batch is', () => {
+    expect(batchOptions('purva-windermere').map((o) => o.id)).toEqual(['PW1']);
+    expect(batchOptions('appswamy-greensville').map((o) => o.id)).toEqual(['AG1']);
+  });
+
+  it('gives those batches their level, and CG T2 its own', () => {
+    expect(batchOptions('purva-windermere').find((b) => b.id === 'PW1')?.detail).toBe('Level 3');
+    expect(batchOptions('appswamy-greensville').find((b) => b.id === 'AG1')?.detail).toBe('Level 4');
+    expect(batchOptions('casagrand-tranquil').find((b) => b.id === 'CG T2')?.detail).toBe('Level 3');
   });
 
   it('keeps students out of names, keys and alt text', () => {

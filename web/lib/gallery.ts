@@ -56,6 +56,8 @@ export type Album = {
   /** Classes only */
   venueId?: string;
   batches?: string[];
+  /** The level of a class the public schedule does not list. */
+  programme?: string;
 };
 
 const EVENT_ALBUMS: Album[] = [
@@ -84,7 +86,7 @@ const EVENT_ALBUMS: Album[] = [
  * Casagrand Riviera class and covers both its batches, so those photographs
  * appear under either batch.
  */
-const CLASS_ALBUMS: { id: string; venueId: string; batches: string[] }[] = [
+const CLASS_ALBUMS: { id: string; venueId: string; batches: string[]; programme?: string }[] = [
   { id: 'class-as1', venueId: 'appswamy-springs', batches: ['AS1'] },
   { id: 'class-as2', venueId: 'appswamy-springs', batches: ['AS2'] },
   { id: 'class-as3', venueId: 'appswamy-springs', batches: ['AS3'] },
@@ -98,11 +100,13 @@ const CLASS_ALBUMS: { id: string; venueId: string; batches: string[] }[] = [
   { id: 'class-cg-t', venueId: 'casagrand-tranquil', batches: ['CG T1'] },
   // One-to-one classes. They are filed exactly as the group classes are, by venue,
   // so a parent finds them the same way.
-  { id: 'class-cg-t2', venueId: 'casagrand-tranquil', batches: ['CG T2'] },
+  { id: 'class-cg-t2', venueId: 'casagrand-tranquil', batches: ['CG T2'], programme: 'Level 3' },
   // These two venues are in the archive but not (yet) on the Locations page, and
-  // have no batch code, so the filter stops at the venue.
-  { id: 'class-pw', venueId: 'purva-windermere', batches: [] },
-  { id: 'class-ag', venueId: 'appswamy-greensville', batches: [] },
+  // the public schedule has no batch for them, so the level is the academy's own,
+  // given here. The batch code follows the same naming as every other batch:
+  // the venue's initials and a number.
+  { id: 'class-pw', venueId: 'purva-windermere', batches: ['PW1'], programme: 'Level 3' },
+  { id: 'class-ag', venueId: 'appswamy-greensville', batches: ['AG1'], programme: 'Level 4' },
 ];
 
 /**
@@ -129,11 +133,13 @@ export function batchLabel(code: string): string {
 
 /**
  * What to say about a batch beyond its code: its level and days where the
- * schedule has it, nothing where it does not (a batch that is only in the
- * archive), so "CG T2 · CG T2" is never written.
+ * schedule has it, its level alone where the schedule has no batch for it, and
+ * nothing at all where there is no level to give, so "CG T2 · CG T2" is never
+ * written.
  */
 function batchDetail(code: string): string | null {
-  return BATCH_INFO.has(code) ? batchLabel(code) : null;
+  if (BATCH_INFO.has(code)) return batchLabel(code);
+  return CLASS_ALBUMS.find((a) => a.batches.includes(code))?.programme ?? null;
 }
 
 const batchTitle = (code: string) => {
@@ -150,6 +156,7 @@ function classAlbum(a: (typeof CLASS_ALBUMS)[number]): Album {
     section: 'studio',
     venueId: a.venueId,
     batches: a.batches,
+    programme: a.programme,
   };
 }
 
@@ -380,7 +387,7 @@ export function indexSections(items: GalleryItem[]): IndexSection[] {
       if (!inAlbum.length) continue;
       const detail =
         a.group === 'classes'
-          ? a.batches!.map(batchDetail).filter(Boolean).join('  /  ') || null
+          ? a.batches!.map(batchDetail).filter(Boolean).join('  /  ') || a.programme || null
           : albumDate(a);
       sections.push({ id: a.id, title: a.title, detail, group: a.group, items: inAlbum });
     }
