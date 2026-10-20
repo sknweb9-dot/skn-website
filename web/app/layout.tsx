@@ -69,7 +69,7 @@ export const metadata: Metadata = {
         url: SITE.ogImage,
         width: 1200,
         height: 630,
-        alt: 'A dancer performing at Udaan 2025, the academy’s own showcase',
+        alt: 'The academy’s Udaan 2025 class on stage, each holding a certificate',
       },
     ],
   },

@@ -31,7 +31,7 @@ export const SITE = {
    * _research/make_og_image.py, 1200 x 630. It has a name of its own because
    * readers cache a preview by its image address, and a new one is fetched.
    */
-  ogImage: '/img/og-home.jpg',
+  ogImage: '/img/og-udaan-2025.jpg',
   socials: {
     instagram: 'https://www.instagram.com/shantikalanikketan',
     facebook: 'https://www.facebook.com/shantikalanikketan',
