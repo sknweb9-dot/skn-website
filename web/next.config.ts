@@ -30,13 +30,29 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
 
   images: {
-    formats: ['image/avif', 'image/webp'],
-    // The Instagram rail's pictures. Instagram serves them from its CDN on signed
-    // URLs; routing them through the optimizer turns 1290px originals into the
-    // ~480px the rail shows.
-    remotePatterns: [
-      { protocol: 'https', hostname: '**.fbcdn.net' },
-      { protocol: 'https', hostname: '**.cdninstagram.com' },
+    // AVIF is ~20% smaller than WebP but about 50% slower to encode, and offering
+    // both doubles the distinct outputs (one per browser Accept header). On a
+    // photo-heavy site running on the Hobby allowance, WebP-only is the cheaper
+    // trade; the bytes saved by AVIF are not worth the extra transformations.
+    formats: ['image/webp'],
+    // Local images are keyed by content hash, so replacing a file busts its own
+    // cache — a long TTL cannot serve a stale photograph. 31 days is the maximum
+    // Vercel keeps a local image cached, and it is what stops a 197-image gallery
+    // from being re-transformed every time the 1-day source Cache-Control goes
+    // stale. See the ASSET_CACHE comment below.
+    minimumCacheTTL: 60 * 60 * 24 * 31,
+    // The widths this design actually asks for. The defaults (828/1200/2048/3840
+    // and 32/48/64) are four extra widths the layout never selects, and every
+    // width is a separate transformation per image.
+    deviceSizes: [640, 750, 1080, 1200, 1920],
+    imageSizes: [96, 128, 256, 384],
+    // Only these paths may reach the optimizer. /api/instagram is the stable
+    // proxy the rail points at (app/api/instagram/[id]/route.ts); Instagram's
+    // signed CDN URLs rotate on every API call, so they cannot be cache keys.
+    localPatterns: [
+      { pathname: '/img/**' },
+      { pathname: '/frames/**' },
+      { pathname: '/api/instagram/**' },
     ],
   },
 
