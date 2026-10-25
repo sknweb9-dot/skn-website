@@ -35,15 +35,15 @@ import { SITE } from '@/lib/site';
  * treatment. It also stops on hover and on keyboard focus, because reading a
  * caption while it slides away is miserable.
  *
- * WHY THE PICTURES GO THROUGH THE IMAGE OPTIMIZER
- * -------------------------------------------------
- * Instagram serves media at 1290px or more from its CDN on signed URLs. The rail
- * shows them at about 240px, so sent as they are they were most of this page's
- * weight. The CDN hosts are allowed in `images.remotePatterns` (next.config.ts),
- * which makes the optimizer fetch each one once and serve a right-sized copy.
- * When a URL's signature lapses the optimizer cannot fetch it and the picture is
- * missing, exactly as it would have been with a plain <img>; the page is rebuilt
- * from a fresh feed hourly (lib/instagram.ts), so that window is short.
+ * WHY THE PICTURES GO THROUGH A LOCAL PROXY
+ * ------------------------------------------
+ * Instagram serves media at 1290px or more from its CDN on signed URLs, and it
+ * re-signs those URLs on every API call. Feeding a signed URL to the optimizer
+ * would make every hourly feed rebuild a new cache key. The rail instead points
+ * at /api/instagram/<id> (app/api/instagram/[id]/route.ts), which resolves the
+ * current URL server-side and streams the bytes; the optimizer sees one stable
+ * URL per post, transforms each picture once, and serves a right-sized copy from
+ * cache.
  */
 
 /** Seconds a single post takes to cross the rail. */
@@ -163,7 +163,7 @@ function Card({
     >
       <div className="relative aspect-square overflow-hidden bg-silk">
         <Image
-          src={post.imageUrl}
+          src={`/api/instagram/${post.id}`}
           alt={post.alt}
           fill
           sizes="(max-width: 640px) 216px, 240px"
